@@ -1,0 +1,19 @@
+{
+ 
+   
+  "orgName": "ServiceMax Base",
+  "edition": "Developer",
+  "namespace":"SVMXC",
+  "features": ["API","DebugApex","ForceComPlatform","MaxCustomLabels:15","MaxApexCodeSize:22"],
+   "settings": {
+        "quoteSettings": {
+            "enableQuote": true
+        },
+        "languageSettings": {
+            "enableTranslationWorkbench": true
+        },
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        }
+    }
+}

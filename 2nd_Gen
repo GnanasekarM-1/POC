@@ -1,0 +1,180 @@
+#!groovy
+
+import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
+
+
+node ('DCx-Windows') 
+{
+
+    def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
+    def SF_USERNAME=env.SF_USERNAME
+    def SERVER_KEY_CREDENTALS_ID=env.SERVER_KEY_CREDENTALS_ID
+    def SCRATCH_ORG_NAMES= env.SCRATCH_ORG_NAMES
+    def SCRATCH_ORG_NAME = "${SCRATCH_ORG_NAMES}".split(',')
+    def HUB_ORG="HubOrg"
+    def Scratch_Org_Definition = env.Scratch_Org_Definition
+    def toolbelt = tool 'sfdx'
+    def curl = tool 'curl'
+	
+
+    /*def TEST_LEVEL='RunLocalTests'
+    def PACKAGE_NAME='0Ho8000000'
+    def PACKAGE_VERSION
+*/
+  	
+	step([$class: 'WsCleanup']) 
+
+   stage('Checkout_Source') 
+    {
+        checkout scm
+    }  
+ 
+    withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) 
+    {
+
+        // -------------------------------------------------------------------------
+        // Authorize the Dev Hub org with JWT key and give it an alias.
+        // -------------------------------------------------------------------------
+
+        stage('Authorize_Dev_Hub')
+	    {
+		Authorize_Dev_Hub = command "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
+                UpdateDX = command "${toolbelt}/sfdx update && ${toolbelt}/sfdx version"
+
+	    if (Authorize_Dev_Hub != 0)
+          {
+                error 'Salesforce dev hub org authorization failed.'
+            }
+        }
+	  
+	    stage ('Second_generation')
+	    {    
+ command "cd  ${WORKSPACE}/Static_Resource_1_DX && ${toolbelt}/sfdx force:package:version:create --package 0Ho1E000000XZAHSA4 -v  ${SF_USERNAME} --installationkeybypass --definitionfile config/project-scratch-def.json  --wait 20 --json >> ${WORKSPACE}/Static_Resource_1_DX.json"
+ command "cd  ${WORKSPACE}/Static_Resource_2_DX && ${toolbelt}/sfdx force:package:version:create --package 0Ho1E000000XZAMSA4 -v  ${SF_USERNAME} --installationkeybypass --definitionfile config/project-scratch-def.json --wait 20 --json >> ${WORKSPACE}/Static_Resource_2_DX.json"
+ command "cd  ${WORKSPACE}/Static_Resource_3_DX && ${toolbelt}/sfdx force:package:version:create --package 0Ho1E000000XZAWSA4 -v  ${SF_USERNAME} --installationkeybypass --definitionfile config/project-scratch-def.json --wait 100 --json >> ${WORKSPACE}/Static_Resource_3_DX.json"
+ command "cd  ${WORKSPACE}/Static_Resource_SFMD && ${toolbelt}/sfdx force:package:version:create --package 0Ho1E000000XZAgSAO -v  ${SF_USERNAME} --installationkeybypass --definitionfile config/project-scratch-def.json --wait 100 --json >> ${WORKSPACE}/Static_Resource_SFMD.json"	    
+ dx =command "cd  ${WORKSPACE}/All_Component_DX  && ${toolbelt}/sfdx force:package:version:create --package 0Ho1E000000XZARSA4 -v ${SF_USERNAME} --installationkeybypass  --definitionfile config/project-scratch-def.json  --wait 200 --json >> ${WORKSPACE}/All_Component_DX.json"
+    sleep(300)
+    println "**WAKE**"	    
+    if (dx != 0) 
+	  {
+ 	  def All_Component_DX = readJSON file: "${WORKSPACE}/All_Component_DX.json"
+	  println "${All_Component_DX.message}"
+	  println "${All_Component_DX}"	  
+          command "type All_Component_DX.json"
+		  
+	 body ="""<!DOCTYPE html>
+        <html>
+        <head>
+        <title>Page Title</title>
+        </head>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <style>
+        body {
+        font-family: 'Open Sans', sans-serif;
+        }
+        </style>
+        <body style="margin:0px;padding:10px">
+        <img src="https://s3-us-west-1.amazonaws.com/images.servicemax.com/servicemax-2019-logo.svg" style="padding:10px 0px;margin:0px;height:20px">
+         
+        <p>Hi Team,<br /></p>
+        <p>Please find below Jenkins error log during DX 2GP creation.</br >
+	Once the issue is resolved please raise PR against Dev Branch of SVMX-SFDC Repo("https://github.com/ServiceMax-Engineering/svmx-sfdc.git").</br >
+     <div style="background:Yellow	;color:red;font-weight:bold;margin:0px;padding:5px">   
+	<div style="font-size:18px;padding:5px 0px"> ${All_Component_DX.message}</div></div>
+        
+	 
+        <p><b>Note:</b> This email is an auto-generated, please dont reply to this mail ID <br/></p>
+        <p>
+        Regards<br />
+        ReleaseOps 
+        </p>
+        </body>
+        </html>
+        """
+        emailext body: "${body}", recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: "Error:2GP-DX", to: 'ENGReleaseOps@servicemax.com,dxdev@servicemax.com'
+        error 'Second_generation package:"All_Component_DX" creation failed.'
+     
+	  
+	 }
+	    } 
+	     
+    stage('Email_Trigger') 
+	    { 
+                def Static_Resource_1 = readJSON file: "${WORKSPACE}/Static_Resource_1_DX.json"
+                def Static_Resource_2 = readJSON file: "${WORKSPACE}/Static_Resource_2_DX.json"
+		def Static_Resource_3 = readJSON file: "${WORKSPACE}/Static_Resource_3_DX.json"
+	        def Static_Resource_SFMD = readJSON file: "${WORKSPACE}/Static_Resource_SFMD.json"
+                def Component_DX = readJSON file: "${WORKSPACE}/All_Component_DX.json"
+                command "cd ${WORKSPACE} && type All_Component_DX.json"
+	
+		subject ="2GP-DX"
+		    body ="""<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<style>
+body {
+font-family: 'Open Sans', sans-serif;
+}
+</style>
+<body style="margin:0px;padding:10px">
+<img src="https://s3-us-west-1.amazonaws.com/images.servicemax.com/servicemax-2019-logo.svg" style="padding:10px 0px;margin:0px;height:20px">
+<div style="background:#30b701;color:white;font-weight:bold;margin:0px;padding:5px">
+<div style="font-size:18px;padding:5px 0px">Second Generation Package</div>
+<div style="font-size:14px;padding:5px 0px">Generated from git Dev branch. Please checkin your code to dev branch to make use of Salesforce DX.</div>
+</div>
+<p>Hi Team,<br /></p>
+<p>Please find second generation package Url  </br >
+<b>Static_Resource_1_DX:</b> https://login.salesforce.com/packaging/installPackage.apexp?p0=${Static_Resource_1.result.SubscriberPackageVersionId}<br />
+<b>Static_Resource_2_DX:</b> https://login.salesforce.com/packaging/installPackage.apexp?p0=${Static_Resource_2.result.SubscriberPackageVersionId}<br />
+<b>Static_Resource_3_DX:</b> https://login.salesforce.com/packaging/installPackage.apexp?p0=${Static_Resource_3.result.SubscriberPackageVersionId}<br />
+<b>Static_Resource_SFMD:</b> https://login.salesforce.com/packaging/installPackage.apexp?p0=${Static_Resource_SFMD.result.SubscriberPackageVersionId}<br />
+<b>Component_DX :</b> https://login.salesforce.com/packaging/installPackage.apexp?p0=${Component_DX.result.SubscriberPackageVersionId}<br />
+</p>
+<p><b>Note:</b> This email is an auto-generated, please dont reply to this mail ID <br/></p>
+ 
+<p>
+Regards<br />
+ReleaseOps 
+</p>
+</body>
+</html>"""
+                 println "${body}"
+                emailext body: "${body}", recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: "${subject}", to: 'ENGReleaseOps@servicemax.com,dxdev@servicemax.com'
+       	 
+       }   
+	/*
+	  stage('Install') 
+	    { 
+	   
+                def Static_Resource_1 = readJSON file: "${WORKSPACE}/Static_Resource_1_DX.json"
+                def Static_Resource_2 = readJSON file: "${WORKSPACE}/Static_Resource_2_DX.json"
+		def Static_Resource_3 = readJSON file: "${WORKSPACE}/Static_Resource_3_DX.json"
+	        def Static_Resource_SFMD = readJSON file: "${WORKSPACE}/Static_Resource_SFMD.json"
+                def Component_DX = readJSON file: "${WORKSPACE}/All_Component_DX.json"
+      command "${toolbelt}/sfdx force:package:install --package ${Static_Resource_1.result.SubscriberPackageVersionId} --targetusername gnanasekar.svmx@sfdxtest.com -a package -w 20"
+      command "${toolbelt}/sfdx force:package:install --package ${Static_Resource_2.result.SubscriberPackageVersionId} --targetusername gnanasekar.svmx@sfdxtest.com -a package -w 20"
+       command "${toolbelt}/sfdx force:package:install --package ${Static_Resource_3.result.SubscriberPackageVersionId} --targetusername gnanasekar.svmx@sfdxtest.com -a package -w 20"
+      command "${toolbelt}/sfdx force:package:install --package ${Static_Resource_SFMD.result.SubscriberPackageVersionId} --targetusername gnanasekar.svmx@sfdxtest.com -a package -w 20"
+      command "${toolbelt}/sfdx force:package:install --package ${Component_DX.result.SubscriberPackageVersionId} --targetusername gnanasekar.svmx@sfdxtest.com -a package -w 20 -r"
+
+ 
+ } */  
+    }
+}
+
+def command(script) {
+    if (isUnix()) {
+        return sh(returnStatus: true, script: script);
+    }else {
+		return bat(returnStatus: true, script: script);
+    }
+}
+
+
+
+
