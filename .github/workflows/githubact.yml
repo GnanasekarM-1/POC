@@ -12,5 +12,6 @@ jobs:
       - name: run-pmd
         run: |
           git clone https://github.com/Gnanasekar-m/POC.git
-          workspace/POC/pmd-bin-6.28.03/bin/pmd.sh -d ./force-app/main/default/classes -R category/apex/design.xml -f text
+          ls -la
+          ${WORKSPACE}/POC/pmd-bin-6.28.03/bin/pmd.sh -d ./force-app/main/default/classes -R category/apex/design.xml -f text
         shell: bash
