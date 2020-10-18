@@ -5,9 +5,9 @@ on: [push]
 jobs:
   pmd:
   
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd -d ./force-app/main/default/classes -R  ./pmd-apex/src/main/resources/rulesets/apex/style.xml -f text
+        run: pmd -d ./force-app/main/default/classes -R apex/style.xml -f text
