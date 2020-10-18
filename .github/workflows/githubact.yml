@@ -1,13 +1,13 @@
-name: PMD Source Code Analyzer 
+name: PMD Source Code Analyzer on Push
 
 on: [push]
 
 jobs:
   pmd:
   
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd-bin-6.28.0 3/bin/pmd.bat pmd -d ./force-app/main/default/classes -f text -R POC/pmd-apex/src/main/resources/rulesets/apex/security.xml 
+        run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
