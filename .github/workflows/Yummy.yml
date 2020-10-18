@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd -d ./Classes -R category/apex/design.xml -f text
+        run: pmd -d workspace/Classes/ -R category/apex/design.xml -f text
