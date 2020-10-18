@@ -17,6 +17,7 @@ jobs:
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
           git clone https://github.com/Gnanasekar-m/POC.git 
           cd POC/ | ls -la
-          pmd -d POC/force-app/main/default/classes -R category/apex/design.xml -f textcolor
+          pmd -d POC/force-app/main/default/classes -R category/apex/design.xml -f textcolor >> Report.txt
+          cat Report.txt
         shell: bash
  
