@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run:  ./pmd-bin-6.28.0 3/bin/pmd.bat pmd -d ./force-app/main/default/classes -R  ./pmd-apex/src/main/resources/rulesets/apex/style.xml -f text
+        run: cd pmd-bin-6.28.0 3/bin/pmd.bat && pmd -d ./force-app/main/default/classes -R  ./pmd-apex/src/main/resources/rulesets/apex/style.xml -f text
