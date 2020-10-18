@@ -16,5 +16,6 @@ jobs:
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
           pwd
-          pmd -d .\force-app\main\default\classes -f html -R \pmd-bin-6.28.03\rulesets\apex\apexunit.xml
+          pmd -d .\force-app\main\default\classes -f html -R pmd-bin-6.28.03/rulesets/apex/apexunit.xml
         shell: bash
+ 
