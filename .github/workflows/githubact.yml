@@ -13,9 +13,10 @@ jobs:
         run: | 
           cd $HOME        
           wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.28.0/pmd-bin-6.28.0.zip
+          git clone https://github.com/Gnanasekar-m/POC.git
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
-          cd ${GITHUB_WORKSPACE}/ | ls -la
-          pmd -d .\force-app\main\default\classes -R ${GITHUB_WORKSPACE}/pmd-bin-6.28.03/rulesets/apex/ruleset.xml -f html
+          pwd | cd ${GITHUB_WORKSPACE}/ | ls -la
+          pmd -d .\force-app\main\default\classes -R ${GITHUB_WORKSPACE}/POC/pmd-bin-6.28.03/rulesets/apex/ruleset.xml -f html
         shell: bash
  
