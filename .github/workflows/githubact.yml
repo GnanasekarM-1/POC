@@ -16,5 +16,5 @@ jobs:
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
           pwd
-          pmd -d .\force-app\main\default\classes -f html -R java-unusedcode
+          pmd -d .\force-app\main\default\classes -f html -R  category/apex/design.xml
         shell: bash
