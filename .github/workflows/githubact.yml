@@ -16,6 +16,6 @@ jobs:
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
           git clone https://github.com/Gnanasekar-m/POC.git 
-          pmd -d POC/force-app/main/default/classes -R category/apex/design.xml -f html -cache ./Cache.txt
+          pmd -d POC/force-app/main/default/classes -R category/apex/design.xml -f textcolor -cache ./Cache.txt
         shell: bash
  
