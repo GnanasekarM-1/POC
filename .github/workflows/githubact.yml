@@ -17,6 +17,6 @@ jobs:
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
           pwd | cd ${GITHUB_WORKSPACE}/ | ls -la
-          pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f html
+          pmd -d POC/All_Component_DX/force-app/main/default/classes -R category/apex/design.xml -f html
         shell: bash
  
