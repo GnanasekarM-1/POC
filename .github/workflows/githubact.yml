@@ -16,7 +16,7 @@ jobs:
           git clone https://github.com/Gnanasekar-m/POC.git
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
-          pwd | cd ${GITHUB_WORKSPACE}/ | ls -la
-          pmd -d POC/All_Component_DX/force-app/main/default/classes -R category/apex/design.xml -f html
+          pwd | cd ${GITHUB_WORKSPACE}/POC/All_Component_DX/ | ls -la
+          pmd -d ${GITHUB_WORKSPACE}/POC/All_Component_DX/force-app/main/default/classes -R category/apex/design.xml -f html
         shell: bash
  
