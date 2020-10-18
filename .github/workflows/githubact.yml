@@ -15,5 +15,6 @@ jobs:
           wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.28.0/pmd-bin-6.28.0.zip
           unzip pmd-bin-6.28.0.zip
           alias pmd="$HOME/pmd-bin-6.28.0/bin/run.sh pmd"
+          pmd-bin-6.28.0/bin/run.sh pmd -dir /home/workspace/src/main/java/code -f html -rulesets rulesets/java/quickstart.xml,category/java/codestyle.xml
           pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
         shell: bash
