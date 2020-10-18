@@ -1,13 +1,15 @@
 on:
-  workflow_dispatch:
+  push:
+    branches:
+    - main
+     
 jobs:
   my_job:
     name: deploy to staging
     runs-on: ubuntu-18.04
     steps:
      - name: Create an incremental tag
-       uses: aurestic/incremental-tag@1.0.8
+       uses: mosfetlang/dev-tagger-action@v1
        with:
-         flag_branch: tag
-         message:  tagname
-         prev tag:  pick
+         tag-prefix: dev
+         origin:  main
