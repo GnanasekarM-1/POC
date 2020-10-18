@@ -1,0 +1,95 @@
+{
+	"id" : "com.servicemax.client.admin.appfilters",
+	"module-activator" : "com.servicemax.client.admin.appfilters.impl.Module",
+
+	"depends" :[
+		{
+        	"id": "com.servicemax.client.sfmconsole",
+        	"version": "1.0.0"
+    	}
+    ],
+
+	"declares" : [],
+
+	"defines" : [
+		{
+            "type": "com.servicemax.client.sfmconsole.consoleapp",
+            "config": {
+                "app": {
+                    "id": "apft",
+                    "class-name": "com.servicemax.client.admin.appfilters.console.ConsoleAppImpl"
+                },
+                "icon": {
+                    "large-css-class": "sfm-console-apft-icon",
+                    "small-css-class": "sfm-console-apft-icon"
+                },
+                "discover": true,
+                "multiple": false,
+                "positionWeight": 2000,
+                "tooltip": "IPAD014_TAG021"
+            }
+        },
+
+        {
+            "type" : "com.servicemax.client.runtime.namedinstance",
+            "config" : {
+                "define" : {
+                	"name" : "APFT.VIEW",
+                	"type" : "com.servicemax.client.mvc.impl.View"
+                }
+            }
+        },
+
+        {
+            "type": "com.servicemax.client.sfmconsole.deliveryengine",
+            "config": {
+                "engine": {
+                    "id": "apft",
+                    "class-name": "com.servicemax.client.admin.appfilters.engine.DeliveryEngineImpl"
+                }
+            }
+        },
+
+        {
+            "type": "com.servicemax.client.runtime.namedinstance",
+            "config": {
+                "configure": {
+                    "name": "CONTROLLER",
+                    "data": [
+                        {
+                            "event": "APFT.GET_SUPPORTED_RECORD_TYPES",
+                            "command": "com.servicemax.client.admin.appfilters.commands.GetSupportedRecordTypes"
+                        },
+                    	{
+                        	"event": "APFT.GET_ALL_SOURCE_OBJECTS",
+                        	"command": "com.servicemax.client.admin.appfilters.commands.GetAllSourceObjects"
+                    	},
+                        {
+                            "event": "APFT.GET_APPLICATION_FILTER",
+                            "command": "com.servicemax.client.admin.appfilters.commands.GetApplicationFilter"
+                        },
+                        {
+                            "event": "APFT.SAVE_APPLICATION_FILTER",
+                            "command": "com.servicemax.client.admin.appfilters.commands.SaveApplicationFilter"
+                        },
+                        {
+                            "event": "APFT.CHANGE_APP_STATE",
+                            "command": "com.servicemax.client.admin.appfilters.commands.ChangeAppState"
+                        }
+                   	]
+                }
+            }
+        }
+    ],
+
+	"services" : [],
+
+	"scripts" : [
+		"commands.js",
+		"console.js",
+		"engine.js",
+		"impl.js",
+		"responders.js"
+	]
+
+}
