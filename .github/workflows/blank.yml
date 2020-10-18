@@ -5,7 +5,7 @@ on:
      
 jobs:
   my_job:
-    name: deploy to staging
+    name: Incrmental Tag
     runs-on: ubuntu-18.04
     steps:
      - name: Create an incremental tag
