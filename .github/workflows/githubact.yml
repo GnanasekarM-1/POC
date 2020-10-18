@@ -14,4 +14,6 @@ jobs:
           git clone https://github.com/Gnanasekar-m/POC.git   
           pwd
           ls -la
+          cd /home/runner/work/POC/POC/POC/pmd-bin-6.28.03/bin/
+          pmd.sh -d ./force-app/main/default/classes -R category/apex/design.xml -f text
           
