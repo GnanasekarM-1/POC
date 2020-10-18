@@ -5,12 +5,12 @@ on: [push]
 jobs:
   pmd:
   
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
         run: |
-          git clone https://github.com/Gnanasekar-m/POC.git   
-          cd /home/runner/work/POC/POC/POC/pmd-bin-6.28.03/bin/pmd.bat && pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
-        shell: cmd
+          git clone https://github.com/Gnanasekar-m/POC.git
+          POC/pmd-bin-6.28.03/bin/pmd.sh -d ./force-app/main/default/classes -R category/apex/design.xml -f text
+        shell: bash
