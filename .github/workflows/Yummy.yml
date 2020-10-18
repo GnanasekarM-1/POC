@@ -5,9 +5,9 @@ on: [push]
 jobs:
   pmd:
   
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd -d ./force-app/main/default/classes -f text -R category/apex/design.xml 
+        run: pmd-bin-6.28.0 3/bin/pmd.bat pmd -d ./force-app/main/default/classes -f text -R category/apex/design.xml 
