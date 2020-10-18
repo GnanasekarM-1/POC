@@ -5,6 +5,9 @@ jobs:
     name: deploy to staging
     runs-on: ubuntu-18.04
     steps:
-      - name: Install Dependencies
-        run: npm install
-        
+     - name: Create an incremental tag
+       uses: aurestic/incremental-tag@1.0.8
+       with:
+         flag_branch: tag
+         message:  tagname
+         prev tag:  pick
