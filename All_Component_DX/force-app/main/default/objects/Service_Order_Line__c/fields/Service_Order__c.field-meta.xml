@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Order__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Service order number. Is a lookup to an existing service order in ServiceMax</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Service order number. Is a lookup to an existing service order in ServiceMax</inlineHelpText>
+    <label>Work Order</label>
+    <referenceTo>Service_Order__c</referenceTo>
+    <relationshipName>Service_Order_Line</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

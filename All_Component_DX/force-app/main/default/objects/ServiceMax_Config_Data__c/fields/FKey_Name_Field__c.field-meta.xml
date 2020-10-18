@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FKey_Name_Field__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Salesforce API name of the Name-Field in the foreign key object</description>
+    <externalId>false</externalId>
+    <label>Object Name Field</label>
+    <length>100</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

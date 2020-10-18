@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Initial_Response_Internal_By__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Date/time by which customer should be initial responsed as per internal commitment in SLA.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date/time by which customer should be initial responsed as per internal commitment in SLA.</inlineHelpText>
+    <label>Initial Response Internal By</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

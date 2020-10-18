@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Top_Level_IBs_Only__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>This checkbox indicates whether an IB search performed on a Change Order will search the Top-Level Installed Product records only (true), or if the search will review all installed product records (false).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This checkbox indicates whether an IB search performed on a Change Order will search the Top-Level Installed Product records only (true), or if the search will review all installed product records (false).</inlineHelpText>
+    <label>Search for Top Level IBs Only</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,87 @@
+<apex:page title="PIQ_Attribute_Search" controller="TechnicalAttribute" standardStylesheets="false" sidebar="true" showHeader="true">
+    <script> 
+     window.SVMX_PIQ_JSR = {
+      jsrActionMapping: {   
+         JsrGetAllTags:'{!$RemoteAction.TechnicalAttribute.JsrGetAllTags}',  
+         JsrGetAllProductFilter:'{!$RemoteAction.TechnicalAttribute.JsrGetAllProductFilter}', 
+         JsrFilterProductName:'{!$RemoteAction.TechnicalAttribute.JsrFilterProductName}',
+         JsrGetAllProductOperator:'{!$RemoteAction.TechnicalAttribute.JsrGetAllProductOperator}',  
+         JsrGetAllAttributeOperator:'{!$RemoteAction.TechnicalAttribute.JsrGetAllAttributeOperator}',  
+         JsrGetAllAdditionalFilter:'{!$RemoteAction.TechnicalAttribute.JsrGetAllAdditionalFilter}', 
+         JsrGetPossibleFirstColumns:'{!$RemoteAction.TechnicalAttribute.JsrGetPossibleFirstColumns}', 
+         JsrGetInstalledProductforTechnicalAttribute:'{!$RemoteAction.TechnicalAttribute.JsrGetInstalledProductforTechnicalAttribute}',
+         JsrGetAllAdditionalFilter:'{!$RemoteAction.TechnicalAttribute.JsrGetAllAdditionalFilter}', 
+         JsrGetIBDetails:'{!$RemoteAction.TechnicalAttribute.JsrGetIBDetails}',   
+         JsrGetAllAttributesforIB :'{!$RemoteAction.TechnicalAttribute.JsrGetAllAttributesforIB}', 
+         JsrGetAllHistoryGroupByAttribute:'{!$RemoteAction.TechnicalAttribute.JsrGetAllHistoryGroupByAttribute}', 
+         JsrGetAllHistoryGroupByRecord:'{!$RemoteAction.TechnicalAttribute.JsrGetAllHistoryGroupByRecord}', 
+      },
+      
+      makeJsrRequest: function (jsrMappingKey, request, callback, context, jsrActionParams) {
+
+       
+        var requestStr = JSON.stringify(request);        
+        Visualforce.remoting.Manager.invokeAction(SVMX_PIQ_JSR.jsrActionMapping[jsrMappingKey],requestStr,
+          function (result, event) {
+            SVMX_PIQ_JSR.processResult(result, event, callback, context);
+          },
+          jsrActionParams
+        );
+      },
+      processResult: function (result, event, callback, context) {
+        var ret = { success: false };
+        if (event.status == true) {
+          ret = JSON.parse(result);
+        }
+        callback.call(context, ret, event);
+      }
+    } 
+    
+    function getConfigData()
+        {       
+            var configData = {};           
+            configData.namespace = "SVMXC";
+            window.configData = configData;
+        }
+        getConfigData();   
+
+  </script>
+  <html lang="en" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="{!URLFOR($Resource.piq_attribute_search, 'PIQ_Attribute_Search')}/manifest.json" />
+    <link rel="shortcut icon" href="{!URLFOR($Resource.piq_attribute_search, 'PIQ_Attribute_Search')}/favicon.ico" />
+    <link href="{!URLFOR($Resource.piq_attribute_search, 'PIQ_Attribute_Search')}/static/css/main.css" rel="stylesheet" />
+
+    <title>{!$Label.CONF005_TEXT141}</title>
+    <apex:slds />
+  </head>
+
+  <body>
+    <div class="slds-scope">
+      <noscript>{!$Label.CONF005_TEXT139}</noscript>
+      <div id="root"></div>
+    </div>
+    <script>
+      var isRemote = !0;
+      var ASSET_ROOT = "{!URLFOR($Asset.SLDS, '/')}";
+      var PUBLIC_URL = "{!URLFOR($Resource.piq_attribute_search, 'PIQ_Attribute_Search')}";
+      var isLightningExperience = "{!$User.UITheme}" === "Theme4d" ? true : false;
+      var nameSpace = 'SVMXDEV';
+      var userTimeFormat = window.UserContext.timeFormat;
+      var isIE11 = /Trident.*rv[ :]*11\./.test(window.navigator.userAgent);
+      if(isIE11) {
+        var rootEl = document.getElementById('root');
+        var div = document.createElement('div');
+        div.innerHTML = "{!$Label.CONF005_TEXT140}";
+        rootEl.appendChild(div);
+      }
+    </script>     
+    <script type="text/javascript" src="{!URLFOR($Resource.piq_attribute_search, 'PIQ_Attribute_Search')}/static/js/main.js"></script>
+   </body>
+
+  </html>
+</apex:page>

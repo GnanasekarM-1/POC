@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assign_Work_Order_To__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Internal use only</description>
+    <externalId>false</externalId>
+    <label>Assign Work Order To</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Technician</fullName>
+                <default>false</default>
+                <label>Technician</label>
+            </value>
+            <value>
+                <fullName>Queue</fullName>
+                <default>false</default>
+                <label>Queue</label>
+            </value>
+            <value>
+                <fullName>Primary Technician</fullName>
+                <default>false</default>
+                <label>Primary Technician</label>
+            </value>
+            <value>
+                <fullName>Team</fullName>
+                <default>false</default>
+                <label>Team</label>
+            </value>
+            <value>
+                <fullName>Dispatcher</fullName>
+                <default>false</default>
+                <label>Dispatcher</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

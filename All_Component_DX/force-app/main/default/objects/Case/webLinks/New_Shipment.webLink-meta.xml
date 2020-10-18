@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Shipment</fullName>
+    <availability>online</availability>
+    <description>Button to launch new shipment screen</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create Shipment Order</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&#39;/apex/SVMXC__ServiceMaxConsole?SVMX_recordId=&#39;+CASESAFEID(Case.Id)+&#39;&amp;SVMX_processId=TDM005&amp;SVMX_retURL=&#39;+URLFOR($Site.Prefix+&#39;/&#39;+CASESAFEID(Case.Id)))}</url>
+</WebLink>

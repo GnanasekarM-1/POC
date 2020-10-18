@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Template__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Name of the warranty template. Is a lookup to an existing warranty template in ServiceMax</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the warranty template. Is a lookup to an existing warranty template in ServiceMax</inlineHelpText>
+    <label>Warranty Terms</label>
+    <referenceTo>Service_Template__c</referenceTo>
+    <relationshipName>R00N70000001hzbrEAA</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

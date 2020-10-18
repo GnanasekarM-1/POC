@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of Customer Account to Invoice for Service or for Contract. This is a lookup to an existing salesforce account record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of Customer Account to Invoice for Service or for Contract. This is a lookup to an existing salesforce account record.</inlineHelpText>
+    <label>Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Proforma Invoices</relationshipLabel>
+    <relationshipName>Invoice_Account</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

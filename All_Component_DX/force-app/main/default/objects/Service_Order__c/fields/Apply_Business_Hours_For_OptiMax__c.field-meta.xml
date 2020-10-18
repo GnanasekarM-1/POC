@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apply_Business_Hours_For_OptiMax__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag to indicate if Preferred Window for Work Order is based on SLA/Access Hours</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag to indicate if Preferred Window for Work Order is based on SLA/Access Hours</inlineHelpText>
+    <label>Apply Business Hours For OptiMax</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

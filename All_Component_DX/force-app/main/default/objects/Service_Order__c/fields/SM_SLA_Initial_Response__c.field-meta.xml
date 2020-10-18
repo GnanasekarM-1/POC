@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_SLA_Initial_Response__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Number of minutes Configured in the SLA Rule for Initial Response.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Number of minutes Configured in the SLA Rule for Initial Response.</inlineHelpText>
+    <label>SLA Initial Response</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

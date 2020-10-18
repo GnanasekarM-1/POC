@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Product_Warranty</fullName>
+    <availability>online</availability>
+    <description>Launches manual warranty creation page from Installed Product</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Product Warranty</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__IPRD_ProductWarranty?PId=&apos;+Installed_Product__c.Id)}</url>
+</WebLink>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Member__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Technician who is Preferred, Mandatory or Prohibited</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select a Technician who is Preferred, Mandatory or Prohibited</inlineHelpText>
+    <label>Technician</label>
+    <referenceTo>Service_Group_Members__c</referenceTo>
+    <relationshipLabel>Resource Preferences</relationshipLabel>
+    <relationshipName>Resource_Preferences</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

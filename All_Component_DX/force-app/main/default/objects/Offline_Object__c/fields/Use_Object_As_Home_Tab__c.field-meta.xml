@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Use_Object_As_Home_Tab__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Indicates if this object&apos;s tab should be used as the home tab</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates if this object&apos;s tab should be used as the home tab</inlineHelpText>
+    <label>Use Object As Home Tab</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

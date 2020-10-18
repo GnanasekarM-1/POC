@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Stock_Transfers</fullName>
+    <columns>NAME</columns>
+    <columns>Source_Location__c</columns>
+    <columns>Destination_Location__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Stock Transfers</label>
+    <language>en_US</language>
+</ListView>

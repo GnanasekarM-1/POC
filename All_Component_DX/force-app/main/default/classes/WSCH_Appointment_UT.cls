@@ -1,0 +1,100 @@
+@isTest
+public with sharing class WSCH_Appointment_UT {
+
+    static testMethod void getterSetterTest(){
+    String startTime='test';
+    DateTime startDateTime = DateTime.now();
+    String endTime='test';
+    DateTime endDateTime = DateTime.now().addHours(1);
+    String promBand='AD';
+    String promType='A';
+    String day='Tue';
+    String offerToken='fsadfsakfdiasfsfas';
+    String offerText='fdsadfsafa';
+    Integer travelTime=60;
+    String DRU='SOU';
+    String FRU='SOU';
+    String IRU='SOU';
+    String empID='SM001';
+    String siteIndicator='test';
+    Integer groupDuration = 60;
+    Integer groupNumber = 10;
+    String groupType = 'type1';
+    SVMXC__Service_Group_Members__c technician = new SVMXC__Service_Group_Members__c();
+
+
+    WSCH_Appointment techSlot = new WSCH_Appointment(); 
+    
+    techSlot.setStartDateTime(startDateTime);
+    techSlot.getStartDateTime();
+    techSlot.setEndDateTime(endDateTime);
+    techSlot.setPromBand(promBand);
+    techSlot.getEndDateTime();
+    techSlot.getPromBand();
+    techSlot.setPromType(promType);
+    techSlot.getPromType();
+    techSlot.setDay(day);
+    techSlot.getDay();
+    techSlot.setOfferToken(offerToken);
+    techSlot.getOfferToken();
+    techSlot.setOfferText(offerText);
+    techSlot.getOfferText();
+    techSlot.setTravelTime(travelTime);
+    techSlot.getTravelTime();
+    techSlot.setDRU(dRU);
+    techSlot.getDRU();
+    techSlot.setFRU(fRU);
+    techSlot.getFRU();
+    techSlot.setIRU(iRU);
+    techSlot.getIRU();
+    techSlot.setTechExternalId(empID);
+    techSlot.getTechExternalId();
+    techSlot.setTechnician(technician);
+    techSlot.getTechnician();
+    techSlot.setSiteIndicator(siteIndicator);
+    techSlot.getSiteIndicator();
+    techSlot.setGroupDuration(groupDuration);
+    techSlot.getGroupDuration();
+    techSlot.setGroupNumber(groupNumber);
+    techSlot.getGroupNumber();
+    techSlot.setGroupType(groupType);
+    techSlot.getGroupType();
+    techSlot.setStrStartDateTime('2014-03-13T13:30');
+    techSlot.getStrStartDateTime();
+    techSlot.getStartDateTimeGmt();
+    techSlot.setStrEndDateTime('2014-03-13T13:30');
+    techSlot.getStrEndDateTime();
+    techSlot.getEndDateTimeGmt();
+    techSlot.setViolationPenalty(100);
+    techSlot.getViolationPenalty();
+    techSlot.setDateOrCost('Cost');
+    techSlot.getDateOrCost();
+    techSlot.setIntTimeZoneOffset(10);
+    techSlot.getIntTimeZoneOffset();
+    techSlot.setSlotCost(1000);
+    techSlot.getSlotCost();
+    techSlot.setSlotType('Low');
+    techSlot.getSlotType();
+    List<String> technicians = new List<String>();
+    technicians.add('Tech1');
+    technicians.add('Tech2');
+    techSlot.setTechnicians(technicians);
+    techSlot.getTechnicians();
+    techSlot.setGoAhead(true);
+    techSlot.getGoAhead();
+    List<WSCH_Appointment> techSlotList = new List<WSCH_Appointment>();
+    techSlotList.add(techSlot);
+    WSCH_Appointment techSlot2 = new WSCH_Appointment();
+    techSlot2.setSlotCost(100);
+    techSlot2.setStartDateTime(startDateTime);
+    techSlotList.add(techSlot2);
+    WSCH_Appointment.sortBy = 'Cost';
+    techSlotList.sort();
+    WSCH_Appointment.sortBy = 'Dates';
+    techSlotList.sort();
+    techSlot.getTerritoryTimeZone();
+    Double slotCategoryCost=10.0;
+    techSlot.setSlotCategoryCost(slotCategoryCost);
+    techSlot.getSlotCategoryCost();
+    }
+}

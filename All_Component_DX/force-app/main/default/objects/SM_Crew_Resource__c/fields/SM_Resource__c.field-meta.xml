@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Resource__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The technician associated to this resource.</description>
+    <externalId>false</externalId>
+    <label>Resource</label>
+    <referenceTo>Service_Group_Members__c</referenceTo>
+    <relationshipLabel>Crew Resource</relationshipLabel>
+    <relationshipName>Crew_Resource</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,3 @@
+<apex:page standardController="Parts_Discount__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Parts_Discount__c.Id}" />
+</apex:page>

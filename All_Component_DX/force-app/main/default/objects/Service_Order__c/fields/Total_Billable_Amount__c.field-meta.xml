@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Billable_Amount__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Total Amount which is billed to the customer for the work performed.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Total Amount which is billed to the customer for the work performed.</inlineHelpText>
+    <label>Total Billable Amount</label>
+    <summarizedField>Service_Order_Line__c.Total_Line_Price__c</summarizedField>
+    <summaryFilterItems>
+        <field>Service_Order_Line__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Usage/Consumption</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Service_Order_Line__c.Is_Billable__c</field>
+        <operation>equals</operation>
+        <value>true</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Service_Order_Line__c.Service_Order__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

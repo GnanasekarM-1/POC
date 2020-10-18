@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Average_Slots__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Number of service slots per technician that can be committed in this time period. This information is used to show the number of available slots on the Booking Window selection screen</description>
+    <externalId>false</externalId>
+    <label>Average Slots</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

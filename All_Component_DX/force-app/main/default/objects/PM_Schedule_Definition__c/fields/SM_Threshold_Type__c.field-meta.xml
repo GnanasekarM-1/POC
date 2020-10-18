@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Threshold_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Type of threshold, used for internal purpose</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Type of threshold, used for internal purpose</inlineHelpText>
+    <label>Threshold Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Picklist</fullName>
+                <default>false</default>
+                <label>Picklist</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

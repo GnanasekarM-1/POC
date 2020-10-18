@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Job_Start_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Time at which the Scheduling Job Started</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Time at which the Scheduling Job Started</inlineHelpText>
+    <label>Job Start Time</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Warranty__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Holds the reference to Product Warranty Object</description>
+    <externalId>false</externalId>
+    <label>Product Warranty</label>
+    <referenceTo>Warranty__c</referenceTo>
+    <relationshipLabel>SPM - Repeat Visits</relationshipLabel>
+    <relationshipName>SPM_Repeat_Visit</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

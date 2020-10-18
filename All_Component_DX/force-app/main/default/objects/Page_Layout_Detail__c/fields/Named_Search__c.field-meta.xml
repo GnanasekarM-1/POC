@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Named_Search__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Reference to lookup config definition</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Reference to lookup config definition</inlineHelpText>
+    <label>Lookup Config</label>
+    <referenceTo>ServiceMax_Processes__c</referenceTo>
+    <relationshipLabel>Page Layout Details</relationshipLabel>
+    <relationshipName>Page_Layout_Details</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVO_From_Case_Messages__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Field labels and messages dispalyed for Create SVO from Case module.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Field labels and messages dispalyed for Create SVO from Case module.</inlineHelpText>
+    <label>SVO From Case Messages</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>LAB000</fullName>
+                <default>false</default>
+                <label>LAB000</label>
+            </value>
+            <value>
+                <fullName>MSG001</fullName>
+                <default>false</default>
+                <label>MSG001</label>
+            </value>
+            <value>
+                <fullName>MSG002</fullName>
+                <default>false</default>
+                <label>MSG002</label>
+            </value>
+            <value>
+                <fullName>MSG003</fullName>
+                <default>false</default>
+                <label>MSG003</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

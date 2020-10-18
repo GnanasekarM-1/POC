@@ -1,0 +1,107 @@
+<apex:page title="SFM Event Delivery" standardStylesheets="false" controller="SFMEventDeliveryController">
+<script>
+    
+    var __SVMX_LOAD_VERSION__ = "micro";
+    var __SVMX_CLIENT_LIB_PATH__ = "{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib')}";
+    
+    var SVMXJsr = {
+        
+        JsrGetEventData : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMEventDeliveryController.JsrGetEventData}', requestStr, 
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+        
+        JsrGetWizardInfo : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMEventDeliveryController.JsrGetWizardInfo}', requestStr, 
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+        
+        processResult : function(result, event, callback, context){
+            var ret = {success : false};
+            if(event.status == true){
+                ret = SVMX.toObject(result);
+            }
+            callback.call(context, ret, event);
+        }
+   };
+    
+</script>
+
+<script type="text/javascript" src="{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib/src/bootstrap.js')}"></script>
+
+<script>
+
+jQuery(document).ready(function(){
+    var client_runtime            = "{!URLFOR($Resource.com_servicemax_client_runtime, '')}";
+    var client_console            = "{!URLFOR($Resource.com_servicemax_client_sfmconsole, '')}";
+    var client_sal                = "{!URLFOR($Resource.com_servicemax_client_sal, '')}";
+    var client_mvc                = "{!URLFOR($Resource.com_servicemax_client_mvc, '')}";
+    var ui_components             = "{!URLFOR($Resource.com_servicemax_client_ui_components, '')}";
+    var client_sfmeventdelivery   = "{!URLFOR($Resource.com_servicemax_client_sfmeventdelivery, '')}";
+    var client_sal_sfmevent_model = "{!URLFOR($Resource.com_servicemax_client_sal_sfmevent_model, '')}";
+    var client_sfwdelivery        = "{!URLFOR($Resource.com_servicemax_client_sfwdelivery, '')}";
+    var client_sal_sfw_model      = "{!URLFOR($Resource.com_servicemax_client_sal_sfw_model, '')}";
+    var ui_components_calendar    = "{!URLFOR($Resource.com_servicemax_client_ui_components_calendar, '')}";
+    
+    var config = {title : "Event Delivery", version : "1.0.0",
+        modules : [
+            { id : "com.servicemax.client.sfmconsole",              version : "1.0.0" , codebase : client_console },
+            { id : "com.servicemax.client.runtime",                 version : "1.0.0" , codebase : client_runtime },
+            { id : "com.servicemax.client.sal",                     version : "1.0.0" , codebase : client_sal },
+            { id : "com.servicemax.client.mvc",                     version : "1.0.0" , codebase : client_mvc },
+            { id : "com.servicemax.client.ui.components",           version : "1.0.0" , codebase : ui_components },
+            { id : "com.servicemax.client.sfmeventdelivery",        version : "1.0.0" , codebase : client_sfmeventdelivery },
+            { id : "com.servicemax.client.sal.sfmevent.model",      version : "1.0.0" , codebase : client_sal_sfmevent_model },
+            { id : "com.servicemax.client.sfwdelivery",             version : "1.0.0" , codebase : client_sfwdelivery },
+            { id : "com.servicemax.client.sal.sfw.model",           version : "1.0.0" , codebase : client_sal_sfw_model },
+            { id : "com.servicemax.client.ui.components.calendar",  version : "1.0.0" , codebase : ui_components_calendar }
+        ],
+    
+        "app-config" : {
+            "application-id"   : "console",
+            "svmx-api-version" : "9.0",
+            "sal-service-runtime-mode" : "VISUAL_FORCE",
+            "enable-cache" : true,
+            "enable-log" : true,
+            "svmx-sfm-sal-model-use-jsr" : true
+        },
+    
+        "platform-config" : {
+    
+        }
+    };
+    
+    // create a console logger
+    new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+        
+    // create the client instance
+    var client = new com.servicemax.client.lib.core.Client();
+        
+    // set up the session id
+    client.addApplicationParameter("session-id", "{!GETSESSIONID()}");
+    
+    // for testing only
+    client.addApplicationParameter("onappload-handler", {handler : function(){
+        
+        SVMXJsr.JsrGetEventData({}, function(result, event){
+            alert(SVMX.toJSON(result));
+        }, {});
+        
+    }, context : {}});
+    // end testing
+    
+    setTimeout(function(){
+        client.run({configType : "local", data : config, loadVersion : __SVMX_LOAD_VERSION__ });
+    }, 200);
+    
+});
+
+</script>
+<body>
+<div id="client_display_root"></div>
+</body>
+</apex:page>

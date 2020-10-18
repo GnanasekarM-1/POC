@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Category__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Type of cost used for this group/member.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Type of cost used for this group/member.</inlineHelpText>
+    <label>Cost Category</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Straight</fullName>
+                <default>false</default>
+                <label>Straight</label>
+            </value>
+            <value>
+                <fullName>Double Time</fullName>
+                <default>false</default>
+                <label>Double Time</label>
+            </value>
+            <value>
+                <fullName>Time and a Half</fullName>
+                <default>false</default>
+                <label>Time and a Half</label>
+            </value>
+            <value>
+                <fullName>After Hours</fullName>
+                <default>false</default>
+                <label>After Hours</label>
+            </value>
+            <value>
+                <fullName>On Call</fullName>
+                <default>false</default>
+                <label>On Call</label>
+            </value>
+            <value>
+                <fullName>Travel</fullName>
+                <default>false</default>
+                <label>Travel</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

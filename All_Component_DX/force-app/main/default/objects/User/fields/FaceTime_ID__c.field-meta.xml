@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FaceTime_ID__c</fullName>
+    <deprecated>false</deprecated>
+    <description>User&#39;s FaceTime login ID. Used to make FaceTime calls in ServiceMax iPad Client. If this is left blank, user&#39;s phone number and email are used for the call.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter this user&#39;s FaceTime login ID if available. This is used to make FaceTime calls in ServiceMax iPad Client. If this is left blank, user&#39;s phone number and email are used for the call.</inlineHelpText>
+    <label>FaceTime ID</label>
+    <length>100</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

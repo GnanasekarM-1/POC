@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Estimates</fullName>
+    <availability>online</availability>
+    <description>Create/Edit Estimate Lines in the work order</description>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create/Edit Estimates</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__ServiceMaxConsole?SVMX_recordId=&apos;+CASESAFEID(Service_Order__c.Id)+&apos;&amp;SVMX_processId=TDM017&amp;SVMX_retURL=&apos;+URLFOR($Site.Prefix+&apos;/&apos;+CASESAFEID(Service_Order__c.Id)))}</url>
+</WebLink>

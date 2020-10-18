@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billable_Quantity__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Billable Qty computed for this line item. UOM is hours for Labor and Travel if applicable.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Billable Qty computed for this line item. UOM is hours for Labor and Travel if applicable.</inlineHelpText>
+    <label>Billable Qty</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

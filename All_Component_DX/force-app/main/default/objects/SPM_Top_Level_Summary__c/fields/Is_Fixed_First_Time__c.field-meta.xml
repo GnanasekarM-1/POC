@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Fixed_First_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Holds the value of FTF Summary (0 - Non-FTF, 1-FTF).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Holds the value of FTF Summary (0 - Non-FTF, 1-FTF)</inlineHelpText>
+    <label>Is Fixed First Time</label>
+    <precision>1</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

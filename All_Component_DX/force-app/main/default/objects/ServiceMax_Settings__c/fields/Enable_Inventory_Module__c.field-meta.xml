@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enable_Inventory_Module__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag Indicates if inventory functionality has been enabled for this organization or not.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag Indicates if inventory functionality has been enabled for this organization or not.</inlineHelpText>
+    <label>Enable Inventory Module</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

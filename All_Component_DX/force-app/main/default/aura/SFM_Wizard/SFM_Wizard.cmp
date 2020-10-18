@@ -1,0 +1,78 @@
+<aura:component controller="SFM_Wizard_LightningController" access="global" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes">
+    <ltng:require styles="{!$Resource.sfw_lightning_cmp}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getWizardsController}"/> 
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+	<aura:attribute name="sitePrefix" type="String"/>
+    
+    <!-- Added for the defect 046614 fix-->
+    <aura:attribute name="isCommunityRunning" type="Boolean"/>
+    
+    <!-- Define the Maximum height of the component added to UI-->
+    <aura:attribute name="maxheight" type="String" access="global"/>
+    <aura:attribute name="showIcons" type="Boolean" access="global"/>
+    <aura:attribute name="wizardMap" type="Map" />
+    <aura:attribute name="wizardToWizardStepMap" type="Map" />
+    <aura:attribute name="wizardHeaderRec" type="ServiceMax_Processes__c[]"/>
+    <aura:attribute name="isLoadingDone" type="Boolean" default="false"/>
+    
+    <!-- Below code is used for auto-refreshing the screen on change of any value in the record-->
+    <aura:attribute name="recordId" type="Id" /> 
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="record" type="Object"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}" 
+                      layoutType="FULL"
+                      targetRecord="{!v.record}"
+                      targetFields="{!v.simpleRecord}"
+                      recordUpdated="{!c.recordUpdated}"
+                      mode="VIEW"/>
+    
+    <div class="slds-section slds-is-open slds-card  full forcePageBlockSection forcePageBlockSectionView" aura:id="main" id="wizardComponentLoad">
+        
+        <h3 class="slds-section__title slds-card ">
+            <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+               <span class="slds-truncate" title="Section Title"> Service Flow Wizard</span>
+            </button>
+        </h3>
+        
+		    
+        <div aria-hidden="false" class="slds-section__content section__content"  aura:id= "wizardStepWrapper" >
+            <div>
+                <div class="scroll-container container show-less" aura:id="showMoreLess">
+                    <!-- 
+						BAC-3020 - Show All and Show Less Functionality
+					-->
+                    <aura:if isTrue="{!v.isLoadingDone}">
+						<div class="show-links">
+                            <a class="show-link show-more-link"  href="#" onclick="{!c.showMoreClick}">{!$Label.c.SFW001_TAG015}</a>
+                            <a class="show-link show-less-link" href="#" onclick="{!c.showLessClick}">{!$Label.c.SFW001_TAG016}</a>
+                        </div>
+                    </aura:if>
+                    <!-- 
+						BAC-3020, BAC-3965 - removing the "horizontalAlign" value. 
+					-->
+                    <lightning:layout multipleRows="true" >
+                        <aura:iteration var="wizard" items="{!v.wizardHeaderRec}">
+                            <div class="slds-m-left_small slds-m-right_small" >
+                                <lightning:layoutItem padding="around-medium" class="fixedWidth" flexibility="auto, no-shrink"> 
+                                    <div class="slds-text-title"> 
+                                        <h5 class="slds-text-heading_small" title="{!wizard.SVMXC__Description__c != null ? wizard.SVMXC__Description__c : wizard.SVMXC__Name__c}">
+                                            <span > {!wizard.SVMXC__Name__c} </span>
+                                        </h5>
+                                        
+                                    </div> 
+                                    <div class="slds-m-top_small">
+                                        <!-- Added isCommunityRunning for the defect 046614 fix-->
+                                        <c:SFM_Wizard_Steps wizardToWizardStepMap="{!v.wizardToWizardStepMap}" wizardID="{!wizard.Id}" record="{!v.simpleRecord}" showIcons="{!v.showIcons}" sitePrefix = "{!v.sitePrefix}" isCommunityRunning = "{!v.isCommunityRunning}"/>
+                                    </div>
+                                </lightning:layoutItem>
+                                <div class="slds-m-bottom_x-small"></div>
+                            </div>
+                        </aura:iteration>
+                     </lightning:layout>
+                </div>
+            </div>
+        </div>
+    </div>  
+</aura:component>

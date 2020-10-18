@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TimeBetweenAssignAndSchedule__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Calculates the time taken for the work order to be scheduled after it was assigned</description>
+    <externalId>false</externalId>
+    <formula>( FirstScheduledDateTime__c - First_Assigned_DateTime__c )*24</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Calculates the time taken for the work order to be scheduled after it was assigned</inlineHelpText>
+    <label>Time Between Assign And Schedule</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

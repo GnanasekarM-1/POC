@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Contract_Future_End_Date</fullName>
+    <active>true</active>
+    <description>Service contract end date should be in the future</description>
+    <errorConditionFormula>AND(ISNEW(),  End_Date__c  &lt;  TODAY())</errorConditionFormula>
+    <errorDisplayField>End_Date__c</errorDisplayField>
+    <errorMessage>End date should be a future date.</errorMessage>
+</ValidationRule>

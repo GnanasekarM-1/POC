@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resource_Dependency__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Resource Dependency</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Time_Dependency__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Same Resource</fullName>
+                <default>false</default>
+                <label>Same Resource</label>
+            </value>
+            <value>
+                <fullName>Different Resource</fullName>
+                <default>false</default>
+                <label>Different Resource</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Start to Start</controllingFieldValue>
+            <controllingFieldValue>Finish to Finish</controllingFieldValue>
+            <controllingFieldValue>Finish to Start</controllingFieldValue>
+            <valueName>Same Resource</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Start to Start</controllingFieldValue>
+            <controllingFieldValue>Finish to Finish</controllingFieldValue>
+            <controllingFieldValue>Start to Finish</controllingFieldValue>
+            <controllingFieldValue>Finish to Start</controllingFieldValue>
+            <controllingFieldValue>Finish in Unison</controllingFieldValue>
+            <controllingFieldValue>Start in Unison</controllingFieldValue>
+            <valueName>Different Resource</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

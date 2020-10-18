@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Batch_Lot__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Identification number assigned to a particular quantity or lot of material from a single manufacturer.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Identification number assigned to a particular quantity or lot of material from a single manufacturer.</inlineHelpText>
+    <label>Batch/Lot</label>
+    <referenceTo>Batch_Lot_Master__c</referenceTo>
+    <relationshipLabel>Stock Transfer Lines</relationshipLabel>
+    <relationshipName>Stock_Transfer_Lines</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

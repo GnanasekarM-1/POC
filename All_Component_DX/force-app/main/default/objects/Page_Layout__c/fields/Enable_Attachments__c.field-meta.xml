@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enable_Attachments__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Based on this flag, the iPad client will show the Attachments section for a record allowing the user to view, create or edit attachments</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Based on this flag, the iPad client will show the Attachments section for a record allowing the user to view, create or edit attachments</inlineHelpText>
+    <label>Enable Attachments</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

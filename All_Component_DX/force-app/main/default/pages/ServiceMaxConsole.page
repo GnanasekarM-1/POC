@@ -1,0 +1,989 @@
+<apex:page title="Service Delivery" standardStylesheets="false" controller="SFMDeliveryController" sidebar="true">
+<apex:includeScript value="/support/console/44.0/integration.js"/>
+
+<script>
+    function processResourceURL(url){
+        var ret = url, index;
+        if((index = url.indexOf("?")) != -1){
+            ret = url.substring(0, index);
+        }
+        return ret;
+    }
+
+    function navigateTo(urlStr, newRecord) {
+        //Defect Fix : 045122 : Below code added for salesforce Lightning console and added if condition for lightning console which is Theme4u
+        var themTypeValue = '{!$User.UITheme}';
+        if(urlStr && sforce.console.isInConsole() && themTypeValue == 'Theme4u')
+        {
+            if (newRecord){
+                sforce.console.getEnclosingTabId(function(result) {
+                    sforce.console.getEnclosingPrimaryTabId(function(primaryTabIdRes){
+                        if(result.id!=undefined && primaryTabIdRes.id!=undefined && result.id == primaryTabIdRes.id){//Added by Nidhi as fix for defect #46694
+                            sforce.console.openPrimaryTab(result.Id, urlStr, true, tabLabel, function() {
+                                sforce.console.closeTab(result.id);
+                            });
+                        }else{
+                            
+                            //Defect fix - 046781 : Changed below logic
+                            sforce.console.closeTab(result.id);
+                            sforce.console.refreshPrimaryTabById(primaryTabIdRes.id, true);
+                            
+                            /*sforce.console.openPrimaryTab(result.Id, urlStr, true, tabLabel, function() {
+                                sforce.console.closeTab(result.id);
+                            });*/
+                            //Fixed issue 047194 : cerated record open in subTab for lightning console
+                            sforce.console.openSubtab(primaryTabIdRes.id,urlStr,true,tabLabel,null, function (){
+                                
+                            });
+                        }
+                    });
+                });
+            }else
+            {
+              sforce.console.getEnclosingTabId(function(result) {
+                sforce.console.getEnclosingPrimaryTabId(function (primaryTabIdRes){
+                    if(result.id!=undefined && primaryTabIdRes.id!=undefined && result.id == primaryTabIdRes.id){//Added by Nidhi as fix for defect #46694
+                        //sforce.console.refreshPrimaryTabById(primaryTabIdRes.id, true);
+                        sforce.console.openPrimaryTab(result.Id, urlStr, true, tabLabel, function() {
+                            sforce.console.closeTab(result.id);
+                        });
+                    }else{//Added by Nidhi Ends here
+                        sforce.console.closeTab(result.id);
+                        sforce.console.refreshPrimaryTabById(primaryTabIdRes.id, true);
+                    }
+                });
+              });
+
+            }
+
+        }else if(urlStr && sforce.console.isInConsole()){
+            var primaryTabId = SVMX.getUrlParameter("priTabId");
+            var subtabId = SVMX.getUrlParameter("subtabId");
+            var tabLabel = '';
+            if (newRecord){
+                //Jaysukh:Defect Fixed 044713 : Refreshing record on creating of new record
+                sforce.console.getEnclosingTabId(function(result)
+                {
+                    sforce.console.refreshPrimaryTabById(primaryTabId, true, function()
+                    {
+                      sforce.console.openPrimaryTab(result.Id, urlStr, true, tabLabel, function(){
+                                sforce.console.closeTab(result.id);
+                       });
+                    });
+                });
+            }
+            else
+            {
+                //Defect Fixed 43999 : If condition true when sfm lauch from custom button and else condition for sfm lauched from wizard button
+                if(typeof primaryTabId === 'undefined' &&  typeof subtabId === 'undefined')
+                {
+                    sforce.console.getEnclosingTabId(function(result) {
+                        //Jaysukh : below code changed for BAC-3444
+                        sforce.console.refreshSubtabById(result.id, true, function() {
+                            // 1-  First get the Primary tab ID and then refresh it.
+                            // 2- Later close the subtab
+                            sforce.console.getEnclosingPrimaryTabId(function (primaryTabIdRes) {
+                               sforce.console.refreshPrimaryTabById(primaryTabIdRes.id, true, function() {
+                                    sforce.console.closeTab(result.id);
+                                });
+                            });
+                        });
+                    });
+                }
+                else
+                {
+                    sforce.console.getEnclosingTabId(function(result) {
+                        sforce.console.refreshSubtabById(subtabId, true, function() {
+                            sforce.console.refreshPrimaryTabById(primaryTabId, true, function() {
+                                sforce.console.closeTab(result.id);
+                            });
+                        });
+                    });
+                }
+            }
+        } else {
+            window.parent.location.href = '' + urlStr;
+        }
+    }
+
+</script>
+
+<script>
+    var cacheDataContext = function () {
+        this.dataCache = null;
+        this.dataCallBack = null;
+        this.dataEvent = null;
+        this.dataContext = null;
+        this.dataInitiated = false;
+    };
+
+    if(window['Visualforce'] && Visualforce.remoting){
+        Visualforce.remoting.timeout = 120000;
+    }
+
+    var SVMXJsr = {
+
+        dataContext: {},
+        callBackHandler: {},
+
+        JsrGetConfigInfo : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetConfigInfo}', requestStr,
+                function(result, event){
+                    console.log('JsrGetConfigInfo - end');
+                    me.processResult(result, event, callback, context);
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetIsQualify: function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetIsQualify}', requestStr,
+                function(result, event){
+                    console.log('JsrGetIsQualify - end');
+                    me.processResult(result, event, callback, context);
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetJwtToken : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetJwtToken}', requestStr,
+                function(result, event){
+                    console.log('JsrGetJwtToken - end');
+                    me.processResult(result, event, callback, context);
+                }, {escape: false}
+            );
+        },
+
+        JsrGetPageLayout : function(request2, callback, context){
+            var requestStr = SVMX.toJSON(request2), me = this;
+            console.log("JSR - JsrGetPageLayout start");
+            var cache = me.dataContext['pageLayout'];
+            if(cache && cache.dataInitiated){
+                if(cache.dataCache) {
+                    me.processResult(cache.dataCache, cache.dataEvent, callback, context);
+                    delete me.dataContext['pageLayout'];
+                    console.log("JSR - pageLayout available");
+                } else {
+                    console.log("JSR - pageLayout not available");
+                    cache.dataCallBack = callback;
+                    cache.dataContext = context;
+                }
+            } else {
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetPageLayout}', requestStr,
+                    function(result, event){
+                        console.log('JsrGetPageLayout - end');
+                        me.processResult(result, event, callback, context);
+                    }, {buffer:false,escape: false}
+                );
+            }
+        },
+
+        JsrGetBubbleData : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            console.log('JsrGetBubbleData - start');
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetBubbleData}', requestStr,
+                function(result, event){
+                    console.log('JsrGetBubbleData - end');
+                    me.processResult(result, event, callback, context);
+                }, {escape: false}
+            );
+        },
+
+        JsrGetLookupConfig : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetLookupConfig}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrAddRecords : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrAddRecords}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrSaveTarget : function(request, callback, context){
+          var requestStr = SVMX.toJSON(request), me = this;
+          if(!isCORSEnabled() || SVMX.getUrlParameter("SVMX_action") === 'CHECKLIST') {
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrSaveTarget}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+          } else {
+            me.callSaveByREST(request,callback,context);
+          }
+        },
+
+        JsrGetNextStepInfo : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetNextStepInfo}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrGetSnippetForEvent : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetSnippetForEvent}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrGetRecordTypes : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetRecordTypes}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrGetLookupData : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetLookupData}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrGetLookupConfiguration : function(request, callback, context){ //Added for BAC-5211
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetLookupConfiguration}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrGetPageData : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            console.log("JSR - JsrGetPageData start");
+            var cache = me.dataContext['pageData'];
+            if(cache && cache.dataInitiated){
+                if(cache.dataCache) {
+                    console.log("JSR - PageData available");
+                    me.processResult(cache.dataCache, cache.dataEvent, callback, context);
+                    delete me.dataContext['pageData'];
+                } else {
+                    console.log("JSR - PageData not available");
+                    cache.dataCallBack = callback;
+                    cache.dataContext = context;
+                }
+            } else {
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetPageData}', requestStr,
+                    function(result, event){ console.log("DateTime JsrGetPageData server response came"); me.processResult(result, event, callback, context); }, {buffer:false,escape: false}
+                );
+            }
+        },
+
+        JsrGetPageDataV2 : function(request, callback, context){//Added by Nidhi as part of Lazy Loading BAC-4680
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetPageDataV2}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+        JsrRetrieveDisplayTags : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            console.log('JSR - JsrRetrieveDisplayTags - start');
+
+            var cache = me.dataContext['displayTags'];
+            if(cache && cache.dataInitiated){
+                if(cache.dataCache) {
+                    console.log("JSR - displayTags available");
+                    me.processResult(cache.dataCache, cache.dataEvent, callback, context);
+                    delete me.dataContext['displayTags'];
+                } else {
+                    console.log("JSR - displayTags not available");
+                    cache.dataCallBack = callback;
+                    cache.dataContext = context;
+                }
+            } else {
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrRetrieveDisplayTags}', requestStr,
+                    function(result, event){
+                        console.log("DateTime JsrRetrieveDisplayTags server response came");
+                        me.processResult(result, event, callback, context);
+                    }, {buffer:false,escape: false}
+                );
+            }
+        },
+
+        JsrGetListOfChecklist : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetListOfChecklist}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        JsrResolveLookUpDisplayValue : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrResolveLookUpDisplayValue}', requestStr,
+                function(result, event){ me.processResult(result, event, callback, context); }, {escape: false}
+            );
+        },
+
+        processResult : function(result, event, callback, context){
+            var me = this;
+            var ret = {success : false};
+            console.log('Jsr - processResult '+event.method);
+            if(event.status == true && result != null){
+                ret = SVMX.toObject(result);
+                //------Start-------Added for the story BAC-4426
+                if(event.method == 'JsrGetPageData'){
+                    ret.message = ret && ret.data && ret.data.response && ret.data.response.message;
+                }
+                else if(event.method == 'JsrGetPageLayout' || event.method == 'JsrGetBubbleData'){
+                    ret.message = ret && ret.response && ret.response.message;
+                    ret.success = ret && ret.response && ret.response.success;
+                }else if(event.method == 'JsrGetPageDataV2'){//Added by Nidhi as part of Lazy Loading BAC-4680
+                    ret.message = ret.data.response.message;
+                    ret.success = ret.data.response.success;
+                }
+            }
+            else{
+                ret.success = event.status;
+                ret.message = event.message;
+            }
+            //------End-------Added for the story BAC-4426
+            callback.call(context, ret, event);
+        },
+
+        callSaveByREST : function(request,callback, context){
+            var me = this;
+            var apiPath = svmx_org_namespace + '/svmx/rest/SFMDeliveryServiceIntf/saveTarget/9.0/';
+            callRestEndpoint('SFMDeliveryServiceIntf', 'saveTarget', apiPath, request,
+                function(result,event){
+                    var status = result.status=='error'?false:true;
+                    var event = {'status':status, 'method':'saveTarget'};
+                    me.processResult(result, event, callback, context);
+                 },
+                this
+            );
+        },
+
+        initiatePageDataByREST : function(request){
+            var me = this;
+            console.log("DateTime initiatePageData start");
+            var apiPath = svmx_org_namespace + '/svmx/rest/SFMDeliveryServiceIntf/getPageData/9.0/';
+            callRestEndpoint('SFMDeliveryServiceIntf', 'getPageData', apiPath, request,
+                function(result,event){
+                    var status = result.status=='error'?false:true;
+                    var event = {'status':status, 'method':'JsrGetPageData'};
+                    console.log("DateTime initiatePageData server response came");
+                    var cache = me.dataContext['pageData'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['pageData'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+                 },
+                this
+            );
+        },
+
+        initiatePageDataByJSR : function(request){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            console.log("DateTime initiatePageData start");
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetPageData}', requestStr,
+                function(result, event){
+                    console.log("DateTime initiatePageData server response came");
+                    var cache = me.dataContext['pageData'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['pageData'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+                 }, {buffer:false,escape: false}
+            );
+        },
+
+        initiateDisplayTagsbyREST : function(request){
+            var me = this;
+
+            console.log("JSR - initiateDisplayTags - start");
+            var apiPath = svmx_org_namespace + '/svmx/rest/SFMDeliveryServiceIntf/retrieveDisplayTags/9.0/';
+            callRestEndpoint('SFMDeliveryServiceIntf','retrieveDisplayTags', apiPath, request,
+                function(result){
+                    console.log('JSR - initiateDisplayTags - end');
+                    var event = {'status':true, 'method':'JsrRetrieveDisplayTags'};
+                    var cache = me.dataContext['displayTags'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['displayTags'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+
+                 },
+                this
+            );
+        },
+
+        initiateDisplayTagsbyJSR : function(request){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            console.log("JSR - initiateDisplayTags - start");
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrRetrieveDisplayTags}', requestStr,
+                function(result,event){
+                    console.log('JSR - initiateDisplayTags - end');
+                    var cache = me.dataContext['displayTags'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['displayTags'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+
+                 },
+                 {buffer:false,escape: false}
+            );
+        },
+
+        initiatePageLayoutbyREST : function(request){
+            var me = this;
+
+            console.log("JSR - initiatePageLayout - start");
+            var apiPath = svmx_org_namespace + '/svmx/rest/SFMDeliveryServiceIntf/getPageLayout/9.0/';
+            callRestEndpoint('SFMDeliveryServiceIntf','getPageLayout', apiPath, request,
+                function(result){
+                    console.log('JSR - initiatePageLayout - end');
+                    var event = {'status':true, 'method':'JsrGetPageLayout'};
+                    var cache = me.dataContext['pageLayout'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['pageLayout'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+
+                 },
+                this
+            );
+        },
+
+        initiatePageLayoutbyJSR : function(request){
+            var requestStr = SVMX.toJSON(request), me = this;
+
+            console.log("JSR - initiatePageLayout - start");
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrGetPageLayout}', requestStr,
+                function(result,event){
+                    console.log('JSR - initiatePageLayout - end');
+                    var cache = me.dataContext['pageLayout'];
+                    if(cache) {
+                        if(cache.dataCallBack) {
+                            me.processResult(result, event,cache.dataCallBack, cache.dataContext);
+                            delete me.dataContext['pageLayout'];
+                        } else {
+                            cache.dataCache = result;
+                            cache.dataEvent = event;
+                        }
+                    }
+                 },
+                 {buffer:false,escape: false}
+            );
+        },
+
+        initiateObjectDescribeBySOAP: function(request, lstObjectNames){
+            var me = this;
+            var noOfObjects = lstObjectNames ? lstObjectNames.length : 0;
+            var describeObjectOperation = SVMX.create('com.servicemax.client.sal.model.sfmdelivery.operations.DescribeObject');
+
+            for(var i=0; i<noOfObjects; i++) {
+                var objectName = lstObjectNames[i];
+                me.dataContext['objectDescribe-'+objectName] = new cacheDataContext();
+                me.callObjectDescribeSoapService(objectName, describeObjectOperation);
+            }
+        },
+
+        callObjectDescribeSoapService: function(objName, describeObjectOperation) {
+            var me = this;
+            console.log("ObjectDescribe - for Object:" + objName + " start");
+            var data = {sObjectType:objName}
+
+            callSoapEndpoint('', 'describeSObject', '', data,
+                             function(data) {
+                                var cache = me.dataContext['objectDescribe-'+objName];
+                                var result = SVMX.xmlToJson(data);
+                                result = result.Envelope.Body.describeSObjectResponse.result;
+                                cache.dataCache = result;
+
+                                if(cache.dataCallBack) {
+                                    cache.dataCallBack.call(cache.dataContext, cache.dataCache);
+                                    delete me.dataContext['objectDescribe-'+objName];
+                                }
+                            },
+                            this);
+        },
+
+        getObjectDescribeDataBySOAP: function(objName, callback, context) {
+          var me = this;
+          var cache = me.dataContext['objectDescribe-'+objName];
+          if(cache) {
+              if (cache.dataCache){
+                  console.log("ObjectDescribe - for Object:" + objName + " callback");
+                  callback.call(context, cache.dataCache);
+                  delete me.dataContext['objectDescribe-'+objName];
+              } else if(!cache.dataCache) {
+                  cache.dataCallBack = callback;
+                  cache.dataContext = context;
+            }
+          } else {
+              callback.call(context, null);
+          }
+        },
+    }
+</script>
+
+<script type="text/javascript" src="{!IF($CurrentPage.parameters.debug != null,
+URLFOR($Resource.com_servicemax_client_sfmdelivery_es6, 'com.servicemax.client.sfmdelivery.es6/bundle.js'),
+URLFOR($Resource.com_servicemax_client_sfmdelivery_es6, 'com.servicemax.client.sfmdelivery.es6/bundle.min.js')
+)}"></script>
+
+<script>
+    var svmx_org_namespace = 'SVMXC';
+
+    var applicationStarted = false;
+    var sessionTokenReceived = false;
+    var recordQualifyReceived = false;
+    var configResponseReceived = false;
+    var bInitiateParallelCalls = false;
+    var bInitiatePageData = false;
+
+    //initial values
+    var svmx_sfm_delivery_process_title;
+    var svmx_sfm_delivery_settings = {}; //mandatory
+    var svmx_sfm_delivery_userinfo = {}; //mandatory
+    var svmx_sfm_delivery_is_sfmprocess;
+    var svmx_sfm_delivery_is_qualified = false;
+    var svmx_sfm_delivery_error_message;
+    var svmx_sfm_delivery_process_lmd;
+    var svmx_sfm_delivery_attachments_enabled = false;
+    var svmx_sfm_lightning_title_process_name;
+    var svmx_sfm_lightning_title_source_record_value;
+    var svmx_sfm_tab_style_logo_url;
+    var svmx_sfm_color_code_for_icon;
+    var svmx_is_launch_designer_enabled;
+    var svmx_url_for_launch_designer;
+    var svmx_salesforce_file_global_setting;
+    var svmx_is_sanitizehtml_enabled;
+    var svmx_sfm_delivery_jwt_token;
+    var svmx_is_jwt_token_enabled;
+    var svmx_is_usage_statistics_enable;
+    var svmx_site_prefix = "{!$Site.Prefix}";
+    var svmx_metadata_lmd;
+    
+
+    var svmx_user_id;
+    var svmx_user_language;
+
+
+    var request = {
+        processId:SVMX.getUrlParameter("SVMX_processId"),
+        recordId:SVMX.getUrlParameter("SVMX_recordId"),
+        qualify:true,
+        dateTimeConversionRequired:true,
+    };
+
+    function callRestEndpoint(endpoint,methodname,query,data,callback,context) {
+      /*var restService = window['callRestService'];
+      restService && restService(endpoint,methodname,query,data,callback,context);
+      */
+      var instanceName = SVMX.getUrlParameter("SVMX_AppInstanceName");
+      var sessionId =  SVMX.getClient().getApplicationParameter('session-id');
+      var data = JSON.stringify(data);
+      var url= 'https://'+ instanceName +'.salesforce.com/services/apexrest/'+ query;
+      var headers = {
+        'Authorization': 'OAuth '+sessionId,
+        'SalesforceProxy-Endpoint':url,
+      };
+      SVMX.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: data,
+        url:url,
+        context: this,
+        async: true,
+        headers: headers,
+
+        success:  function(data, status, jqXhr) {
+          callback.call(context,data);
+        },
+
+        error: function(jqXhr, status, e) {
+          var data = { 'e': e,'status':status};
+          callback.call(context,data);
+        },
+      });
+    }
+
+    function callSoapEndpoint(endpoint, methodname, query, data, callback, context) {
+        var soapService = window['callSoapService'];
+        soapService && soapService(endpoint, methodname, query, data, callback, context);
+    }
+
+    function shouldInitiateParallelCalls() {
+        if(SVMX.getUrlParameter("SVMX_action") === 'CHECKLIST')  {
+            return false;
+        }
+        return true;
+    }
+
+    function isCORSEnabled() {
+         if(SVMX.getUrlParameter("SVMX_CORS_Enabled") === 'false' || SVMX.getUrlParameter("SVMX_CORS_Enabled") === undefined) {
+            return false;
+         }
+         return true;
+    }
+
+    function initiateParallelCalls() {
+        console.log('initiateParallelCalls - starts ' + applicationStarted + ' ' + sessionTokenReceived + ' ' +recordQualifyReceived);
+        if(configResponseReceived && sessionTokenReceived && applicationStarted && recordQualifyReceived) {
+            callInitiateObjectDescribe();
+        }
+        runApplication();
+        if(applicationStarted && sessionTokenReceived && recordQualifyReceived && !bInitiateParallelCalls)  {
+            bInitiateParallelCalls = true;
+            if(!svmx_sfm_delivery_is_qualified || !shouldInitiateParallelCalls())  {
+                console.log('either record is checklist or not qualify');
+                return;
+            }
+            initiateDisplayTagsCache();
+            initiatePageLayout();
+        }
+
+        if(!bInitiatePageData && shouldInitiateParallelCalls() && sessionTokenReceived )  {
+            bInitiatePageData = true;
+            callInitiatePageData();
+        }
+    }
+
+    function callGetSessionToken() {
+        console.log('GetSessionToken call - start');
+        SVMX.getClient().addApplicationParameter("session-id", "{!GETSESSIONID()}");
+        sessionTokenReceived= true;
+        initiateParallelCalls();
+    }
+
+    function callGetConfigInfo() {
+        console.log('JsrGetConfigInfo call - start');
+        SVMXJsr.JsrGetConfigInfo(request,
+            function(result,event) {
+                console.log('JsrGetConfigInfo call - end');
+                svmx_sfm_delivery_userinfo = result.UserInfo;   //first time
+                svmx_sfm_delivery_process_title = result.ProcessTitle;
+                svmx_sfm_delivery_settings = result.Settings;
+                svmx_sfm_delivery_process_lmd = result.numLMD;
+                svmx_sfm_lightning_title_process_name = result.strLightningTitleProcessName;
+                svmx_sfm_lightning_title_source_record_value = result.strLightningTitleSourceRecordValue;
+                svmx_sfm_tab_style_logo_url = result.strTabStyleLogoURL;
+                svmx_sfm_color_code_for_icon = result.strColorCodeForIcon;
+                svmx_is_launch_designer_enabled = result.isLaunchDesignerEnabled;
+                svmx_url_for_launch_designer = result.urlForLaunchDesigner;
+                svmx_salesforce_file_global_setting = result.salesforceFileGlobalValue;
+                svmx_is_sanitizehtml_enabled = result.isSanitizehtmlEnabled;
+                svmx_is_usage_statistics_enable = result.isUsageStatisticsEnable;
+                svmx_list_of_object_names = result.lstObjectNames;
+                svmx_metadata_lmd = result.cacheSettingValue;
+                configResponseReceived = true;
+                initiateParallelCalls();
+            },
+            this
+        );
+    }
+
+    function callGetIsRecordQualify() {
+        console.log('JsrGetIsQualify call - start');
+        SVMXJsr.JsrGetIsQualify(request,
+            function(result,event) {
+                console.log('JsrGetIsQualify call - end');
+                recordQualifyReceived = true;
+                svmx_sfm_delivery_is_sfmprocess = result.isSFMProcess;
+                svmx_sfm_delivery_is_qualified = result.isQualified;
+                svmx_sfm_delivery_error_message = result.errorMessage;
+                svmx_user_id = result.userId;
+                svmx_user_language = result.language;
+                SVMX.getClient().addApplicationParameter("svmx-app-instance-name", result.appInstanceName);
+                SVMX.getClient().addApplicationParameter("svmx-app-instance-url", result.appInstanceURL);
+                initiateParallelCalls();
+            },
+            this
+        );
+    }
+
+    function callJWTToken() {
+        console.log('JsrGetJwtToken call - start');
+        SVMXJsr.JsrGetJwtToken({},
+            function(result,event) {
+                console.log('JsrGetJwtToken call - end');
+                sessionTokenReceived= true;
+                svmx_is_jwt_token_enabled = result.isJWTTokenEnabledforClient;
+                svmx_sfm_delivery_jwt_token = result.jwtTokenIdforCommunity;
+                SVMX.getClient().addApplicationParameter("session-id", svmx_sfm_delivery_jwt_token);
+                initiateParallelCalls();
+            },
+            this
+        );
+    }
+
+    function callInitiatePageData() {
+        console.log('JsrGetPageData call - start');
+        var cache = SVMXJsr.dataContext['pageData'];
+        cache.dataInitiated = true;
+        if(isCORSEnabled())
+            SVMXJsr.initiatePageDataByREST(request);
+        else
+            SVMXJsr.initiatePageDataByJSR(request);
+    }
+
+    function loadApplication() {
+        jQuery(document).ready(function(){
+            console.log("DateTime JQuery Ready Application : " + new Date());
+            var ui_components               = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_components_resource , '')}");
+            var ui_component_bubble         = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_components_bubble_resource, '')}");
+            var ui_desktop_theme            = processResourceURL("{!URLFOR($Resource.com_servicemax_client_sfmdelivery_ui_desktop_theme_resource, '')}");
+            var ui_desktop_lighting_theme   = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_lightning_theme_resource, '')}");
+
+            var config = {title :svmx_sfm_delivery_process_title, version : "1.0.0",
+                 modules : [],
+
+                "app-config" : {
+                    "org-name-space": svmx_org_namespace,
+                    "application-id"   : "console",
+                    "svmx-api-version" : "9.0",
+                    "sfmconsole-skip-sync": true,
+                    "sfmconsole-runtime-start": "sfmdelivery",
+                    "sal-service-runtime-mode" : "VISUAL_FORCE",
+                    "svmx-sfm-section-label-align" : "right",
+                    "svmx-sfm-section-label-style" : "font-weight:bold",
+                    "svmx-sfm-validate-email-format" : true,
+                    "svmx-sfm-validate-url-format" : false,
+                    "svmx-sfm-reload-on-quick-save" : false,
+                    "svmx-sfm-lookup-cache-limit": 10,
+                    "svmx-sfm-validate-phone-format" : false,
+                    "enable-cache" : true,
+                    "enable-log" : true,
+                    "svmx-use-server-cache" : false,
+                    "svmx-sfmd-settings-instant-update" : false,
+                    "ui-component-resourcepath": ui_components,
+                    "ui-components-bubble-resource-path": ui_component_bubble,
+                    "ui-desktop-theme-resourcepath": ui_desktop_theme,
+                    "ui-desktop-lightning-theme-resourcepath" : ui_desktop_lighting_theme,
+                    "ui-components-bubble-theme-path" : ui_component_bubble + "/com.servicemax.client.ui.components.bubble.resource/modules/com.servicemax.client.ui.components.bubble/resources/themes/images/bubble",
+                    "svmx-sfm-sal-model-use-jsr" : true,
+                    "svmx-base-url" : "{!$Site.Prefix}",
+                    "svmx-datetime-conversion-required": true,
+                 },
+
+                "platform-config" : {
+
+                }
+            };
+
+            var appConfig = config['app-config'];
+
+            Object.keys(appConfig).forEach(function(key){
+                  SVMX.getClient().addApplicationParameter(key, appConfig[key]);
+            });
+
+            var checklistAction = SVMX.getUrlParameter("SVMX_action");
+            var isChecklist = false;
+            if(checklistAction !== null && checklistAction !== undefined && checklistAction === 'CHECKLIST') {
+                isChecklist = true;
+            }
+
+            // check if automation is enabled
+            var automation = SVMX.getUrlParameter("svmx-automation");
+            if(automation !== undefined && automation !== null && automation === "true"){
+                SVMX.getClient().addApplicationParameter("automation", true);
+            }
+
+            var useServerCache = SVMX.getUrlParameter("svmx-use-server-cache");
+            if(useServerCache !== undefined && useServerCache !== null && useServerCache === "true"){
+                SVMX.getClient().addApplicationParameter("svmx-use-server-cache", true);
+            }
+
+            var profiler = SVMX.getUrlParameter("svmx-profiling");
+            if(profiler !== undefined && profiler !== null && profiler === "true"){
+                config["modules"].push({
+                    id : "com.servicemax.client.profiler", version : "1.0.0" , codebase : ui_profiling });
+            }
+
+            // reading lightning mode from url settings
+            var lightningSettingsFromURL = SVMX.getUrlParameter("SVMX_IsSFMLightning");
+            var lightning = lightningSettingsFromURL!== undefined && lightningSettingsFromURL.startsWith('true')?'true' : 'false';
+
+            var extPath;
+            if(isChecklist !== true && lightning !== undefined && lightning !== null && lightning === 'true'){
+                SVMX.getClient().addApplicationParameter("theme", 'LIGHTNING');
+                SVMX.getClient().addApplicationParameter("svmx-lightning", true);
+                extPath = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_ext6loader , 'com.servicemax.client.ui.ext6loader/src/extjs/ext-all.js')}");
+                if(document.getElementsByTagName('html')[0].getAttribute('dir') === 'rtl'){
+                    extPath = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_ext6loader , 'com.servicemax.client.ui.ext6loader/src/extjs/ext-all-rtl.js')}");
+                }
+            }
+            else{
+                extPath = processResourceURL("{!URLFOR($Resource.com_servicemax_client_ui_ext4loader , 'com.servicemax.client.ui.ext4loader/src/extjs/ext-all.js')}");
+            }
+
+            SVMX.getClient().addApplicationParameter('svmx_optimisation_enabled', true);
+
+            var appInstanceName = SVMX.getUrlParameter("SVMX_AppInstanceName");
+            SVMX.getClient().addApplicationParameter("svmx-app-instance-name", appInstanceName);
+            SVMX.getClient().addApplicationParameter("svmx-app-instance-url", 'https://'+appInstanceName+'.salesforce.com');
+
+            console.log('ext start loading');
+            SVMX.requireScript(extPath, function() {
+                console.log('ext loaded')   ;
+                Ext.onReady( function() {
+                    console.log('ext ready and application start loading');
+                    startApplication();
+                    applicationStarted = true;
+                    console.log('application started,ready to call get page data');
+                    initiateParallelCalls();
+                 });
+            }, null, this, { ignoreLoadVersion: true });
+
+            $("#handlebarContainer").click(function(evt){
+                setTimeout(function(){
+                    $("#client_display_root").width($("#AppBodyHeader").width() - $("#sidebarCell").width() - 40);
+                    SVMX.getCurrentApplication().getApplicationErrorHandler().getRoot().resize();
+                }, 5);
+            });
+        });
+    }
+
+    function runApplication() {
+
+        console.log('run application starts - configResponseReceived='+configResponseReceived + ",recordQualifyReceived=" + recordQualifyReceived + ',applicationStarted=' + applicationStarted + ',sessionTokenReceived=' + sessionTokenReceived) ;
+
+        if(configResponseReceived && recordQualifyReceived && applicationStarted && sessionTokenReceived) {
+
+            configResponseReceived = false; //don't run application again
+            var applicationType = 'Standard App';
+            var communityValue = svmx_site_prefix;
+            if(sforce.console.isInConsole()){
+                applicationType = 'Console App';
+            }
+            else if(communityValue != null && communityValue.length > 0){
+                applicationType = 'Community';
+            }
+            else{
+                applicationType = 'Standard App';
+            }
+
+            var userInfo = SVMX.toObject(svmx_sfm_delivery_userinfo);
+            userInfo.ApplicationType = applicationType;
+            svmx_sfm_delivery_userinfo = SVMX.toJSON(userInfo);
+
+            SVMX.getClient().addApplicationParameter('svmx_is_sanitizehtml_enabled', svmx_is_sanitizehtml_enabled);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_delivery_jwt_token', svmx_sfm_delivery_jwt_token);
+            SVMX.getClient().addApplicationParameter('svmx_is_jwt_token_enabled', svmx_is_jwt_token_enabled);
+
+            var AbstractApplication = window['AbstractApplication'];
+            if(AbstractApplication) {
+                console.log('run application starts by AbstractApplication');
+                var app = AbstractApplication.currentApp;
+                app.run();
+            }  else {
+                console.log('run application starts but before run still in process');
+                window['PleaseStart'] = true;
+            }
+        }
+    }
+
+    function initiateDisplayTagsCache() {
+        var callCacheService = window['callCache'];
+        var displayTags = callCacheService && callCacheService('SFM002-DISPLAY_TAGS');
+        if(displayTags==undefined) {
+            var cache = SVMXJsr.dataContext['displayTags'];
+            cache.dataInitiated = true;
+            if(isCORSEnabled())
+                SVMXJsr.initiateDisplayTagsbyREST({'moduleId': "SFM002"});
+            else
+                SVMXJsr.initiateDisplayTagsbyJSR({'moduleId': "SFM002"});
+        } else {
+            delete SVMXJsr.dataContext['displayTags'];
+        }
+    }
+
+    function initiatePageLayout() {
+        var key = 'SFMDELIVERY-PAGELAYOUT-' + request.processId;
+        var userInfo = SVMX.toObject(svmx_sfm_delivery_userinfo);
+        var finalkey = svmx_user_id + '-' + svmx_user_language + '-' + key;
+        var callCacheService = window['callCache'];
+        var pageLayout = callCacheService && callCacheService(finalkey);
+        if(pageLayout==undefined) {
+            var cache = SVMXJsr.dataContext['pageLayout'];
+            cache.dataInitiated = true;
+            SVMXJsr.initiatePageLayoutbyJSR(request);
+        } else {
+            delete SVMXJsr.dataContext['pageLayout'];
+        }
+    }
+
+    function callInitiateObjectDescribe() {
+        var key = 'SFMDELIVERY-OBJECT-LIST_' + request.processId;
+        var finalkey = svmx_user_id + '-' + svmx_user_language + '-' + key;
+        var callCacheService = window['callCache'];
+        var objectDescribeData = callCacheService && callCacheService(finalkey);
+        if(objectDescribeData == undefined) {
+            SVMXJsr.initiateObjectDescribeBySOAP(request, svmx_list_of_object_names);
+        }
+    }
+
+    function getSessionToken() {
+        if(SVMX.getUrlParameter("SVMX_JWTEnabled") == 'true') {
+            callJWTToken();
+        } else {
+            callGetSessionToken(); // api session
+        }
+    }
+
+    function init() {
+        if(!shouldInitiateParallelCalls())
+            return;
+        SVMXJsr.dataContext['pageData'] = new cacheDataContext();;
+        SVMXJsr.dataContext['displayTags'] = new cacheDataContext();
+        SVMXJsr.dataContext['pageLayout'] = new cacheDataContext();
+    }
+
+    init();
+    callGetIsRecordQualify(); //JSR call
+    callGetConfigInfo(); // JSR call
+    loadApplication();
+    getSessionToken();
+
+
+</script>
+<body>
+<div id="client_display_root"></div>
+</body>
+
+<script>
+    var isStatisticsEnabled = '{!$CurrentPage.parameters.SVMX_IsStatisticsEnabled}';
+    if(isStatisticsEnabled === 'true'){
+        var consolePageHead = document.getElementsByTagName('head')[0];
+        var newRelicScriptTag = document.createElement('script');
+        newRelicScriptTag.setAttribute("type", "text/javascript");
+        newRelicScriptTag.setAttribute("src", "{!URLFOR($Resource.com_servicemax_client_usageanalytics , 'com.servicemax.client.usageanalytics/resource/sfmdelivery-newrelic.js')}");
+        consolePageHead.appendChild(newRelicScriptTag);
+    }
+</script>
+</apex:page>

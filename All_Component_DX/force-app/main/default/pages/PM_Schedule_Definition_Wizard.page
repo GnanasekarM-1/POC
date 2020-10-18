@@ -1,0 +1,3 @@
+<apex:page standardController="PM_Schedule_Definition__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!PM_Schedule_Definition__c.Id}" />
+</apex:page>

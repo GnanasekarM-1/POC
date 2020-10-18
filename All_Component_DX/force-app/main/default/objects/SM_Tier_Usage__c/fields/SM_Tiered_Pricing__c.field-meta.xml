@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Tiered_Pricing__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Tiered Pricing for which this usage is applicable.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Tiered Pricing for which this usage is applicable.</inlineHelpText>
+    <label>Tiered Pricing</label>
+    <referenceTo>SM_Tiered_Pricing__c</referenceTo>
+    <relationshipLabel>Tier Usages</relationshipLabel>
+    <relationshipName>Tier_Usages</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

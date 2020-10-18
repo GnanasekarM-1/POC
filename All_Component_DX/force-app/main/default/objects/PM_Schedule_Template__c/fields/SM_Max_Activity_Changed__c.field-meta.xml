@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Max_Activity_Changed__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Minimum threshold above which adjustment of schedules should be applied.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Minimum threshold above dynamic adjustment of schedules should be applied</inlineHelpText>
+    <label>Max Activity Changed</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

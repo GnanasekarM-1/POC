@@ -1,0 +1,70 @@
+.THIS {
+}
+.THIS .sla-btn-container {
+    max-width: 135px;
+    padding: 10px 5px 0;
+    position: relative;
+}
+.THIS .sla-btn-container>button {
+    height: 100%;
+    display: block;
+    padding: 15px 0 0 0;
+    max-height: 80px;
+    min-width: 120px;
+    margin-left: 0;
+    color: #706E6B;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+}
+
+.THIS .sla-btn-container>button[disabled="true"] {
+	background: #c9c7c5;
+    border-color: #c9c7c5;
+    color: #fff;
+}
+
+.THIS .sla-btn-container>button .slds-button__icon {
+    display: block;
+    width: 100%;
+    text-align: center;    
+}
+.THIS .sla-clock-pause ~ .pause-label {
+    color: #3e3e3c;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 17px;
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    padding: 15px 15px 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.THIS .sla-clock-pause[disabled="true"] ~ .pause-label {
+    color: #ffffff;
+}
+
+.THIS .sla-clock-play ~ .play-label {
+    color: #C23934;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 17px;
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    padding: 15px 15px 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.THIS .sla-clock-play[disabled="true"] ~ .play-label {
+    color: #ffffff;
+}

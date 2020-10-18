@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Optimization_Goal__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Optimization Goal</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Optimization Goal</inlineHelpText>
+    <label>Optimization Goal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Custom</fullName>
+                <default>true</default>
+                <label>Custom</label>
+            </value>
+            <value>
+                <fullName>Maximize SLA Compliance</fullName>
+                <default>false</default>
+                <label>Maximize SLA Compliance</label>
+            </value>
+            <value>
+                <fullName>Maximize Resource Utilization</fullName>
+                <default>false</default>
+                <label>Maximize Resource Utilization</label>
+            </value>
+            <value>
+                <fullName>Right Person to Right Job</fullName>
+                <default>false</default>
+                <label>Right Person to Right Job</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

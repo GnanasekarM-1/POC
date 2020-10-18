@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Access_Configuration_Profile__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Field stores servicemax profile tagged to device mobile configuration</description>
+    <externalId>false</externalId>
+    <label>Access Configuration Profile</label>
+    <referenceTo>ServiceMax_Config_Data__c</referenceTo>
+    <relationshipLabel>Device Mobile Config</relationshipLabel>
+    <relationshipName>Device_Mobile_Config</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

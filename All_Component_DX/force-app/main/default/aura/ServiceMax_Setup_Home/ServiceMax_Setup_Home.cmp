@@ -1,0 +1,115 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="CONF_SetupHome_Controller" access="global" >
+    <aura:attribute name="setupComponentTitle" type="string" />
+    <aura:attribute name="helpButtonLabel" type="string" />
+    <aura:attribute name="helpButtonUrl" type="string"/> 
+    <aura:attribute name="licenseDescription" type="string" />
+    <aura:attribute name="licenseTypeTxt" type="string" />
+    <aura:attribute name="versionLabelTxt" type="string" />
+    <aura:attribute name="versionNumberTxt" type="string" />
+    <aura:attribute name="recentlyVisited" type="string" />
+    <aura:attribute name="recentlyVisitedBtns" type="object" />
+    <aura:attribute name="allButtons" type="object" />
+    <aura:attribute name="sectionObj" type="object" />
+    <aura:handler name="init" value="{!this}" action="{!c.getSections}" />
+    <!-- Preloader -->
+    <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>
+    <aura:attribute name="spinner" type="Boolean" default="true"/>
+    <aura:if isTrue="{!v.spinner}">
+        <div class="slds-spinner_container" >
+            <div class="slds-spinner--brand slds-spinner slds-spinner--medium" role="alert">
+                <span class="slds-assistive-text">Loading, Please Wait...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- EOF. Preloader -->
+    <div class="setup-root">
+        <!-- header -->
+        <div class="slds-page-header slds-card slds-has-bottom-magnet">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <h1>
+                        <span class="slds-page-header__title slds-truncate setup-title">{!v.setupComponentTitle}</span>
+                    </h1>
+                    <p class="slds-page-header__name-meta">
+                        {!v.versionLabelTxt}&nbsp;{!v.versionNumberTxt}&nbsp;{!v.licenseTypeTxt}&nbsp;<lightning:helptext content="{!v.licenseDescription}"/>
+                    </p>
+                </div>
+                <div class="slds-page-header__col-actions">
+                    <div class="slds-page-header__control">
+                        <ul class="slds-button-group-list">
+                            <li><a href="{!v.helpButtonUrl}" target="_blank" class="slds-button slds-button_neutral">{!v.helpButtonLabel}</a></li>
+                        </ul>
+                    </div>            
+                </div>
+            </div>
+        </div>
+        <!-- eof. header -->
+        <!-- Setup body -->
+        <div class="slds-card slds-has-top-magnet">
+            <div class="slds-grid slds-gutters">
+                <!-- Setup Accordions -->
+                <div class="slds-col slds-size_2-of-3" aura:id="setupBodyId">
+                    <div class="slds-p-around_medium setup-body">
+                        <lightning:accordion aura:id="accordion" allowMultipleSectionsOpen="true">
+                            <aura:iteration items="{!v.sectionObj}" var="setupSection">
+                                <aura:if isTrue="{!setupSection.isSectionEnabled == 'true' ? true : false}">
+                                    <lightning:accordionSection label="{!setupSection.sectionTitle}" name="{!setupSection.sectionId}">
+                                        <ul class="slds-has-block-links_space">
+                                            <aura:iteration items="{!setupSection.buttonList}" var="buttons">
+                                                <li>
+                                                    <div
+                                                         onmouseover="{!c.helpTextIn}" 
+                                                         onmouseout="{!c.helpTextOut}"
+                                                         id="{!buttons.buttonId}"
+                                                         class="button-wrapper">
+                                                        <lightning:button
+                                                                          class="slds-truncate"
+                                                                          variant="base"
+                                                                          label="{!buttons.buttonLabel}" 
+                                                                          name="{!buttons.buttonId}"
+                                                                          onclick="{!c.clickHandler}"
+                                                                          disabled="{!buttons.isButtonEnabled == 'true' ? false : true}"
+                                                                          />
+                                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left lightning-popover toggle-tooltip" role="tooltip" id="{! 'TP-' + buttons.buttonId}">
+                                                            <div class="slds-popover__body">{!buttons.buttonDescription}</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </li>
+                                            </aura:iteration>
+                                        </ul>
+                                    </lightning:accordionSection>
+                                </aura:if>
+                            </aura:iteration>
+                        </lightning:accordion>
+                    </div>
+                </div>
+                <!-- eof. Setup Accordions-->
+                <!-- Recently Used -->
+                <div class="slds-col slds-size_1-of-3 recently-used-wrap" aura:id="recentBodyId">
+                    <div class="setup-recently-used">
+                        <p class="title-recently-used"><span>{! v.recentlyVisited}</span><br /></p>
+                        <ul class="slds-has-block-links_space">
+                            <aura:iteration items="{!v.recentlyVisitedBtns}" var="recentButtons">
+                                <li>
+                                    <lightning:button
+                                                      class="slds-truncate"
+                                                      variant="base"
+                                                      label="{!recentButtons.buttonLabel}" 
+                                                      name="{!'Rec-' + recentButtons.buttonId}"
+                                                      onclick="{!c.clickHandler}"
+                                                      disabled="{!recentButtons.isButtonEnabled == 'true' ? false : true}"
+                                                      />
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </div>
+                <!-- eof. Recently Used -->
+            </div>
+        </div>
+        <!-- eof Setup body -->
+    </div>
+</aura:component>

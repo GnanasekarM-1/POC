@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Adjustment_Min__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This field indicates date difference smaller than this value will be ignored and the next Schedule On date is not affected. For example, if this value is 14, the next Scheduled On date is not affected if the Activity Date is less than 14 days after the Preferred Start date of the WO</description>
+    <externalId>false</externalId>
+    <label>Min Activity Changed</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

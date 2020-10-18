@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMX_ServicePlan_Or_Contract</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(LEN(Service_Contract__r.Id) &gt; 0, IF(LEN( Service_Plan__r.Id ) &gt; 0, TRUE, FALSE), IF(LEN(Service_Plan__r.Id) &gt; 0, FALSE, TRUE))</errorConditionFormula>
+    <errorMessage>Expense Pricing must be associated with either Service Plan or Service Contract, but not both.</errorMessage>
+</ValidationRule>

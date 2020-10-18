@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Initial_Response__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Date/time on which customer was initial responsed as per commitment in SLA.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date/time on which customer was initial responsed as per commitment in SLA.</inlineHelpText>
+    <label>Actual Initial Response</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

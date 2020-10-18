@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Failure_Feedback__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Feedback given by the customer about the overall failure event and how your organization responded</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Feedback given by the customer about the overall failure event and how your organization responded</inlineHelpText>
+    <label>Customer Failure Feedback</label>
+    <length>32000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>

@@ -1,0 +1,59 @@
+<!--- 
+ *****************************************************************************
+ *                       Copyright (C) 2019 ServiceMax, Inc
+ *                               All rights reserved
+ *****************************************************************************
+ * We are using this page to redircet Time base or condition base page url from PM Plan Template object
+ * @version 19.3
+ * @since 2019
+--->
+<apex:page lightningStylesheets="true" standardController="PM_Plan_Template__c" standardStylesheets="true" extensions="PREV_SelectPMPlanTemplate">
+<style>
+    .hederFont{
+      font-size: 1.3em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+     }
+    .titleFont
+    {
+    fint-size: 8px;
+    font-weight: bold;
+    allign: center;
+    }
+    .tableClass {
+     border-collapse: collapse;
+     }
+    .thtdClass {
+      border: 1px solid #e0e3e5;
+     }
+    .tableClass tr th {
+      background-color: #f2f3f3;
+      border: 1px solid #e0e3e5;
+    }
+</style>
+ <apex:form >
+     
+     <apex:pageBlock title="{!TAG051}" helpTitle="{!HELPTITLE}" helpUrl="{!HLPURL3}">
+         <apex:pageBlockSection columns="1">
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="{!TAG052}" styleClass="titleFont"></apex:outputLabel>
+              <apex:selectList size="1" value="{!strTemplateType}">
+                <apex:selectOptions value="{!templateTypeOptns}"/>
+              </apex:selectList>
+         </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+             <apex:commandButton value="{!TAG074}" action="{!proceed}"/>
+             <apex:commandButton value="{!TAG028}" action="{!URLFOR($Action.SVMXC__PM_Plan_Template__c.List, $ObjectType.SVMXC__PM_Plan_Template__c)}"/>
+        </apex:pageBlockButtons>
+     </apex:pageBlock>
+     <h3><strong>{!TAG053}</strong></h3>
+     <apex:dataTable value="{!tableDetail}" var="tablevalue" styleClass="tableClass thtdClass" border="0" cellpadding="10">
+      <apex:column headerValue="{!TAG052}" styleClass="thtdClass">{!tablevalue.name}</apex:column>
+      <apex:column headerValue="{!TAG010}" styleClass="thtdClass">{!tablevalue.description}<apex:outputLink value="{!tablevalue.docurl}" target="_blank" style="color: #015BA1 !important">{!tablevalue.urltitle}</apex:outputLink></apex:column>
+     </apex:dataTable>
+     
+      
+ </apex:form>
+
+</apex:page>

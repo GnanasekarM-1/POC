@@ -1,0 +1,116 @@
+<aura:component controller = "SLA_Clock_WO_Controller" access="global" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes">
+<aura:attribute name="initialClock" type="Map" default="{title:'Initial Response',dateTimeValue:'10-20-2017 11:00AM', timeLeft:'1 day',circleDegree:'90',totalMin:'',isClockSet:true,isClockCompleted:false}" />
+<aura:attribute name="onsiteClock" type="Map" default="{title:'Onsite Reponse',dateTimeValue:'09-20-2017 12:00AM', timeLeft:'8 day',circleDegree:'180',totalMin:'',isClockSet:true,isClockCompleted:false}" />
+<aura:attribute name="restorationClock" type="Map" default="{title:'Restoration',dateTimeValue:'11-20-2017 01:00AM', timeLeft:'12:00',circleDegree:'300',totalMin:'',isClockSet:true,isClockCompleted:false}" />
+<aura:attribute name="resolutionClock" type="Map" default="{title:'Resolution',dateTimeValue:'12-20-2017 11:00AM', timeLeft:'01:01',circleDegree:'200',totalMin:'',isClockSet:true,isClockCompleted:false}" />
+<aura:attribute name="recordId" type="Id" /> 
+<aura:attribute name="slaDetils" type="Object"/>
+<aura:attribute name="isLoadingDone" type="Boolean" default="false"/>
+<aura:attribute name="showInitialClock" type="Boolean" access="global" default="true"/>
+<aura:attribute name="showOnsiteClock" type="Boolean" access="global" default="true"/>
+<aura:attribute name="showRestorationClock" type="Boolean" access="global" default="true"/>
+<aura:attribute name="showResolutionClock" type="Boolean" access="global" default="true"/>
+<aura:attribute name="woRecord" type="Service_Order__c" default="{sobjectType : 'Service_Order__c'}" />
+<aura:attribute name="elapsedMinutes" type="Integer"/>
+<aura:attribute name="clockPaused" type="Boolean" default="false"/> 
+<aura:attribute name="shouldEnablePlayPause" type="Boolean" default="false"/>     
+<aura:handler name="init" value="{!this}" action="{!c.doinit}"/> 
+<aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+ <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}" 
+                      layoutType="FULL"
+                      recordUpdated="{!c.doinit}"
+                      mode="VIEW"/>    
+<aura:handler name="change" value="{!v.clockPaused}" action="{!c.doinit}"/>
+
+    <div class="slds-is-relative">
+        <lightning:spinner aura:id="mySpinner" alternativeText="Loading" title="Loading" class="slds-hide"/>
+      
+    <h3 class="slds-section__title slds-theme_shade">
+    	<span class="slds-truncate slds-p-horizontal_small" title="Section Title">{!$Label.c.SLAT003_TAG045}</span>
+ 	 </h3> 	
+ 
+<aura:if isTrue="{!v.isLoadingDone}">
+ <div class="slds-grid"> 
+    <div class="slds-col sla-btn-container">
+        <lightning:button aura:id="playId" disabled="{!!v.shouldEnablePlayPause}" label="{!$Label.c.SLAT003_TAG035}" iconName="utility:play" iconPosition="left" onclick="{!c.resume}" class="slds-box slds-hide sla-clock-play"/>
+        <lightning:button aura:id="pauseId" disabled="{!!v.shouldEnablePlayPause}" label="{!$Label.c.SLAT003_TAG034}" iconName="utility:pause" iconPosition="left" onclick="{!c.pause}" class="slds-box sla-clock-pause"/>
+        <aura:if isTrue="{!v.woRecord.SVMXC__SLA_Clock_Paused__c}">
+        <label class="play-label" title="{!$Label.c.SLAT003_TAG041}">{!$Label.c.SLAT003_TAG041}</label>
+        <aura:set attribute="else">
+		<label class="pause-label" title="{!$Label.c.SLAT003_TAG040}">{!$Label.c.SLAT003_TAG040}</label>	
+         </aura:set>
+        </aura:if>
+   </div> 
+   <div class="slds-col">
+   		<div class="slds-grid slds-wrap" >
+                <aura:if isTrue="{!v.showInitialClock}">    
+                <div class="slds-col">
+                    <c:COMM_SLA_CLOCK clockDetails = "{!v.initialClock}" clockPaused = "{!v.clockPaused}"/>
+                </div>
+                </aura:if>       
+                <aura:if isTrue="{!v.showOnsiteClock}"> 
+                <div class="slds-col">
+                      <c:COMM_SLA_CLOCK clockDetails = "{!v.onsiteClock}" clockPaused = "{!v.clockPaused}"/>
+                </div>
+                </aura:if>    
+                <aura:if isTrue="{!v.showRestorationClock}"> 
+                  <div class="slds-col">
+                      <c:COMM_SLA_CLOCK clockDetails = "{!v.restorationClock}" clockPaused = "{!v.clockPaused}"/>
+                </div>
+                </aura:if>    
+                <aura:if isTrue="{!v.showResolutionClock}"> 
+                  <div class="slds-col">
+                      <c:COMM_SLA_CLOCK clockDetails = "{!v.resolutionClock}" clockPaused = "{!v.clockPaused}"/>
+				</div> 
+                </aura:if>    
+		</div> 
+   </div>    
+ </div>    
+  
+</aura:if>
+    <!--POP UP FOR PAUSE BUTTON -->
+    <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-hide modalbox">    
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon iconName="utility:close" size="large" variant="bare-inverse" onclick="{!c.closePopup}" alternativeText="{!$Label.c.SLAT003_TAG044}" class="slds-modal__close"/>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning:recordEditForm aura:id="recordViewForm"
+                                  recordId="{!v.recordId}"
+                                  objectApiName="SVMXC__Service_Order__c">
+                <lightning:inputField fieldName="SVMXC__SLA_Clock_Pause_Reason__c" value="" aura:id="reason" required="true"/>
+                </lightning:recordEditForm>
+                
+                <lightning:select name="forhowlong" label="{!$Label.c.SLAT003_TAG017}" required="true">
+                    <option value="1">{!$Label.c.SLAT003_TAG007}</option>
+                </lightning:select>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick="{!c.closePopup}">{!$Label.c.SLAT003_TAG024}</button>
+                <button class="slds-button slds-button_brand" onclick="{!c.pauseClock}">{!$Label.c.SLAT003_TAG034}</button>
+            </footer>
+        </div>
+    </section>
+	<div class="slds-backdrop slds-backdrop_open slds-hide modalbox"></div>
+    
+    <!--POPUP FOR PLAY BUTTON -->
+    <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-hide modalboxResume">    
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon iconName="utility:close" size="large" variant="bare-inverse" onclick="{!c.closePopupResume}" alternativeText="{!$Label.c.SLAT003_TAG044}" class="slds-modal__close"/>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <span>{!v.elapsedMinutes +' '+ $Label.c.SLAT003_TAG042}</span>
+                <br/>
+                <lightning:input type="checkbox" label= "{!$Label.c.SLAT003_TAG043 + ' '+v.elapsedMinutes +' '+ $Label.c.SLAT003_TAG039}" name="input1" aura:id="checkExtend"/>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick="{!c.closePopupResume}">{!$Label.c.SLAT003_TAG024}</button>
+                <button class="slds-button slds-button_brand" onclick="{!c.resumeClock}">{!$Label.c.SLAT003_TAG035}</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open slds-hide modalboxResume"></div>
+        </div>  
+</aura:component>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Setting_Unique_ID__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Unique ID of the setting across all submodules</description>
+    <externalId>false</externalId>
+    <formula>Setting_ID__r.Setting_Unique_ID__c</formula>
+    <inlineHelpText>Unique ID of the setting across all submodules</inlineHelpText>
+    <label>Setting Unique ID</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

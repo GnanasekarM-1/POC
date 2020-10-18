@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateRequestedFromStockable1</fullName>
+    <active>true</active>
+    <description>Requested From should be a stockable location if Supplier name is not entered.</description>
+    <errorConditionFormula>AND(Company__c = &quot;&quot;, Requested_From__r.Stocking_Location__c = FALSE)</errorConditionFormula>
+    <errorDisplayField>Requested_From__c</errorDisplayField>
+    <errorMessage>Requested From should be a stockable location if Supplier name is not entered.</errorMessage>
+</ValidationRule>

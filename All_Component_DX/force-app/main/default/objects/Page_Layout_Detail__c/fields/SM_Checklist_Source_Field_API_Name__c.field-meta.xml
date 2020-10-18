@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Checklist_Source_Field_API_Name__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Field to hold API name of the field mapped to the question</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Field to hold API name of the field mapped to the question</inlineHelpText>
+    <label>Checklist Source Field API Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

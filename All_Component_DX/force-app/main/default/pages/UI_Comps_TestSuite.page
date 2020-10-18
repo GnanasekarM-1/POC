@@ -1,0 +1,48 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+
+<script>
+    // TODO: Read from settings
+    var __SVMX_LOAD_VERSION__ = "micro";
+</script>
+
+<script type="text/javascript" src="{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib/src/bootstrap.js')}"></script>
+
+<script>
+
+jQuery(document).ready(function(){
+    var client_runtime      = "{!URLFOR($Resource.com_servicemax_client_runtime, '')}";
+    var ui_components       = "{!URLFOR($Resource.com_servicemax_client_ui_components, '')}";
+    var test_suite          = "{!URLFOR($Resource.com_servicemax_client_ui_components_testsuite, '')}";
+    
+    var config = {title : "UI Component TestSuite", version : "1.0.0",
+        modules : [
+            { id : "com.servicemax.client.runtime",                 version : "1.0.0" , codebase : client_runtime },
+            { id : "com.servicemax.client.ui.components",           version : "1.0.0" , codebase : ui_components },
+            { id : "com.servicemax.client.ui.components.testsuite", version : "1.0.0" , codebase : test_suite }
+        ],
+    
+        "app-config" : {
+            "application-id"   : "test-suite-app"
+        },
+    
+        "platform-config" : {
+    
+        }
+    };
+    
+    // create a console logger
+    new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+        
+    // create the client instance
+    var client = new com.servicemax.client.lib.core.Client();
+        
+    // set up the session id
+    client.addApplicationParameter("session-id", "{!GETSESSIONID()}");
+    client.run({configType : "local", data : config, loadVersion : __SVMX_LOAD_VERSION__ });
+});
+
+</script>
+<body>
+<div id="client_display_root"></div>
+</body>
+</apex:page>

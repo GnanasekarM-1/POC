@@ -1,0 +1,135 @@
+<apex:page controller="CONF_ManageActions" id="ManageAction">
+    <apex:form id="form1">
+        <!------------------------------------------------- Page Block for the PickList to select Object --------------------------------------------------->
+        <apex:pageBlock title="{!TAG001}" helpTitle="{!TAG002}"
+            helpUrl="{!HLPURL}">
+            <apex:pageMessages id="pMsg1" />
+            <apex:pageBlockButtons location="TOP">
+                <apex:commandButton value="{!TAG007}" action="{!Stdbacktosetuphme}" />
+            </apex:pageBlockButtons>
+            <apex:actionStatus id="processing" startText="{!TAG019}" />
+            <apex:actionFunction id="func" name="func" reRender="form1"
+                action="{!selectedObjectActions}" status="processing" />
+            <apex:pageBlockSection columns="2" collapsible="false">
+                <apex:pageblockSectionItem >
+                    <apex:pageblockSection >
+                        <apex:outputText value="{!TAG003}" style="font-weight:bold;" />
+                        <apex:selectList size="1" value="{!SelectedSourceObject}"
+                            onchange="func()">
+                            <!-- <apex:selectOptions value="{!ObjectsWithAction}" /> -->
+                            <apex:selectOptions value="{!listOfObjects.1stList}"/>
+                            <apex:selectOptions value="{!listOfObjects.2ndList}" rendered="{!IsSecondListHasItem}"/>
+                            <apex:selectOptions value="{!listOfObjects.3rdList}" rendered="{!IsThirdListHasItem}"/> <!-- #defectFix 047155 -->
+                        </apex:selectList>
+                    </apex:pageblockSection>
+                </apex:pageblockSectionItem>
+            </apex:pageBlockSection>
+            </apex:pageblock>
+
+            <!-------------------------------------------------- PageBlock for the Standard Actions ------------------------------------------------------------>
+            <apex:pageBlock mode="edit" title="{!TAG004}" id="pblock1"
+                rendered="{!(Render && NOT( DisableStd))}">
+                <apex:inputHidden id="GetstdRecIdnField" />
+                <apex:pageBlockButtons location="top" rendered="{!Render}">
+                    <apex:commandButton value="{!TAG005}" action="{!StdView}"
+                        disabled="{!DisableStd}" />
+                    <apex:commandButton value="{!TAG006}" action="{!StdClone}"
+                        disabled="{!DisableStd}" />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection columns="1" rendered="{!Render}">
+                    <apex:pageBlockSectionItem >
+                        <apex:pageBlockTable id="pblocktable"
+                            value="{!standardActionsLst}" var="stdRecords" rendered="True">
+                            <apex:column >
+                                <apex:facet name="header">{!TAG008}</apex:facet>
+                                <apex:inputField value="{!stdRecords.Select__c}"
+                                    id="stdselected" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG009}</apex:facet>
+                                <apex:outputText value="{!stdRecords.Name__c}" id="stdName" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG034}</apex:facet>
+                                <apex:outputText value="{!TAG035}" id="stdActnTyp" rendered="{!if((stdRecords.Custom_Action_Type__c == 'URL'),true,false)}"/>
+                                <apex:outputText value="{!TAG036}" id="stdActnTyp1" rendered="{!if((stdRecords.Custom_Action_Type__c == 'Web-Service'),true,false)}"/>
+                                <apex:outputText value="{!TAG037}" id="stdActnTyp2" rendered="{!if((stdRecords.Custom_Action_Type__c == 'App-to-App'),true,false)}"/>
+                                <apex:outputText value="{!TAG038}" id="stdActnTyp3" rendered="{!if((stdRecords.Custom_Action_Type__c == 'Mobile-Activity-Space'),true,false)}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG010}</apex:facet>
+                                <apex:outputText value="{!stdRecords.Description__c}"
+                                    id="stddesc" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG011}</apex:facet>
+                                <apex:outputText value="{!stdRecords.ProcessID__c}"
+                                    id="stdprocessid" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG012}</apex:facet>
+                                <apex:outputText value="{!stdRecords.LastModifiedBy.Name}"
+                                    id="stdlstmodifyBy" />
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+
+            <!-------------------------------------------------- PageBlock for the Custom Actions ------------------------------------------------------------>
+            <apex:pageBlock title="{!TAG013}" id="pblock2" rendered="{!Render}">
+                <apex:inputHidden id="GetcustRecIdnField" />
+                <apex:pageBlockButtons location="top" rendered="{!Render}">
+                    <apex:commandButton value="{!TAG014}" action="{!CustomNew}" />
+                    <apex:commandButton value="{!TAG015}" action="{!CustomEdit}"
+                        disabled="{!DisableCusBtn}" />
+                    <apex:commandButton value="{!TAG006}" action="{!CustomClone}"
+                        disabled="{!DisableCusBtn}" />
+                    <!-- To Perform delete action we need the following -->
+                    <apex:actionFunction action="{!CustomDelete}" name="confirmdel"
+                        status="processing" />
+                    <apex:commandButton value="{!TAG017}"
+                        onClick="if(window.confirm('{!TAG018}')) confirmdel();"
+                        reRender="pblock2,pMsg1" disabled="{!DisableCusBtn}" />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection columns="1" rendered="{!Render}">
+                    <apex:pageBlockSectionItem >
+                        <apex:pageBlockTable id="pblocktablecustom"
+                            value="{!customActionLst}" var="custRecords">
+                            <apex:column >
+                                <apex:facet name="header">{!TAG008}</apex:facet>
+                                <apex:inputField value="{!custRecords.Select__c}"
+                                    id="cusselected" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG009}</apex:facet>
+                                <apex:outputText value="{!custRecords.Name__c}" id="cusName" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG034}</apex:facet>
+                                <apex:outputText value="{!TAG035}" id="stdActnTyp" rendered="{!if((custRecords.Custom_Action_Type__c == 'URL'),true,false)}"/>
+                                <apex:outputText value="{!TAG036}" id="stdActnTyp1" rendered="{!if((custRecords.Custom_Action_Type__c == 'Web-Service'),true,false)}"/>
+                                <apex:outputText value="{!TAG037}" id="stdActnTyp2" rendered="{!if((custRecords.Custom_Action_Type__c == 'App-to-App'),true,false)}"/>
+                                <apex:outputText value="{!TAG038}" id="stdActnTyp3" rendered="{!if((custRecords.Custom_Action_Type__c == 'Mobile-Activity-Space'),true,false)}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG010}</apex:facet>
+                                <apex:outputText value="{!custRecords.Description__c}"
+                                    id="cusdesc" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG011}</apex:facet>
+                                <apex:outputText value="{!custRecords.ProcessID__c}"
+                                    id="cusprocessid" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!TAG012}</apex:facet>
+                                <apex:outputText value="{!custRecords.LastModifiedBy.Name}"
+                                    id="cuslstmodifyon" />
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+    </apex:form>
+</apex:page>

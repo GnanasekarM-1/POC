@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Post_Usage_To_Inventory</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Post Usage To Inventory</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__INVT_SmartEngine?hdrId=&apos;+Service_Order__c.Id+&apos;&amp;SMid=WORD010&apos;)}</url>
+</WebLink>

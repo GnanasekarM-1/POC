@@ -1,0 +1,69 @@
+<aura:component controller="SFM_Wizard_LightningController">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.setWizardList}"/>
+   	<aura:attribute name="wizardID" type="String"/>
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="wizardMap" type="Map"/>
+    <aura:attribute name="wizardSteps" type="List[]" />
+    <aura:attribute name="wizardToWizardStepMap" type="Map"/>
+    <aura:attribute name="overlayPanel" type="Aura.Component" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="wizDesc" type="String"/>
+    <aura:attribute name="sitePrefix" type="String"/>
+    
+    <!-- Added isCommunityRunning for the defect 046614 fix-->
+    <aura:attribute name="isCommunityRunning" type="Boolean"/>
+    
+    <!-- 
+    	BAC-3861 - Display icons based on configuration
+    --> 
+    <aura:attribute name="showIcons" type="Boolean"/>
+    <!-- 
+    	BAC-3861 - Display icons based on configuration
+    --> 
+    <aura:attribute name="waiting" type="Boolean" default="false"/>
+    
+    
+    <aura:iteration var="steps" items="{!v.wizardSteps}" indexVar="index">
+        <div class="slds-m-top_xx-small" style="margin-top: 12px; position:relative" >
+           	
+            <a  title="{!steps.description}"  disabled="{!steps.isDisabled}" class="{!(steps.isDisabled)? 'disabledWizStep': ''}">
+                <!-- 
+					BAC-3861 - Display icons based on configuration
+				--> 
+                <aura:if isTrue="{!v.showIcons}">
+                    <span style="padding-right: 5px ">
+                        <aura:if isTrue="{!steps.actionType == 'SFM'}">
+                            <lightning:icon iconName="standard:template" size="small" class="iconTop sfmIcon"/>
+                        </aura:if>
+                        <aura:if isTrue="{!steps.actionType == 'INVENTORY'}">
+                            <lightning:icon iconName="standard:apps_admin" size="small" class="iconTop inventoryIcon"/>
+                        </aura:if>
+                        <aura:if isTrue="{!steps.actionType == 'OTHERS'}">
+                            <lightning:icon iconName="standard:link" size="small" class="iconTop othersIcon"/>
+                        </aura:if>
+                        <aura:if isTrue="{!steps.actionType == 'CHECKLIST'}">
+                            <lightning:icon iconName="standard:task" size="small" class="iconTop checklistIcon"/>
+                        </aura:if>
+                        <aura:if isTrue="{!steps.actionType == 'OUTPUT_DOCUMENT'}">
+                            <lightning:icon iconName="standard:timesheet" size="small" class="iconTop opDocIcon"/>
+                        </aura:if>  
+                    </span>
+                </aura:if>
+                <!-- 
+                    BAC-3861 - Display icons based on configuration
+                --> 
+                <span data-value="{!steps.actionURL}"  data-selected-Index="{!index}" onclick ="{!c.loadAction}">
+                    {!steps.name}
+                </span>
+                
+            </a>
+                
+        </div> 
+    </aura:iteration>
+     
+    <aura:if isTrue="{!v.waiting }">
+        <lightning:spinner size="medium" />
+    </aura:if> 
+    
+</aura:component>

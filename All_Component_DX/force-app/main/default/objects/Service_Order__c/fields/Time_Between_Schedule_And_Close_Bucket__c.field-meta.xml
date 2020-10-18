@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Between_Schedule_And_Close_Bucket__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Time taken for the work order to be closed after it was scheduled bucket. Used for reporting purpose</description>
+    <externalId>false</externalId>
+    <formula>IF (TimeBetweenScheduleAndClose__c &lt;=2, &quot;Less Than 2 hours&quot;, IF (TimeBetweenScheduleAndClose__c &lt;= 6, &quot;2 To 6 hours&quot;, IF (TimeBetweenScheduleAndClose__c &lt;= 10, &quot;6 to 10 hours&quot;, &quot;Over 10 hours&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Time taken for the work order to be closed after it was scheduled bucket. Used for reporting purpose</inlineHelpText>
+    <label>Time Between Schedule And Close Bucket</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

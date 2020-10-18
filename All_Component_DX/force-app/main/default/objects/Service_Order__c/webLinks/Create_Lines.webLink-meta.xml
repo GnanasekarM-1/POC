@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Lines</fullName>
+    <availability>online</availability>
+    <description>Link to launch WORD_CreateWOLines VF Page</description>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>T&amp;M Lines</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__ServiceMaxConsole?SVMX_recordId=&apos;+CASESAFEID(Service_Order__c.Id)+&apos;&amp;SVMX_processId=TDM016&amp;SVMX_retURL=&apos;+URLFOR($Site.Prefix+&apos;/&apos;+CASESAFEID(Service_Order__c.Id)))}</url>
+</WebLink>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Work_Order__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Lookup to Primary Work Order</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Lookup to Primary Work Order</inlineHelpText>
+    <label>Primary Work Order</label>
+    <referenceTo>Service_Order__c</referenceTo>
+    <relationshipLabel>SPM - Repeat Visits (Primary Work Order)</relationshipLabel>
+    <relationshipName>SPM_Repeat_Visits</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

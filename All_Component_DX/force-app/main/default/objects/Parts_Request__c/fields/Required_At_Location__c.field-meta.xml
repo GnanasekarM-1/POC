@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_At_Location__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Location where stock is required. This is a lookup to an existing site record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Location where stock is required. This is a lookup to an existing site record.</inlineHelpText>
+    <label>Required At Location</label>
+    <referenceTo>Site__c</referenceTo>
+    <relationshipName>Parts_Request_To</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

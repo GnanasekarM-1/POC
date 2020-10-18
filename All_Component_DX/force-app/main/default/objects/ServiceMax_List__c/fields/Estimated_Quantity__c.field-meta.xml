@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estimated_Quantity__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Quantity of part, time or expenses to be used. This is context-sensitive. For example: Quantity for Travel expense might be 500 (miles).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Quantity of part, time or expenses to be used. This is context-sensitive. For example: Quantity for Travel expense might be 500 (miles).</inlineHelpText>
+    <label>Estimated Qty</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

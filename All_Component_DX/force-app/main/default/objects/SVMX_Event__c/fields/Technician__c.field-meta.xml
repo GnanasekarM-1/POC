@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Technician__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Technician that owns the event. Reference to an existing technician record in ServiceMax</description>
+    <externalId>false</externalId>
+    <label>Technician</label>
+    <referenceTo>Service_Group_Members__c</referenceTo>
+    <relationshipLabel>ServiceMax Events</relationshipLabel>
+    <relationshipName>SVMX_Event</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

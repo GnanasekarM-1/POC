@@ -1,0 +1,84 @@
+<apex:page >
+
+<script>
+var __SVMX_LOAD_VERSION__    = "debug";
+var __SVMX_CLIENT_LIB_PATH__ = "{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib')}";
+</script>
+
+<script type="text/javascript" src="{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib/src/bootstrap.js')}"></script>
+
+<script>
+jQuery(document).ready(function(){
+
+    var client_app          = "{!URLFOR($Resource.com_servicemax_client_demo_app, '')}";
+    var client_runtime      = "{!URLFOR($Resource.com_servicemax_client_runtime, '')}";
+    var client_ui           = "{!URLFOR($Resource.com_servicemax_client_ui_components, '')}";  
+    var client_ui_themes    = "{!URLFOR($Resource.com_servicemax_client_ui_themes, '')}"; 
+      
+    var config = {title : "Sample App", version : "",
+        modules : [
+            { id : "com.servicemax.client.runtime",       version : "1.0.0" , codebase : client_runtime },
+            { id : "com.servicemax.client.demo.app",           version : "1.0.0" , codebase : client_app },
+            { id : "com.servicemax.client.ui.components", version : "1.0.0" , codebase : client_ui } ,
+            { id : "com.servicemax.client.ui.themes",     version : "1.0.0" , codebase : client_ui_themes }   
+        ],
+           
+        "app-config" : {
+            "application-id"   : "application",
+            "enable-log" : true
+        },
+    
+        "platform-config" : { }
+    };
+   
+    new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+    var client = new com.servicemax.client.lib.core.Client();
+    
+    client.addApplicationParameter( "onappload-handler", {handler : function(){
+         
+         var root = SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXSection", 
+           {title : "My First App", frame : true, width : "100%", height : 400, renderTo : 'appRoot'});
+
+         var btn = SVMX.create("com.servicemax.client.ui.components.controls.impl.SVMXButton", 
+            {text : "Hello World!", handler : function(){
+                alert("Clicked!");
+            }});
+        
+         root.add(btn);
+         
+         var fields = [
+             {name : "firstName"}, {name : "lastName"}
+         ];
+         
+         var modelClassName = 'com.servicemax.client.testapp.result.model';
+         Ext.define(modelClassName , 
+         { extend: 'com.servicemax.client.ui.components.composites.impl.SVMXModel', fields: fields});
+               
+         var data = [
+             {firstName : "Indresh",  lastName : "MS"},
+             {firstName : "Rajesh",   lastName : "Rao"},
+             {firstName : "Boniface", lastName : "Lobo"}
+         ];
+         
+         var store = SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXStore",
+             {model: modelClassName });
+         
+         var cols = [
+             {dataIndex : "firstName", header : "First Name"},
+             {dataIndex : "lastName", header: "Last Name"}
+         ];
+             
+         var list = SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXListComposite",
+             {title : "Work Orders", forceFit : true, width : "100%", columns : cols, store : store});
+             
+         root.add(list);
+         
+         store.loadData(data);
+         
+    }, context : {}} );
+    
+    client.run({configType : "local", data : config, loadVersion : __SVMX_LOAD_VERSION__ });
+});
+</script>
+<div id = 'appRoot'></div>
+</apex:page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Job_Summary__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Master-Detail relationship to Scheduling Job Summary table</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Master-Detail relationship to Scheduling Job Summary table</inlineHelpText>
+    <label>Job Summary</label>
+    <referenceTo>SM_Scheduling_Job_Summary__c</referenceTo>
+    <relationshipLabel>Scheduling Event Summaries</relationshipLabel>
+    <relationshipName>Scheduling_Event_Summaries</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

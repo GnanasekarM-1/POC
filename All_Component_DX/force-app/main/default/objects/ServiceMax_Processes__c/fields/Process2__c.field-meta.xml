@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Process2__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Shipment Line to RMA Line map to use when creating external RMA</description>
+    <externalId>false</externalId>
+    <label>Process2</label>
+    <referenceTo>ServiceMax_Processes__c</referenceTo>
+    <relationshipLabel>ServiceMax Processes (Process2)</relationshipLabel>
+    <relationshipName>ServiceMax_Processes5</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

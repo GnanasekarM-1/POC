@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipment</fullName>
+    <active>true</active>
+    <label>Shipment</label>
+    <picklistValues>
+        <picklist>Disposition__c</picklist>
+        <values>
+            <fullName>Repair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Restock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salvage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scrap</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entitled_Exchange_Type__c</picklist>
+        <values>
+            <fullName>Advance Exchange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Return Exchange</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entitlement_Status__c</picklist>
+        <values>
+            <fullName>Entitled To Warranty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Entitled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Expected_Condition__c</picklist>
+        <values>
+            <fullName>Defective</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Good%2FWorking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shipping Damage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Line_Status__c</picklist>
+        <values>
+            <fullName>Canceled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Picked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Processing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Line_Type__c</picklist>
+        <values>
+            <fullName>Inbound %28RMA%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound %28Shipment%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reconciliation_Action__c</picklist>
+        <values>
+            <fullName>Add</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remove</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Replace</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Returned_Condition__c</picklist>
+        <values>
+            <fullName>As Expected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shipping Damage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

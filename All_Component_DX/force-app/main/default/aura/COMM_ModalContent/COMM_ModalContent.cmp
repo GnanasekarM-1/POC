@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="modalContent" type="String" required="true"/>
+    <div> 
+        {!v.modalContent}
+    </div>
+</aura:component>

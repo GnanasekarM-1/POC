@@ -1,0 +1,3 @@
+<apex:page standardController="Travel_Policy__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Travel_Policy__c.Id}" />
+</apex:page>

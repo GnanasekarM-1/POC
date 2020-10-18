@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OptiMax_Error_Email2__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Email address copied from dispatch process. Can be used to send pre-calculation failures</description>
+    <externalId>false</externalId>
+    <label>OptiMax Error Email2</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Email</type>
+    <unique>false</unique>
+</CustomField>

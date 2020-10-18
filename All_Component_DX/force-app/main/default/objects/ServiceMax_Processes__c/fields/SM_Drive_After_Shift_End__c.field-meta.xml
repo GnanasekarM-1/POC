@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Drive_After_Shift_End__c</fullName>
+    <deprecated>false</deprecated>
+    <description>After the shift ends, technicians should drive on their own time for up to (Minutes)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>After the shift ends, technicians should drive on their own time for up to (Minutes)</inlineHelpText>
+    <label>Drive time after shift end (in mins)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

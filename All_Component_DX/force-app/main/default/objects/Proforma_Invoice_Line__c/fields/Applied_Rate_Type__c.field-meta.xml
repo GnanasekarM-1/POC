@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applied_Rate_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Labor Rate type applied to this line</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Labor Rate type applied to this line</inlineHelpText>
+    <label>Applied Rate Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Flat Rate</fullName>
+                <default>false</default>
+                <label>Flat Rate</label>
+            </value>
+            <value>
+                <fullName>Per Hour</fullName>
+                <default>false</default>
+                <label>Per Hour</label>
+            </value>
+            <value>
+                <fullName>Markup %</fullName>
+                <default>false</default>
+                <label>Markup %</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

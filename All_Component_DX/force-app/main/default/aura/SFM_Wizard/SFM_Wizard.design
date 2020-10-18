@@ -1,0 +1,4 @@
+<design:component >
+    <design:attribute name="maxheight" label="{!$Label.SVMXC.SFW001_TAG007}" datasource="apex://SFM_Wizard_DynamicDesignAttributes"  description="{!$Label.SVMXC.SFW001_TAG008}" />
+    <design:attribute name="showIcons" label="{!$Label.SVMXC.SFW001_TAG013}" description="{!$Label.SVMXC.SFW001_TAG014}"/>
+</design:component>

@@ -1,0 +1,1 @@
+public class CONF_ManageIntegration { }

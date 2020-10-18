@@ -1,0 +1,3 @@
+<apex:page standardController="SPM_Mean_Time_To_Complete__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!SPM_Mean_Time_To_Complete__c.Id}" />
+</apex:page>

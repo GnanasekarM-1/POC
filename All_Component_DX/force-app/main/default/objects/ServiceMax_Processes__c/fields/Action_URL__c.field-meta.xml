@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_URL__c</fullName>
+    <deprecated>false</deprecated>
+    <description>URL to be launched for the action</description>
+    <externalId>false</externalId>
+    <inlineHelpText>URL to be launched for the action</inlineHelpText>
+    <label>Action URL</label>
+    <length>32000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

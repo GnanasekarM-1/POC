@@ -1,0 +1,1 @@
+<apex:page standardController="Activity_Master__c" extensions="COMM_Controller" tabStyle="Activity_Master__c" showheader="true" action="{!CreateActivity}" />

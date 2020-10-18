@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Button_Size__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates the size of buttons and text in Service Flow Wizard when the wizard is placed in a Salesforce page layout.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates the size of buttons and text in Service Flow Wizard when the wizard is placed in a Salesforce page layout.</inlineHelpText>
+    <label>Button Size</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Small</fullName>
+                <default>false</default>
+                <label>Small</label>
+            </value>
+            <value>
+                <fullName>Medium</fullName>
+                <default>true</default>
+                <label>Medium</label>
+            </value>
+            <value>
+                <fullName>Large</fullName>
+                <default>false</default>
+                <label>Large</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PM_Plan_Start_End_Date_Validation</fullName>
+    <active>true</active>
+    <description>Start date of preventive maintenance plan cannot be less than end time.</description>
+    <errorConditionFormula>IF( Start_Date__c &gt;  End_Date__c, true, false)</errorConditionFormula>
+    <errorMessage>End date should be greater than start date of Preventive Maintenance Plan</errorMessage>
+</ValidationRule>

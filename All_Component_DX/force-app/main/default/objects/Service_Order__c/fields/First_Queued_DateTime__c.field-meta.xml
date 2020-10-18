@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>First_Queued_DateTime__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Datetimestamp the work order was queued to a technician for the very first time.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Datetimestamp the work order was queued to a technician for the very first time.</inlineHelpText>
+    <label>First Queued DateTime</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

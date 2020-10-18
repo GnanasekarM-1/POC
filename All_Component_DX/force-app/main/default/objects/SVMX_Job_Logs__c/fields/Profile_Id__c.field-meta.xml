@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Profile_Id__c</fullName>
+    <deprecated>false</deprecated>
+    <description>If Type = MASTER_*:  Profile Name of the ServiceMax Group Profile of mobile user. For other sync time log records: Salesforce Record Id of the ServiceMax Group Profile of mobile user. For logs pushed by client app: Mobile user&apos;s Salesforce Record Id.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If Type = MASTER_*:  Profile Name of the ServiceMax Group Profile of mobile user. For other sync time log records: Salesforce Record Id of the ServiceMax Group Profile of mobile user. For logs pushed by client app: Mobile user&apos;s Salesforce Record Id.</inlineHelpText>
+    <label>Profile Id</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

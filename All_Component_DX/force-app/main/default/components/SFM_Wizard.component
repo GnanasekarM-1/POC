@@ -1,0 +1,604 @@
+<!-- component name is : SFM_Wizard -->
+<apex:component access="global" controller="SFM_WrapperDef" rendered="{!isWizardVisible}"> <!-- Added rendered condition for story BAC-4835-->
+    <!-- Start : Added below invisible component as per salesforce suggestion case 19546933 -->
+        <apex:form >
+            <apex:commandButton style="display: none;"/>
+        </apex:form>
+        <!-- End : Added above invisible component as per salesforce suggestion case 19546933 -->
+    <apex:attribute name="recordId" type="String" description="Record Id" required="true" access="global"/>
+    <apex:outputPanel layout="block" id="SVMX_SFWWizardBody"/>
+    
+    <!-- commented below files no longer using 043240 -->
+    <!--script type="text/javascript" src="/js/functions.js"></script> 
+    <script src="/dJS/en/library.js" type="text/javascript"></script--> 
+    <script src="/soap/ajax/20.0/connection.js" type="text/javascript"></script> 
+    <script src="/soap/ajax/20.0/apex.js"></script> 
+    <!--<script src="/static/081407/js/picklist.js" type="text/javascript"></script> 
+    <script src="/soap/ajax/15.0/connection.js" type="text/javascript"></script> 
+    <script src="/soap/ajax/15.0/apex.js" type="text/javascript"></script> -->
+    <apex:includeScript value="/support/console/30.0/integration.js"/>
+     <style type="text/css">
+            .overlay {
+            background-color:#EFEFEF;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            top: 0px;
+            left: 0px;
+            opacity: .5; /* in FireFox */ 
+            filter: alpha(opacity=50); /* in IE */
+            }
+    </style>
+    <script>
+            function overlayWizardOnClick(){
+                var div= document.createElement("div");
+                div.className += "overlay";
+                document.body.appendChild(div);
+                
+            }
+    </script>
+    <style> 
+        html { 
+            overflow-x: auto; 
+            overflow-y: auto; 
+        } 
+
+        table { 
+            border: none; 
+            font-family: 'Arial', 'Helvetica', sans-serif; 
+        } 
+
+        caption { 
+            background: #0095C3;
+            color: White; 
+            border-top: none; 
+            border-right: none; 
+            text-align: left; 
+            font-weight: bold; 
+            height: 18px;
+            font-size: 14px !important;
+            padding-top: 2px;
+            padding-left: 7px;
+        } 
+
+        caption.cap_medium { 
+            font-size: 100%; 
+        } 
+
+        caption.cap_small { 
+            font-size: 75%; 
+        } 
+
+        caption.cap_large { 
+            font-size: 150%; 
+        } 
+
+        thead { 
+            border-left: none; 
+        } 
+
+        td { 
+            vertical-align:center; 
+            font-weight:normal; 
+        } 
+
+        .td1 { 
+            vertical-align:center; 
+            font-weight:normal; 
+            width:50%; 
+        } 
+
+        tbody td { 
+            background-color: #D9ECFF; 
+        } 
+
+        tbody tr.odd, tbody tr.odd td{ 
+            background-color: #BDDFFF; 
+        } 
+
+        .svmxbtn { 
+            font-family:'Arial', 'Helvetica', sans-serif; 
+            font-weight: normal; 
+            color:#000000; 
+            text-decoration:none; 
+            display:block; 
+            border-width: 0;
+            white-space: pre-wrap; 
+            padding: 0 0 0 0; 
+            -webkit-transition: all .4s ease-in-out; 
+            -moz-transition: all .4s ease-in-out; 
+            -o-transition: all .4s ease-in-out; 
+            transition: all .4s ease-in-out; 
+            word-break: keep-all;
+        } 
+
+        .disabledbtn { 
+            background: #cdeef9;
+            color: #a1a1a1 !important;
+         } 
+        input.disabledbtn:disabled {
+            color: #a1a1a1 !important;
+        }
+
+    .enabledbtn { 
+        background: #cdeef9;        
+        font-size: 13px !important;
+        color: #333;
+    } 
+
+        .mediumbtn { 
+            font-size: 12px !important;
+            height: 55px !important;
+            width: 100px !important;
+            padding: 0 3px;
+            margin: 2px 2px 1px;           
+        }
+        .mediumbtn:hover {color: #015ba7 !important}        
+
+        .tab1c { 
+            width:100%; 
+        } 
+
+        .smallbtn { 
+            font-size: 11px !important;
+            height: 45px !important;
+            width: 90px !important;
+            padding: 0 3px;
+            margin: 2px 2px 1px;           
+        }
+        .smallbtn:hover {color: #015ba7 !important}
+
+        .largebtn { 
+            font-size: 13px !important;
+            height: 65px !important;
+            width: 110px !important; 
+            padding: 0 3px;
+            margin: 2px 2px 1px;            
+        } 
+        .largebtn:hover {color: #015ba7 !important}
+
+        .enabledbtn:hover { 
+            color: #015ba7;             
+        } 
+
+        .enabledbtn:active { 
+            border-style: inset; 
+        }
+
+        table#tab tr td {background-color: #f2f2f2 !important;} 
+        table#tab tbody tr.odd td {background-color: #f2f2f2 !important;}
+        table#tbcontainer tbody td {background-color: #f2f2f2 !important;}
+        .loading_spinner {position: absolute; top: 50%; left: calc(50% - 33px);}
+    </style> 
+    <!-- for BAC-2362/040053 Start -->
+        <apex:form id="form1">
+        <apex:actionFunction name="getSFWHTMLData" action="{!INTF_GetSFWHTML_WS}" rerender="myHiddenField,myHiddenField1" oncomplete="oncompleteActionfunction()" status="Loadingstatus">
+            <apex:param name="p1" value="" assignTo="{!intfRecId}" />
+        </apex:actionFunction>
+        <apex:inputHidden value="{!intfRecordId}" id="myHiddenField"/>
+        <apex:inputHidden value="{!sfwOutputTemplate}" id="myHiddenField1"/>
+        <apex:actionStatus startText="{!$Label.svmxc__sfm001_tag089}" startStyleClass="loading_spinner" id="Loadingstatus">
+        
+        </apex:actionStatus>
+        </apex:form>
+        <!-- for BAC-2362/040053 End -->
+    <script> 
+        var recordId = '{!RecordId}';
+        var funReturn = new Array();
+         var windowObjRef ={} ;
+         /* for BAC-2362/040053 Start */
+        function oncompleteActionfunction(){
+        //console.log('sfwOutputTemplate' + !sfwOutputTemplate);
+            try 
+            {
+                var tbarHTML = '';
+                if(recordId != null && recordId != undefined)
+                {
+                    tbarHTML = document.getElementById('{!$Component.form1.myHiddenField}').value; 
+                    funReturn = document.getElementById('{!$Component.form1.myHiddenField1}').value;
+                    document.getElementById('{!$Component.SVMX_SFWWizardBody}').innerHTML = tbarHTML;
+                }
+                
+            } 
+            catch(err) 
+            {
+                var txt = "Following error occurred on trying to load Service Flow Wizards for this record:\n"; 
+                txt += err.faultstring; 
+                txt += "\nClick OK to continue.\n"; 
+                alert(txt); 
+            } 
+            
+        }
+        /* for BAC-2362/040053 end */
+        function SVMX_GetSFWHTML() 
+        { 
+            try 
+            { 
+                var tbarHTML = '';
+                if(recordId != null && recordId != undefined)
+                {
+                    getSFWHTMLData(recordId); /* for BAC-2362/040053  */
+                    /* for BAC-2362/040053
+                    tbarHTML = sforce.apex.execute("SVMXC.INTF_WebServicesDef","INTF_GetSFWHTML_WS", {recId: recordId, keyVal: ""}); 
+                    funReturn = sforce.apex.execute("SVMXC.INTF_WebServicesDef","INTF_GetSFWOutputTemplate_WS", {recId: recordId}); 
+                    document.getElementById('{!$Component.SVMX_SFWWizardBody}').innerHTML = tbarHTML; 
+                    */
+                    /* for BAC-2362/040053 end */
+                }
+            } 
+            catch(err) 
+            {
+                var txt = "Following error occurred on trying to load Service Flow Wizards for this record:\n"; 
+                txt += err.faultstring; 
+                txt += "\nClick OK to continue.\n"; 
+                alert(txt); 
+            } 
+        } 
+
+        function SVMX_doConfirmAndNavigate(doConfirm, confirmMsg, urlStr, winType, winWidth, winHeight, winScroll, fullscreen,processid,modeofexecution) 
+        {
+            if(modeofexecution.toLowerCase()=='background' && (!doConfirm) && !sforce.console.isInConsole())
+            {
+                overlayWizardOnClick();
+            }
+            
+            if(doConfirm) 
+            { 
+                
+                var conBox = confirm(confirmMsg); 
+                 if(modeofexecution.toLowerCase()=='background' && (conBox) && !sforce.console.isInConsole())
+                   {
+                    overlayWizardOnClick();
+                   }
+                   if(conBox) 
+                   {        
+                            SVMX_LaunchThis(urlStr, winType, winWidth, winHeight, winScroll, fullscreen,processid); 
+                   }
+            } 
+            else SVMX_LaunchThis(urlStr, winType, winWidth, winHeight, winScroll, fullscreen,processid);  
+        } 
+
+
+        function SVMX_LaunchThis(urlStr, winType, winWidth, winHeight, winScroll, fullscreen,processid) 
+        {
+            console.log('Entered Here...');
+            var recId = '{!RecordId}';
+            if(recId != null && recId != undefined)
+                processid = processid+'*'+recId;
+            debugger;
+            var strSitePrefix = '{!$Site.Prefix}';
+            var newTab = getParameterByName('newTab', urlStr);
+            if(strSitePrefix != null && strSitePrefix != '' && urlStr.indexOf(strSitePrefix) == -1){
+                if(urlStr.startsWith('..')){
+                    urlStr =  strSitePrefix + urlStr.substring(2, urlStr.length);
+                }
+                 else if(!(urlStr.startsWith('/'))){
+                    // Changes related to BAC-2305
+                    //If the url is not a partial path, assuming it as external path.Hence not adding the community prefix
+                    urlStr = urlStr;
+                }
+                else{
+                    urlStr =  strSitePrefix + urlStr;
+                }
+                //block for changed return URL
+                if(urlStr.indexOf('SVMX_retURL=') !== -1)
+                    urlStr = urlStr.replace('SVMX_retURL=', 'SVMX_retURL='+strSitePrefix);
+            }
+            
+            if((winType == 'New Window' || winType == 'Modal Window') && fullscreen == 'yes'){
+                var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+                var isChrome = !!window.chrome && !isOpera;
+                var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+                if(isChrome || isSafari){
+                    //.window.open(urlStr,'svmxwindow','width='+screen.width+','+'height='+screen.height+','+'resizable=yes'+',scrollbars='+winScroll);
+                    if (windowObjRef == null || windowObjRef[urlStr] == null || (windowObjRef[urlStr] != null&& windowObjRef[urlStr].closed)) 
+                    {
+                        if(newTab && newTab.toLowerCase() == 'true') {//for IB Tree, It should open as new tab, not as new window.
+                            windowObjRef[urlStr] = window.open(urlStr,'_blank');
+                        } else {
+                            windowObjRef[urlStr] = window.open(urlStr,processid,'width='+screen.width+','+'height='+screen.height+','+'resizable=yes'+',scrollbars='+winScroll);
+                        }
+                        windowObjRef[urlStr].focus();
+                    }
+                    else
+                    {
+                        
+                        windowObjRef[urlStr].focus();
+                    }
+                }
+                else{
+                    //window.open(urlStr,'svmxwindow','fullscreen=yes, resizable=yes'+',scrollbars='+winScroll) 
+                    if (windowObjRef == null || windowObjRef[urlStr] == null || (windowObjRef[urlStr] != null&& windowObjRef[urlStr].closed)) 
+                    {
+                    
+                        if(newTab && newTab.toLowerCase() == 'true') {//for IB Tree, It should open as new tab, not as new window.
+                            windowObjRef[urlStr] = window.open(urlStr,'_blank');
+                        } 
+                        else 
+                        {
+                            
+                            
+                              windowObjRef[urlStr] = window.open(urlStr,processid,'fullscreen=yes, resizable=yes'+',scrollbars='+winScroll);
+                            
+                        }
+                        windowObjRef[urlStr].focus();
+                    }
+                    else
+                    {
+                        
+                        windowObjRef[urlStr].focus();
+                    }
+                }
+            }
+            else if((winType == 'New Window' || winType == 'Modal Window') && fullscreen == 'no' ) 
+            {
+                //window.open(urlStr,'svmxwindow','width='+winWidth+','+'height='+winHeight+','+'scrollbars='+winScroll+','+'resizable=yes'); 
+                if (windowObjRef == null || windowObjRef[urlStr] == null || (windowObjRef[urlStr] != null&& windowObjRef[urlStr].closed)) {
+                       if(newTab && newTab.toLowerCase() == 'true') {//for IB Tree, It should open as new tab, not as new window.
+                            windowObjRef[urlStr] = window.open(urlStr,'_blank');
+                        } else {
+                            windowObjRef[urlStr] = window.open(urlStr,processid,'width='+winWidth+','+'height='+winHeight+','+'scrollbars='+winScroll+','+'resizable=yes');
+                        }
+                } 
+                else
+                    windowObjRef[urlStr].focus();
+                    
+            }
+            else { 
+                if(urlStr && sforce.console.isInConsole() && isNotInDCConsoleMode()) {
+                    try { 
+                        navigateInConsole(urlStr);
+                    }
+                    catch(e){
+                        var n = urlStr.indexOf("isdtp");
+                        var inlUrlStr = '' + urlStr.substring(0, n-1);
+                        var subUrlStr = '' + urlStr.substring(n+8);
+                        window.parent.location.href = '' + inlUrlStr + subUrlStr;
+                    }
+                }
+                else {
+                    if (typeof sforce.one === 'undefined') {
+                        window.parent.location.href = '' + urlStr;
+                    } else {
+                        sforce.one.navigateToURL(urlStr);
+                    }
+                }
+            }
+        } 
+        //3 May 2017, Sakthivel: added to check for newTab, comes as parameter.
+        function getParameterByName(name, url) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        
+        // 3 Dec 2015, Anchal; Defect - 025323 (SFMs not working in console)
+        function navigateInConsole(urlStr) {
+            if(urlStr && sforce.console.isInConsole()){
+                sforce.console.getFocusedSubtabId(function (result) {
+                    var focusedSubTabId = result.id;
+                    sforce.console.getFocusedPrimaryTabId(function(prime_result) {
+                        var primaryTabId = prime_result.id;
+                        urlStr += "&priTabId=" + prime_result.id + "&subtabId=" + focusedSubTabId;
+                        sforce.console.openPrimaryTab(null, urlStr, true, "ServiceMax");
+                    });
+                });
+            }
+        }
+        
+        //Praveen - API to check wheather the user is in DC Console or Service Console.
+        function isNotInDCConsoleMode() {        
+            var qs = location.search;
+            return (qs.length != 0 && qs.indexOf("sfdcIFrameOrigin=") > -1);
+        }
+        
+        function SVMX_LaunchRunTimeOutPutDoc(strSlectTemp, strGenrtReport, strCncle, strErrmsg) 
+        { 
+            if(funReturn.length != 0) 
+            { 
+                if(window.document.getElementById("divDyna") == null) 
+                {
+                    debugger;
+                    var dynDiv = window.document.createElement("div"); 
+                    dynDiv.id = "divDyna"; 
+                    dynDiv.style.height = "235px"; 
+                    dynDiv.style.width = "375px"; 
+                    dynDiv.style.backgroundColor = '#d8f2fa'; 
+                    dynDiv.style.position = 'absolute'; 
+                    dynDiv.style.left = '40%';//((window.innerWidth -150)/2)+150+"px" ; 
+                    dynDiv.style.top = 200+"px"; 
+                    dynDiv.style.borderStyle = "solid"; 
+                    dynDiv.style.borderWidth = "2px"; 
+                    dynDiv.style.borderColor = "#f89b00"; 
+                    dynDiv.style.borderTopLeftRadius = '7px'; 
+                    dynDiv.style.borderTopRightRadius = '7px'; 
+                    dynDiv.style.borderBottomLeftRadius = '7px'; 
+                    dynDiv.style.borderBottomRightRadius = '7px'; 
+
+                    var dynDivHeader = window.document.createElement("div"); 
+                    dynDivHeader.innerHTML = strSlectTemp; 
+                    dynDivHeader.style.textAlign = "center"; 
+                    dynDivHeader.style.fontWeight = "bold"; 
+                    dynDivHeader.style.fontSize = "13px"; 
+                    dynDivHeader.style.padding = "5px"; 
+                    dynDivHeader.style.borderBottomWidth = "2px"; 
+                    dynDivHeader.style.borderBottomStyle = "solid"; 
+                    dynDivHeader.style.borderBottomColor = "#f89b00"; 
+
+                    var dynDivSelectLst = window.document.createElement("div"); 
+                    dynDivSelectLst.style.padding = "5px"; 
+
+                    var dynDivInputButns = window.document.createElement("div"); 
+                    dynDivInputButns.style.textAlign = "center"; 
+                    dynDivInputButns.style.clear = "both"; 
+                    dynDivInputButns.style.borderTopWidth = "2px"; 
+                    dynDivInputButns.style.borderTopStyle = "solid"; 
+                    dynDivInputButns.style.borderTopColor = "#f89b00"; 
+                    dynDivInputButns.style.paddingTop = "1px"; 
+
+                    var selectLst = window.document.createElement("select"); 
+                    selectLst.size = 9; 
+                    selectLst.style.width = "365px"; 
+                    selectLst.style.height = "162px"; 
+                    selectLst.style.backgroundColor = '#f5fdff'; 
+                    selectLst.style.padding = 0; 
+                    selectLst.style.border = 'none'; 
+                    selectLst.style.borderWidth = "1px"; 
+                    selectLst.style.borderStyle = "solid"; 
+                    selectLst.style.borderColor = "#ccc"; 
+                    selectLst.style.margin = 0; 
+                    selectLst.style.fontSize = "14px"; 
+                    selectLst.id= "slestLstId"; 
+
+                    var isTemplateAvilbl = false; 
+                    
+                    try 
+                    { 
+                        if(funReturn[0] != null && funReturn[0].valueMap != null) 
+                        { 
+                            if(!funReturn[0].valueMap.length) 
+                            { 
+                                if(funReturn[0].valueMap.record != null && funReturn[0].valueMap.record.SVMXC__Name__c != null && funReturn[0].valueMap.record.SVMXC__ProcessID__c != null) 
+                                { 
+                                    var optionElemnt = window.document.createElement("option"); 
+                                    optionElemnt.value = funReturn[0].valueMap.record.SVMXC__ProcessID__c; 
+                                    optionElemnt.title = funReturn[0].valueMap.record.SVMXC__Name__c; 
+                                    optionElemnt.innerHTML = funReturn[0].valueMap.record.SVMXC__Name__c; 
+                                    optionElemnt.selected = "selected"; 
+                                    
+                                    
+                                    if(sforce.console.isInConsole()) {
+                                        var strURL = "/apex/SVMXC__OPDOC_Delivery?SVMX_processId='+this.value+'&SVMX_recordId='+recordId+'&SVMX_retURL=/' + recordId;";
+                                        optionElemnt.setAttribute('ondblclick', "sforce.console.openPrimaryTab(null, strURL, false, 'ServiceMax')"); 
+                                    }
+                                    else{
+                                        optionElemnt.setAttribute('ondblclick', "window.location.href = '/apex/SVMXC__OPDOC_Delivery?SVMX_processId='+this.value+'&SVMX_recordId='+recordId+'&SVMX_retURL=/' + recordId;"); 
+                                    }
+                                    selectLst.appendChild(optionElemnt); 
+                                } 
+                            } 
+                            else 
+                            { 
+                                for( i = 0 ; i < funReturn[0].valueMap.length ; i++) 
+                                { 
+                                    if(funReturn[0].valueMap[i].record != null && funReturn[0].valueMap[i].record.SVMXC__Name__c != null && funReturn[0].valueMap[i].record.SVMXC__ProcessID__c != null) 
+                                    { 
+                                        var optionElemnt = window.document.createElement("option"); 
+                                        optionElemnt.value = funReturn[0].valueMap[i].record.SVMXC__ProcessID__c; 
+                                        optionElemnt.title = funReturn[0].valueMap[i].record.SVMXC__Name__c; 
+                                        optionElemnt.innerHTML = funReturn[0].valueMap[i].record.SVMXC__Name__c; 
+                                        
+                                        if(i == 0) 
+                                            optionElemnt.selected = "selected"; 
+                                        if((i%2) == 0) 
+                                            optionElemnt.style.backgroundColor = "#FFFFFF"; 
+                                                
+                                        if(sforce.console.isInConsole()) {
+                                            var strURL = "/apex/SVMXC__OPDOC_Delivery?SVMX_processId='+this.value+'&SVMX_recordId='+recordId+'&SVMX_retURL=/' + recordId;";
+                                            optionElemnt.setAttribute('ondblclick', "sforce.console.openPrimaryTab(null, strURL, false, 'ServiceMax')"); 
+                                        }
+                                        else{
+                                            optionElemnt.setAttribute('ondblclick', "window.location.href = '/apex/SVMXC__OPDOC_Delivery?SVMX_processId='+this.value+'&SVMX_recordId='+recordId+'&SVMX_retURL=/' + recordId;"); 
+                                        }
+                                        selectLst.appendChild(optionElemnt); 
+                                    } 
+                                } 
+                            } 
+                        } 
+                        else isTemplateAvilbl = true; 
+                    } 
+                    catch(e) 
+                    { 
+                        alert(e); 
+                    }
+                    
+                    var inputtype = window.document.createElement("input"); 
+                    inputtype.type = "Button"; 
+                    inputtype.id = 'generateButton'; 
+                    inputtype.value = strGenrtReport; 
+                    inputtype.style.color = '#ffffff'; 
+                    inputtype.style.fontSize = "12px"; 
+                    inputtype.style.paddingTop = "4px"; 
+                    inputtype.style.paddingBottom = "4px"; 
+                    inputtype.style.paddingLeft = "7px"; 
+                    inputtype.style.paddingRight = "7px"; 
+                    inputtype.style.borderStyle = "solid"; 
+                    inputtype.style.borderWidth = "2px"; 
+                    inputtype.style.borderColor = "#488AC7"; 
+                    inputtype.style.backgroundColor = '#5CB3FF'; 
+                    inputtype.style.cursor = "pointer"; 
+                    inputtype.style.fontWeight = "bold"; 
+                    inputtype.style.marginRight = "5px"; 
+                    inputtype.style.borderTopLeftRadius = '5px'; 
+                    inputtype.style.borderTopRightRadius = '5px'; 
+                    inputtype.style.borderBottomLeftRadius = '5px'; 
+                    inputtype.style.borderBottomRightRadius = '5px'; 
+                    
+                    if(sforce.console.isInConsole()) {
+                        inputtype.setAttribute('onclick', "var selectedId = window.document.getElementById('slestLstId').value;if(selectedId != undefined && selectedId != null && selectedId.length != 0){sforce.console.openPrimaryTab(null, apex/SVMXC__OPDOC_Delivery?SVMX_processId=selectedId & SVMX_recordId = recordId & SVMX_retURL= recordId, false, 'ServiceMax');}");
+                    }
+                    else{
+                        inputtype.setAttribute('onclick', "var selectedId = window.document.getElementById('slestLstId').value;if(selectedId != undefined && selectedId != null && selectedId.length != 0){window.document.location.href = '/apex/SVMXC__OPDOC_Delivery?SVMX_processId='+selectedId+'&SVMX_recordId='+recordId+'&SVMX_retURL=/' + recordId;}"); 
+                    }
+                    
+                    var inputtypeCancle = window.document.createElement("input"); 
+                    inputtypeCancle.type = "Button"; 
+                    inputtypeCancle.id = 'cancelButton'; 
+                    inputtypeCancle.value = strGenrtReport; 
+                    inputtypeCancle.style.color = '#ffffff'; 
+                    inputtypeCancle.style.fontSize = "12px"; 
+                    inputtypeCancle.style.paddingTop = "4px"; 
+                    inputtypeCancle.style.paddingBottom = "4px"; 
+                    inputtypeCancle.style.paddingLeft = "7px"; 
+                    inputtypeCancle.style.paddingRight = "7px"; 
+                    inputtypeCancle.style.borderStyle = "solid"; 
+                    inputtypeCancle.style.borderWidth = "2px"; 
+                    inputtypeCancle.style.borderColor = "#488AC7"; 
+                    inputtypeCancle.style.backgroundColor = '#5CB3FF'; 
+                    inputtypeCancle.style.cursor = "pointer"; 
+                    inputtypeCancle.style.fontWeight = "bold"; 
+                    inputtypeCancle.value = strCncle; 
+                    inputtypeCancle.style.borderTopLeftRadius = '5px'; 
+                    inputtypeCancle.style.borderTopRightRadius = '5px'; 
+                    inputtypeCancle.style.borderBottomLeftRadius = '5px'; 
+                    inputtypeCancle.style.borderBottomRightRadius = '5px'; 
+                    inputtypeCancle.setAttribute('onclick', "window.document.getElementById('divDyna').style.display = 'none';"); 
+                    
+                    if(isTemplateAvilbl == false) 
+                    { 
+                        dynDiv.appendChild(dynDivHeader); 
+                        dynDivSelectLst.appendChild(selectLst); 
+                        dynDiv.appendChild(dynDivSelectLst); 
+                        dynDivInputButns.appendChild(inputtype); 
+                        dynDivInputButns.appendChild(inputtypeCancle); 
+                        dynDiv.appendChild(dynDivInputButns); 
+                        window.document.body.appendChild(dynDiv); 
+
+
+
+
+
+
+
+
+                    } 
+                    else 
+                    alert(strErrmsg); 
+                } 
+                else 
+                { 
+                    window.document.getElementById("divDyna").style.display = "block"; 
+                    window.document.getElementById("divDyna").style.left = '40%'; 
+                } 
+            } 
+            else alert(strErrmsg); 
+        }
+
+        sforce.connection.sessionId = '{!$Api.Session_ID}'; 
+        SVMX_GetSFWHTML();
+    </script> 
+</apex:component>

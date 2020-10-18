@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Symptom__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Symptom that was noted before the failure.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Symptom that was noted before the failure.</inlineHelpText>
+    <label>Symptom</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sample Value1</fullName>
+                <default>false</default>
+                <label>Sample Value1</label>
+            </value>
+            <value>
+                <fullName>Sample Value2</fullName>
+                <default>false</default>
+                <label>Sample Value2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

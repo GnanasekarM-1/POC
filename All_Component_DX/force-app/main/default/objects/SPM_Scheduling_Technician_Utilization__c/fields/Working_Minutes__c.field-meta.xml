@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Working_Minutes__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is computed from Technician&apos;s WorkingHours Field. If empty then we consider Territory Business Hours. If Territory Business  Hours is also empty then we consider Company&apos;s Business Hours.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is computed from Technician&apos;s WorkingHours Field. If empty then we consider Territory Business Hours. If Territory Business  Hours is also empty then we consider Company&apos;s Business Hours.</inlineHelpText>
+    <label>Working Minutes</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

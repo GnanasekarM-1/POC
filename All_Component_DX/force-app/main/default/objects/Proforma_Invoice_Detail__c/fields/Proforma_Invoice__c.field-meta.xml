@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proforma_Invoice__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Document under which this invoice is consolidated. This is a lookup to an existing Proforma Invoice record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Document under which this invoice is consolidated. This is a lookup to an existing Proforma Invoice record.</inlineHelpText>
+    <label>Proforma Invoice</label>
+    <referenceTo>Proforma_Invoice__c</referenceTo>
+    <relationshipLabel>Proforma Invoice Details</relationshipLabel>
+    <relationshipName>Proforma_Invoice_Detail</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

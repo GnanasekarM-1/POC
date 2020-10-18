@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Address</fullName>
+    <availability>online</availability>
+    <description>Gets the latitude &amp; longitude coordinates of an valid address.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>200</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Validate Address</masterLabel>
+    <openType>newWindow</openType>
+    <position>topLeft</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__COMM_validateAddress?objID=&apos;+Service_Order__c.Id+&apos;&amp;objName=SVMXC__Service_Order__c&amp;street=SVMXC__Street__c&amp;city=SVMXC__City__c&amp;state=SVMXC__State__c&amp;country=SVMXC__Country__c&amp;zip=SVMXC__Zip__c&amp;latitude=SVMXC__Latitude__c&amp;longitude=SVMXC__Longitude__c&apos;)}</url>
+    <width>600</width>
+</WebLink>

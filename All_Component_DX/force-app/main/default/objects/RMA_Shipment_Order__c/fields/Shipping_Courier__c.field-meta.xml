@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipping_Courier__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of the courier company used to ship the product. Is a lookup to an existing salesforce account record</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the courier company used to ship the product. Is a lookup to an existing salesforce account record</inlineHelpText>
+    <label>Shipping Courier</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipName>RMA_Shipment_Order_Shp_Courier</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

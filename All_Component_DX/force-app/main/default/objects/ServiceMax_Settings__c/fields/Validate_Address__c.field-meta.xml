@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Address__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Labels and messages displayed in Validate Address module used in Service Team,Technician/Equipment.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Labels and messages displayed in Validate Address module used in Service Team,Technician/Equipment.</inlineHelpText>
+    <label>Validate Address</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>LAB000</fullName>
+                <default>false</default>
+                <label>LAB000</label>
+            </value>
+            <value>
+                <fullName>LAB001</fullName>
+                <default>false</default>
+                <label>LAB001</label>
+            </value>
+            <value>
+                <fullName>MSG001</fullName>
+                <default>false</default>
+                <label>MSG001</label>
+            </value>
+            <value>
+                <fullName>MSG002</fullName>
+                <default>false</default>
+                <label>MSG002</label>
+            </value>
+            <value>
+                <fullName>MSG003</fullName>
+                <default>false</default>
+                <label>MSG003</label>
+            </value>
+            <value>
+                <fullName>MSG004</fullName>
+                <default>false</default>
+                <label>MSG004</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

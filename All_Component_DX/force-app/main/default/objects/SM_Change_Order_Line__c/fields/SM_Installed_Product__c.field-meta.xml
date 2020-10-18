@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Installed_Product__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>This field is used to associate the Change Order Line with Installed Product.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field is used to associate the Change Order Line with Installed Product.</inlineHelpText>
+    <label>Installed Product</label>
+    <referenceTo>Installed_Product__c</referenceTo>
+    <relationshipLabel>Change Order Lines</relationshipLabel>
+    <relationshipName>Change_Order_Lines</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

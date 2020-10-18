@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utilization_Count__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Count of averages computed for every run</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Count of averages computed for every run</inlineHelpText>
+    <label>Utilization Count</label>
+    <summaryForeignKey>SPM_Scheduling_Technician_Utilization__c.SPM_Schedul_Tech_Utilization_Constraints__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

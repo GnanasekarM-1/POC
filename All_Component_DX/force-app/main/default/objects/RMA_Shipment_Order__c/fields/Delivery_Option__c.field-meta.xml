@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Option__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates special delivery requirements such as Saturday delivery etc.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates special delivery requirements such as Saturday delivery etc.</inlineHelpText>
+    <label>Delivery Option</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AM</fullName>
+                <default>false</default>
+                <label>AM</label>
+            </value>
+            <value>
+                <fullName>PM</fullName>
+                <default>false</default>
+                <label>PM</label>
+            </value>
+            <value>
+                <fullName>Two Day</fullName>
+                <default>false</default>
+                <label>Two Day</label>
+            </value>
+            <value>
+                <fullName>Saturday</fullName>
+                <default>false</default>
+                <label>Saturday</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Link_Id__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This field stores the visited link Id on user clicks on the Setup Home Page in Lightning</description>
+    <externalId>false</externalId>
+    <label>Link Id</label>
+    <length>50</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

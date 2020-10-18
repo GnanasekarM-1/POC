@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Crew__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The Crew to which this resource belongs.</description>
+    <externalId>false</externalId>
+    <label>Crew</label>
+    <referenceTo>SM_Crew__c</referenceTo>
+    <relationshipLabel>Crew Resource</relationshipLabel>
+    <relationshipName>Crew_Resource</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

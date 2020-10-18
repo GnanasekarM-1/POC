@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates if the target URL is opened in the same window or a new window</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates if the target URL is opened in the same window or a new window</inlineHelpText>
+    <label>Target Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Window</fullName>
+                <default>false</default>
+                <label>New Window</label>
+            </value>
+            <value>
+                <fullName>Existing Window</fullName>
+                <default>false</default>
+                <label>Existing Window</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

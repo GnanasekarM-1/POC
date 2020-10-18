@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatch_Status__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates in which stage the work order is in.</description>
+    <externalId>false</externalId>
+    <formula>IF(AND( Service_Group__c=null , Group_Member__c =null),&quot;New&quot;, IF(AND( Service_Group__c&lt;&gt;null , Group_Member__c =null),&quot;Queued&quot;,IF(Group_Member__c &lt;&gt;null,&quot;Assigned&quot;,&apos;New&apos;)))</formula>
+    <inlineHelpText>Indicates in which stage the work order is in.</inlineHelpText>
+    <label>Dispatch Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

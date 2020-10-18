@@ -1,0 +1,3 @@
+<apex:page standardController="Time_Tracker__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Time_Tracker__c.Id}" />
+</apex:page>

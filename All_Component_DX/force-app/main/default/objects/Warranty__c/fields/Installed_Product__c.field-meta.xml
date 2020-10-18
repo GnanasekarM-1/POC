@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Installed_Product__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Name of the installed product for which this warranty is applicable. Is a lookup to an existing installed product record in ServiceMax</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the installed product for which this warranty is applicable. Is a lookup to an existing installed product record in ServiceMax</inlineHelpText>
+    <label>Installed Product</label>
+    <referenceTo>Installed_Product__c</referenceTo>
+    <relationshipLabel>Product Warranty</relationshipLabel>
+    <relationshipName>Warranty</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

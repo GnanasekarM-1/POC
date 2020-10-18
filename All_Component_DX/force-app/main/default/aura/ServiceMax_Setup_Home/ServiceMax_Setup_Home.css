@@ -1,0 +1,99 @@
+.THIS .slds-form-element__icon {
+    padding-top: 0;
+}
+.THIS .setup-body .slds-accordion__summary-heading .slds-button:active,
+.THIS .setup-body .slds-accordion__summary-heading .slds-button:focus {
+    text-decoration: none;
+    color: #080707;
+}
+.THIS .setup-body .slds-accordion__summary-heading .slds-button:hover {
+    color: #004487;
+}
+.THIS .setup-version {
+    color: #514F4D;
+    font-size: 12px;
+    line-height: 15px;
+}
+.THIS .slds-has-bottom-magnet {
+    border-bottom-width: 0;
+}
+.THIS .slds-has-top-magnet {
+    border-top-width: 0;
+}
+.THIS .setup-recently-used {
+    height: calc(100% - 2rem);
+    border: 1px solid #DDDBDA;
+    padding: 1rem;
+    margin: 1rem 1rem 1rem 0;
+}
+.THIS .title-recently-used {
+    text-transform: uppercase;
+    padding-left: .4rem;
+}
+.THIS .recently-used-wrap {
+    padding-left: 0
+}
+.THIS .button-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+.THIS .button-wrapper .slds-button,
+.THIS .setup-recently-used .slds-button {
+    font-size: 0.875rem;
+    position: relative;
+    display: inline-block;
+    color: #006dcc;
+    margin-left: .4rem;
+}
+.THIS .button-wrapper .slds-button:focus,
+.THIS .setup-recently-used .slds-button:focus {
+    box-shadow: none;
+}
+.THIS .button-wrapper .slds-button[disabled="true"],
+.THIS .setup-recently-used .slds-button[disabled="true"] {
+    color: #c9c7c5;
+    display: inline-block;
+    pointer-events: none;
+    text-decoration: none;
+}
+.THIS .slds-popover {
+    position: absolute;
+    bottom: 40px;
+    min-width: 20rem;
+}
+.THIS .setup-body .slds-popover {
+    left: calc(100% - 2rem);    
+}
+.THIS .lightning-popover {
+    position: absolute;
+    bottom: 40px;
+    min-width: 20rem;
+}
+.THIS .setup-body .lightning-popover {
+    left: calc(100% - 2rem);    
+}
+.THIS .setup-recently-used .lightning-popover {
+    right: -1rem;
+}
+.THIS .toggle-tooltip {
+    display: none;
+}
+.THIS .button-wrapper .lightning-popover {
+    opacity: 0;
+    -webkit-transition: opacity 1s ;
+    -moz-transition: opacity 1s ;
+    -o-transition: opacity 1s ;
+    transition: opacity 1s ;
+    transition-delay: 1s;
+}
+.THIS .button-wrapper:hover .lightning-popover {
+    opacity: 1;
+}
+.THIS .hide-recent {
+    display: none;
+}
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}

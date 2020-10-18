@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Latitude__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This field is created to store the latitude of the non work order events of the technicians.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field is created to store the latitude of the non work order events of the technicians.</inlineHelpText>
+    <label>Latitude</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>6</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rule_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Internal use only</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select Rule Types..</inlineHelpText>
+    <label>Rule Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Work Order Parts</fullName>
+                <default>false</default>
+                <label>Work Order Parts</label>
+            </value>
+            <value>
+                <fullName>MTTS</fullName>
+                <default>false</default>
+                <label>MTTS</label>
+            </value>
+            <value>
+                <fullName>Simple Assignment</fullName>
+                <default>false</default>
+                <label>Simple Assignment</label>
+            </value>
+            <value>
+                <fullName>Priortization</fullName>
+                <default>false</default>
+                <label>Priortization</label>
+            </value>
+            <value>
+                <fullName>Counters</fullName>
+                <default>false</default>
+                <label>Counters</label>
+            </value>
+            <value>
+                <fullName>Auto Entitlement</fullName>
+                <default>false</default>
+                <label>Auto Entitlement</label>
+            </value>
+            <value>
+                <fullName>Work Order Territory</fullName>
+                <default>false</default>
+                <label>Work Order Territory</label>
+            </value>
+            <value>
+                <fullName>Named Expression</fullName>
+                <default>false</default>
+                <label>Named Expression</label>
+            </value>
+            <value>
+                <fullName>FulFillment Path</fullName>
+                <default>false</default>
+                <label>FulFillment Path</label>
+            </value>
+            <value>
+                <fullName>Custom View</fullName>
+                <default>false</default>
+                <label>Custom View</label>
+            </value>
+            <value>
+                <fullName>Auto Entitlement WO</fullName>
+                <default>false</default>
+                <label>Auto Entitlement WO</label>
+            </value>
+            <value>
+                <fullName>Column Info</fullName>
+                <default>false</default>
+                <label>Column Info</label>
+            </value>
+            <value>
+                <fullName>Tech Eligibility</fullName>
+                <default>false</default>
+                <label>Tech Eligibility</label>
+            </value>
+            <value>
+                <fullName>Skill Matching</fullName>
+                <default>false</default>
+                <label>Skill Matching</label>
+            </value>
+            <value>
+                <fullName>SRCH_CRITERIA</fullName>
+                <default>false</default>
+                <label>SRCH_CRITERIA</label>
+            </value>
+            <value>
+                <fullName>Adv Criteria Exp</fullName>
+                <default>false</default>
+                <label>Adv Criteria Exp</label>
+            </value>
+            <value>
+                <fullName>Field Update Rule</fullName>
+                <default>false</default>
+                <label>Field Update Rule</label>
+            </value>
+            <value>
+                <fullName>Checklist_QB</fullName>
+                <default>false</default>
+                <label>Checklist_QB</label>
+            </value>
+            <value>
+                <fullName>Checklist_Section_Entry_Criteria</fullName>
+                <default>false</default>
+                <label>Checklist_Section_Entry_Criteria</label>
+            </value>
+            <value>
+                <fullName>Checklist_Section_Exit_Criteria</fullName>
+                <default>false</default>
+                <label>Checklist_Section_Exit_Criteria</label>
+            </value>
+            <value>
+                <fullName>Checklist Criteria in Output Doc</fullName>
+                <default>false</default>
+                <label>Checklist Criteria in Output Doc</label>
+            </value>
+            <value>
+                <fullName>Capacity Reservation</fullName>
+                <default>false</default>
+                <label>Capacity Reservation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

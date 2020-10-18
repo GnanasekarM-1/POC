@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of the supplier company. Applicable for replenishing stock at warehouse locations. Lookup to an existing salesforce account record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the supplier company. Applicable for replenishing stock at warehouse locations. Lookup to an existing salesforce account record.</inlineHelpText>
+    <label>Supplier</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipName>Parts_Request</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

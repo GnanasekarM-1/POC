@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Match_Account_In_Entitlement__c</fullName>
+    <defaultValue>true</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag indicates if the account on case/service order should be matched with account on service contract when entitling on a serial number.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag indicates if the account on case/service order should be matched with account on service contract when entitling on a serial number.</inlineHelpText>
+    <label>Match Account In Entitlement</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Display_Map_ID__c</fullName>
+    <deprecated>false</deprecated>
+    <description>ServiceMax map ID (MAP001, MAP002 etc.). Derived from object mapping automatically.</description>
+    <externalId>false</externalId>
+    <formula>MapID__r.MapID__c</formula>
+    <inlineHelpText>ServiceMax map ID (MAP001, MAP002 etc.). Derived from object mapping automatically.</inlineHelpText>
+    <label>Display Map ID</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

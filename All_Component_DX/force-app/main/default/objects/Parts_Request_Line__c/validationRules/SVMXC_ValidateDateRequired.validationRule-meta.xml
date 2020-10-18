@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateDateRequired</fullName>
+    <active>true</active>
+    <description>Required date must be a future date.</description>
+    <errorConditionFormula>AND(ISNEW(),  Date_Required__c &lt;  TODAY())</errorConditionFormula>
+    <errorDisplayField>Date_Required__c</errorDisplayField>
+    <errorMessage>Date required cannot be a past date.</errorMessage>
+</ValidationRule>

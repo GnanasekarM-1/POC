@@ -1,0 +1,317 @@
+<apex:page title="Service Delivery" sidebar="true" showHeader="true" standardStylesheets="false" controller="OPDOC_Delivery">
+<script type="text/javascript"> 
+    var __sfdcSessionId = '{!GETSESSIONID()}'; 
+    var __sfdcSiteUrlPrefix = '{!$Site.Prefix}'; 
+</script> 
+
+
+<script>
+    console.log("DateTime Allication Start");
+   
+    function processResourceURL(url){
+        var ret = url, index;
+        if((index = url.indexOf("?")) != -1){
+            ret = url.substring(0, index);
+        }
+        return ret;
+    }
+    
+    function opDocImg(imageTag) {
+        const ratio = imageTag.offsetHeight / imageTag.offsetWidth;
+        const isHeightMore = (ratio > 1.29)?true:false;
+        if(isHeightMore) {
+            if(imageTag.offsetHeight >= 905){
+              imageTag.style.height = '905px';
+            }
+        } else {
+            if(imageTag.offsetWidth >= 700){
+              imageTag.style.width = '700px';
+            }
+        }
+    }
+    
+    var __SVMX_LOAD_VERSION__ = "micro";
+    var __SVMX_CLIENT_LIB_PATH__ = processResourceURL("{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib')}");
+    if(window['Visualforce'] && Visualforce.remoting){
+        Visualforce.remoting.timeout = 120000;
+    }
+    
+    var SvmxOpDocDeliveryJsr = {
+         
+        JsrGetTemplate : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetTemplate}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetConfigInfo : function(request, callback, context){ //Added for the story BAC-5383
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetConfigInfo}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrSubmitDocument : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrSubmitDocument}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrCreatePDF : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrCreatePDF}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrSubmitQuery : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrSubmitQuery}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetUserInfo : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetUserInfo}', requestStr, 
+                function(result, event){
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetDocumentData : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetDocumentData}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetDocumentMetadata : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetDocumentMetadata}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrDescribeObject : function(request, callback, context){ 
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrDescribeObject}', requestStr, 
+                function(result, event){   
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrTargetUpdates : function(request, callback, context){
+            var requestStr = SVMX.toJSON(request), me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrTargetUpdates}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+        },
+
+        JsrGetDisplayTags : function(request, callback, context){
+            //Added for the story BAC-5393 and commented below code
+            var requestStr = {}, me = this;
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.OPDOC_Delivery.JsrGetDisplayTags}', requestStr, 
+                function(result, event){ 
+                    me.processResult(result, event, callback, context); 
+                }, {buffer:false,escape: false}
+            );
+            /*var result = {
+                "SFM004_TAG006"         : "{!HTMLENCODE($Label.SFM004_TAG006)}",
+                "SFM004_TAG007"         : "{!HTMLENCODE($Label.SFM004_TAG007)}",
+                "SFM004_TAG008"         : "{!HTMLENCODE($Label.SFM004_TAG008)}",              
+                "SFM004_TAG009"         : "{!HTMLENCODE($Label.SFM004_TAG009)}",              
+                "SFM004_TAG010"         : "{!HTMLENCODE($Label.SFM004_TAG010)}",              
+                "SFM004_TAG011"         : "{!HTMLENCODE($Label.SFM004_TAG011)}",              
+                "SFM004_TAG012"         : "{!HTMLENCODE($Label.SFM004_TAG012)}",
+                "SFM004_TAG013"         : "{!HTMLENCODE($Label.SFM004_TAG013)}",
+                "SFM004_TAG014"         : "{!HTMLENCODE($Label.SFM004_TAG014)}",
+                "SFM004_TAG015"         : "{!HTMLENCODE($Label.SFM004_TAG015)}",
+            }, me = this;
+            
+            setTimeout(function(){
+                me.processResult(result, {status : true}, callback, context);
+            }, 1);*/
+        },
+
+        processResult : function(result, event, callback, context){
+            var ret = {success : false};
+            if(event.status == true){
+                ret = SVMX.toObject(result);
+            }
+            callback.call(context, ret, event);
+        }
+    };
+    
+</script>
+
+<script type="text/javascript" src="{!IF($CurrentPage.parameters.debug != null,
+URLFOR($Resource.com_servicemax_client_sfmopdocdelivery_es6, 'com.servicemax.client.sfmopdocdelivery.es6/bundle.js'),
+URLFOR($Resource.com_servicemax_client_sfmopdocdelivery_es6, 'com.servicemax.client.sfmopdocdelivery.es6/bundle.min.js')
+)}"></script>
+
+<script>
+    var applicationStarted = false;
+    var configResponseReceived = false;
+    
+    //initial values
+    var svmx_sfm_opdoc_settings = {}; //mandatory 
+    var svmx_is_launch_designer_enabled; 
+    var svmx_url_for_launch_designer; 
+    var svmx_is_sanitizehtml_enabled; 
+    var svmx_site_prefix = "{!$Site.Prefix}";
+
+    //new propertys
+    var svmx_sfm_opdoc_delivery_is_qualified = false;
+    var svmx_sfm_opdoc_delivery_error_message = "Error";
+    var svmx_sfm_opdoc_delivery_settings = {};
+    var svmx_sfm_opdoc_process_lmd = "";
+    var svmx_sfm_opdoc_userinfo = {};
+    var svmx_sfm_opdoc_objectLabel = "";
+    var svmx_sfm_opdoc_objectIconURL = "";
+    var svmx_sfm_opdoc_colorCodeForIcon = "";
+    var svmx_sfm_opdoc_recordName = "";
+               
+    var request = {
+        processId:SVMX.getUrlParameter("SVMX_processId"),
+        recordId:SVMX.getUrlParameter("SVMX_recordId")
+    };
+   
+
+    function callGetConfigInfo() {
+        console.log('JsrGetConfigInfo call - start');
+        SvmxOpDocDeliveryJsr.JsrGetConfigInfo(request,
+            function(result,event) {
+                console.log('JsrGetConfigInfo call - end');
+                svmx_sfm_opdoc_delivery_is_qualified = result.isQualified;
+                svmx_sfm_opdoc_delivery_error_message = result.errorMessage;
+                svmx_sfm_opdoc_delivery_settings = result.strSettings;
+                svmx_sfm_opdoc_settings = result.strSfmDeliverySettings; 
+                svmx_is_launch_designer_enabled = result.isLaunchDesignerEnabled; 
+                svmx_url_for_launch_designer = result.urlForLaunchDesigner; 
+                svmx_is_sanitizehtml_enabled = result.isSanitizehtmlEnabled; 
+                svmx_sfm_opdoc_process_lmd = result.numLMD;
+                svmx_sfm_opdoc_userinfo = SVMX.toObject(result.strUserInfo);
+                svmx_sfm_opdoc_objectLabel = result.objectLabel;
+                svmx_sfm_opdoc_objectIconURL = result.strTabStyleLogoURL;
+                svmx_sfm_opdoc_colorCodeForIcon = result.strColorCodeForIcon;
+                svmx_sfm_opdoc_recordName = result.strNameFieldValue;
+                configResponseReceived = true;
+                runApplication();
+            },
+            this
+        ); 
+    }
+
+    function runApplication() {
+        console.log('JsrGetConfigInfo configResponseReceived - ' + configResponseReceived + ', applicationStarted - '+applicationStarted);
+        if(configResponseReceived && applicationStarted) {
+            var settingObject = SVMX.toObject(svmx_sfm_opdoc_settings);
+            var lightning = false;
+            if(settingObject!=undefined && settingObject.stringMap!=undefined ) {
+                for(var index=0;index<settingObject.stringMap.length;index++) {
+                  var item = settingObject.stringMap[index];
+                    if (item && item.key === 'SET004') {
+                        if(item.value === 'Lightning') {
+                            lightning = 'true';
+                        }
+                        break;
+                    }
+                }
+            }
+            //Check Salesforce lightning
+            var isSalesforceLight = "{! $User.UIThemeDisplayed }" == "Theme4d"? true : false ;
+
+            SVMX.getClient().addApplicationParameter('lightning', lightning);
+            SVMX.getClient().addApplicationParameter('objectLabel', svmx_sfm_opdoc_objectLabel);
+            SVMX.getClient().addApplicationParameter('isSalesforceLightning', isSalesforceLight);
+            SVMX.getClient().addApplicationParameter('colorCodeForIcon', svmx_sfm_opdoc_colorCodeForIcon);
+            SVMX.getClient().addApplicationParameter('objectIconURL', svmx_sfm_opdoc_objectIconURL);
+            SVMX.getClient().addApplicationParameter('recordName', svmx_sfm_opdoc_recordName);
+            SVMX.getClient().addApplicationParameter('svmx_is_sanitizehtml_enabled', svmx_is_sanitizehtml_enabled);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_opdoc_userinfo', svmx_sfm_opdoc_userinfo);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_opdoc_process_lmd', svmx_sfm_opdoc_process_lmd);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_opdoc_processID', request.processId);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_opdoc_recordId', request.recordId);
+            SVMX.getClient().addApplicationParameter('svmx_sfm_opdoc_delivery_is_qualified', svmx_sfm_opdoc_delivery_is_qualified);
+          
+            startApplication();
+        }
+    }
+
+    function loadApplication() {
+        jQuery(document).ready(function(){
+            console.log("DateTime jQuery Start");
+            
+            var ui_desktop_theme = processResourceURL("{!URLFOR($Resource.com_servicemax_client_sfmdelivery_ui_desktop_theme_resource,'')}");
+            var config = {title : "SFM Output Documents - Delivery", version : "1.0.0",
+                modules : [],
+            
+                "app-config" : {
+                    "application-id"   : "console",
+                    "enable-cache" : true,
+                    "enable-log" : true,
+                    "org-name-space" : "SVMXC",
+                    "allow-draft" : true,
+                    "allow-signatures" : false,
+                    "svmx-base-url" : "{!$Site.Prefix}",
+                    "ui-opdoc-desktop-theme" : ui_desktop_theme +'/com.servicemax.client.sfmdelivery.ui.desktop.theme.resource/modules/com.servicemax.client.sfmopdocdelivery.ui.desktop',
+                    "use_jsr":true,
+                },
+            
+                "platform-config" : {
+            
+                }
+            };
+            
+            var appConfig = config['app-config'];  
+
+            SVMX.getClient().addApplicationParameter("session-id", "{!GETSESSIONID()}");
+            
+            Object.keys(appConfig).forEach(function(key){
+                  SVMX.getClient().addApplicationParameter(key, appConfig[key]);
+            });
+            
+            // set up the session id
+            SVMX.getClient().addApplicationParameter("session-id", "{!GETSESSIONID()}");
+            
+         
+            // create a console logger
+            // new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+
+            applicationStarted = true;     
+            runApplication();   
+        });
+    }
+    callGetConfigInfo(); // JSR call
+    loadApplication();
+    </script>
+
+<script>
+ 
+</script>
+<body>
+<div id="client_display_root"></div>
+</body>
+<script src="../../soap/ajax/24.0/connection.js" type="text/javascript"></script>
+</apex:page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Picklist_Id__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Stores Picklist Id’s referenced with in the template as comma &quot;,&quot; separated values.</description>
+    <externalId>false</externalId>
+    <label>Picklist Id</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

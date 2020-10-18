@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatcher__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of the dispatcher that can dispatch to this team or territory. Reference to an existing Salesforce user</description>
+    <externalId>false</externalId>
+    <label>Dispatcher</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Dispatcher_Access</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

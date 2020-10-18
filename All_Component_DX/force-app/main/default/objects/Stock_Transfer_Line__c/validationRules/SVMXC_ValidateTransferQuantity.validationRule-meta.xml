@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateTransferQuantity</fullName>
+    <active>true</active>
+    <description>Transfer quantity must be greater than zero.</description>
+    <errorConditionFormula>( Quantity_Transferred2__c &lt;=0)</errorConditionFormula>
+    <errorDisplayField>Quantity_Transferred2__c</errorDisplayField>
+    <errorMessage>Quantity transferred should be greater than zero.</errorMessage>
+</ValidationRule>

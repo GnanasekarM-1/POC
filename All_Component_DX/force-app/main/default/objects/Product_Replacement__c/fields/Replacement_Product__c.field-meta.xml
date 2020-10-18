@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Replacement_Product__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The product that replaces the base/main product</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose the product that replaces the base/main product</inlineHelpText>
+    <label>Replacement Product</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Other Products Replaced By This Product</relationshipLabel>
+    <relationshipName>Product_Replacements1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

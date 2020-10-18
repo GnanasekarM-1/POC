@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Booking_Window_Name__c</fullName>
+    <deprecated>false</deprecated>
+    <description>A user-friendly name for the booking window. For example, &quot;Peak Hour Slot&quot;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter a user-friendly name for this booking window. For example, &quot;After Hours&quot;</inlineHelpText>
+    <label>Booking Window Name</label>
+    <length>100</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

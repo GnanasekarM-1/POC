@@ -1,0 +1,3 @@
+<apex:page standardController="SM_Product_Attributes__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!SM_Product_Attributes__c.Id}" />
+</apex:page>

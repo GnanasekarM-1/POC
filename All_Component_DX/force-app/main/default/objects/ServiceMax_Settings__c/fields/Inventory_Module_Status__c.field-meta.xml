@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inventory_Module_Status__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates if inventory module has been enabled for this organization or not</description>
+    <externalId>false</externalId>
+    <formula>IF(Enable_Inventory_Module__c = True, &quot;Enabled&quot;, &quot;Disabled&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Indicates if inventory module has been enabled for this organization or not. This can be set only by Maxplore administrator at the time of deployment.</inlineHelpText>
+    <label>Inventory Module Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Driving_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Driving or travel time to this work order location from the last work order location or from the home base.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Driving or travel time to this work order location from the last work order location or from the home base.</inlineHelpText>
+    <label>Travel Time to Workorder Location (Mins)</label>
+    <precision>8</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

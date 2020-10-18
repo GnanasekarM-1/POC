@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_In_Jeopardy__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>This field indicates whether the Work Order is &apos;In Jeopardy&apos; of missing a fulfillment deadline or promise or not progressing per the plan or schedule. A value of &apos;True&apos; means the Work Order fulfillment status is &apos;At Risk&apos;.</description>
+    <externalId>false</externalId>
+    <label>In Jeopardy</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_level__c</fullName>
+    <deprecated>false</deprecated>
+    <description>For master records (Type = MASTER_*), it is the time taken in seconds for database operations in server, with the value calculated using this formula: Server Processing Time - Code Execution Time.  For logs pushed by client app, it is the the level (1/2/3) of log message. Messages with level 3 are logged when the client app log level is Verbose. Level 2 messages are logged for the log level Warning. Level 1 messages are logged for the log level Error.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For master records (Type = MASTER_*), it is the time taken in seconds for DB operations in server: Server Processing Time - Code Execution Time.  For logs pushed by client app, it is the the level (1/2/3) of log message (3 logged when level is verbose).</inlineHelpText>
+    <label>Log level</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

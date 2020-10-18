@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Checklist__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Looks up to the related checklist record</description>
+    <externalId>false</externalId>
+    <label>Checklist</label>
+    <referenceTo>Checklist__c</referenceTo>
+    <relationshipLabel>Checklist Attachments</relationshipLabel>
+    <relationshipName>Checklist_Attachments</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

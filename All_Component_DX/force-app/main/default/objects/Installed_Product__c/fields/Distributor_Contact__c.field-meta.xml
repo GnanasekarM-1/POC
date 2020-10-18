@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distributor_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of the distributor contact if applicable</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the distributor contact if applicable</inlineHelpText>
+    <label>Distributor Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipName>R00N70000001hzc8EAA</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

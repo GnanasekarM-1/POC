@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Labor_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Holds the Labor time for fixing the issue</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Holds the Labor time for fixing the issue</inlineHelpText>
+    <label>Labor Time</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

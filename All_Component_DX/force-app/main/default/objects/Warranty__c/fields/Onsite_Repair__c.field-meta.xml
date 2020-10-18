@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Onsite_Repair__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag indicates if customer is eligible for onsite repair when entitled by this warranty. This flag does not drive any functionality in ServiceMax and is for informational purposes only</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag indicates if customer is eligible for onsite repair when entitled by this warranty. This flag does not drive any functionality in ServiceMax and is for informational purposes only</inlineHelpText>
+    <label>Onsite Repair</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

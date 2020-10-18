@@ -1,0 +1,71 @@
+<template>
+    <template  if:true={loading} >
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-account" title="Attribute History">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                </svg>
+                <span class="slds-assistive-text">{label.l_PageTitle}</span>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <div class="entityNameTitle slds-line-height_reset">{label.l_PageTitle}</div>
+                <h2 class="slds-card__header-title">
+                    <span>{installedBaseName}</span>
+                </h2>
+            </div>
+            </header>
+        </div>
+        <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_2-of-3">
+            <div class="slds-p-horizontal_medium">
+                {label.l_Range}
+            </div>
+            <div class="slds-p-horizontal_medium">
+                <div class="slds-form " role="list" style="padding-bottom: 10px;">
+                    <div class="slds-grid">
+                        <div class="slds-p-left_none slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--2-of-6 slds-large-size--4-of-12"
+                            role="listitem">
+                            <lightning-input type="date" data-id="startDate" name="startdatepicker" class="datepicker" value={selectedStart}
+                                label={label.l_FromDate} onchange={onDateChange} autocomplete="off"></lightning-input>
+                        </div>
+                        <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--2-of-6 slds-large-size--4-of-12"
+                            role="listitem">
+                            <lightning-input type="date" data-id="endDate" name="enddatepicker" class="datepicker" value={selectedEnd}
+                                label={label.l_ToDate} onchange={onDateChange} autocomplete="off"></lightning-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+        <div class="slds-col slds-size_1-of-3" style="text-align: right;">
+            <template if:true={tableData.length}>
+                <lightning-button label={label.l_Export} title={label.l_Export} onclick={downloadCSV} class="slds-m-right_x-small export-button"></lightning-button>
+            </template>
+        </div>
+        </div>
+
+        <div class="slds-col"  style="min-height:400px;padding:10px;">
+            <template if:true={tableData.length} >
+                <lightning-datatable
+                        key-field="id"
+                        hide-checkbox-column="true"
+                        data={tableData}
+                        min-column-width="200"
+                        columns={columns}>
+                </lightning-datatable>
+            </template>
+            <template if:false={tableData.length}>
+                <div class="slds-p-horizontal_medium">
+                <p>{label.l_NoRecords}</p>
+                </div>
+            </template>
+        </div>
+    </article>
+</template>

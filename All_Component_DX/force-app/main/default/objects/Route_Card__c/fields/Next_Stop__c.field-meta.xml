@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Next_Stop__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Next step in the route</description>
+    <externalId>false</externalId>
+    <label>Next Stop</label>
+    <referenceTo>Site__c</referenceTo>
+    <relationshipLabel>Route Cards</relationshipLabel>
+    <relationshipName>Route_Cards</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

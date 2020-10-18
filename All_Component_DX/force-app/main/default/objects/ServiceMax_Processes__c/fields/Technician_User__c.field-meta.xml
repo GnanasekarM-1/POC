@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Technician_User__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Used in Work Order Pre-calculation trigger.</description>
+    <externalId>false</externalId>
+    <formula>Assign_To_Technician__r.Salesforce_User__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Technician User</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

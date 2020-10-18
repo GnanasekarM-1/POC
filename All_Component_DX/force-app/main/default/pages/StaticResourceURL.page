@@ -1,0 +1,35 @@
+<apex:page controller="StaticResourceURL">
+<div id='root'></div>
+<script>
+
+function JsrGetAllStaticResources(request, callback, context){
+    var requestStr = JSON.stringify(request), me = this;
+    Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.StaticResourceURL.JsrGetAllStaticResources}', requestStr, 
+        function(result, event){ processResult(result, event, callback, context); }, {escape: false}
+    );
+}
+
+function processResult(result, event, callback, context){
+    var ret = {success : false};
+    if(event.status == true){
+        ret = JSON.parse(result);
+    }
+    callback.call(context, ret, event);
+}
+
+function getResourceUrl(resource) {
+    return "resource/" + resource.Timestamp + "/" + (resource.Namespace ? resource.Namespace.toLowerCase() + "__" : "") + resource.Name; 
+}
+
+JsrGetAllStaticResources({}, function(resp, event){
+    var item, i, l = resp.length, root = document.getElementById("root");
+    
+    for(i = 0; i < l; i++) {
+        item = document.createElement("div");
+        item.innerHTML = getResourceUrl(resp[i]);
+        root.appendChild(item);   
+    }
+});
+
+</script>
+</apex:page>

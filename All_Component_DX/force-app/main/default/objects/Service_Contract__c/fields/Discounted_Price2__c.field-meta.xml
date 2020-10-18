@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Discounted_Price2__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Contract Price minus discount. Calculated automatically</description>
+    <externalId>false</externalId>
+    <formula>Contract_Price2__c - (Contract_Price2__c * Discount__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Contract Price minus discount. Calculated automatically</inlineHelpText>
+    <label>Discounted Price</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

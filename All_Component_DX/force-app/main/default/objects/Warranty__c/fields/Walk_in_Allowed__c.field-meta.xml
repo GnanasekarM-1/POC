@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walk_in_Allowed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag indicates if the customer is authorized to walk into a service center for service. This flag does not drive any functionality in ServiceMax and is for informational purposes only</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag indicates if the customer is authorized to walk into a service center for service. This flag does not drive any functionality in ServiceMax and is for informational purposes only</inlineHelpText>
+    <label>Walk-in Allowed</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

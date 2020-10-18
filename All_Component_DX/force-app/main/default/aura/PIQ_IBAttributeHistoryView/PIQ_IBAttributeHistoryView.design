@@ -1,0 +1,3 @@
+<design:component >
+    <design:attribute name="IBField" label="{!$Label.SVMXC.PRODIQ002_TAG058}" description="{!$Label.SVMXC.PRODIQ002_TAG066}" required="true" datasource="apex://PIQ_IBAttributeDynamicPicklist"/>
+</design:component>

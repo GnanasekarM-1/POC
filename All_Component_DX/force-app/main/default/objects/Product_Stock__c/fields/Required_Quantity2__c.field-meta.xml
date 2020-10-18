@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Quantity2__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Calculated required quantity for reordering.</description>
+    <externalId>false</externalId>
+    <formula>IF(Quantity2__c &lt;= Reorder_Level2__c,  (Reorder_Level2__c  -  Quantity2__c) + Reorder_Quantity2__c, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Calculated required quantity for reordering.</inlineHelpText>
+    <label>Required Qty</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

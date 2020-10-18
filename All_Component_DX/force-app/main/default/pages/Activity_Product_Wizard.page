@@ -1,0 +1,3 @@
+<apex:page standardController="Activity_Product__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Activity_Product__c.Id}" />
+</apex:page>

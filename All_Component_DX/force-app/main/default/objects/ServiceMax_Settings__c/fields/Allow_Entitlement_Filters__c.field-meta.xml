@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Entitlement_Filters__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Flag indicates if a user can specify filters on future/expired entitlements on the entitlement screen, or if the screen should use org-wide settings.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag indicates if a user can specify filters on future/expired entitlements on the entitlement screen, or if the screen should use org-wide settings.</inlineHelpText>
+    <label>Allow Entitlement Filters</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

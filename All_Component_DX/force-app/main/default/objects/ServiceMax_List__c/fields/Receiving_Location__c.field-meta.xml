@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Receiving_Location__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Location where the product is being received. This is a lookup to an existing site record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Location where the product is being received. This is a lookup to an existing site record.</inlineHelpText>
+    <label>Receiving Location</label>
+    <referenceTo>Site__c</referenceTo>
+    <relationshipLabel>ServiceMax List (Receiving Location)</relationshipLabel>
+    <relationshipName>ServiceMax_List3</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

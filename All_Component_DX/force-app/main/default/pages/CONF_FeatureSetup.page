@@ -1,0 +1,248 @@
+<apex:page title="ServiceMax Feature Administration" controller="CONF_FeatureSetup" tabStyle="ServiceMax_Tags__c">    
+<style>
+        
+        .Logo1{
+                float:left;
+                margin: 0;
+                padding-top:0px;
+                padding-left:0px;
+                padding-right:0px;
+                overflow: hidden;
+                width: 319px;
+            }
+            .Logoheader{
+                  width:319px;
+                  height:44px;
+            }
+            .buttonNormalStateSelectedForGroup a.buttonLinkForGroup{
+                outline:0;
+            }
+            .buttonNormalStateSelected{
+                cursor: pointer;
+            }
+
+            .buttonNormalTextWithIcon{
+                padding-top: 5px;
+                height: auto;
+                width:117px;
+                text-decoration:none;
+            }
+            a.buttonLink, a.buttonLink:hover {text-decoration:none; cursor: pointer;}
+            
+            #outer {display: table; height: 48px; padding:0}
+            #middle {display: table-cell; vertical-align: middle;}
+            #inner {word-wrap: break-word; width:117px;}
+            .buttonNormalTextWithIconGroup {
+                padding: 9px 0 3px 13px;
+                width: 110px;
+                word-wrap: break-word;
+            }      
+            .rightContDescText{min-height:100px;}
+            .buttonNormalTextWithIconGroup{padding: 9px 0 3px 13px; width: 110px; word-wrap: break-word;}
+            
+            a.buttonLinkSelected #inner, a.buttonLinkSelected:hover #inner {color:#fff; text-decoration:none}
+            *:first-child+html .rightContDesc .rightContDescText{  
+                min-height:80px !importants;
+                padding-bottom:40px;
+            }             
+                        
+            *:first-child+html #outer {
+              height: 48px;
+              position: relative;
+            }
+            *:first-child+html #middle {
+              position: absolute;
+              top: 50%;
+            }
+            *:first-child+html #inner {
+              position: relative;
+              top: -50%;
+            }            
+</style>
+
+    <apex:form id="FeatureSetup">
+        <apex:stylesheet value="{!URLFOR($Resource.CONF_SetupHome, 'style.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CONF_SetupHome, 'jquery-3.0.0.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CONF_SetupHome, 'jquery.browser.min.js')}"/>
+        
+        <script type="text/javascript">
+        
+        $(document).ready(function() {
+            if(navigator.userAgent.indexOf('Mac') > 0) 
+            {
+                $("#macstyle").addClass("macclass");                
+            }
+        });
+
+              function loadImages()
+              {
+                   imageObj = new Image();
+                   imges = new Array();
+                   for(var j=0;j<21;j++){
+                       imges[j]="{!URLFOR($Resource.CONF_SetupHome,'images/S_Icon_"+j+1+".png')}";
+                   }
+                   for(var i=0; i<21; i++) 
+                   {
+                        imageObj.src=imges[i];
+                   }
+              }
+            loadImages();
+            </script>
+            <script type="text/javascript">
+                
+                function HELP() 
+                {
+                    urlLoc = '{!TagHLPURL}';
+                    window.open(urlLoc,"_win");
+                }
+
+                function QuestionBankManager()
+                {
+                    urlLoc = "{!TagURL95}";
+                    urlLoc = urlLoc+'?SVMX_retURL=/apex/SVMXC__CONF_FeatureSetup&isStandAloneChecklist=true';
+                    if(urlLoc != null && urlLoc !='')
+                        {
+                            document.getElementById('Name001').innerHTML="{!HTMLENCODE(TagTitle2)}";
+                            document.getElementById('Desc001').innerHTML="{!HTMLENCODE(TagDesc2)}";
+                            document.getElementById('{!$Component.img}').src="{!URLFOR($Resource.CONF_SetupHome,'images/B_Icon_103.png')}";        
+                        }
+                }
+
+                function checklistDesigner()
+                {
+                     urlLoc = '{!TagURL52}';
+                     var isEnabled = {!isHtmlView};//Added for BAC-5682
+                     if(!isEnabled){//Added if condition for BAC-5682
+                     urlLoc = urlLoc+'&isStandAloneChecklist=true';
+                     urlLoc = urlLoc.replace('SVMX_retURL=/apex/SVMXC__CONF_SetupHome','SVMX_retURL=/apex/SVMXC__CONF_FeatureSetup');
+                     }
+                     if(urlLoc != null && urlLoc !='')
+                        { 
+                            document.getElementById('Name001').innerHTML="{!HTMLENCODE(TagTitle1)}";
+                            document.getElementById('Desc001').innerHTML="{!HTMLENCODE(TagDesc1)}";
+                            document.getElementById('{!$Component.img}').src="{!URLFOR($Resource.CONF_SetupHome,'images/B_Icon_21.png')}";
+                        }                        
+                }
+
+                function Checklist_ImportExport(){
+                    urlLoc = '{!TagURL120}';
+                    if(urlLoc != null && urlLoc !='')
+                    {
+                        document.getElementById('Name001').innerHTML= "{!HTMLENCODE(TagTitle3)}";
+                        document.getElementById('Desc001').innerHTML="{!HTMLENCODE(TagDesc3)}";
+                        document.getElementById('{!$Component.img}').src="{!URLFOR($Resource.CONF_SetupHome,'images/B_Icon_110.png')}";
+                    }                        
+                }
+                
+                
+                function checkListGroup()
+                {   
+                  var isEnabled = {!IsChecklistFeatureEnabled};
+                  if(!isEnabled) {
+                          document.getElementById('checklistbutton1').className = "removeStyles";
+                          document.getElementById('checklistbutton1').className = "disableStyle";
+                          document.getElementById('checklistbutton1').onmouseover = null;
+                          document.getElementById('checklistbutton1').onclick = null; 
+
+                          document.getElementById('checklistbutton2').className = "removeStyles";
+                          document.getElementById('checklistbutton2').className = "disableStyle";
+                          document.getElementById('checklistbutton2').onmouseover = null; 
+                          document.getElementById('checklistbutton2').onclick = null;
+
+                          document.getElementById('checklistbutton3').className = "removeStyles";
+                          document.getElementById('checklistbutton3').className = "disableStyle";
+                          document.getElementById('checklistbutton3').onmouseover = null;
+                          document.getElementById('checklistbutton3').onclick = null;  
+                    } 
+                    urlLoc = '#';
+                    document.getElementById('{!$Component.img}').src="{!URLFOR($Resource.CONF_SetupHome,'images/B_GroupImg1.png')}";
+                    document.getElementById('Name001').innerHTML="{!HTMLENCODE(TagGroupTitle1)}";  
+                    document.getElementById('Desc001').innerHTML="{!HTMLENCODE(TagGroupDes1)}";
+                    document.getElementById(101).className = "buttonNormalStateSelectedForGroup"; 
+                }
+
+                function GotoUrl()
+                {
+                    if((typeof sforce != 'undefined') && (typeof sforce.one != 'undefined') && (sforce.one != null)) {
+                        console.log('Navigating to the url - ' + urlLoc);
+                        
+                        if(urlLoc.length == 6) {
+                            console.log('Navigating to the custom list page screen');
+                            urlLoc = urlLoc.substring(0,4);
+                        }
+                        sforce.one.navigateToURL(urlLoc);
+                    } else {
+                        return window.location=urlLoc;
+                    }
+                }
+
+                function GotoUrlNewWindow(){
+                    return window.open(urlLoc);
+                }
+            </script>
+            <div id="MainContainer">
+                 <header>
+                    <div class="headerFMA">
+                        <div class="headerLogo"><div class="Logoheader"><div class="Logo1">
+                            <apex:image url="{!SvmxLogoId}" width="100%" />
+                        </div></div></div>
+                        <div class="headerFMAText">
+                            <div class="headerFMAHelpLogo" >
+                                <apex:image url="{!URLFOR($Resource.CONF_SetupHome,'images/Help_small.png')}" usemap="#Map" />
+                                <map name="Map">
+                                    <area shape="rect" coords="-2,0,27,34" href="javascript:HELP()" alt="Help" title="Help" />
+                                </map>
+                            </div>
+                            <div class="headerFMATextHeading">{!TAG001}</div>
+                            <div class="headerFMATextDesc">{!TAG002}</div>
+                        </div>
+                    </div>
+                </header>
+                <section>
+                    <div class="middleCont">
+                        <div class="leftCont"> 
+                            <div class="GroupCont" style="padding-left: 8px; padding-top: 23px;">
+                                <div id="101" class="buttonNormalStateForGroup"><a id="btnLinkGroup1" class="buttonLinkForGroup"  href="javascript:checkListGroup()"><div class="buttonNormalTextWithIconGroup" id="macstyle">{!TagGroupName1}</div></a></div>
+                                <script>
+                                </script> 
+                            </div> 
+                            <div class="buttonStateContNew">
+                                <div class="top">
+                  
+                               <div id="1" style="display: block" class="buttonNormalState" onmouseover="javascript:checklistDesigner()"><a id="checklistbutton1" class="buttonLink" onclick="javascript:GotoUrl()" ><div class="buttonNormalLogo"><apex:image url="{!URLFOR($Resource.CONF_SetupHome,'images/S_Icon_21.png')}"/></div><div class="buttonNormalTextWithIcon"><div id="outer" class="border"><div id="middle"><div id="inner" class="border">{!TagName1}</div></div></div></div></a></div>
+                               
+
+                               <div id="2" style="display: block" class="buttonNormalState" onmouseover="javascript:QuestionBankManager()"><a id="checklistbutton2" class="buttonLink" onclick="javascript:GotoUrl()" ><div class="buttonNormalLogo"><apex:image url="{!URLFOR($Resource.CONF_SetupHome,'images/S_Icon_103.png')}"/></div><div class="buttonNormalTextWithIcon"><div id="outer" class="border"><div id="middle"><div id="inner" class="border">{!TagName2}</div></div></div></div></a></div>
+
+                               <div id="3" style="display: block" class="buttonNormalState" onmouseover="javascript:Checklist_ImportExport()"><a id="checklistbutton3" class="buttonLink" onclick="javascript:GotoUrlNewWindow()" ><div class="buttonNormalLogo"><apex:image url="{!URLFOR($Resource.CONF_SetupHome,'images/S_Icon_110.png')}"/></div><div class="buttonNormalTextWithIcon"><div id="outer" class="border"><div id="middle"><div id="inner" class="border">{!TagName3}</div></div></div></div></a></div>
+
+                               </div>
+                            </div>
+                            
+                            <div style="padding: 20px 2px 5px 10px; float: left; width: 100%;">{!CONF005_TAG004} {!VersionNo} ({!LicenseType})</div>
+                            <div style="padding: 2px 2px 5px 10px;">{!CONF005_TAG005}</div>
+                            
+                        </div>
+                        <div class="Devider"></div>
+                        <div class="rightCont">
+                            <div class="rightContIcon">
+                                <div class="rightContIconImage" id="icon001"><apex:image id="img" url="{!URLFOR($Resource.CONF_SetupHome,'images/module_icon_big.png')}"/></div>
+                            </div>
+                            <div class="rightContBottom">
+                                <div class="rightContHeader">
+                                    <div class="rightContHeaderText" id="Name001"></div> 
+                                </div>
+                                <div class="rightContDesc">
+                                    <div class="rightContDescText" id="Desc001"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <script type="text/javascript">
+                checkListGroup();
+            </script>
+    </apex:form>    
+</apex:page>

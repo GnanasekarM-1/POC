@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Uptime__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Holds the time difference (business-hours) between the current date and installed product&apos;s created date.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Holds the time difference (business-hours) between the current date and installed product&apos;s created date.</inlineHelpText>
+    <label>Expected Uptime (Mins)</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

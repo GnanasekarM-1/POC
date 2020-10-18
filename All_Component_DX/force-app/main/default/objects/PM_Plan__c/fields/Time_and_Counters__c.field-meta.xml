@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_and_Counters__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates the tie-breaking rule between validity dates and counters for a product.</description>
+    <externalId>false</externalId>
+    <label>Time &amp; Counters</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Which Ever Comes First</fullName>
+                <default>true</default>
+                <label>Which Ever Comes First</label>
+            </value>
+            <value>
+                <fullName>Which Ever Comes Last</fullName>
+                <default>false</default>
+                <label>Which Ever Comes Last</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

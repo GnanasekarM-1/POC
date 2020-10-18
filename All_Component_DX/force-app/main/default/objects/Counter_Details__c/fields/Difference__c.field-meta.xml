@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Difference__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is formula field to calculate absolute difference between the current reading and last reading.</description>
+    <externalId>false</externalId>
+    <formula>IF( NOT(ISNULL(Counter_Reading__c) || ISNULL(Last_Reading__c)), ABS( Last_Reading__c  -  Counter_Reading__c ) , 0 )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This is formula field to calculate absolute difference between the current reading and last reading.</inlineHelpText>
+    <label>Difference</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>6</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

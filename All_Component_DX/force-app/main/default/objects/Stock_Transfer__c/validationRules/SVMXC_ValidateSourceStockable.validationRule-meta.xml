@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateSourceStockable</fullName>
+    <active>true</active>
+    <description>Source location should be a stocking location.</description>
+    <errorConditionFormula>( Source_Location__r.Stocking_Location__c = false)</errorConditionFormula>
+    <errorDisplayField>Source_Location__c</errorDisplayField>
+    <errorMessage>Source location is not a stocking location. Please select stocking locations only.</errorMessage>
+</ValidationRule>

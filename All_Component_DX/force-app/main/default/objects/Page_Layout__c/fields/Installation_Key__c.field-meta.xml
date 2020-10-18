@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Installation_Key__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Installation key used when seeding default page layout</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Installation key used when seeding default page layout</inlineHelpText>
+    <label>Installation Key</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

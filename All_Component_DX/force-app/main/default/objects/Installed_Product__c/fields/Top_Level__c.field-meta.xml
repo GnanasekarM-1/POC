@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Top_Level__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Serial/Lot number of the top-most product in the installed product hierarchy.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Serial/Lot number of the top-most product in the installed product hierarchy.</inlineHelpText>
+    <label>Top-Level</label>
+    <referenceTo>Installed_Product__c</referenceTo>
+    <relationshipName>R00N70000001hzcvEAA</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

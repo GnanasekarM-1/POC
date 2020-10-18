@@ -1,0 +1,3 @@
+<apex:page standardController="Parts_Request__c" sidebar="false" showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Parts_Request__c.Id}" />
+</apex:page>

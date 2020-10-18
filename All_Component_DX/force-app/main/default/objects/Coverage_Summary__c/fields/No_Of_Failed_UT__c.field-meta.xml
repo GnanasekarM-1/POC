@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Of_Failed_UT__c</fullName>
+    <externalId>false</externalId>
+    <label>No Of Failed UT</label>
+    <summaryFilterItems>
+        <field>Coverage_Details__c.Unit_Test_Failed__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Coverage_Details__c.Coverage_Summary__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

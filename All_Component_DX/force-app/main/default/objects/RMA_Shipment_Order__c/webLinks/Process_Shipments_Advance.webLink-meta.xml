@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Process_Shipments_Advance</fullName>
+    <availability>online</availability>
+    <description>Shows screen to process shipments. Performs inventory updates.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Process Shipments - Advanced</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__INVT_SmartEngine?hdrId=&apos;+RMA_Shipment_Order__c.Id+&apos;&amp;SMid=PORD008&apos;)}</url>
+</WebLink>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMX_Job__c</fullName>
+    <deprecated>false</deprecated>
+    <description>ServiceMax job for which statistics is captured. Reference to an existing ServiceMax Job</description>
+    <externalId>false</externalId>
+    <label>ServiceMax Job</label>
+    <referenceTo>SVMX_Jobs__c</referenceTo>
+    <relationshipLabel>ServiceMax Job Stats</relationshipLabel>
+    <relationshipName>ServiceMax_Job_Stats</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

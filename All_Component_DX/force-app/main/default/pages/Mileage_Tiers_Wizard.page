@@ -1,0 +1,3 @@
+<apex:page standardController="Mileage_Tiers__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Mileage_Tiers__c.Id}" />
+</apex:page>

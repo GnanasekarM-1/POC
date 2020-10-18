@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_CORD_Config__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>This field is used to associate the configuration template with the Change Order.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field is used to associate the configuration template with the Change Order.</inlineHelpText>
+    <label>Change Order Configuration</label>
+    <referenceTo>SM_Change_Order_Configuration__c</referenceTo>
+    <relationshipLabel>Change Orders</relationshipLabel>
+    <relationshipName>Change_Orders</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

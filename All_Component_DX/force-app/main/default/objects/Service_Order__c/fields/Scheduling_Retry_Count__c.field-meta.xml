@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheduling_Retry_Count__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates the number of times the work order was sent to the scheduling optimizer for scheduling</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates the number of times the work order was sent to the scheduling optimizer for scheduling</inlineHelpText>
+    <label>Scheduling Retry Count</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

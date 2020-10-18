@@ -1,0 +1,168 @@
+<apex:page controller="WSCH_Provider_ECO_ManageTimeWindows">
+    
+    <style>
+        .disableTab {
+            background-color: Lightgrey;
+            color: LightGrey;
+            background-image: none;
+            font-size: 14px;
+        }    
+    </style>
+    <script type='text/javascript'>
+    
+        function confirmToDelete() {
+            var res = confirm('{!TAG011}');
+            if(res) {
+                deleteTimeWindows();
+            } else {
+                return false;
+            }
+        }
+        
+    </script>
+    
+    <apex:form id="form">
+        <apex:pagemessages />
+        <apex:actionFunction action="{!deleteTimeWindows}" name="deleteTimeWindows"/>
+        <apex:pageBlock id="pageblock1" rendered="{!(!displayEditPage && !isDeleteWindow)}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!TAG001}" action="{!newTimeWindows}" reRender="form"/>
+                <apex:commandButton value="{!TAG002}" action="{!editTimeWindows}" reRender="form"/>
+                <apex:commandButton value="{!TAG003}" action="{!deleteComfirmation}" reRender="form"/>
+                <apex:commandButton value="{!TAG020}" action="{!showReleatedAppointmentTypes}" reRender="form"/>
+                <apex:commandButton value="{!TAG004}" action="{!backToAppointmentTypes}"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel >
+                <apex:pageBlockSection collapsible="false" columns="1">
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;" datastyleClass="disableTab">
+                        <apex:outputText value="{!TAG005}" style="font-weight: bold;font-Size:12px;color:#000000;background:LightGrey;" styleclass="disableTab"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel >
+                            <table width="100%">
+                                <tr align="Left">
+                                    <td>
+                                        <b>
+                                            {!TAG025} :<apex:selectList value="{!sortType}" multiselect="false" size="1">
+                                                <apex:actionSupport event="onchange" action="{!sortList}" reRender="form"/>
+                                                <apex:selectOptions value="{!sortOptions}"/>
+                                            </apex:selectList>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:pageBlockTable value="{!timeWindowList}" var="TW">
+                            
+                            <apex:column headerValue="{!TAG006}" width="5%">
+                                <apex:inputCheckbox value="{!TW.isSelected}"/>
+                            </apex:column>
+                            
+                            <apex:column headerValue="{!TAG007}" width="35%">
+                                <apex:outputText value="{!TW.timeWindow.Name}"/>
+                            </apex:column>
+                            
+                            <apex:column headerValue="{!TAG008}">
+                                <apex:outputText value="{!TW.timeWindow.SM_Window_Start_Time__c}"/>
+                            </apex:column>  
+                            
+                            <apex:column headerValue="{!TAG009}">
+                                <apex:outputText value="{!TW.timeWindow.SM_Window_End_Time__c}"/>
+                            </apex:column>
+                                                  
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pageblock2" rendered="{!(displayEditPage && !isDeleteWindow)}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!TAG012}" action="{!saveTimeWindows}" reRender="form" />
+                <apex:commandButton value="{!TAG013}" action="{!cancel}" reRender="form" immediate="true"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="timeWindowPanel">
+                <apex:variable var="rowIndex" value="{!0}"/>
+                <apex:pageBlockSection collapsible="false" columns="1">
+                    <apex:pageblockTable value="{!timeWindowsToSaveList}" var="TW">
+                        <apex:column headerValue="{!TAG007}">
+                            <apex:inputField value="{!TW.Name}" required="true"/>
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!TAG008}">
+                            <apex:inputField value="{!TW.SM_Window_Start_Time__c}" required="true"/>
+                        </apex:column>  
+                        
+                        <apex:column headerValue="{!TAG009}">
+                            <apex:inputField value="{!TW.SM_Window_End_Time__c}" required="true"/>
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!TAG014}" rendered="{!isNewTimeWindow}">
+                            <apex:commandButton value="{!TAG015}" action="{!removeTimeWindow}" immediate="true" reRender="timeWindowPanel">
+                                <apex:param value="{!rowIndex}" name="rowNumber" assignTo="{!rowNumber}"/>
+                            </apex:commandButton>
+                            <apex:variable var="rowIndex" value="{!rowIndex + 1}"/>
+                            <apex:commandButton value="{!TAG016}" action="{!addTimeWindow}" reRender="timeWindowPanel" rendered="{!if((rowIndex == timeWindowsToSaveListSize),true,false)}" immediate="true"/>
+                        </apex:column>
+                        
+                    </apex:pageblockTable>
+                    <apex:outputPanel >
+                        <apex:commandButton value="{!TAG016}" action="{!addTimeWindow}" rendered="{!if((timeWindowsToSaveListSize == 0),true,false)}" immediate="true"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:pageBlock id="pageblock3" rendered="{!isDeleteWindow}">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!TAG023}" action="{!deleteTimeWindows}"/>
+                <apex:commandButton value="{!TAG013}" action="{!cancel}" reRender="form"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="false" columns="1">
+                <apex:outputPanel >
+                    <apex:pageBlockSectionItem >
+                        <apex:pageBlockTable value="{!timeWindowsToDelete}" var="TW">
+                        
+                            <apex:column headerValue="{!TAG007}">
+                                <apex:outputField value="{!TW.Name}"/>
+                            </apex:column>
+                            
+                            <apex:column headerValue="{!TAG008}">
+                                <apex:outputField value="{!TW.SM_Window_Start_Time__c}"/>
+                            </apex:column>  
+                            
+                            <apex:column headerValue="{!TAG009}">
+                                <apex:outputField value="{!TW.SM_Window_End_Time__c}"/>
+                            </apex:column>
+                        
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="pageblock4" rendered="{!showAppointmentTypes}">
+            <apex:outputPanel >
+                <apex:pageBlockSection collapsible="false" columns="1">
+                    <apex:pageblockSectionItem dataStyle="text-align:center;" datastyleClass="disableTab">
+                        <apex:outputText value="{!TAG019}" style="font-weight: bold;font-Size:12px;color:#000000;background:LightGrey;" styleclass="disableTab"/>
+                    </apex:pageblockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:pageBlockTable value="{!appointmentTypesList}" var="AT">
+                            <apex:column headerValue="{!TAG021}" width="40%">
+                                <apex:outputField value="{!AT.Name}"/>
+                            </apex:column>
+                            
+                            <apex:column headerValue="{!TAG022}">
+                                <apex:outputField value="{!AT.SM_Appointment_Type_Description__c}"/>
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

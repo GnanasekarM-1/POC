@@ -1,0 +1,55 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true,
+            "features": [
+                "API",
+                "DebugApex",
+                "ForceComPlatform",
+                "MaxCustomLabels:15",
+                "MaxApexCodeSize:22"
+            ],
+            "package": "SVMXC 2G CORE",
+            "versionName": "ServiceMax 19.3",
+            "versionNumber": "19.29.1.NEXT",
+            "dependencies": [
+                {
+                    "packageId": "0Ho1E000000XZAHSA4",
+                    "versionNumber": "19.29.1.LATEST"
+                },
+                {
+                    "packageId": "0Ho1E000000XZAMSA4",
+                    "versionNumber": "19.29.1.LATEST"
+                },
+                {
+                    "packageId": "0Ho1E000000XZAWSA4",
+                    "versionNumber": "19.29.1.LATEST"
+                },
+                {
+                    "packageId": "0Ho1E000000XZAgSAO",
+                    "versionNumber": "19.29.1.LATEST"
+                }
+            ]
+        }
+    ],
+      "settings": {
+        "quoteSettings": {
+            "enableQuote": true
+        },
+        "languageSettings": {
+            "enableTranslationWorkbench": true
+        },
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        }
+    },
+    "namespace": "SVMXC",
+    "sfdcLoginUrl": "https://test.salesforce.com",
+    "sourceApiVersion": "46.0",
+    "packageAliases": {
+        "SVMXC 2G CORE": "0Ho1E000000XZARSA4",
+        "SVMXC 2G CORE@19.29.1-1": "04t1E000000trNlQAI",
+        "SVMXC 2G CORE@19.29.1-83": "04t1E000000phGxQAI"
+    }
+}

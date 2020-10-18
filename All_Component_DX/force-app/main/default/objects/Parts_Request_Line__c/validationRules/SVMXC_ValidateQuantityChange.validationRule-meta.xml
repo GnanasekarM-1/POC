@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateQuantityChange</fullName>
+    <active>true</active>
+    <description>Quantity Required cannot be changed.</description>
+    <errorConditionFormula>AND(!ISNEW(),   OR(Quantity_Shipment_Initiated2__c &gt; 0,  Quantity_Shipped2__c &gt; 0), ISCHANGED( Quantity_Required2__c ))</errorConditionFormula>
+    <errorDisplayField>Quantity_Required2__c</errorDisplayField>
+    <errorMessage>Quantity Required cannot be changed once shipment activity has been initiated. Create a new Parts request instead.</errorMessage>
+</ValidationRule>

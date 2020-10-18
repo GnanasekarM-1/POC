@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Process_Shipments_Basic</fullName>
+    <availability>online</availability>
+    <description>Shows a screen to close pending shipments in the order. No inventory updates made</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Process Shipments - Basic</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR($Site.Prefix+&apos;/apex/SVMXC__INVT_SmartEngine?hdrId=&apos;+RMA_Shipment_Order__c.Id+&apos;&amp;SMid=PORD007&apos;)}</url>
+</WebLink>

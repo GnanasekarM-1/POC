@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submodule__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Lookup to ServiceMax Processes: Record Type  &apos;ServiceMax Submodules&apos;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Lookup to ServiceMax Processes: Record Type  &apos;ServiceMax Submodules&apos;</inlineHelpText>
+    <label>Submodule</label>
+    <referenceTo>ServiceMax_Processes__c</referenceTo>
+    <relationshipLabel>ServiceMax Tags</relationshipLabel>
+    <relationshipName>ServiceMax_Tags</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

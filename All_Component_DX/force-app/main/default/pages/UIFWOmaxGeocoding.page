@@ -1,0 +1,131 @@
+<apex:page >
+    <script>
+    var __SVMX_LOAD_VERSION__ = "debug";
+    var __SVMX_CLIENT_LIB_PATH__ = "{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib')}";
+    </script>
+    
+    <script type="text/javascript" src="{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib/src/bootstrap.js')}"></script>
+    <script>
+        jQuery(document).ready(function(){
+        var client_app          = "{!URLFOR($Resource.com_servicemax_client_app, '')}";
+        var client_runtime      = "{!URLFOR($Resource.com_servicemax_client_runtime, '')}";
+        var ui_components       = "{!URLFOR($Resource.com_servicemax_client_ui_components, '')}";
+                
+        var config = {title : "OmaxGeoCoding", version : "1.0.0",
+        modules : [
+            { id : "com.servicemax.client.runtime",      version : "1.0.0" , codebase : client_runtime },
+            { id : "com.servicemax.client.ui.components",version : "1.0.0" , codebase : ui_components },
+            { id : "com.servicemax.client.app",          version : "1.0.0" , codebase : client_app }           
+        ],
+           
+        "app-config" : {
+            "application-id"   : "application",
+            "enable-cache" : true
+        },
+    
+        "platform-config" : {}
+    };
+    
+     // create a console logger
+    new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+        
+    // create the client instance
+    var client = new com.servicemax.client.lib.core.Client();
+    
+    client.addApplicationParameter("onappload-handler", {handler : function(){
+        SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXSection", {
+            width: 500,
+            height: 300,
+            title: "Technician Details",
+            layout: 'form',
+            renderTo: "frm1",
+            bodyPadding: 5,
+            defaultType: 'textfield',
+        
+    items: [{
+       fieldLabel: 'First Name',
+        name: 'first',
+        allowBlank:false
+    },{
+        fieldLabel: 'Last Name',
+        name: 'last'
+    },{
+        fieldLabel: 'Address',
+        name: 'address',
+        xtype: 'textarea'
+    },{
+        fieldLabel: 'City',
+        name: 'city',
+        allowBlank:false
+    },{    
+        fieldLabel: 'State',
+        name: 'state',
+        vtype:'email'
+    },{    
+        xtype: 'button',
+        text : "Validate Address", handler : function(){ 
+            
+                    SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXWindow", {
+            title: "GeoCoding Result",
+            height: 200,
+            width: 400,
+            layout: "fit",
+            items: { 
+            xtype: 'grid',
+            border: false,
+            columns: [{
+                header: "Address"},{header: "City"},{header: "Lattitude"},{header: "Langtitude"}
+            ] 
+            }           
+        }).show();
+             }
+    }]
+});
+    
+        SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXContainer",{
+            title: 'Contact Info',
+            bodyPadding: 10,        
+            width: 400,
+            renderTo: "frm",
+            items: [
+            {
+                xtype: 'textfield',
+                name: 'name',
+                fieldLabel: 'Name',
+                allowBlank: false  // requires a non-empty value
+            },{
+                xtype: 'textfield',
+                name: 'email',
+                fieldLabel: 'Email Address',
+                vtype: 'email'  // requires value to be a valid email address format
+            }]
+            });
+                  
+            SVMX.create("com.servicemax.client.ui.components.controls.impl.SVMXButton", {
+            renderTo: "btn", text : "Validate Address", handler : function(){ 
+            
+                    SVMX.create("com.servicemax.client.ui.components.composites.impl.SVMXWindow", {
+            title: "Hello",
+            height: 200,
+            width: 400,
+            layout: "fit",
+            items: { 
+            xtype: 'grid',
+            border: false,
+            columns: [{
+                header: "Address"},{header: "City"},{header: "Lattitude"},{header: "Langtitude"}
+            ] 
+            }           
+        }).show();
+             }
+        });
+
+    }, context : {}} );
+       
+    client.run({configType : "local", data : config, loadVersion : __SVMX_LOAD_VERSION__ });
+   });
+   </script>
+<div id='frm1'></div>   
+<div id='frm'></div>
+<div id='btn'></div>
+</apex:page>

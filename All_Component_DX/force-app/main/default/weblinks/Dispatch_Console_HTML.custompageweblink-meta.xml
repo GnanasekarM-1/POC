@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPageWebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Dispatch Console HTML</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var urlString = &#39;/apex/SVMXC__DCON_DispatchConsole_DCX?isdtp=mn&#39;;
+try
+{
+var strCommnutniyName = &#39;&#39;;
+strCommnutniyName = &quot;{!$Site.Prefix}&quot;;
+if(strCommnutniyName.length != 0)
+urlString = strCommnutniyName+urlString;
+window.open(urlString, &#39;test&#39;, &#39;resizable=1,status=0,toolbar=0,menubar=0,scrollbars=1&#39;,false);
+}
+catch(err)
+{
+window.open(urlString, &#39;test&#39;, &#39;resizable=1,status=0,toolbar=0,menubar=0,scrollbars=1&#39;,false);
+}</url>
+</CustomPageWebLink>

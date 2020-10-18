@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SVMXC_ValidateLocationsAreSame</fullName>
+    <active>true</active>
+    <description>From and To locations cannot be the same.</description>
+    <errorConditionFormula>(Requested_From__c =  Required_At_Location__c)</errorConditionFormula>
+    <errorDisplayField>Requested_From__c</errorDisplayField>
+    <errorMessage>Requested From location cannot be the same as Required At Location.</errorMessage>
+</ValidationRule>

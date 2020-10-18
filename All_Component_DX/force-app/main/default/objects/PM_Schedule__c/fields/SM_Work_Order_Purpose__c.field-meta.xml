@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Work_Order_Purpose__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Reference to Task Template object.</description>
+    <externalId>false</externalId>
+    <label>Work Order Purpose</label>
+    <referenceTo>Task_Template__c</referenceTo>
+    <relationshipLabel>PM Schedule</relationshipLabel>
+    <relationshipName>PM_Schedule</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

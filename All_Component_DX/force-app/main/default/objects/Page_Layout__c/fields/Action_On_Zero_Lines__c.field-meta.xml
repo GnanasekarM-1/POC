@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_On_Zero_Lines__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Action On Zero Lines</description>
+    <externalId>false</externalId>
+    <label>Action On Zero Lines</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Allow</fullName>
+                <default>false</default>
+                <label>Allow</label>
+            </value>
+            <value>
+                <fullName>Warn</fullName>
+                <default>false</default>
+                <label>Warn</label>
+            </value>
+            <value>
+                <fullName>Disallow</fullName>
+                <default>false</default>
+                <label>Disallow</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Dependency__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Time Dependency</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Finish to Start</fullName>
+                <default>false</default>
+                <label>Finish to Start: Primary work order must finish before secondary work order can start</label>
+            </value>
+            <value>
+                <fullName>Start to Start</fullName>
+                <default>false</default>
+                <label>Start to Start: Primary work order must start before secondary work order can start</label>
+            </value>
+            <value>
+                <fullName>Finish to Finish</fullName>
+                <default>false</default>
+                <label>Finish to Finish: Primary work order must finish before secondary work order can finish</label>
+            </value>
+            <value>
+                <fullName>Start to Finish</fullName>
+                <default>false</default>
+                <label>Start to Finish: Primary work order must start before secondary work order can finish</label>
+            </value>
+            <value>
+                <fullName>Start in Unison</fullName>
+                <default>false</default>
+                <label>Start in Unison: Both work orders must start simultaneously</label>
+            </value>
+            <value>
+                <fullName>Finish in Unison</fullName>
+                <default>false</default>
+                <label>Finish in Unison: Both work orders must finish simultaneously</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

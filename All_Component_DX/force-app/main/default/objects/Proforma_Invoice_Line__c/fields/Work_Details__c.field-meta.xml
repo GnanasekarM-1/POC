@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Work_Details__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Work Detail corresponding to this Line entry. This is a lookup to an existing Work detail record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Work Detail corresponding to this Line entry. This is a lookup to an existing Work detail record.</inlineHelpText>
+    <label>Work Details</label>
+    <referenceTo>Service_Order_Line__c</referenceTo>
+    <relationshipLabel>Proforma Invoice Lines</relationshipLabel>
+    <relationshipName>Proforma_Invoice_Lines</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

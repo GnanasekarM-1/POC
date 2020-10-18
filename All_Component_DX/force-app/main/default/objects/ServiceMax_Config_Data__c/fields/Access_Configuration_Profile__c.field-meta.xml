@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Access_Configuration_Profile__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Lookup to &apos;ServiceMax Configuration Data&apos; object. Record Type &apos;Configuration Profile&apos;. Used in Configuration Access.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select the configuration profile for the configuration access</inlineHelpText>
+    <label>Access Configuration Profile</label>
+    <referenceTo>ServiceMax_Config_Data__c</referenceTo>
+    <relationshipLabel>ServiceMax Configuration Access</relationshipLabel>
+    <relationshipName>SVMX_Config_Data2</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

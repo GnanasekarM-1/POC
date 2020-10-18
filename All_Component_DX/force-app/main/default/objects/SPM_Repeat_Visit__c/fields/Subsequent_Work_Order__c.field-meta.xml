@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subsequent_Work_Order__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Holds the Subsequent Work Order Reference</description>
+    <externalId>false</externalId>
+    <label>Followup Work Order</label>
+    <referenceTo>Service_Order__c</referenceTo>
+    <relationshipLabel>SPM - Repeat Visits (Subsequent Work Order)</relationshipLabel>
+    <relationshipName>SPM_Repeat_Visit</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

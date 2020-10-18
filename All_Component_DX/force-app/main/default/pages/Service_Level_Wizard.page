@@ -1,0 +1,3 @@
+<apex:page standardController="Service_Level__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Service_Level__c.Id}" />
+</apex:page>

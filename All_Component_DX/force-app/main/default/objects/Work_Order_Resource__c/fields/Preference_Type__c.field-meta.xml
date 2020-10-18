@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preference_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Resource Preference Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Preferred</fullName>
+                <default>true</default>
+                <label>Preferred</label>
+            </value>
+            <value>
+                <fullName>Mandatory</fullName>
+                <default>false</default>
+                <label>Mandatory</label>
+            </value>
+            <value>
+                <fullName>Prohibited</fullName>
+                <default>false</default>
+                <label>Prohibited</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

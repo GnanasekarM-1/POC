@@ -1,0 +1,3 @@
+<apex:page standardController="SM_Default_Checklist_Response__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!SM_Default_Checklist_Response__c.Id}" />
+</apex:page>

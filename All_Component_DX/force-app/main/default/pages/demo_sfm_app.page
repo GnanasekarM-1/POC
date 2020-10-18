@@ -1,0 +1,218 @@
+<apex:page sidebar="true" showHeader="true" standardStylesheets="false" controller="SFMDeliveryController">
+    <script>
+    // TODO: Read from settings
+    var __SVMX_LOAD_VERSION__ = "micro";
+    </script>
+    
+    <script type="text/javascript" src="{!URLFOR($Resource.com_servicemax_client_lib, 'com.servicemax.client.lib/src/bootstrap.js')}"></script>
+    <script>
+    var model = new Object();
+    model.tab = new Object();
+    var myGrid = new Object();
+        jQuery(document).ready(function(){
+        var client_sal          = "{!URLFOR($Resource.com_servicemax_client_sal, '')}";
+        var client_app          = "{!URLFOR($Resource.com_servicemax_client_app, '')}";
+        var client_runtime          = "{!URLFOR($Resource.com_servicemax_client_runtime, '')}";
+        var ui_components       = "{!URLFOR($Resource.com_servicemax_client_ui_components, '')}";
+                
+        var config = {title : "SFM Search", version : "1.0.0",
+        modules : [
+            { id : "com.servicemax.client.sal",          version : "1.0.0" , codebase : client_sal },
+            { id : "com.servicemax.client.runtime",      version : "1.0.0" , codebase : client_runtime },
+            { id : "com.servicemax.client.ui.components",version : "1.0.0" , codebase : ui_components },
+            { id : "com.servicemax.client.app",          version : "1.0.0" , codebase : client_app }           
+        ],
+           
+        "app-config" : {
+            "application-id"   : "application",
+            "svmx-api-version" : "9.0",
+            "sal-service-runtime-mode" : "VISUAL_FORCE",
+            "enable-cache" : true
+        },
+    
+        "platform-config" : {
+        }
+    };
+    
+     // create a console logger
+    new com.servicemax.client.lib.services.BrowserConsoleLogTarget();
+        
+    // create the client instance
+    var client = new com.servicemax.client.lib.core.Client();
+    
+    // set up the session id
+    client.addApplicationParameter("session-id", "{!GETSESSIONID()}");
+    client.addApplicationParameter("onappload-handler", {handler : function(){
+           document.getElementById("{!$Component.frm}").style.display="block";
+    
+    
+    
+    function createStore(storeId, fields, data)
+    {
+        Ext.create('Ext.data.Store', {
+            storeId:storeId,
+            fields:fields,
+            data:{'items':data},
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json',
+                    root: 'items'
+                }
+            }
+        });
+    }
+    
+    function buildTabItems(searchDetails)
+    {
+        var response = new Array();
+        for(var i = 0; i < searchDetails.length; i++){
+            var searchDef = searchDetails[i].objectDetails;
+            var item = new Object();
+            item.title = searchDef.SVMXC__Name__c;
+            item.html = '<div id="tab' + i + '"></div>';
+            model.tab['tab'+i] = searchDetails[i].fieldsLable;
+            response.push(item);
+        }
+        return response;
+    }
+    
+    function getSearchConfig(response, event)
+    {
+        debugger;
+        var result = JSON.parse(response, function (key, value) {
+            var type;
+            if (value && typeof value === 'object') {
+                type = value.type;
+                if (typeof type === 'string' && typeof window[type] === 'function') {
+                    return new (window[type])(value);
+                }
+            }
+            return value;
+        });
+        
+        
+        var tabPannel = Ext.create('Ext.tab.Panel', {
+            width: '100%',
+            height: 600,
+            activeTab: 0,
+            items: buildTabItems(result.lstSearchInfo[0].searchDetails)
+        });
+        
+        var searchAccordion = Ext.create('Ext.panel.Panel', {
+            title: 'Accordion Layout',
+            width: 300,
+            height: 300,
+            defaults: {
+                // applied to each contained panel
+                bodyStyle: 'padding:15px'
+            },
+            layout: {
+                // layout-specific configs go here
+                type: 'accordion',
+                titleCollapse: false,
+                animate: true,
+                activeOnTop: true
+            },
+            items: [{
+                title: 'Panel 1',
+                html: 'Panel content!'
+            },{
+                title: 'Panel 2',
+                html: 'Panel content!'
+            },{
+                title: 'Panel 3',
+                html: 'Panel content!'
+            }],
+            renderTo : Ext.getBody()
+        });
+        
+        var sampleText = SVMX.create('com.servicemax.client.ui.components.composites.impl.SVMXSection', {                
+                 bodyPadding: 10,title: 'SFM Search', height : '800px', collapsible : false,
+                 items:  [
+                 {
+                     xtype: 'toolbar',height: 50, width: '100%',
+                     items: [{xtype: 'textfield', width: '50%', id :'sername',labelAlign: 'right',fieldLabel: 'Keyword '},
+                             { xtype: 'button',text: 'Go', width : 80, id:'searchbtn',handler : function(){ javascript:performSearch();}}]
+                },
+                tabPannel]
+                ,renderTo : 'searchComp'});
+                
+        createStore('simpsonsStore', [], []);
+        
+        for(tabId in model.tab){
+            var columns = new Array();
+            for(fieldId in model.tab[tabId]){
+                columns.push(new createColumn(model.tab[tabId][fieldId]));
+            }
+                
+            myGrid[tabId] = Ext.create('Ext.grid.Panel', {
+                title: 'Search Result',
+                store: Ext.data.StoreManager.lookup('simpsonsStore'),
+                columns: columns,
+                height: 400, width: '100%',renderTo : tabId
+            });
+        }
+    }
+    
+    function createColumn(fieldsLable)
+    {
+        this.text = fieldsLable.value;
+        this.dataIndex = fieldsLable.key;
+    }
+    
+    //Get search configurations
+    Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrSFM_GetSearchInfo_WS}', '{}', 
+        function(result, event){ getSearchConfig(result, event); }, {escape: false}
+        );
+    
+    function performSearch()
+    {
+        var keyWord = Ext.getCmp('sername').value;
+        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SFMDeliveryController.JsrSFM_GetSearchResult_WS}', '{"eventType":null,"eventName":null,"valueMap":[{"value":"a0K70000008r38TEAQ","key":"SearchProcessId"},{"value":"'+ keyWord +'","key":"KeyWord"},{"value":"a0K70000008r38UEAQ","key":"ObjectId"},{"value":"10","key":"RecordLimit"},{"value":"Contains","key":"SEARCH_OPERATOR"}],"aplOrder":null}', 
+        function(result, event){ processResult(result, event); }, {escape: false}
+        );
+    }
+    
+    function processResult(response, event)
+    {
+        var result = JSON.parse(response, function (key, value) {
+                    var type;
+                    if (value && typeof value === 'object') {
+                        type = value.type;
+                        if (typeof type === 'string' && typeof window[type] === 'function') {
+                            return new (window[type])(value);
+                        }
+                    }
+                    return value;
+                });
+        var data = new Array();
+        for(var i = 0; i < result.MapStringMap.length; i++){
+            var eachRow = result.MapStringMap[i].valueMap;
+            var record = new Object();
+            for(var j = 0; j < eachRow.length; j++){
+                record[eachRow[j].key] = eachRow[j].value;
+            }
+            record['CaseNumber'] = '<a target="_blank" href="../' + result.MapStringMap[i].id + '">' + record['CaseNumber'] + '</a>';
+            data.push(record);
+        }
+        createStore('simpsonsStore2', ['CaseNumber', 'SVMXC__Component__c', 'SVMXC__Product__c'], data);
+        
+        this.myGrid['tab0'].reconfigure(Ext.data.StoreManager.lookup('simpsonsStore2'));
+    }
+    }, context : {}} );
+       
+    client.run({configType : "local", data : config, loadVersion : __SVMX_LOAD_VERSION__ });
+    
+   });
+   
+   </script>
+   
+   <apex:form id="frm"  style="display:none">
+   <div id="searchComp"> </div>        
+   <script>
+   
+    </script>
+     
+  </apex:form>
+</apex:page>

@@ -1,0 +1,14 @@
+<apex:page standardController="Case">
+<A HREF="#" onClick="testIsInConsole();return false">
+Click here to check if the page is in the Service Cloud console</A>
+<apex:includeScript value="/support/console/22.0/integration.js"/>
+<script type="text/javascript">
+function testIsInConsole() {
+if (sforce.console.isInConsole()) {
+alert("in console");
+} else {
+alert("not in console");
+}
+}
+</script>
+</apex:page>

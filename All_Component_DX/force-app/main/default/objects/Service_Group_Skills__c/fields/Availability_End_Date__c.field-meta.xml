@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Availability_End_Date__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Date up to which this skill is available in this group</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date up to which this skill is available in this group</inlineHelpText>
+    <label>Availability End Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

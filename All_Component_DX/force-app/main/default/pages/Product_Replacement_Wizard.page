@@ -1,0 +1,3 @@
+<apex:page standardController="Product_Replacement__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
+   <c:SFM_Wizard recordId="{!Product_Replacement__c.Id}" />
+</apex:page>

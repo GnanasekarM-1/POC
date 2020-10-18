@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Contract_Start_End_Date</fullName>
+    <active>true</active>
+    <description>Service contract should have valid start and end dates</description>
+    <errorConditionFormula>End_Date__c  &lt;  Start_Date__c</errorConditionFormula>
+    <errorDisplayField>End_Date__c</errorDisplayField>
+    <errorMessage>End date should be greater or equal to Start date.</errorMessage>
+</ValidationRule>

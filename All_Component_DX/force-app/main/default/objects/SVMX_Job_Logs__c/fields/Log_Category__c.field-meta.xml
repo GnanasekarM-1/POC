@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_Category__c</fullName>
+    <deprecated>false</deprecated>
+    <description>For sync time log records, it indicates the type of sync operation initiated by the mobile user (INITIAL SYNC, INCREMENTAL DATA SYNC, CONFIG SYNC, SFM SEARCH). For logs pushed by client app, it is the log category (Application Level/Performance Level).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For sync time log records, it indicates the type of sync operation initiated by the mobile user (INITIAL SYNC, INCREMENTAL DATA SYNC, CONFIG SYNC, SFM SEARCH). For logs pushed by client app, it is the log category (Application Level/Performance Level).</inlineHelpText>
+    <label>Log Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Application Level</fullName>
+                <default>false</default>
+                <label>Application Level</label>
+            </value>
+            <value>
+                <fullName>Performance Level</fullName>
+                <default>false</default>
+                <label>Performance Level</label>
+            </value>
+            <value>
+                <fullName>GET PRICE SYNC</fullName>
+                <default>false</default>
+                <label>GET PRICE SYNC</label>
+            </value>
+            <value>
+                <fullName>CONFIG SYNC</fullName>
+                <default>false</default>
+                <label>CONFIG SYNC</label>
+            </value>
+            <value>
+                <fullName>INITIAL SYNC</fullName>
+                <default>false</default>
+                <label>INITIAL SYNC</label>
+            </value>
+            <value>
+                <fullName>INCREMENTAL DATA SYNC</fullName>
+                <default>false</default>
+                <label>INCREMENTAL DATA SYNC</label>
+            </value>
+            <value>
+                <fullName>SFM SEARCH</fullName>
+                <default>false</default>
+                <label>SFM SEARCH</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

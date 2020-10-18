@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Change_Order__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This field is used to associate the Change Order Criteria with Change Order.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field is used to associate the Change Order Criteria with Change Order.</inlineHelpText>
+    <label>Change Order</label>
+    <referenceTo>SM_Change_Order__c</referenceTo>
+    <relationshipLabel>Change Order Criterias</relationshipLabel>
+    <relationshipName>Change_Order_Criterias</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Installed_Product_Id__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Reference to installed product id/name</description>
+    <externalId>false</externalId>
+    <label>Installed Product Id</label>
+    <referenceTo>Installed_Product__c</referenceTo>
+    <relationshipLabel>IB Attributes Template Instances</relationshipLabel>
+    <relationshipName>IB_Attributes_Template_Instance</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Location__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Name of the internal/customer site from which the products are shipped. Is a lookup to an existing site record in ServiceMax</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Name of the internal/customer site from which the products are shipped. Is a lookup to an existing site record in ServiceMax. Choose an existing site OR enter address details.</inlineHelpText>
+    <label>From Location</label>
+    <referenceTo>Site__c</referenceTo>
+    <relationshipLabel>Parts Orders (Source Location)</relationshipLabel>
+    <relationshipName>RMA_Shipment_Order_From</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

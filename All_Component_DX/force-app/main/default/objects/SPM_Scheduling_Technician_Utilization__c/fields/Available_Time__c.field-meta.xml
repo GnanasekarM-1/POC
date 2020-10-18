@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Available_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Holds the available time of the technician.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Holds the available time of the technician.</inlineHelpText>
+    <label>Available Time</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

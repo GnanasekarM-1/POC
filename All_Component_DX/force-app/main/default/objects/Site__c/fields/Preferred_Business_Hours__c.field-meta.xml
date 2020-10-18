@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preferred_Business_Hours__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The work order location is open or accessible for service technician during these hours of the week</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The work order location is open or accessible for service technician during these hours of the week</inlineHelpText>
+    <label>Access Hours</label>
+    <referenceTo>BusinessHours</referenceTo>
+    <relationshipLabel>Locations</relationshipLabel>
+    <relationshipName>Locations</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

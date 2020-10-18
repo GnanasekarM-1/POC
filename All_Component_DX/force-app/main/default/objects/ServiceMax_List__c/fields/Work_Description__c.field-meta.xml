@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Work_Description__c</fullName>
+    <deprecated>false</deprecated>
+    <description>An assessment of work to be performed or additional details about the line type.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>An assessment of work to be performed or additional details about the line type.</inlineHelpText>
+    <label>Work Description</label>
+    <length>32000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>
