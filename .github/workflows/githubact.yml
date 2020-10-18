@@ -10,4 +10,8 @@ jobs:
     steps:
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pwd
+        run: |
+          git clone https://github.com/Gnanasekar-m/POC.git   
+          pwd
+          ls -la
+          
