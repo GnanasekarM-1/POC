@@ -1,0 +1,4 @@
+- name: PMD Automatic reviewer
+  # You may pin to the exact commit or the version.
+  # uses: krukmat/setup-pmd@5a8c7655ddd578cc8e3fac2a859011bde47556f3
+  uses: krukmat/setup-pmd@v0.4
