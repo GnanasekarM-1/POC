@@ -22,7 +22,7 @@ jobs:
               
       - name: Run test in Devhub
         run: |
-            sfdx force:apex:test:run -l RunLocalTests -c -r human -w 10
+            sfdx force:apex:test:run -n TemperatureConverterTest -c -r human -w 10
             
       - name: Scratch Org create
         run: |
