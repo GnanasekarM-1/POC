@@ -14,6 +14,9 @@ jobs:
         with:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: 'Convert Metadata'
-        run: sfdx force:source:convert --rootdir=force-app --outputdir=convert
+        run: |
+            git clone https://github.com/Gnanasekar-m/POC.git 
+            cd POC
+            sfdx force:source:convert --rootdir=force-app --outputdir=convert
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --deploydir=convert -w 30
