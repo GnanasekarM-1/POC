@@ -15,7 +15,6 @@ jobs:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: 'AUTH_SECRET'
         run: |
-            git clone https://github.com/Gnanasekar-m/POC.git
-            ls -la
-            cd POC && sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
+              ls -la
+              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
       
