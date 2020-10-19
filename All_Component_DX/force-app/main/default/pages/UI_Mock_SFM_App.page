@@ -1,6 +1,0 @@
-<apex:page >
-
-
-<iframe id='container' style='width:100%;height:550px;border:0;background:#90A7C4' src='https://svmxc.na5.visual.force.com/apex/UI_Comps_TestSuite?application-id=mock-sfm-app&theme=RED'></iframe>
-
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page standardController="Activity_Master__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Activity_Master__c.Id}" />
-</apex:page>

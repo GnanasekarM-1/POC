@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SVMXC_ValidateAdjustmentQuantityChange</fullName>
-    <active>true</active>
-    <description>Adjustment quantity cannot be changed.</description>
-    <errorConditionFormula>AND(!ISNEW(),  ISCHANGED(New_Quantity2__c))</errorConditionFormula>
-    <errorDisplayField>New_Quantity2__c</errorDisplayField>
-    <errorMessage>Once saved, adjustment quantity cannot be modified.</errorMessage>
-</ValidationRule>

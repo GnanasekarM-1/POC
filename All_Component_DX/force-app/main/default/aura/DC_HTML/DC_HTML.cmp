@@ -1,7 +1,0 @@
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
-<lightning:card title="Dispatch Console HTML">
-<aura:set attribute="actions">
-<lightning:button variant="brand-outline" label="Launch" title="Launch" onclick="{! c.handleClick }"/>
-</aura:set>
-</lightning:card>
-</aura:component>

@@ -1,3 +1,0 @@
-<apex:page standardController="Work_Order_Resource__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Work_Order_Resource__c.Id}" />
-</apex:page>

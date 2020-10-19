@@ -1,3 +1,0 @@
-<apex:page standardController="Route_Stop__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Route_Stop__c.Id}" />
-</apex:page>

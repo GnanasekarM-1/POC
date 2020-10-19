@@ -1,9 +1,0 @@
-<aura:component controller="SFM_Delivery_LightningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
-	<aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
-    <aura:attribute name="SVMXC__SVMX_recordId" type="String"/>
-    <aura:attribute name="SVMXC__SVMX_action" type="String"/>
-    <aura:attribute name="SVMXC__SVMX_processId" type="String"/>
-    <aura:attribute name="SVMXC__SVMX_retURL" type="String"/>
-    <aura:attribute name="SVMXC__SVMX_JWTEnabled" type="Boolean"/>
-    <lightning:container aura:id="SFMDeliveryApp" src="{!$Resource.com_servicemax_client_sfmdelivery_lightning_resource  + '/index.html?SVMX_recordId='+v.SVMXC__SVMX_recordId + '&amp;' +'SVMX_action='+v.SVMXC__SVMX_action+ '&amp;'+ 'SVMX_processId='+v.SVMXC__SVMX_processId+ '&amp;'+ 'SVMX_retURL='+v.SVMXC__SVMX_retURL+ '&amp;'+ 'SVMX_namespace=SVMXC&amp;SVMX_JWTEnabled=' +v.SVMXC__SVMX_JWTEnabled}" onmessage="{!c.handleMessage}"/>
-</aura:component>

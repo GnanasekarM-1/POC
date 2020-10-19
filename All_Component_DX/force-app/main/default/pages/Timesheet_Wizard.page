@@ -1,3 +1,0 @@
-<apex:page standardController="Timesheet__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Timesheet__c.Id}" />
-</apex:page>

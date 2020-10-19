@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SVMX_Product_Validation</fullName>
-    <active>true</active>
-    <description>Product Validation</description>
-    <errorConditionFormula>IF(LEN(Product__r.Id) &gt; 0, IF(OR(LEN(TEXT(Product_Line__c)) &gt; 0, LEN(TEXT(Product_Family__c)) &gt; 0), TRUE, FALSE), IF(LEN(TEXT(Product_Line__c)) &gt; 0, IF(LEN(TEXT(Product_Family__c)) &gt; 0, TRUE, FALSE), IF(LEN(TEXT(Product_Family__c)) &gt; 0, FALSE, TRUE)))</errorConditionFormula>
-    <errorMessage>Discount must be applied on only one of Product, Product Family, or Product Line.</errorMessage>
-</ValidationRule>

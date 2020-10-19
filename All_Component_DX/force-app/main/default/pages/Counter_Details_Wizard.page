@@ -1,3 +1,0 @@
-<apex:page standardController="Counter_Details__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Counter_Details__c.Id}" />
-</apex:page>

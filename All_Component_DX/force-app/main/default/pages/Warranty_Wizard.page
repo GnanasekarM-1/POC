@@ -1,3 +1,0 @@
-<apex:page standardController="Warranty__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Warranty__c.Id}" />
-</apex:page>

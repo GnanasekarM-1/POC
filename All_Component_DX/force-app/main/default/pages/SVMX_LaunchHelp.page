@@ -1,3 +1,0 @@
-<apex:page controller="SVMX_LaunchHelp" action="{!GetHelpURL}" showHeader="false" applyHtmlTag="false">
-     
-</apex:page>

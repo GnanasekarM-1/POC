@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SVMX_Activity_Or_ActivityProduct</fullName>
-    <active>true</active>
-    <errorConditionFormula>IF(LEN(Activity__r.Id) &gt; 0, IF(LEN(Activity_Product__r.Id) &gt; 0, TRUE, FALSE), IF(LEN(Activity_Product__r.Id) &gt; 0, FALSE, TRUE))</errorConditionFormula>
-    <errorMessage>Price must be set for either Activity or Activity Product, but not both.</errorMessage>
-</ValidationRule>

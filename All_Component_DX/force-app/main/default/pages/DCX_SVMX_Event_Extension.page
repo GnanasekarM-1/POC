@@ -1,3 +1,0 @@
-<apex:page standardController="SVMX_Event__c" extensions="DCX_SVMX_Event_Extension">
-
-</apex:page>

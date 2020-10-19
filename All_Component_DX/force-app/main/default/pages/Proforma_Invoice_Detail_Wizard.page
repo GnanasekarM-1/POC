@@ -1,3 +1,0 @@
-<apex:page standardController="Proforma_Invoice_Detail__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Proforma_Invoice_Detail__c.Id}" />
-</apex:page>

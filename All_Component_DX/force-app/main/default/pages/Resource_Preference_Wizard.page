@@ -1,3 +1,0 @@
-<apex:page standardController="Resource_Preference__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Resource_Preference__c.Id}" />
-</apex:page>

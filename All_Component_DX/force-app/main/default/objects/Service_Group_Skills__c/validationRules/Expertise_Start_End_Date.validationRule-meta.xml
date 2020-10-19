@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Expertise_Start_End_Date</fullName>
-    <active>true</active>
-    <description>Expertise should have valid start and end dates</description>
-    <errorConditionFormula>Availability_End_Date__c &lt;  Availability_Start_Date__c</errorConditionFormula>
-    <errorMessage>End date should be greater than or equal to Start date.</errorMessage>
-</ValidationRule>

@@ -1,3 +1,0 @@
-<apex:page standardController="Account" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Account.Id}" />
-</apex:page>

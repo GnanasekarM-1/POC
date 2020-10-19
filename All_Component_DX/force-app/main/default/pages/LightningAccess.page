@@ -1,3 +1,0 @@
-<apex:page >
-    SVMX_SessionId_Start{!$Api.Session_ID}SVMX_SessionId_End
-</apex:page>

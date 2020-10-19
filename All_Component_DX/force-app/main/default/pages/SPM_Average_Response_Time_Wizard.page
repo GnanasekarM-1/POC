@@ -1,3 +1,0 @@
-<apex:page standardController="SPM_Average_Response_Time__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!SPM_Average_Response_Time__c.Id}" />
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page standardController="Site__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Site__c.Id}" />
-</apex:page>

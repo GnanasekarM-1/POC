@@ -1,3 +1,0 @@
-<apex:page standardController="PM_Offering__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!PM_Offering__c.Id}" />
-</apex:page>

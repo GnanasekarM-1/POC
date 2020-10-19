@@ -1,3 +1,0 @@
-<apex:page standardController="Territory__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Territory__c.Id}" />
-</apex:page>

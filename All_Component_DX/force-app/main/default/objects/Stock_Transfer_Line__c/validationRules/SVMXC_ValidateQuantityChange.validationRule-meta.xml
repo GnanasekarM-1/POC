@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SVMXC_ValidateQuantityChange</fullName>
-    <active>true</active>
-    <description>Transfer quantity cannot be changed for existing records.</description>
-    <errorConditionFormula>AND (!ISNEW(),  ISCHANGED( Quantity_Transferred2__c))</errorConditionFormula>
-    <errorDisplayField>Quantity_Transferred2__c</errorDisplayField>
-    <errorMessage>Once entered, transfer quantity cannot be changed.</errorMessage>
-</ValidationRule>

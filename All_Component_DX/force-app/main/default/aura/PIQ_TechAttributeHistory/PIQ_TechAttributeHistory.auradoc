@@ -1,6 +1,0 @@
-<aura:documentation>
-	<aura:description>Documentation</aura:description>
-	<aura:example name="IBTechAttributeHistory" ref="History Component to display IB technical attributes" label="Label">
-		IB Tech Attribute History
-	</aura:example>
-</aura:documentation>

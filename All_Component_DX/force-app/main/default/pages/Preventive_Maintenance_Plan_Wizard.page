@@ -1,3 +1,0 @@
-<apex:page standardController="PM_Plan__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!PM_Plan__c.Id}" />
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page standardController="Code_Snippet__c" sidebar="false">
-   <c:SFM_Wizard recordId="{!Code_Snippet__c.Id}" />
-</apex:page>

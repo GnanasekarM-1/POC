@@ -1,3 +1,0 @@
-<apex:page standardController="Required_Part__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Required_Part__c.Id}" />
-</apex:page>

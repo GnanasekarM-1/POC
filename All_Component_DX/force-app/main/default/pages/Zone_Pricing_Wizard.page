@@ -1,3 +1,0 @@
-<apex:page standardController="Zone_Pricing__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Zone_Pricing__c.Id}" />
-</apex:page>

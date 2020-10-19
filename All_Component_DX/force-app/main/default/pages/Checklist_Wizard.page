@@ -1,3 +1,0 @@
-<apex:page standardController="Checklist__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Checklist__c.Id}" />
-</apex:page>

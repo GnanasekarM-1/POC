@@ -1,3 +1,0 @@
-<apex:page standardController="Quote__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Quote__c.Id}" />
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page controller="CONF_ManageIntegration">
-  <h1>Configuration page for integration</h1>
-</apex:page>

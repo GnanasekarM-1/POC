@@ -1,3 +1,0 @@
-<apex:page standardController="SPM_Down_Time_Detail__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!SPM_Down_Time_Detail__c.Id}" />
-</apex:page>

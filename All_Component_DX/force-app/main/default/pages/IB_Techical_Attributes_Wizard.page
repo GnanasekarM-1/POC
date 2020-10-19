@@ -1,3 +1,0 @@
-<apex:page standardController="SM_IB_Technical_Attributes__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!SM_IB_Technical_Attributes__c.Id}" />
-</apex:page>

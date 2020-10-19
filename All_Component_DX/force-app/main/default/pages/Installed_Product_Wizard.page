@@ -1,3 +1,0 @@
-<apex:page standardController="Installed_Product__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Installed_Product__c.Id}" />
-</apex:page>

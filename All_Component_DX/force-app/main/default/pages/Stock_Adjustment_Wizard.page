@@ -1,3 +1,0 @@
-<apex:page standardController="Stock_Adjustment__c" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Stock_Adjustment__c.Id}" />
-</apex:page>

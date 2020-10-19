@@ -1,3 +1,0 @@
-<apex:page standardController="Case" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Case.Id}" />
-</apex:page>

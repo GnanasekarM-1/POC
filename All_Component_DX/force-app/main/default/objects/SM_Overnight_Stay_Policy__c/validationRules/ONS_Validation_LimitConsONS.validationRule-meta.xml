@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ONS_Validation_LimitConsONS</fullName>
-    <active>true</active>
-    <description>Maximum consecutive ONS per week should be greater than or equal to 0 and less than or equals to the total ONS per week.</description>
-    <errorConditionFormula>OR(SM_Consecutive_ONS_Per_Week__c &lt; 0, SM_Consecutive_ONS_Per_Week__c &gt; SM_Total_ONS_Per_Week__c)</errorConditionFormula>
-    <errorMessage>Maximum consecutive overnight stays per week should be between 0 and total overnight stays per week.</errorMessage>
-</ValidationRule>

@@ -1,3 +1,0 @@
-<apex:page standardController="Labor_Pricing__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Labor_Pricing__c.Id}" />
-</apex:page>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SVMXC_ValidateRequiredAtStockable</fullName>
-    <active>true</active>
-    <description>Required At should be a stockable location</description>
-    <errorConditionFormula>( Required_At_Location__r.Stocking_Location__c = FALSE)</errorConditionFormula>
-    <errorDisplayField>Required_At_Location__c</errorDisplayField>
-    <errorMessage>Required At is not a stockable location. Please select a stockable location.</errorMessage>
-</ValidationRule>

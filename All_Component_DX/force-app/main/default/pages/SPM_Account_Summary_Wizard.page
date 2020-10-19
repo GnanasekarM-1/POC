@@ -1,3 +1,0 @@
-<apex:page standardController="SPM_Account_Summary__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!SPM_Account_Summary__c.Id}" />
-</apex:page>

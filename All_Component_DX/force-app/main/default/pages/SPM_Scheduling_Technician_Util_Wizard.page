@@ -1,3 +1,0 @@
-<apex:page standardController="SPM_Scheduling_Technician_Utilization__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!SPM_Scheduling_Technician_Utilization__c.Id}" />
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page standardController="Entitlement_History__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Entitlement_History__c.Id}" />
-</apex:page>

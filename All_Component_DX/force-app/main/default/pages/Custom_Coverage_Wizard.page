@@ -1,3 +1,0 @@
-<apex:page standardController="Custom_Coverage__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Custom_Coverage__c.Id}" />
-</apex:page>

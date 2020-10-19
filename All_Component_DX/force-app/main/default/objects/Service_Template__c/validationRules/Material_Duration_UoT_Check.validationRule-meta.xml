@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Material_Duration_UoT_Check</fullName>
-    <active>true</active>
-    <description>If Material coverage % is specified, duration and unit of time should be specified too.</description>
-    <errorConditionFormula>AND(NOT ISNULL(Material_Covered__c), OR( ISNULL( Duration_of_Material_Coverage__c ), ISPICKVAL( Unit_of_Time_Material__c, &quot;&quot;)))</errorConditionFormula>
-    <errorDisplayField>Unit_of_Time_Material__c</errorDisplayField>
-    <errorMessage>Please specify the duration and unit of time of Material coverage.</errorMessage>
-</ValidationRule>

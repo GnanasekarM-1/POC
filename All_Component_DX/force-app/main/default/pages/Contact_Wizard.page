@@ -1,3 +1,0 @@
-<apex:page standardController="Contact" sidebar="false" showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Contact.Id}" />
-</apex:page>

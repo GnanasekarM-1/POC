@@ -1,1 +1,0 @@
-<apex:page standardController="SM_Overnight_Stay_Policy__c" extensions="COMM_Controller" tabStyle="Activity_Master__c" showheader="true" action="{!CreateOvernightStayPolicy}" />

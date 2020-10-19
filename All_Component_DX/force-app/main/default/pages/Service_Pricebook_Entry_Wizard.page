@@ -1,3 +1,0 @@
-<apex:page standardController="Service_Pricebook_Entry__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!Service_Pricebook_Entry__c.Id}" />
-</apex:page>

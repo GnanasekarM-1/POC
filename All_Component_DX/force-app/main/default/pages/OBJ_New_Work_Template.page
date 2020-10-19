@@ -1,1 +1,0 @@
-<apex:page standardController="Task_Template__c" extensions="COMM_Controller" tabStyle="Task_Template__c" showheader="true" action="{!CreateWorkTemplate}" />

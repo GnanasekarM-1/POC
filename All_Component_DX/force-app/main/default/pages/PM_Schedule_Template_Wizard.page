@@ -1,3 +1,0 @@
-<apex:page standardController="PM_Schedule_Template__c" sidebar="false"  showHeader="false" applyHtmlTag="false">
-   <c:SFM_Wizard recordId="{!PM_Schedule_Template__c.Id}" />
-</apex:page>
