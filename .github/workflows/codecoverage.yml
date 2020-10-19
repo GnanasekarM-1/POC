@@ -17,5 +17,5 @@ jobs:
         run: 
             git clone https://github.com/Gnanasekar-m/POC.git
             ls -la
-            cd POC && sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUBSEKAR
+            cd POC && sfdx force:auth:sfdxurl:store -f ./authurl -s
       
