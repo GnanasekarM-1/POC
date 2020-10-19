@@ -22,7 +22,8 @@ jobs:
           
       - name: Scratch Org create
         run: |
-             cd All_Component_DX && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 30
+             sfdx force:project:create -n CC
+             cd CC && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 30
              
       - name: push it
         run: |
