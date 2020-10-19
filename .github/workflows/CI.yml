@@ -25,11 +25,11 @@ jobs:
              sfdx force:project:create -n CC
              cd CC && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 30
              
-      - name: push it
+      - name: Push to Org
         run: |
              cd All_Component_DX && sfdx force:source:push -u so1
         
-      - name: Run test in Devhub
+      - name: Run test in ScratchOrg
         run: |
             sfdx force:apex:test:run -n TemperatureConverterTest -c -r human -w 10 -u so1      
              
