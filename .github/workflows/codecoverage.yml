@@ -16,6 +16,6 @@ jobs:
       - name: 'Convert Metadata'
         run: |
             git clone https://github.com/Gnanasekar-m/POC.git 
-            sfdx force:source:convert --rootdir=POC/All_Component_DX/force-app/main/default --outputdir=convert
+            cd POC/All_Component_DX && sfdx force:source:convert --rootdir=force-app/main/default --outputdir=convert
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --deploydir=convert -w 30
