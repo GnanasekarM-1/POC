@@ -1,253 +1,199 @@
-/*****************************************************************************
- *                       Copyright (C) 2016 ServiceMax, Inc
- *                               All rights reserved
- *
- *****************************************************************************/
+ @isTest(SeeAllData=false)
+global class SPM_TechUtilization_UT{
+    
+    private static RecordType spmRuleRecordType;
+    private static RecordType spmDetailsRecordType;
+    
+    static testMethod void testWithRecrods(){
+        Test.startTest();
+        setup();
+        Id processId = insertProcess();
+        insertConfigData(processId);
+        insertTimeSheetData();
+        
+        SPM_TechUtilization objTechUtilization = new SPM_TechUtilization(null);
+        System.assert(objTechUtilization != null);
+        
+        Database.QueryLocator queryLocator = objTechUtilization.start( null );
+        List<SObject> records = Database.query( queryLocator.getQuery() );
+        
+        objTechUtilization.execute(null, records);
+        objTechUtilization.execute(null, records);
+        
+        objTechUtilization.finish(null);
+        BusinessHours bizHour = [SELECT id From BusinessHours Where IsDefault=true];
+        Long minutes;
+        minutes = objTechUtilization.calculateBreakTime('day1', bizHour);
+        System.assertEquals(1440,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day2', bizHour);
+        System.assertEquals(60,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day3', bizHour);
+        System.assertEquals(60,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day4', bizHour);
+        System.assertEquals(60,minutes);
 
-/**
- * The APFT_Utilities implements utility methods which can be used accross servicemax product.
- * 
- *
- * @author Ramachandra Mohan
- * @version 16.39000
- * @since 2016
- */
-/*****************************************************************************************************
- *    ID        Name                   Date            Comment
- *****************************************************************************************************
- *              Ramachandra Mohan      13 May 2016     Created. 
- *****************************************************************************************************/
-public class APFT_Utilities {
-    
-    /**
-     * @brief Single static instance variable of this class.
-     */
-    private static final APFT_Utilities instance = new APFT_Utilities();
-    
-    /**
-     * 
-     */
-    private Map<String,APFT_Schema.Filters> deviceTypeFiltersMap = new Map<String,APFT_Schema.Filters>();
-    
-    /**
-     * 
-     */
-    private Map<String, SVMXC__ServiceMax_Processes__c> deviceTypeProcessMap = new Map<String, SVMXC__ServiceMax_Processes__c>();
-    
-    /**
-     * 
-     */
-    private Datetime lastModifiedOn;
-    
-    /**
-     * @brief Static method to get instance of this class with all supported filter devices.
-     * 
-     * @return Always returns single instance of this class.
-     */
-    public static APFT_Utilities getInstance() {
-        return instance;
-    }
-    
-    /**
-     * @brief Static method to create instance of this class with specific filter devices.
-     * 
-     * @return Returns new instance with filters for specified device type.
-     */
-    public static APFT_Utilities createInstanceByDeviceType( List<String> deviceTypeIdList ) {
-        return new APFT_Utilities( deviceTypeIdList );
-    }
-    
-    /**
-     * @brief This method is used to retrieve filters for specified device type
-     * 
-     * @param deviceType Application Profile process id for which the filter to be retrieved.
-     * @return Returns APFT_Schema.Filters instance to requested device type.
-     */
-    public APFT_Schema.Filters getDeviceFilters( String deviceType ) {
-        return deviceTypeFiltersMap.get( deviceType );
-    }
-    
-    /**
-     * @brief This method is used to clear invalid process id's from JSON structure.
-     * 
-     * @param recordTypeName Record type for which the invalid process id's to be cleared.
-     * @param uniqueProcessIdSet Unique set of process id's of same type.
-     */
-    public void clearInvalidFilters( String recordTypeName, Set<String> uniqueProcessIdSet ) {
         
-        System.debug( LoggingLevel.DEBUG, 'clearInvalidFilters - enter; recordTypeName: ' + recordTypeName );
+        List<SVMXC__SPM_Utilization__c> lstSPMUtilization = [Select Id,SVMXC__Available_Time__c,SVMXC__Break_Minutes__c,SVMXC__Country__c,SVMXC__Drive_Time__c,SVMXC__Non_Productive_Time__c,SVMXC__Off_Time__c,SVMXC__Productive_Time__c,SVMXC__Service_Manager__c,SVMXC__Service_Team__c,SVMXC__Technician__c,SVMXC__Timesheet_Daily_Summary__c,SVMXC__User__c,SVMXC__Utilization__c,SVMXC__Utilization_Without_Drive_Time__c,SVMXC__Utilization_On__c,SVMXC__Working_Minutes__c FROM SVMXC__SPM_Utilization__c];
+        /* System.assert(lstSPMUtilization.size() == 2);
+        System.debug( LoggingLevel.DEBUG, 'UtilizationRecord1 : ' + lstSPMUtilization[0]);
+        System.debug( LoggingLevel.DEBUG, 'UtilizationRecord2 : ' + lstSPMUtilization[1]); */
+        Test.stopTest();
+    }
+    
+    static testMethod void testConstructor_With_Schedule(){
+        Test.startTest();
+        setup();
+        Id processId = insertProcess();
+        insertConfigData( processId );
+        insertTimeSheetData();
+
+        SVMXC__ServiceMax_Config_Data__c scheduleData = new SVMXC__ServiceMax_Config_Data__c();
+        scheduleData.SVMXC__Previous_Execution_Started_On__c = System.now().addMonths(-1);
         
-        if( recordTypeName != null && !recordTypeName.trim().equals('') && uniqueProcessIdSet != null && !uniqueProcessIdSet.isEmpty() ) {
-            
-            // For each device type, retrieve the filter and validate the process Id's.
-            Boolean hasInvalidFilters = false;        
-            for( String deviceType : deviceTypeFiltersMap.keySet() ) {
-                
-                APFT_Schema.Filters filters = deviceTypeFiltersMap.get(deviceType);            
-                Set<String> configuredProcessIdSet = new Set<String>();
-                // retrieve process id set for specified record type name.
-                if( recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD ) ) {                
-                    configuredProcessIdSet = filters.wizards;                
-                } else if( recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_SFM_PROCESS_NODE_OBJECT ) || recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_SFM ) || ( recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD_STEP ) && !recordTypeName.equalsIgnoreCase(APFT_Constants.ACTION_TYPE_OTHERS) ) ) {
-                    configuredProcessIdSet = filters.sfms;
-                } else if( recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_CUSTOM_ACTION ) || ( recordTypeName.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD_STEP ) && recordTypeName.equalsIgnoreCase(APFT_Constants.ACTION_TYPE_OTHERS) ) ) {                
-                    configuredProcessIdSet = filters.sfactions;
-                }
-                
-                if( configuredProcessIdSet != null && !configuredProcessIdSet.isEmpty() ) {
-                    
-                    // Remove invalid process ids.
-                    Set<String> invalidProcessId = new Set<String>();            
-                    for( String processId : configuredProcessIdSet ) {                
-                        if( !uniqueProcessIdSet.contains( processId ) ) {
-                            invalidProcessId.add(processId);
-                        }
-                    }
-                    
-                    if( ! invalidProcessId.isEmpty() ) {
-                        
-                        hasInvalidFilters = true;
-                        configuredProcessIdSet.removeAll(invalidProcessId);
-                        deviceTypeProcessMap.get(deviceType).SVMXC__Values__c = JSON.serialize( filters );
-                    }
-                }            
-            }
-            
-            if( hasInvalidFilters ) update deviceTypeProcessMap.values();            
+        SPM_TechUtilization objTechUtilization = new SPM_TechUtilization(scheduleData);
+        System.assert(objTechUtilization != null );
+        
+        Database.QueryLocator queryLocator = objTechUtilization.start( null );
+        List<SObject> records = Database.query( queryLocator.getQuery() );
+        
+        objTechUtilization.execute(null, records);
+        objTechUtilization.execute(null, records);
+        
+        objTechUtilization.finish( null );
+        BusinessHours bizHour = [SELECT id From BusinessHours Where IsDefault=true];
+        Long minutes;
+        minutes = objTechUtilization.calculateBreakTime('day1', bizHour);
+        System.assertEquals(1440,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day2', bizHour);
+        System.assertEquals(60,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day3', bizHour);
+        System.assertEquals(60,minutes);
+        minutes = objTechUtilization.calculateBreakTime('day4', bizHour);
+        System.assertEquals(60,minutes);
+        Test.stopTest();
+    }
+    
+    private static void setup() {
+        if(spmRuleRecordType == null){
+            spmRuleRecordType = [SELECT Id, Name FROM RecordType WHERE SobjectType = 'SVMXC__ServiceMax_Processes__c' AND Name = 'SPM Rule'];    
         }
         
-        System.debug( LoggingLevel.DEBUG, 'clearInvalidFilters - exit' );
+        if(spmDetailsRecordType == null){
+            spmDetailsRecordType = [SELECT Id, Name FROM RecordType WHERE SobjectType = 'SVMXC__ServiceMax_Config_Data__c' AND Name = 'SPM Details'];    
+        }        
     }
     
-    /**
-     * @brief This method is used to apply application filters and updated the process list accordingly.
-     * 
-     * @param processesList List of servicemax processes records to be filtered.
-     * @param deviceType Device type for which the filter to be applied. 
-     * 
-     * @return Returns true if filters applied successfully, Otherwise, returns false.
-     */
-    public Boolean applyApplicationFilters( List<SVMXC__ServiceMax_Processes__c> processesList, String deviceType ) {
+    private static void insertTimeSheetData(){
+        String strBusinessHoursId = [SELECT id From BusinessHours Where IsDefault=true].Id;
         
-        System.debug( LoggingLevel.DEBUG, 'applyApplicationFilters() - enter; deviceType= ' + deviceType );
+        SVMXC__Service_Group__c objTeam = new SVMXC__Service_Group__c();
+        objTeam.Name = 'India team';
+        objTeam.SVMXC__Active__c = true;
+        objTeam.SVMXC__City__c = 'Bangalore';
+        objTeam.SVMXC__Country__c = 'India';
+        objTeam.SVMXC__Group_Type__c = 'Both';
+        objTeam.SVMXC__Zip__c = '560001';
+        insert objTeam;
         
-        Boolean applySuccess = true;
-        try {
-            if( processesList != null && !processesList.isEmpty() && deviceType != null && deviceTypeFiltersMap.containsKey(deviceType) ) {
-                
-                APFT_Schema.Filters filters = deviceTypeFiltersMap.get(deviceType);
-                
-                List<SVMXC__ServiceMax_Processes__c> qualifiedProcessesList = new List<SVMXC__ServiceMax_Processes__c>();
-                for( SVMXC__ServiceMax_Processes__c processes : processesList ) {
-                    
-                    if( APFT_Constants.RecordTypeCompareFieldMap.containsKey( processes.SVMXC__Record_Type_Name__c ) ) {
-                        
-                        String fieldApiName = APFT_Constants.RecordTypeCompareFieldMap.get( processes.SVMXC__Record_Type_Name__c );
-                        String fieldValue = (String) getFieldValue( processes, fieldApiName );
-                        
-                        if( processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD )) {
-                            
-                            if( filters.wizards == null || !filters.wizards.contains( fieldValue ) ) {
-                                qualifiedProcessesList.add( processes );
-                            } 
-                        } else if( processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_SFM_PROCESS_NODE_OBJECT ) || processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_SFM ) || ( processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD_STEP ) && !processes.SVMXC__Action_Type__c.equalsIgnoreCase(APFT_Constants.ACTION_TYPE_OTHERS) ) ) {
-                            
-                            if( filters.sfms == null || !filters.sfms.contains( fieldValue ) ) {
-                                qualifiedProcessesList.add( processes );
-                            }
-                        } else if( processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_CUSTOM_ACTION ) || ( processes.SVMXC__Record_Type_Name__c.equalsIgnoreCase( APFT_Constants.RECORD_TYPE_WIZARD_STEP ) && processes.SVMXC__Action_Type__c.equalsIgnoreCase(APFT_Constants.ACTION_TYPE_OTHERS) ) ) {
-                            
-                            if( filters.sfactions == null || !filters.sfactions.contains( fieldValue ) ) {
-                                qualifiedProcessesList.add( processes );
-                            }
-                        } else {
-                            applySuccess = false;
-                            System.debug( LoggingLevel.ERROR, 'Unsupported record type ' + processes.SVMXC__Record_Type_Name__c );
-                            
-                            break;
-                        }
-                    } else {
-                        System.debug( LoggingLevel.ERROR, 'applyApplicationFilters(): Unsupported record type. recordType=' + processes.SVMXC__Record_Type_Name__c );
-                        
-                        applySuccess = false;
-                        break;
-                    }
-                }
-                
-                if( applySuccess ) {
-                    
-                    processesList.clear(); 
-                    processesList.addAll(qualifiedProcessesList);    
-                }
-                
-            } else {
-                applySuccess = false;
-                System.debug( LoggingLevel.ERROR, 'Invalid or Unsupported arguments.');
-            }    
-        }
-        catch( Exception ex) {
-            
-            applySuccess = false;
-            System.debug( LoggingLevel.ERROR, ex.getMessage() );
-            System.debug( LoggingLevel.ERROR, ex.getStackTraceString() );
-        }
+        SVMXC__Service_Group_Members__c objTech = new SVMXC__Service_Group_Members__c();
+        objTech.SVMXC__Service_Group__c = objTeam.id;
+        objTech.SVMXC__Salesforce_User__c = UserInfo.getUserId();
+        objTech.SVMXC__Active__c = true;
+        objTech.Name = 'TestTech';
+        objTech.SVMXC__Break_Hours__c = strBusinessHoursId;
+        insert objTech;
         
-        return applySuccess;
+        SVMXC__Timesheet__c objTSHeader = new SVMXC__Timesheet__c();
+        objTSHeader.SVMXC__User__c = UserInfo.getUserId();
+        objTSHeader.SVMXC__Start_Date__c = System.Today().addDays(-5);
+        objTSHeader.SVMXC__End_Date__c = System.Today().addDays(5);
+        objTSHeader.SVMXC__Period__c = 'Weekly';
+        objTSHeader.SVMXC__Status__c = 'Approved';
+        objTSHeader.SVMXC__Total_Hours__c = 8;
+        insert objTSHeader;
+        
+        List<SVMXC__Timesheet_Day_Entry__c> lstTMDayEntry = new List<SVMXC__Timesheet_Day_Entry__c>();
+        SVMXC__Timesheet_Day_Entry__c objTSDayEntry1 = new SVMXC__Timesheet_Day_Entry__c();
+        objTSDayEntry1.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSDayEntry1.SVMXC__Timsheet_Day__c = System.Today().addDays(1);
+        objTSDayEntry1.SVMXC__Total_Hours__c = 8;
+        objTSDayEntry1.SVMXC__SM_Working_Minutes__c = 480;
+        lstTMDayEntry.add(objTSDayEntry1);
+        
+        SVMXC__Timesheet_Day_Entry__c objTSDayEntry2 = new SVMXC__Timesheet_Day_Entry__c();
+        objTSDayEntry2.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSDayEntry2.SVMXC__Timsheet_Day__c = System.Today().addDays(2);
+        objTSDayEntry2.SVMXC__Total_Hours__c = 8;
+        objTSDayEntry2.SVMXC__SM_Working_Minutes__c = 480;
+        lstTMDayEntry.add(objTSDayEntry2);
+        insert lstTMDayEntry;
+        
+        List<SVMXC__Timesheet_Entry__c> lstTimesheetEntry = new List<SVMXC__Timesheet_Entry__c>();
+        SVMXC__Timesheet_Entry__c objTSEntry1 = new SVMXC__Timesheet_Entry__c();
+        objTSEntry1.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSEntry1.SVMXC__Timesheet_Day__c = lstTMDayEntry[0].id;
+        objTSEntry1.SVMXC__Activity__c  = 'Task';
+        objTSEntry1.SVMXC__Duration__c = 4;
+        objTSEntry1.SVMXC__SM_Type__c = 'Labor';
+        lstTimesheetEntry.add(objTSEntry1);
+        
+        SVMXC__Timesheet_Entry__c objTSEntry2 = new SVMXC__Timesheet_Entry__c();
+        objTSEntry2.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSEntry2.SVMXC__Timesheet_Day__c = lstTMDayEntry[0].id;
+        objTSEntry2.SVMXC__Activity__c  = 'Travel'; 
+        objTSEntry2.SVMXC__Duration__c = 1;
+        objTSEntry2.SVMXC__SM_Type__c = 'Labor';
+        lstTimesheetEntry.add(objTSEntry2);
+        
+        SVMXC__Timesheet_Entry__c objTSEntry3 = new SVMXC__Timesheet_Entry__c();
+        objTSEntry3.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSEntry3.SVMXC__Timesheet_Day__c = lstTMDayEntry[0].id;
+        objTSEntry3.SVMXC__Activity__c  = 'Labor';  
+        objTSEntry3.SVMXC__Duration__c = 1;
+        objTSEntry3.SVMXC__SM_Type__c = 'PTO';
+        lstTimesheetEntry.add(objTSEntry3);
+        
+        SVMXC__Timesheet_Entry__c objTSEntry4 = new SVMXC__Timesheet_Entry__c();
+        objTSEntry4.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSEntry4.SVMXC__Timesheet_Day__c = lstTMDayEntry[0].id;
+        objTSEntry4.SVMXC__Activity__c  = 'Labor';  
+        objTSEntry4.SVMXC__Duration__c = 1;
+        objTSEntry4.SVMXC__SM_Type__c = 'Meeting';
+        lstTimesheetEntry.add(objTSEntry4);
+        
+        //Time entry for another day
+        SVMXC__Timesheet_Entry__c objTSEntry21 = new SVMXC__Timesheet_Entry__c();
+        objTSEntry21.SVMXC__Timesheet__c = objTSHeader.id;
+        objTSEntry21.SVMXC__Timesheet_Day__c = lstTMDayEntry[1].id;
+        objTSEntry21.SVMXC__Activity__c = 'Task';
+        objTSEntry21.SVMXC__Duration__c = 8;
+        objTSEntry21.SVMXC__SM_Type__c = 'Labor';
+        lstTimesheetEntry.add(objTSEntry21);
+        
+        insert lstTimesheetEntry;
     }
     
-    /**
-     * @brief This method is used to retrieve field value for specified record and field API name.
-     * 
-     * @param record SObject instance from which value to be retrieved.
-     * @param fieldName Field API name of which value to be retrieved.
-     * 
-     * @return Returns object value for specified field API name from sobject. 
-     */
-    @TestVisible private Object getFieldValue( SObject record, String fieldName ) {
-        
-        if( fieldName == null || record == null ) {
-            return null;
-        }
-        
-        Integer index = fieldName.indexOf('.');
-        
-        if( index == -1 ) {
-            return record.get( fieldName );
-        }
-        
-        String referrenceField = fieldName.substring( 0, index );
-        fieldName = fieldName.substring( index + 1 );
-        
-        return getFieldValue( record.getSObject( referrenceField ), fieldName );
+    private static Id insertProcess() {
+        SVMXC__ServiceMax_Processes__c process = new SVMXC__ServiceMax_Processes__c();
+        process.RecordTypeId = spmRuleRecordType.Id;
+        process.SVMXC__ProcessID__c = SPM_Schema.Report.Utilization.name();
+        process.SVMXC__Name__c = 'Utilization';
+        insert process;
+        return process.Id;
     }
     
-    private APFT_Utilities() {
+    private static void insertConfigData(Id processId){
+        SVMXC__ServiceMax_Config_Data__c configData = new SVMXC__ServiceMax_Config_Data__c();
+        configData.RecordTypeId = spmDetailsRecordType.Id;
+        configData.SVMXC__Dispatch_Process__c = processId;
+        configData.SVMXC__Formula__c = calculationMethod;
+        configData.SVMXC__Active__c = true;
+        insert configData;
         
-        for( SVMXC__ServiceMax_Processes__c applicationFilter : [SELECT SVMXC__ProcessID__c, SVMXC__Values__c FROM SVMXC__ServiceMax_Processes__c WHERE SVMXC__Record_Type_Name__c = :APFT_Constants.RECORD_TYPE_APPLICATION_PROFILE AND SVMXC__IsStandard__c = true] ) {
-            
-            APFT_Schema.Filters filters = new APFT_Schema.Filters();
-            if( applicationFilter.SVMXC__Values__c != null && applicationFilter.SVMXC__Values__c.trim() != '') {
-                filters = (APFT_Schema.Filters) JSON.deserialize( applicationFilter.SVMXC__Values__c, APFT_Schema.Filters.class );
-            }
-            
-            deviceTypeFiltersMap.put(applicationFilter.SVMXC__ProcessID__c, filters );
-            deviceTypeProcessMap.put(applicationFilter.SVMXC__ProcessID__c, applicationFilter );
-        }
-        
-        System.debug( LoggingLevel.DEBUG, 'APFT_Utilities() - exit; deviceTypeFiltersMap: ' + deviceTypeFiltersMap );
+        calculationMethod = calculationMethod.replace( 'a10F0000005OlkPIAS', configData.Id );
+        configData.SVMXC__Formula__c = calculationMethod;
+        update configData;
     }
     
-    private APFT_Utilities( List<String> deviceTypeIdList ) {
-        
-        for( SVMXC__ServiceMax_Processes__c applicationFilter : [SELECT Id,SVMXC__ProcessID__c, SVMXC__Values__c FROM SVMXC__ServiceMax_Processes__c WHERE SVMXC__Record_Type_Name__c = :APFT_Constants.RECORD_TYPE_APPLICATION_PROFILE AND SVMXC__IsStandard__c = true AND SVMXC__ProcessID__c = :deviceTypeIdList] ) {
-            
-            APFT_Schema.Filters filters = new APFT_Schema.Filters();
-            if( applicationFilter.SVMXC__Values__c != null && applicationFilter.SVMXC__Values__c.trim() != '') {
-                filters = (APFT_Schema.Filters) JSON.deserialize( applicationFilter.SVMXC__Values__c, APFT_Schema.Filters.class );
-            }
-            
-            deviceTypeFiltersMap.put(applicationFilter.SVMXC__ProcessID__c, filters );
-            deviceTypeProcessMap.put(applicationFilter.SVMXC__ProcessID__c, applicationFilter );
-        }
-    }
+    private static String calculationMethod = '{"targetObjectName":"SVMXC__SPM_Utilization__c","targetObjectLabel":"SPM - Utilization","sourceObjectName":"SVMXC__Timesheet__c","sourceObjectLabel":"Timesheet","recordId":"a10F0000005OlkPIAS","parameterInfoList":[{"sourceObjectName":"SVMXC__Timesheet_Entry__c","sourceObjectField":"NonProductiveTime","sourceFieldName":"Training;Meeting;Administration","sourceFieldLabel":"","sourceFieldInfoList":null,"referenceTo":null,"label":"Select the one or more type(s) for Non Productive Time","isPicklistValue":true,"isMultiSelect":true,"displayType":"MULTIPICKLIST"},{"sourceObjectName":"SVMXC__Timesheet_Entry__c","sourceObjectField":"Leaves","sourceFieldName":"PTO;Sick Leave","sourceFieldLabel":"","sourceFieldInfoList":null,"referenceTo":null,"label":"Select one or more activity types for leaves","isPicklistValue":true,"isMultiSelect":true,"displayType":"MULTIPICKLIST"},{"sourceObjectName":null,"sourceObjectField":"isActiveTechnician","sourceFieldName":"Yes","sourceFieldLabel":null,"sourceFieldInfoList":null,"referenceTo":null,"label":"Consider active technician","isPicklistValue":false,"isMultiSelect":false,"displayType":"PICKLIST"},{"sourceObjectName":null,"sourceObjectField":"BreakTime","sourceFieldName":"Break Hours","sourceFieldLabel":null,"sourceFieldInfoList":null,"referenceTo":null,"label":"Select the source for the Break Time from Technician","isPicklistValue":false,"isMultiSelect":false,"displayType":"PICKLIST"}],"objectMappingDetailsList":[{"targetObjectName":"SVMXC__SPM_Utilization__c","sourceObjectName":"SVMXC__Timesheet__c","referenceObjectName":false,"objectMappingList":null,"mapId":"NONE","label":"Select the Object Mapping to be applied for this metrics"}],"name":null,"methodDisplayName":null,"method":"SPMUTILIZATION: Standard","lastModifiedOn":null,"isActive":true,"expressionDetailsList":[{"sourceObjectName":null,"label":"Select the expression to qualify Timesheet for this metrics","expressionType":"QualificationCriteria","expressionRuleList":null,"expressionRuleId":"SPM:_To_Identify_Approved_Timesheets"}],"appliesTo":""}';  
 }
