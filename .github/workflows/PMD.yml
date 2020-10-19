@@ -1,6 +1,7 @@
-name: PMD Source Code Analyzer on Push
+name: PMD
 
-on: [push]
+on:
+  workflow_dispatch:
 
 jobs:
   pmd:

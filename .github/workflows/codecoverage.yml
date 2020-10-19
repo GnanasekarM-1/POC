@@ -1,4 +1,4 @@
-name: CI
+name: codecoverage
 
 on:
   workflow_dispatch:
