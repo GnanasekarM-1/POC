@@ -19,11 +19,16 @@ jobs:
         run: |
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
+              
       - name: Run test in Devhub
         run: |
-            sfdx force:apex:test:run -l RunLocalTests -w 30
+            sfdx force:apex:test:run -l RunLocalTests  -r human -w 30
             
       - name: Scratch Org create
         run: |
              cd All_Component_DX && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 30
+             
+      - name: push it
+        run: |
+             cd All_Component_DX && sfdx force:source:push -u so1
               
