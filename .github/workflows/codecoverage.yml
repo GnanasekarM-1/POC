@@ -1,4 +1,4 @@
-name: codecoverage
+name: CI
 
 on:
   push:
@@ -19,5 +19,6 @@ jobs:
         run: |
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
+              sfdx force:apex:test:run -l RunLocalTests -w 30
               cd All_Component_DX && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 30
-      
+              
