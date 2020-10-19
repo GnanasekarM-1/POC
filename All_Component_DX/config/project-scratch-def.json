@@ -2,7 +2,7 @@
   "orgName": "ServiceMax Base",
   "edition": "Developer",
   "namespace":"SVMXC",
-  "features": ["API","DebugApex","ForceComPlatform","MaxCustomLabels:15","MaxApexCodeSize:22"],
+  "features": ["API","DebugApex","ForceComPlatform","MaxCustomLabels:15","MaxApexCodeSize:5"],
   "settings": {
     "quoteSettings": {
       "enableQuote": true
