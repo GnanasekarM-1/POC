@@ -4,55 +4,8 @@
 package.xml
 
 #ignoring translations for  object
-force-app/main/default/objectTranslations
-objectTranslations
 
-force-app/main/default/objects/Installed_Product__c/fields/Business_Hours__c.field-meta.xml
-force-app/main/default/objects/Parts_Request__c/webLinks/StockLookupPREQ.webLink-meta.xml
-force-app/main/default/objects/Service_Order__c/fieldSets/SM_SFA_Fields_WORD.fieldset-meta.xml
  
-force-app/main/default/reportTypes/CaseIssuesTracker.reportType-meta.xml
-force-app/main/default/reportTypes/ServiceOrderComponentandProduct.reportType-meta.xml
-force-app/main/default/reportTypes/EntitlementHistory.reportType-meta.xml
-force-app/main/default/reportTypes/screen_flows_prebuilt_crt
-force-app/main/default/reportTypes/Parts_Pricing_with_Tiered_Pricings_with_Tier_Usages
-force-app/main/default/reportTypes/Proforma_Invoice_with_Proforma_Invoice_Details_with_Proforma_Invoice_Lines
-force-app/main/default/reportTypes/Sync_Reports
-force-app/main/default/reportTypes/Work_Orders_with_Work_Details_with_Tier_Usages
-force-app/main/default/layouts
-force-app/main/default/weblinks/SVMXC_ServicesHome.custompageweblink-meta.xml
-force-app/main/default/tabs
-force-app/main/default/objects/Batch_Lot_Master__c
-force-app/main/default/objects/RMA_Shipment_Line__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Stock_History__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Stock_Adjustment__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Stock_Transfer_Line__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Stock_Transfer__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Parts_Request_Line__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Product_Serial__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Service_Order_Line__c/fields/SM_Batch_Lot__c.field-meta.xml
-force-app/main/default/objects/Activity_Product__c/*Activity_Product__c.object*
-force-app/main/default/objects/Task_Template__c/*Task_Template__c.object*
-force-app/main/default/objects/Code_Snippet__c/listViews
-force-app/main/default/classes/*PostInstallDX*
-
-
-#ignoring translations for custom label 
-force-app/main/default/translations
-translations
-
-#profiles
-#force-app/main/default/profiles
-
-# Layout forcegnore
-#force-app/main/default/layouts
-
-**staticresources
-**connectedApps
-**/*SessionSetting*
-**/*PasswordPolicy*
-*SessionSetting*
-*PasswordPolicy*
 
 # LWC configuration files
 **/jsconfig.json
