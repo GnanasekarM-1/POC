@@ -32,20 +32,21 @@ jobs:
           echo "::set-output name=resultJson::$content"
           
       - name: FailRate    
-        if: (${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}!=${{ 0 }})
+        if: (fromJson(steps.set_var.outputs.resultJson).result.summary.failRate) ! = 0
         run: |
              echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
-             exit 0
+             exit 1
       - name: testRunCoverage    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}<${{ 80 }}
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage < 80
         run: |
            echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
            exit 1
       - name: orgWideCoverage    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}<${{ 90 }}
+        if: fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage < 90
         run: |
-          echo orgWideCoverage ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
+          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
           exit 1
+      
       - name: Jobcompletion
         run: echo completed 
        
