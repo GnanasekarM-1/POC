@@ -32,11 +32,6 @@ jobs:
       - name: Test Run
         run: |
             sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json >> output.json
-      - id: set_var
-        run: |
-          content=`cat ./path/to/output.json`
-          echo "::set-output name=outputJson::$content"
-      - run: |
-          echo "${{fromJson(steps.set_var.outputs.outputJson).version}}"
+       
        
               
