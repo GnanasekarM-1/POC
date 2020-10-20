@@ -29,8 +29,10 @@ jobs:
         run: |
              cd All_Component_DX && sfdx force:source:deploy -m ApexClass -u DEVHUB
         
-      - name: Run test in ScratchOrg
+      - name: Test Run
         run: |
-            sfdx force:apex:test:run -l RunLocalTests -c -r human -w 10 -u DEVHUB      
+            sfdx force:apex:test:run -l RunLocalTests -c -r --json -w 10 -u DEVHUB    
              
+      - name: Codecoverage morethan 75%
+        if: success()
               
