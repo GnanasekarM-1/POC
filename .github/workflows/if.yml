@@ -2,29 +2,35 @@ on: push
 
 jobs:
   one:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
+    
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
+      - uses: actions/checkout@v2
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
+      - name: 'AUTH_SECRET'
+        run: |
+              ls -la
+              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
+      
+      - name: testrun       
+        id: testrun
+        run: |
+          sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json >> result.json
+          
+      # Use the output from the `hello` step
+   
+       
+      - id: set_var
+        run: |
+          content=`cat ./result.json`
+          # the following lines are only required for multi line json
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
+          echo "::set-output name=packageJson::$content"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.resultJson).result.summary.passing}}"
+        
