@@ -20,17 +20,17 @@ jobs:
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
           
-      - name: Scratch Org create
-        run: |
-             sfdx force:project:create -n CC
-             cd CC && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 1
+     # - name: Scratch Org create
+     # run: |
+     #     sfdx force:project:create -n CC
+     #    cd CC && sfdx force:org:create -s -f  config/project-scratch-def.json -v DEVHUB -a so1 -d 1
              
       - name: Push to Org
         run: |
-             cd All_Component_DX && sfdx force:source:push -u so1
+             cd All_Component_DX && sfdx force:source:push -u DEVHUB
         
       - name: Run test in ScratchOrg
         run: |
-            sfdx force:apex:test:run -n TemperatureConverterTest -c -r human -w 10 -u so1      
+            sfdx force:apex:test:run -l RunLocalTests -c -r human -w 10 -u DEVHUB      
              
               
