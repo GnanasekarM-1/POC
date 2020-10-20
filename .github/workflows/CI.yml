@@ -27,7 +27,7 @@ jobs:
              
       - name: Push to Org
         run: |
-             cd All_Component_DX && sfdx force:source:push -u DEVHUB
+             cd All_Component_DX && sfdx force:source:deploy -m ApexClass -u DEVHUB
         
       - name: Run test in ScratchOrg
         run: |
