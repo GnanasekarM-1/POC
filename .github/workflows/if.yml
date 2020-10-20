@@ -35,7 +35,7 @@ jobs:
         env:
           Rate: ${{ fromJson(steps.set_var.outputs.resultJson).result.summary.failRate }}
        
-        if: FailRate ! = 0
+        if: ($Rate ! = 0)
         run: |
              echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
              exit 1
