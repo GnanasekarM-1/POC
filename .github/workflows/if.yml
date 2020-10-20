@@ -17,6 +17,7 @@ jobs:
       - name: testrun       
         id: testrun
         run: |
+          sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json
           sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json >> result.json
           
       # Use the output from the `hello` step
@@ -30,17 +31,31 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
-      - name: print    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}>=80 
-        run: |
-          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
-      - name: print    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}>=90 
-        run: |
-          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
-      - name: print    
+          
+      - name: failRate    
         if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}!=0
         run: |
+          echo exit 0
           echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+          
+      - name: failRate
+        run: echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
        
+      - name: testRunCoverage    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}>=80 
+        run: |
+          echo exit 0
+          
+      - name: testRunCoveragepass
+        run: echo testRunCoveragepass
         
+      - name: orgWideCoverage    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}>=90 
+        run: |
+          echo exit 0
+          
+      - name: orgWideCoverage
+        run: echo orgWideCoverage ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
+          
+     
+          
