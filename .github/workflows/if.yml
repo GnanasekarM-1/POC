@@ -32,30 +32,22 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
           
-      - name: failRate    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}>0
+      - name: FailRate    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}!="0"
         run: |
-          echo exit 1
-          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
-          
-      - name: failRate
-        run: echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
-       
+             echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+             exit 1 
       - name: testRunCoverage    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}<80 
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}<"80"
         run: |
-          echo exit 1
-          
-      - name: testRunCoveragepass
-        run: echo testRunCoveragepass
-        
+           echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
+           exit 1 
       - name: orgWideCoverage    
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}<90 
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}<"90"
         run: |
-          echo exit 1
+          echo orgWideCoverage ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
+          exit 1
           
-      - name: orgWideCoverage
-        run: echo orgWideCoverage ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
-          
+       
      
           
