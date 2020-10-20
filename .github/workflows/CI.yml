@@ -32,6 +32,5 @@ jobs:
       - name: Test Run
         run: |
             sfdx force:apex:test:run -l RunLocalTests -c -r --json -w 10 -u DEVHUB
-      - name: Job success
-        if: success()
+       
               
