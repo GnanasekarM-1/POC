@@ -31,6 +31,6 @@ jobs:
         
       - name: Test Run
         run: |
-            sfdx force:apex:test:run -l RunLocalTests -c --json -w 10 -u DEVHUB
+            sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json
        
               
