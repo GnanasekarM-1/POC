@@ -1,0 +1,90 @@
+input{
+        padding:0; margin:0;
+    }
+    
+    .html-design-container{
+        background:#FFFFFF; border:10px solid #FFFFFF; border-top:0;
+    }
+    
+    .copy-past-label{
+        font-size:11px; font-weight:bold; padding:0 0 5px 0;
+    }
+    
+    .tree-container{
+        height:75%;overflow:auto;
+    }
+    
+    .clipbord-content{
+        font-size:11px; font-weight:bold; padding:7px 0 0 0;
+    }
+    
+    .clipbord-content .chkBox{
+        float:left;
+    }
+    
+    .clipbord-content .chkBoxTxt{
+        float:left; padding:0 0 0 3px;
+    }
+    
+    .main-container {
+        /*background:url(../images/left-bottom-curve.gif) no-repeat left bottom;*/
+    }
+    
+    .main-container .columns-holder {
+        /*background:url(../images/right-bottom-curve.gif) no-repeat right bottom;*/
+        padding:10px 0 10px 0; 
+    }
+    
+	.columns-holder
+	{
+		border-style:solid;
+		border-color:#BAB4AF;
+		border-width:0px 1px 1px 1px;
+	}
+
+    .inputTxtHolder {
+        /*background:url(../images/sprite-inputfield.gif) no-repeat top left;*/
+        height:27px;
+        margin:0 0 5px 0;
+    }
+    
+    .inputTxtHolder .rightCurve {
+        /*background:url(../images/sprite-inputfield.gif) no-repeat right -27px; */
+        height:27px;
+        padding:1px 4px 0 4px;
+    }
+    
+    .inputTxtHolder .rightCurve #expression {
+        height:22px;
+		border: 1px solid #CFD7E6;
+		width:100%;
+    }
+	.seperator {/*height: 3px; margin: 0 10px 11px; background-color: #57D1F4*/}
+    .columns-holder {clear:both}
+    .jstree li {min-height:24px; line-height:24px;}
+    
+    .treeview-left-curve {
+        /*background:url(../images/tree-container-left-curve.gif) no-repeat left bottom;*/
+		border: 1px solid #BAB4AF;
+    }
+    
+    .treeview-left-curve .treeview-right-curve {
+        /*background:url(../images/tree-container-right-curve.gif) no-repeat right bottom;*/
+    }
+    
+    .treeview-top-left-curve {
+        /*background:url(../images/treeview-top-curve-sprite.gif) no-repeat left top;*/
+        height:10px;
+    }
+    
+    .treeview-top-left-curve .treeview-top-right-curve{
+        /*background:url(../images/treeview-top-curve-sprite.gif) no-repeat right -7px;   
+        height:7px;*/
+    }
+    
+    .copy-past-label{padding: 0 10px 5px}
+    .inputTxtHolder {margin:0 10px 5px}
+    
+    .jstree-classic.jstree-focused {margin:0 10px !important}
+    .jstree-classic .jstree-hovered {background:none !important }
+    .jstree-classic .jstree-clicked {background:#d8f2fa !important; color: #015ba7 !important;  border: none !important}

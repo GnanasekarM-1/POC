@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>HTML Designer</title>
+        <script>
+        	var __htmlDesignerCodeBase = null;
+        </script>
+        <script type="text/javascript" src="HTMLDesigner.js"></script>
+        <script>
+			var treeData = {objects : []};
+			var woObj = {};
+			woObj.objLabel = "WorkOrder"
+			woObj.objAPIName = 'SVMXC__Service_Order__c';
+			woObj.fields = [];
+			
+			var fldOS = {};
+			fldOS.fieldType = 'picklist';
+			fldOS.fieldLabel = 'Order Status';
+			fldOS.fieldAPIName = 'SVMXC__Order_Status__c';
+			woObj.fields.push(fldOS);
+			
+			var fldOT = {};
+			fldOT.fieldType = 'picklist';
+			fldOT.fieldLabel = 'Order Type';
+			fldOT.fieldAPIName = 'SVMXC__Order_Type__c';
+			woObj.fields.push(fldOT);
+			
+			var fldACC = {};
+			fldACC.fieldType = 'REFERENCE';
+			fldACC.objLabel = 'Account';
+			fldACC.objAPIName = 'Account';
+			fldACC.fields = [];
+			
+			var fldAccName = {};
+			fldAccName.fieldType = 'string';
+			fldAccName.fieldLabel = 'Account Name';
+			fldAccName.fieldAPIName = 'Name';
+			fldACC.fields.push(fldAccName);
+			
+			var fldAccType = {};
+			fldAccType.fieldType = 'string';
+			fldAccType.fieldLabel = 'Account Id';
+			fldAccType.fieldAPIName = 'Id__c';
+			fldACC.fields.push(fldAccType);
+			
+			woObj.fields.push(fldACC);
+			
+			treeData.objects.push(woObj);
+			
+			var poObj = {};
+			poObj.objLabel = "PartsOrder"
+			poObj.objAPIName = 'SVMXC__Parts_Order__c';
+			poObj.fields = [];
+			
+			var fldOS = {};
+			fldOS.fieldType = 'picklist';
+			fldOS.fieldLabel = 'Order Status';
+			fldOS.fieldAPIName = 'SVMXC__Order_Status__c';
+			poObj.fields.push(fldOS);
+			
+			var fldOT = {};
+			fldOT.fieldType = 'picklist';
+			fldOT.fieldLabel = 'Order Type';
+			fldOT.fieldAPIName = 'SVMXC__Order_Type__c';
+			poObj.fields.push(fldOT);
+			
+			treeData.objects.push(poObj);
+			
+			var hdInst = new HtmlDesigner();
+			hdInst.lodaMetaData(treeData);
+			HtmlDesigner.prototype.loadTree();
+			
+			
+		</script>
+    </head>
+    <body>
+    	<div id="htmlDesigner" class="html-design-container" ><!--style="display:none;-->
+    
+        <div class="main-container">    
+            <table cellspacing="0" height="100%" width="100%" border="0" class="columns-holder">
+                <tr>
+                    <td width="1%" valign="top">&nbsp;</td>
+                    <td width="30%" valign="top" height="100%">
+                        <div class="copy-past-label">
+                            Copy and paste the merge field or function value into your template, click on field or function in content tree to know merge value.
+                        </div>
+                        <div class="inputTxtHolder">
+                            <div class="rightCurve">
+                                <input type="text" id="expression" class="textInput" />
+                            </div>    
+                        </div>
+                        <div id="objectTree" class="tree-container">
+                            
+                        </div>
+                        <div class="clipbord-content">
+                            <div class="chkBox"><input type="checkbox" checked="checked" /></div><div class="chkBoxTxt">Copy To Clipboard</div>
+                        </div>
+                    </td>
+                    <td width="1%" valign="top">&nbsp;</td>
+                    <td width="67%" height="100%" valign="top">
+                        <textarea id="ckeditor" name="ckeditor" class="ckeditor"></textarea>
+                    </td>
+                    <td width="1%" valign="top">&nbsp;</td>
+                </tr>
+            </table>
+        </div>        
+    </div>
+    <!--<div id="htmlDesigner">
+    		<table>
+    			<tbody>
+    				<tr>
+    					<td width="30%"> 
+  							<input type="text" id="expression" width="100%"/>
+							<div id="objectTree"></div>
+  						</td>
+				    	<td> 
+				    		<div>
+				    			<textarea id="ckeditor"class="ckeditor" name="editor1"></textarea>
+				    		</div>
+				    	</td>
+				    </tr> 	
+    			</tbody>			
+    		</table>	
+    </div>-->
+	</body>
+	
+</html>

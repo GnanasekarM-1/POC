@@ -1,0 +1,230 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  background: #eeeeee;
+  color: #333333;
+}
+
+#views {
+  width: 620px;
+  margin: 0 auto 40px auto;
+  background: white;
+  
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  
+  -moz-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+
+#bookingscreen1 {
+  padding: 20px;
+}
+
+#bookingscreen1 h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 0 10px 0;
+}
+
+#bookingscreen1 input[type="text"], .selectoption {
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.4em;
+  border: 0;
+  outline: none;
+  padding: 4px;
+  border: 1px solid #999999;
+  
+-moz-border-radius:5px;
+-o-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+}
+
+#bookingscreen1 input[type="text"]{
+width:260px;
+}
+
+#bookingscreen1 .selectoption{
+width:60px;
+}
+
+#bookingscreen1 input[type="text"]:hover , .selectoption:hover{
+border: 1px solid #FBCB09;
+}
+
+#bookingscreen1 input::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+#bookingscreen1 .items {
+  margin: 10px 0;
+  list-style: none;
+}
+
+#bookingscreen1 .item {
+  padding: 15px 20px 15px 0;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+}
+
+#bookingscreen1 .item.done span {
+  color: #777777;
+  text-decoration: line-through;
+}
+
+#bookingscreen1 .SelectBookingTemplate .editdate {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  display: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: url(../images/destroy.png) no-repeat center center;
+}
+
+#bookingscreen1 .SelectBookingTemplate:hover .editdate {
+  display: block;
+}
+
+#bookingscreen1 .item .edit { display: none; }
+#bookingscreen1 .item.editing .edit { display: block; }
+#bookingscreen1 .item.editing .view { display: none; }
+
+#bookingscreen1 footer {
+  display: block;
+  margin: 20px -20px -20px -20px;
+  overflow: hidden;
+  
+  color: #555555;
+  background: #f4fce8;
+  border-top: 1px solid #ededed;
+  padding: 0 20px;
+  line-height: 36px;
+  
+  -moz-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+
+#bookingscreen1 .editscreen  {
+  padding:10px;
+  display: block;
+}
+#bookingscreen1  .editscreen.hide  {
+  display: none;
+}
+
+#bookingscreen1 .processingroom  {
+  display: none;
+}
+#bookingscreen1  .processingroom.show  {
+  padding:10px;
+  display: block;
+}
+
+#bookingscreen1 .SelectBookingTemplate{
+position: relative;
+padding:5px;
+font-size: 16px;
+background-color:#e9eaee;
+-moz-border-radius:5px;
+-o-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+.selectServiceTemplate{
+float: left;
+width:50%;
+position: relative;
+}
+
+.selectServiceTemplate .service{
+padding:10px;
+margin: 0 15px 15px 0;
+background-color: #f4fce8;
+border: 1px solid #ededed;
+-moz-border-radius:5px;
+-o-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+.showServiceDetails li{
+list-style: none;
+}
+
+ul li:nth-child(odd) .selectServiceTemplate .service{
+padding:10px;
+margin: 0 15px 15px 0;
+background-color: #f4fce8;
+border: 1px solid #ededed;
+-moz-border-radius:5px;
+-o-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+ul li:nth-child(even) .selectServiceTemplate .service{
+padding:10px;
+margin: 0 0px 15px 0;
+background-color: #f4fce8;
+border: 1px solid #ededed;
+-moz-border-radius:5px;
+-o-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+.selectServiceTemplate .service .header{
+padding-bottom:10px;
+font-size: 24px;
+font-weight:bold;
+border-bottom: 1px solid #ededed;
+}
+
+
+.left{
+float:left;
+}
+
+.right{
+float:right;
+}
+
+.center{
+text-align:center;
+}
+
+.bold{
+font-weight:bold;
+}
+
+.errormessage{
+display:none;
+}
+.errormessage.show{
+display:block;
+color: red;
+}

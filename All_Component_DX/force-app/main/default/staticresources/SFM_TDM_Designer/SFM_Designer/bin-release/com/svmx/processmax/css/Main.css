@@ -1,0 +1,388 @@
+
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+/* Font */
+
+@font-face
+{
+	src:url("Convb-2.ttf");
+	font-family:"ConvectionCFF";
+	font-weight:bold;
+	font-style:normal;
+	embedAsCFF: true;
+}
+
+@font-face
+{
+	src:url("Conv-1.ttf");
+	font-family:"ConvectionCFF";
+	font-weight:normal;
+	font-style:normal;
+	embedAsCFF: true;
+}
+
+@font-face
+{
+	src:url("Convb-2.ttf");
+	font-family:"ConvectionMX";
+	font-weight:bold;
+	font-style:normal;
+	embedAsCFF: false;
+}
+
+@font-face
+{
+	src:url("Conv-1.ttf");
+	font-family:"ConvectionMX";
+	font-weight:normal;
+	font-style:normal;
+	embedAsCFF: false;
+}
+
+s|BorderContainer.formBorder{
+	skin-class:"com.svmx.processmax.views.skins.FormBorderContainerSkin";
+}
+mx|Form.formStyle{
+/*	border-style:solid;
+	border-color:#cccccc;*/
+	padding-bottom:2px;
+	padding-left:2px;
+	padding-right:2px;
+	padding-top:2px;
+}
+/* Buttons Skinning Style*/
+
+s|Button.rectButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.RectButtonSkinOrange");
+}
+.rectBlueButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.RectButtonSkinBlue");
+}
+
+.buttonRemoveOnOverButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ButtonRemoveOnOverBlueSkin");
+}
+.overCloseButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.OverCloseButtonSkin");
+}
+.closeButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.CloseButtonSkin");
+}
+
+.criteriaScreenButton{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.CriteriaBtnSkin");
+}
+
+s|Button.arrowBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ArrowBtnSkin");
+}
+
+s|Button.greenTickBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.GreenTickBtnSkin");
+}
+
+s|Button.addBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.AddBtnSkin");
+}
+
+s|ToggleButton.editListBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.EditListBtnSkin");
+}
+
+s|Button.saveBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.SaveBtnSkin");
+}
+
+s|Button.saveAsBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.SaveAsBtnSkin");
+}
+s|Button.editBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.EditBtnSkin");
+}
+s|Button.newBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.NewBtnSkin");
+}
+s|Button.newSmallBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.NewSmallBtnSkin");
+}
+s|Button.removeBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.DeleteBtnSkin");
+}
+s|Button.removeSmallBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.DeleteSmallBtnSkin");
+}
+s|Button.mainMenuBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.BarButtonSkin");
+}
+.buttonBarBtnSkin
+{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.ButtonBarBtnSkin");
+}
+.buttonBarFirstBtnSkin{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.BtnbarFirstBtnSkin");
+}
+.helpButton{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.CurvedButtonSkinBlue");
+}
+.cloneButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.CloneBtnSkin");
+}
+.optionButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.OptionBtnSkin");
+}
+.lookupButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.LookupBtnSkin");
+}
+.configureLookupBtn
+{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ConfigureLookupBtnSkin");
+}
+.removeButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.RemoveBtnSkin");
+}
+.viewButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ViewButtonSkin");
+}
+.activateButton{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ActivateBtnSkin");
+}
+s|ToggleButton.toggleSelectBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.SelectBtnSkin");
+}
+s|ToggleButton.toggleMinMaxBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.MinMaxBtnSkin");
+}
+s|ToggleButton.toggleMaximumBtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.MaximumBtnSkin");
+}
+s|ToggleButton.toggleEditBtn{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.buttons.EditBtnSkin");
+}
+
+/* ButtonBar Skinning Style*/
+s|ButtonBar.buttonBar{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ButtonbarSkin");
+}
+s|Button.bntbarFirstbtn{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.buttons.ButtonbarFirstBtnSkin");
+}
+/* Textbox Skinning Style*/
+
+s|TextInput
+{
+	skinClass: ClassReference("com.svmx.processmax.views.skins.texts.TextInputBorderSkin");
+	textIndent: 3;
+	fontSize: 12;
+}
+s|TextInput.textInput
+{
+	skinClass: ClassReference("com.svmx.processmax.views.skins.texts.TextInputBorderSkin");
+	textIndent: 3;
+	fontSize: 12;
+}
+s|TextInput.textComboInput
+{
+	skinClass: ClassReference("com.svmx.processmax.views.skins.combos.ComboTextInputSkin");
+}
+
+s|TextArea.textArea
+{
+	skinClass: ClassReference("com.svmx.processmax.views.skins.texts.TextAreaBorderSkin");
+	textIndent: 3;
+	fontSize: 12;
+}
+
+/* RichTextBox */
+s|RichText.mainButtonLabelStyle
+{
+	fontSize: 22;
+	textAlign: justify;
+	whiteSpaceCollapse: preserve;
+}
+s|RichText.headerTextOrange
+{
+	color: #ED6229;
+	fontFamily: Convection;
+	fontSize: 25;
+	kerning: off;
+	lineHeight: "80%";
+	textAlign: justify;
+	whiteSpaceCollapse: preserve;
+}
+
+
+s|TitleWindow.popUpTitleWindowSkin{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.PopUpTitleWindowSkin");
+}
+/* Panels Skinning Style */
+
+s|Panel#compPanel,#propPanel{
+	skin-class :ClassReference("com.svmx.processmax.views.skins.panels.BluePanelSkin");
+}
+
+s|Panel.bluePanel
+{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.BluePanelSkin");	
+}
+s|Panel.bluePanelWithIcon
+{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.BluePanelWithIconSkin");	
+}
+s|Panel.orangePanelSkin{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.PanelSkin");	
+}
+s|Panel.sectionLinePanel
+{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.BuilderPanelSkin");
+}
+
+s|Panel.createSourcePanel{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.SpecWrapperPanelSkin");
+}
+
+s|Panel.seleceTargetPanel{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.panels.MappningPanelSkin");
+}
+
+
+/* ScrollBar Skinning Style*/
+
+s|VScrollBar{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.scrolls.VScrollSkin");
+}
+s|HScrollBar{
+	skin-class:ClassReference("com.svmx.processmax.views.skins.scrolls.HScrollSkin");
+}
+
+/* ViewStack Skinning Style */
+.viewStack{
+	background-alpha:"0.0";
+}
+
+/*  DataGrid Skinning Style*/
+mx|DataGrid.dataGrid{
+	alternating-item-colors:#D8F2FA,#FDFFFF;
+	verticalGridLines: false;
+	vertical-grid-line-color:#009dff;
+	roll-over-color:#E4F7FC;
+	border-color:#009dff;
+	header-background-skin:ClassReference("com.svmx.processmax.views.skins.CDataGridHeader");
+	header-style-name:"boldHeader";
+}
+mx|DataGridItemRenderer{
+	font-family:"ConvectionMX";
+	font-size:14;
+}	
+
+mx|TabNavigator.mapNavigator{
+	font-family:"ConvectionMX";
+	font-size:14;
+}
+
+/* Label Skinning Style*/
+.boldHeader
+{
+	font-family:"ConvectionMX";
+	font-weight:bold;
+	font-size:14;
+}
+.boldHeaderForm
+{
+	font-family:"ConvectionMX";
+	font-weight:bold;
+	font-size:14;
+	background-color:#1BA8CF;
+}
+
+mx|Label
+{
+	font-family:"ConvectionMX";
+	font-size:14;
+}
+
+/* List Skinning Style */
+.dragList{
+	borderAlpha:"0.0";
+	alternatingItemColors:#F4FBFF,#FFFFFF;
+	contentBackgroundAlpha:"0.06";
+	contentBackgroundColor:"#1126F1";
+}
+
+s|List{
+	selection-color:#487598;
+	textSelectedColor:#ffffff;
+}
+
+s|DropDownList{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.combos.DropDownSkin");
+}
+/* Accordion Skinning Style*/
+.customAccordionHeadStyles {
+	skin: ClassReference("com.svmx.processmax.views.skins.CAccordionHeader");
+	color:#ffffff;
+	text-roll-over-color:#ffffff;
+}
+.accordionStyle{
+	textSelectedColor:#ffffff;
+	backgroundAlph:"0.0";
+	contentBackgroundAlpha:"0.0";
+	borderAlpha:"0.0" ;
+	header-style-name:"customAccordionHeadStyles";
+}
+
+/*mx|AccordionHeader
+{
+	font-family:"ConvectionMX";
+}*/
+
+/* Date Field Skinning Style*/
+mx|DateField
+{
+	font-family:"ConvectionMX";
+}
+
+/* Combobox Skinning Style*/
+s|ComboBox{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.combos.ComboSkin");
+}
+s|ComboBox.comboBox{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.combos.ComboSkin");
+}
+
+/* Skinning Container Skinning Style*/
+
+s|SkinnableContainer.mainSkinnableCont{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.LogoSkin");
+}
+s|SkinnableContainer.criteriaBgSkinnableCont{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.CriteriaBg");
+}
+
+/* Application Skinning Style*/
+
+.application{
+	skinClass:ClassReference("com.svmx.processmax.views.skins.MainAppBkgSkin");
+	font-family:"ConvectionCFF";
+	font-size:14;
+}
+
+.navContent
+{
+	font-family:"ConvectionCFF";
+	font-size:14;
+}
+
+mx|FormItemLabel{
+	text-align:left;
+	font-family:"ConvectionMX";
+}
+
+.done {
+	color: #006600;
+	fontWeight: bold;
+}
+.fail {
+	color: #565656;
+	font-style: italic
+}
