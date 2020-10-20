@@ -25,12 +25,22 @@ jobs:
       - id: set_var
         run: |
           content=`cat ./result.json`
-          # the following lines are only required for multi line json
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
-      - run: |
-          echo "${{fromJson(steps.set_var.outputs.resultJson).result.summary.passing}}"
+      - name: print    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}>=80 
+        run: |
+          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
+      - name: print    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}>=90 
+        run: |
+          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
+      - name: print    
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}!=0
+        run: |
+          echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+       
         
