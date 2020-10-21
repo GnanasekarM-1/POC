@@ -33,7 +33,7 @@ jobs:
            
              
       - name: Outcome  
-        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.outcome != "Passed"
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.outcome != 'Passed'
         run: |
              echo value of Outcome ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
              exit 1
