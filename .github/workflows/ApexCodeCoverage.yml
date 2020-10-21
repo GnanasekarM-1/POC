@@ -33,7 +33,7 @@ jobs:
            
              
       - name: Outcome  
-        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome != 0%
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome != "0%"
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
              exit 1
