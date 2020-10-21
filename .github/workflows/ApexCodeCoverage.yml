@@ -61,10 +61,5 @@ jobs:
       - name: OWD%
         run: |
               echo orgWideCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}}
-           
-      
       - name: Jobcompletion
         run: echo completed 
-       
-     
-          
