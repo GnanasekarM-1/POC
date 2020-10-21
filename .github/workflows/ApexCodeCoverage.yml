@@ -17,7 +17,7 @@ jobs:
       - name: testrun       
         id: testrun
         run: |
-           sfdx force:apex:test:run -l RunAllTestsInOrg -c  -w 10 -u th -r json >> result.json
+           sfdx force:apex:test:run -t LightningLoginFormControllerTest -c  -w 10 -u th -r json >> result.json
           
       # Use the output from the `hello` step
    
