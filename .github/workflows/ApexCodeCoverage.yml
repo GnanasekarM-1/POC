@@ -42,7 +42,7 @@ jobs:
         run: |
               echo testclass run successful and passRate is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.passRate}}
              
-      - name: testRunCoverage <= '80%'  
+      - name: testRunCoverage less than '80%'  
         if: fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= '80%'
         run: |
            echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}} <= '80%'
@@ -52,7 +52,7 @@ jobs:
         run: |
               echo testRunCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
            
-      - name: orgWideCoverage <= '90%'  
+      - name: orgWideCoverage less than '90%'  
         if: fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage <= '90%'
         run: |
           echo orgWideCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}} <= '90%'
