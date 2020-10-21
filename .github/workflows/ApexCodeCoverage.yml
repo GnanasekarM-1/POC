@@ -42,10 +42,10 @@ jobs:
         run: |
               echo testclass run successful and passRate is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.passRate}}
              
-      - name: testRunCoverage less than '80%'  
-        if: fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= '80%'
+      - name: TestRunCoverage less than 80%  
+        if: fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage < '80%'
         run: |
-           echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}} <= '80%'
+           echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}} < '80%'
            exit 1
         
       - name: testRunCoverage%
@@ -53,9 +53,9 @@ jobs:
               echo testRunCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
            
       - name: orgWideCoverage less than '90%'  
-        if: fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage <= '90%'
+        if: fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage < '90%'
         run: |
-          echo orgWideCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}} <= '90%'
+          echo orgWideCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}} < '90%'
           exit 1
           
       - name: OWD%
