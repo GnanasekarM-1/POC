@@ -30,12 +30,10 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
-          echo "::set-output name=Outcome::$${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
-          
+           
              
       - name: Outcome  
-       
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}} != '0%'
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}} != 0%
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
              exit 1
