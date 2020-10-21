@@ -40,7 +40,7 @@ jobs:
               echo testclass run successful and passRate is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.passRate}}
               
       - name: testRunCoverage_fails  
-        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= '76%'
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= '76'
         run: |
           echo current testRunCoverage is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}} which is less than 75%
           exit 1
