@@ -17,10 +17,9 @@ jobs:
       - name: testrun       
         id: testrun
         run: |
-           sfdx force:apex:test:run -t LightningLoginFormControllerTest -c  -w 10 -u th -r json 
+           sfdx force:apex:test:run -t LightningLoginFormControllerTest -c  -w 10 -u th -r json >> resultJson.json
           
       # Use the output from the `hello` step
-   
        
       - id: set_var
         run: |
@@ -30,6 +29,7 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
+          
            
              
       - name: passRate  
