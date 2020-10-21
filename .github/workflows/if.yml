@@ -31,7 +31,7 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
  
-         
+          id: reporter 
           with:
           cond: ${{ fromJson(steps.set_var.outputs.resultJson).result.summary.failRate }}! = 0
           if_true: "exit 0"
