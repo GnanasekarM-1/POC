@@ -12,12 +12,12 @@ jobs:
       - name: 'AUTH_SECRET'
         run: |
               ls -la
-              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DEVHUB
+              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
       
       - name: testrun       
         id: testrun
         run: |
-           sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DEVHUB -r json >> result.json
+           sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u DH3 -r json >> result.json
           
       # Use the output from the `hello` step
    
@@ -30,9 +30,8 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
+          
       - name: Fail_Rate   
-       
-            
         if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}} != "Passed"
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
