@@ -32,10 +32,10 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
           
-      - name: Fail_Rate   
+      - name: Outcome  
         if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}} != "Passed"
         run: |
-             echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+             echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
              exit 1
              
       - name: testRunCoverage    
