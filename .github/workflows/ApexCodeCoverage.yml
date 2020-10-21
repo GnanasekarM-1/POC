@@ -12,12 +12,12 @@ jobs:
       - name: 'AUTH_SECRET'
         run: |
               ls -la
-              sfdx force:auth:sfdxurl:store -f ./authurl -s -a th
+              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
       
       - name: testrun       
         id: testrun
         run: |
-           sfdx force:apex:test:run -l RunLocalTests -d ./ -c  -w 10 -u th -r json >> result.json
+           sfdx force:apex:test:run -l RunLocalTests -d ./ -c  -w 10 -u DH3 -r json >> result.json
           
       # Use the output from the `hello` step
        
