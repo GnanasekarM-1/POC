@@ -50,7 +50,7 @@ jobs:
               echo testRunCoverage passes with ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}%
      
       - name: orgWideCoverage_fails  
-        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage <= '80%'
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage <= 80
         run: |
           echo failed due to current orgWideCoverage passes is ${{fromJson(steps.set_var.outputs.resultJson).result.summary.orgWideCoverage}} which is less than 80%
           exit 1
