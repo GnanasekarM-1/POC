@@ -17,7 +17,6 @@ jobs:
       - name: testrun       
         id: testrun
         run: |
-           sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u th -r human
            sfdx force:apex:test:run -l RunLocalTests -c  -w 10 -u th -r json >> result.json
           
       # Use the output from the `hello` step
@@ -32,8 +31,10 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
           
+             
       - name: Outcome  
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}} != "Passed"
+       
+        if: 1% == 0%
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.Outcome}}
              exit 1
