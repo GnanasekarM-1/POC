@@ -34,7 +34,7 @@ jobs:
         
         if: contains(${{ fromJson(steps.set_var.outputs.resultJson).result.summary.failRate }}, > 0)
         run: |
-             ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+             echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
              exit 1
              
       - name: testRunCoverage    
