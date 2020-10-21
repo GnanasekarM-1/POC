@@ -32,13 +32,13 @@ jobs:
           echo "::set-output name=resultJson::$content"
       - name: Fail_Rate    
         
-        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}} != "0%" 
+        if: ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}} != 0%
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
              exit 1
              
       - name: testRunCoverage    
-        if:  ${{ fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage }} <= "80%"
+        if:  ${{ fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage }} <= 80%
         run: |
            echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
            exit 1
