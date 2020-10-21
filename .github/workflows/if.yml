@@ -30,19 +30,11 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=resultJson::$content"
-          
-          rate=fromJson(steps.set_var.outputs.resultJson).result.summary.failRate
-          echo "::set-output name=rate::$rate"
-          run: echo "::set-env name=DAY_OF_WEEK::$( date +%a )"
-          run: echo "Somebody has a case of the mondays!"
-          if: env.DAY_OF_WEEK == 'Mon'
-          run: echo "This runs every day..."
-      
       - name: Fail_Rate    
         
-        if: ${{fromJson(steps.set_var.outputs.rate)}} = 0
+        if: contains(${{ fromJson(steps.set_var.outputs.resultJson).result.summary.failRate }}, 0)
         run: |
-             echo failRate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
+             ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
              exit 1
              
       - name: testRunCoverage    
