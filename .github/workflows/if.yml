@@ -32,7 +32,7 @@ jobs:
           echo "::set-output name=resultJson::$content"
       - name: Fail_Rate    
         
-        if: ${{ fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage }} != 0 
+        if: 0 != 0 
         run: |
              echo value of rate ${{fromJson(steps.set_var.outputs.resultJson).result.summary.failRate}}
              exit 1
