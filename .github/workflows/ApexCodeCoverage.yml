@@ -1,7 +1,7 @@
 on: push
 
 jobs:
- ApexCodeCoverage:
+ CodeCoverage:
     runs-on: ubuntu-latest  
     
     steps:
