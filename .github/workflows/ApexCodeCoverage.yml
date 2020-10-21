@@ -33,7 +33,7 @@ jobs:
            
              
       - name: passRate  
-        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.passRate != '100'
+        if:  fromJson(steps.set_var.outputs.resultJson).result.summary.passRate != '100%'
         run: |
              echo value of Outcome ${{fromJson(steps.set_var.outputs.resultJson).result.summary.passRate}}
              exit 1
