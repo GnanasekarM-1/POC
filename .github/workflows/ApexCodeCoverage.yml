@@ -14,7 +14,7 @@ jobs:
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
       
-      - name: testrun       
+      - name: TestRun      
         id: testrun
         run: |
            sfdx force:apex:test:run -l RunLocalTests -d ./ -c  -w 10 -u DH3 -r json >> result.json
