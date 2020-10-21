@@ -39,7 +39,7 @@ jobs:
              exit 1
              
       - name: testRunCoverage    
-        if: fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= 80%
+        if: fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage <= "80%"
         run: |
            echo ${{fromJson(steps.set_var.outputs.resultJson).result.summary.testRunCoverage}}
            exit 1
