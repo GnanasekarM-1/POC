@@ -20,6 +20,7 @@ jobs:
         run: |
            mkdir report
            sfdx force:apex:test:run -l RunAllTestsInOrg -d ./report/ -c  -w 10 -u DH3 -r json >> result.json
+           ls
       - id: set_var
         run: |
           content=`cat ./result.json`
