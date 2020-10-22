@@ -11,6 +11,7 @@ jobs:
       run: |
         git clone https://github.com/Gnanasekar-m/POC.git 
     - name: curl
+      run: |
         cd POC
         sh 'curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar'
         sh 'npm install'
