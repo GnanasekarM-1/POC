@@ -9,12 +9,7 @@ jobs:
     - name: clone
       run: |
         git clone https://github.com/Gnanasekar-m/POC.git 
-        cd POC
-        ls
-        npm install
-        npm run sf-build
-        npm test
- 
+        
     - name: clone
       run: |
          cd POC/dc
