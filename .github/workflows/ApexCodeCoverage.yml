@@ -1,3 +1,5 @@
+name: CodeCoverage
+
 on:
   workflow_dispatch:
 
