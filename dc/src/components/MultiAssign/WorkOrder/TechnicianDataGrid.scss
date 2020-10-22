@@ -1,0 +1,109 @@
+@import "theme/variables";
+
+.TechnicianDataGrid {
+  .TechnicianDataGrid__GridRow {
+    margin: 0.25rem 0.25rem;
+  }
+  .TechnicianDataGrid__GridItem {
+    margin: 0px 0.25rem;
+  }
+  .TechnicianDataGrid__GridItem-vcenter {
+    margin: auto;
+    label .slds-checkbox--faux {
+      margin-left: 0.5rem;
+      margin-right: 0.3rem;
+    }
+  }
+  .TechnicianDataGrid__GridItem-search {
+    min-width: 24%;
+    max-width: 24%;
+  }
+  .TechnicianDataGrid__Column-center {
+    justify-content: space-around;
+  }
+
+  .TechnicianDataGrid__data-grid {
+    .rt-table {
+      overflow: hidden;
+
+      .rt-thead {
+        .rt-th:last-child {
+          padding-right: 5px !important;
+        }
+      }
+
+      .rt-tbody {
+        height: 33vh;
+        overflow: auto;
+
+        .rt-td:last-child {
+          padding-right: 5px !important;
+        }
+
+        .long-and-truncated {
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .DateTimeInput {
+          position: absolute;
+          background: white;
+          width: 15rem;
+          padding: 0.2rem;
+          box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);
+          border: 1px solid rgb(221, 219, 218);
+          margin-left: -0.2rem;
+          margin-top: -0.2rem;
+          z-index: 10;
+        }
+
+        .allDay .DateInput {
+          position: absolute;
+          width: inherit;
+          background: white;
+          padding: 0.2rem;
+          box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);
+          border: 1px solid rgb(221, 219, 218);
+          margin-left: -0.2rem;
+          margin-top: -0.2rem;
+          z-index: 10;
+        }
+
+        .rt-tr-group:nth-child(n + 14) .DateInput .Datepicker {
+          top: unset;
+          bottom: 32px;
+        }
+
+        .Picklist .Menu {
+          position: absolute;
+          width: auto;
+          left: inherit;
+          top: inherit;
+        }
+
+        .rt-tr-group:nth-child(n + 14) .Picklist .Menu {
+          top: unset;
+          bottom: 32px;
+        }
+
+        .overlapping__constrast {
+          .label,
+          .slds-form-element__label {
+            color: #000;
+          }
+          // background-color: darkorange;
+        }
+
+        .overlapping__light {
+          .label,
+          .slds-form-element__label {
+            color: #fff;
+          }
+          // background-color: darkorange;
+        }
+      }
+    }
+  }
+}

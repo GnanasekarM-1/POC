@@ -1,0 +1,17 @@
+.DeployUISettingsModal {
+  .DeployUISettingsModal__Header {
+  }
+  .DeployUISettingsModal__Content {
+    min-height: 50vh;
+
+    .DeployUISettingsContainer__Tab {
+      border-bottom: 0;
+    }
+  }
+  .DeployUISettingsModal__Footer {
+  }
+}
+
+.DeployUISettingsModal__console-content {
+  padding: 20px;
+}

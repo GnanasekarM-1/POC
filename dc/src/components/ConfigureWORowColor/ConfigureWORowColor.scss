@@ -1,0 +1,86 @@
+.ConfigureWORowColor__tab {
+  height: 375px;
+  overflow: auto;
+}
+
+//CSS For ColorRule Tab
+.ColorRules__grid {
+  min-height: 300px;
+
+  .ColorRules__grid-column {
+    justify-content: space-around;
+  }
+}
+.ColorRules__addRule {
+  color: blue;
+  cursor: pointer;
+  padding-top: 10px;
+}
+.ColorRules__newColorRule {
+  margin-right: 10px;
+}
+.ColorRules__deleteIcon {
+  fill: #3498db;
+}
+.ColorRules__grid--selected {
+  background: #808080;
+  color: #ffffff;
+}
+
+.ColorRules__DataGrid {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+//CSS For ColorCounters Tab
+.ColorCounters__items {
+  margin-right: 10px;
+}
+.ColorCounters__picklist {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+//CSS for NewColorRule Section
+.NewColorRule__ruleExpression {
+  margin-top: 5px;
+  .NewColorRule__items {
+    //  max-height: 120px;
+    //  overflow:auto;
+  }
+
+  .Picklist__container {
+    .Menu__list {
+      max-height: 140px;
+    }
+  }
+}
+
+.NewColorRule__RuleName {
+  padding-right: 20px;
+}
+
+.RuleExpression__addExpression {
+  color: blue;
+  cursor: pointer;
+}
+
+//CSS for RuleExpression Section
+.RuleExpression__item {
+  margin-bottom: 10px;
+}
+
+.RuleExpression__items {
+  padding-right: 15px;
+}
+
+.NewColorRule__Wrapper {
+  width: 100%;
+}
+
+.ColorHighlight {
+  .slds-col {
+    padding-right: 0.25rem !important;
+    padding-left: 0.75rem !important;
+  }
+}

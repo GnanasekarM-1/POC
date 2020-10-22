@@ -1,0 +1,68 @@
+@import "theme/variables";
+
+.StatusBar {
+  background-color: #ebe9e8;
+  width: 100%;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+
+  .StatusBar__Progress {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 5rem;
+  }
+
+  .warning {
+    blink {
+      animation: blinker 1s linear infinite;
+      color: $svmx-progress-failure;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .slds-icon-text-default {
+    fill: $svmx-icon-hover;
+    margin-right: 5px;
+  }
+  .Button,
+  .slds-scope .Button {
+    overflow: inherit;
+  }
+  .slds-spinner_small,
+  .slds-spinner--small {
+  }
+}
+
+.ResizableLayoutControlled_container {
+  .ResizableLayout__alert {
+    flex: none !important;
+    height: auto;
+  }
+}
+
+.StatusBar__content {
+  text-align: center;
+  word-wrap: break-word;
+  /* border: 1px gray solid; */
+  width: 100%;
+  height: 10%;
+  /* background-color: aliceblue; */
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  /* font-family: sans-serif;*/
+}
+
+.StatusBar__loading {
+  position: relative;
+  width: 32px;
+  vertical-align: middle;
+}

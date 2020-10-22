@@ -1,0 +1,128 @@
+@import "theme/variables";
+.CreateEventModal {
+  .ModalHeader__tagline {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    line-height: 44px;
+  }
+
+  .CreateEventModal__Header {
+  }
+  .CreateEventModal__Content {
+    min-height: 50vh;
+    overflow: hidden;
+
+    .Tabs .Tab__item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .CreateEventModal__Footer {
+    .StatusBar {
+      background-color: #ebe9e8;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .StatusBar__Text {
+        height: 100%;
+        display: flex !important;
+        align-items: center;
+        position: relative;
+        left: 5rem;
+      }
+
+      .warning {
+        blink {
+          animation: blinker 1s linear infinite;
+          color: $svmx-progress-failure;
+        }
+        @keyframes blinker {
+          50% {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      svg {
+        fill: #f0733f;
+        margin-right: 5px;
+      }
+    }
+  }
+  .CreateEventModal__Footer-text {
+    display: flex;
+    align-items: center;
+    .error {
+      color: $svmx-progress-failure;
+    }
+  }
+}
+
+.EditEventModal {
+  .ModalHeader__tagline {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    line-height: 44px;
+  }
+  .EditEventModal__Header {
+  }
+  .EditEventModal__Content {
+    min-height: 50vh;
+    overflow-y: hidden;
+
+    .Tabs .Tab__item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .EditEventModal__Footer {
+    .StatusBar {
+      background-color: #ebe9e8;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .StatusBar__Text {
+        height: 100%;
+        display: flex !important;
+        align-items: center;
+        position: relative;
+        left: 5rem;
+      }
+
+      .warning {
+        blink {
+          animation: blinker 1s linear infinite;
+          color: $svmx-progress-failure;
+        }
+        @keyframes blinker {
+          50% {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      svg {
+        fill: #f0733f;
+        margin-right: 5px;
+      }
+    }
+  }
+  .EditEventModal__Footer-text {
+    display: flex;
+    align-items: center;
+    .error {
+      color: $svmx-progress-failure;
+    }
+  }
+}

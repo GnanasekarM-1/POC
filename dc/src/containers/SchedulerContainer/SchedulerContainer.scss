@@ -1,0 +1,24 @@
+.GridContainer {
+  overflow: hidden;
+  height: 100%;
+  display: inline-flex;
+  width: inherit;
+
+  .SchedulerContainer__grid-row {
+    height: 75%;
+  }
+
+  .GridRow__gridViewToolbar {
+    flex: 0;
+  }
+
+  .GridItem__gridView {
+    height: 100%;
+    width: 100%;
+
+    .GridView {
+      min-height: 0px;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.ModalHeader__title {
+  font-weight: bold;
+}
+.ConfigureQueueModal_DuelingPicklist {
+  margin: 10px 10px 10px 20px;
+}
+
+.ConfigureQueueModal__Footer {
+  display: flex;
+  align-items: center !important;
+  .ConfigureQueueModal__Footer-reload {
+    justify-content: start;
+  }
+}

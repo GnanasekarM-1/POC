@@ -1,0 +1,12 @@
+.TimeZoneModal {
+  .TimeZoneModal__content {
+    padding: 0.5rem;
+    .Picklist__container {
+      width: 100%;
+      .Menu {
+        width: 97.5%;
+        position: fixed;
+      }
+    }
+  }
+}

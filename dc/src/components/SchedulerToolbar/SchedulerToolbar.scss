@@ -1,0 +1,68 @@
+@import "theme/variables";
+
+.SchedulerToolbar {
+  height: 4rem;
+  background: white;
+  display: flex;
+  min-width: 70%;
+  max-height: 4.5em;
+
+  .slds-button {
+    display: inline-block;
+  }
+
+  .SchedulerToolbar__Group {
+    margin: 0px 0.25rem;
+    justify-items: center;
+  }
+
+  .SchedulerToolbar__SubGroup {
+    display: flex;
+    justify-items: center;
+    justify-content: space-around;
+  }
+
+  .SchedulerToolbar__Item {
+    margin: auto 0.1rem;
+
+    .slds-size--xx-small {
+      min-width: 8rem;
+    }
+    .DateInput .Datepicker {
+      position: fixed;
+      left: inherit;
+      top: inherit;
+    }
+  }
+
+  .SchedulerToolbar__Separator {
+    margin: 0.5rem 0rem;
+    background-color: lightgray;
+    width: 0.15rem;
+  }
+
+  .SchedulerToolbar__Group-techSearch {
+    min-width: 17rem;
+
+    .Search__container {
+      width: 100%;
+    }
+  }
+
+  .SchedulerToolbar__Reset {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .SchedulerToolbar__Reset-highlight {
+    background-color: yellow;
+  }
+}
+
+.slds-button:hover span g,
+.slds-button:focus span g {
+  fill: $svmx-icon-hover;
+}
+
+.SchedulerConfig__container {
+  margin-top: 22px;
+}

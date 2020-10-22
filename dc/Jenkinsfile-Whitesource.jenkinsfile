@@ -1,0 +1,42 @@
+node('MacStadium') {
+    currentBuild.description = ''
+    def commitMessage = 'unknown commit message'
+
+    try {
+        
+        stage('Checkout') {
+            timeout(time: 30, unit: 'MINUTES') {
+                // Clean up workspace
+                step([$class: 'WsCleanup'])
+                checkout scm
+                commitMessage = sh returnStdout: true, script: "git log --pretty=format:'%h - %s <%an>' -1"
+                echo commitMessage
+            }
+        }
+        stage('Download WS Files') {
+           sh 'curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar'
+        }
+        
+        stage('Install Dependencies') {
+            sh 'npm install'
+        }
+
+        stage('Scan') {
+            timeout(time: 30, unit: 'MINUTES') {
+                sh 'npm run whitesource'
+            }
+        }
+
+        currentBuild.result = 'SUCCESS'
+     //   slackSend channel: '#test', color: 'good', message: "✅ dcx Whitesource scan succeeded: ${env.JOB_NAME}/${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+    } catch (all) {
+        error "Build failed: ${all}"
+        currentBuild.result = 'FAILURE'
+    //    slackSend channel: '#test', color: 'danger', message: "❌ dcx Whitesource scan failed: ${all} ${env.JOB_NAME}/${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+    }
+
+    currentBuild.description += "<br/>built on ${env.NODE_NAME}, duration: ${currentBuild.durationString}"
+
+    // Clean up workspace
+    step([$class: 'WsCleanup'])
+}

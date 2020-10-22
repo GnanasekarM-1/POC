@@ -1,0 +1,182 @@
+.GridViewToolbar {
+  height: 4.2rem;
+  width: 100%;
+  min-width: 76rem;
+
+  .GridViewToolbar__Layout-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .GridViewToolbar__GridRow-input {
+    height: 2.2rem;
+  }
+
+  .GridViewToolbar__setting-container {
+    padding-left: 0;
+  }
+
+  .GridViewToolbar__GridItem {
+    display: flex;
+    align-items: center;
+    .GridViewToolbar__GridItem-search {
+      min-width: 14rem;
+    }
+  }
+
+  .GridViewToolbar__WOConfigure {
+    display: flex;
+    height: 2.2rem;
+    align-items: center;
+
+    .GridViewToolbar__WOConfigure-action {
+      margin: auto 0.1rem;
+    }
+
+    .GridViewToolbar__WOConfigure-timer {
+      width: 2rem;
+      margin: 0.6rem 0.25rem;
+    }
+  }
+  .Picklist__container {
+    width: 12rem;
+  }
+  li.Menu__item.slds-dropdown__item.slds-has-divider--top-space {
+    border-top: 2px solid #b0b0b7;
+  }
+}
+
+.Filter__Wrapper {
+  .Picklist .Menu {
+    // position: fixed !important;
+    min-width: 12rem !important;
+  }
+  .Picklist .Menu.Menu--size-block {
+    width: fit-content;
+    max-width: fit-content;
+  }
+}
+
+.View__Wrapper {
+  .Picklist .Menu {
+    // position: fixed !important;
+    min-width: 12rem !important;
+  }
+
+  .Picklist .Menu.Menu--size-block {
+    width: fit-content;
+    max-width: fit-content;
+  }
+
+  .View__label {
+    padding-left: 0.75rem;
+    margin-bottom: 0;
+  }
+
+  .GridViewToolbar__GridRow-input {
+    padding-left: 0.75rem;
+  }
+
+  .wrap select::-moz-focus-inner {
+    border: 0;
+    outline: 0;
+  }
+
+  .Menu__list {
+    max-height: 170px;
+  }
+}
+
+//Status classes
+.Status__statusBox {
+  float: left;
+  width: 13.5rem;
+  height: 4.5rem;
+  line-height: 2.3;
+  margin-left: 5px;
+
+  .Status__checkboxContainer {
+    display: inline-flex;
+    width: 14rem;
+    vertical-align: middle;
+    height: 2rem;
+  }
+}
+
+//View classes
+.View__wrapper {
+  float: left;
+  line-height: 2.3;
+  height: 4.5rem;
+
+  .View__viewBox {
+    float: left;
+    height: 4.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    .View__counter {
+      position: absolute;
+      top: 2px;
+      left: 45px;
+    }
+  }
+
+  .View__defalutCheck {
+    float: left;
+    margin-left: 5px;
+    position: relative;
+    top: 2rem;
+  }
+}
+
+//Filter classes
+.Filter__wrapper {
+  float: left;
+  line-height: 2.3;
+  height: 4.5rem;
+  .Filter__filterBox {
+    float: left;
+    height: 4.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .Filter__containsBox {
+    float: left;
+    height: 4.5rem;
+    line-height: 7.5;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    input {
+      width: 9.5rem;
+    }
+  }
+}
+
+//Counter Classes
+.Counter_viewBadge {
+  position: relative;
+  top: 3px;
+  margin-left: 0 !important;
+}
+
+//WOCOnfig classes
+.WOConfigure__reloadContainer {
+  float: right;
+  position: relative;
+  top: 2.3rem;
+
+  svg {
+    float: left;
+    margin-right: 5px;
+    fill: #006bd6;
+  }
+}
+
+.Filter_picklist-container {
+  .Menu__list {
+    max-height: 170px;
+  }
+}
