@@ -1,6 +1,7 @@
 name: Npm
 
-on: push
+on:
+  workflow_dispatch:
 jobs:
  Npm:
     runs-on: ubuntu-latest 
