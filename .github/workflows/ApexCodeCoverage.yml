@@ -19,11 +19,9 @@ jobs:
         id: testrun
         run: |
            mkdir report
-           sfdx force:apex:test:run -l RunAllTestsInOrg -d ./report/ -c  -w 10 -u DH3 -r json >> result.json
            continue-on-error: true
-          
-      # Use the output from the `hello` step
-       
+           sfdx force:apex:test:run -l RunAllTestsInOrg -d ./report/ -c  -w 10 -u DH3 -r json >> result.json
+        
       - id: set_var
         run: |
           content=`cat ./result.json`
