@@ -1,7 +1,9 @@
+
+name: whitesource
 on: push
-  
-  jobs:
- Npm:
+
+jobs:
+ whitesource:
     runs-on: ubuntu-latest 
     
     steps:
