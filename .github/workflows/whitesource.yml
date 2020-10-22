@@ -1,0 +1,16 @@
+on: push
+  
+  jobs:
+ Npm:
+    runs-on: ubuntu-latest 
+    
+    steps:
+    - name: checkout
+      run: |
+        git clone https://github.com/Gnanasekar-m/POC.git 
+    - name: curl
+        cd POC
+        sh 'curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar'
+        sh 'npm install'
+        sh 'npm run whitesource'
+    
