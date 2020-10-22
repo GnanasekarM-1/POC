@@ -1,0 +1,14 @@
+.ApplicationError {
+  .BuilderHeader__item-label {
+    cursor: default;
+    .slds-media__body {
+      font-size: 18px;
+    }
+  }
+  .Details {
+    margin: 1em;
+    p {
+      white-space: pre-wrap;
+    }
+  }
+}

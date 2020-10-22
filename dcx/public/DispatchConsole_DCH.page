@@ -1,0 +1,59 @@
+<apex:page controller="DispatchConsole_DCH"  title="DispatchConsole" standardStylesheets="true" >
+  <!-- <apex:outputText rendered="{!enableUsageStats}"> -->
+  <apex:outputText>
+    <apex:includeScript value="{!URLFOR($Resource.ServiceMax_usage_lib , 'ServiceMax_usage_lib/ServiceMax_usage_lib.js')}"/>
+  </apex:outputText>
+   
+       <script type="text/javascript">
+        function getConfigData()
+        {       
+            var configData = {};           
+            configData.sessionId = "{!$Api.Session_ID}";
+            configData.baseUrl = "{!$Site.BaseUrl}";
+            configData.sitePrefix =  "{!$Site.Prefix}";
+            configData.userId = UserContext.userId;
+            configData.userTimezone = "{!UserTimezone}";    
+            configData.isVFpage = true;                     
+            configData.namespace = "SVMXDEV";   
+            configData.Title = "{!TAG464}"; 
+            configData.LFSettings = "Loading Configuration";//"{!TAG029}";
+            configData.LWO = "Loading Work Orders";//"{!TAG030}";
+            configData.LTech ="Loading Technicians";//"{!TAG032}";
+            configData.LUISettings = "Loading User Settings";//"{!TAG028}";    
+            configData.LViews="Loading Views";   
+            window.configData = configData;
+        }
+        getConfigData();
+    </script>
+<html lang="en" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="{!URLFOR($Resource.dcx_production, 'DCx-production')}/manifest.json" />
+  <link rel="shortcut icon" href="{!URLFOR($Resource.dcx_production, 'DCx-production')}/favicon.ico" />
+  
+
+  <link href="{!URLFOR($Resource.dcx_production, 'DCx-production')}/static/css/1.f7b65cc4.chunk.css" rel="stylesheet" />
+<link href="{!URLFOR($Resource.dcx_production, 'DCx-production')}/static/css/main.4902cc17.chunk.css" rel="stylesheet" />
+ 
+  <title>ServiceMax</title>
+  <apex:slds />
+</head> 
+ 
+<body>
+  <div class="slds-scope"><noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </div>
+  <script>
+    var isRemote = !0,
+      PUBLIC_URL = "{!URLFOR($Resource.dcx_production, 'DCx-production')}",
+      ASSET_ROOT = "{!URLFOR($Asset.SLDS)}"
+  </script>
+ <script type="text/javascript" src="{!URLFOR($Resource.dcx_production, 'DCx-production')}/static/js/runtime~main.js"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.dcx_production, 'DCx-production')}/static/js/1.ac7fd0aa.chunk.js"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.dcx_production, 'DCx-production')}/static/js/main.9ec28fe7.chunk.js"></script>
+</body>
+</html>
+  </apex:page>

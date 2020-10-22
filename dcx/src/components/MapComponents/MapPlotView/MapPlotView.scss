@@ -1,0 +1,239 @@
+@import "theme/variables.scss";
+
+.RadioButton_toolbar {
+  display: inline !important;
+  margin-left: 0.1rem !important;
+  .slds-form-element__label {
+    color: #ffffff !important;
+  }
+}
+.gm-style-mtc div {
+  min-width: 90px !important;
+}
+
+.gm-style .gm-style-mtc label {
+  vertical-align: sub !important;
+}
+
+.DateInput_toolbar {
+  //position: fixed !important;
+}
+
+.ResizableLayout__map.vertical.reflex-element {
+  //display: flow-root;
+  //display: grid;
+  overflow-x: hidden !important;
+  .slds-container--fluid.slds-container--left {
+    //display: block;
+    //width: fit-content!important;
+    //width: calc(100%)!important;
+  }
+}
+
+.PlotView_toolbar_InnerHeader {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  //overflow: hidden;
+  //overflow: auto !important;
+  //overflow-x: auto !important;
+  //overflow-y: hidden !important;
+}
+
+.PlotView_toolbar {
+  background-color: $popover-walkthrough-color-background; //$color-light-gray;
+  overflow-x: auto !important;
+  padding: 2px 4px;
+  white-space: nowrap !important;
+  overflow: auto !important;
+  overflow-y: hidden !important;
+  width: "fit-content";
+  height: 3.125rem;
+  justify-content: flex-start;
+  align-items: center;
+  display: block;
+  //max-width: 22rem;
+}
+
+.PlotView_toolbar::-webkit-scrollbar {
+  //width: 10px;
+  height: 10px;
+}
+
+/* Track */
+.PlotView_toolbar::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 1);
+  //box-shadow: inset 0 0 10px rgba(241,241,241,1);
+}
+
+/* Handle */
+.PlotView_toolbar::-webkit-scrollbar-thumb {
+  background: rgba(193, 193, 193, 1);
+  //box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Handle on hover */
+.PlotView_toolbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(169, 169, 169, 1);
+}
+
+/*.PlotView_toolbar::-webkit-scrollbar-button:double-button {
+    background-color: #FF0000;
+    display: flex;
+    border-style: solid;
+    height: 1px;
+    width: 1px;
+  }
+  .PlotView_toolbar::-webkit-scrollbar-button:single-button {
+    background-color: #FF0000;
+    display: flex;
+    border-style: solid;
+    //height: 1px;
+    //width: 1px;
+  }
+
+  .PlotView_toolbar::-webkit-scrollbar-button:single-button:horizontal:increment {
+    width: 10px; 
+    height: 10px; 
+    border-top: 5px solid transparent; 
+    border-bottom: 5px solid transparent; 
+    border-left: 5px solid #FF0000;
+    //position:absolute;
+    //right:-20px;
+  }
+
+  .PlotView_toolbar::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    //width: 10px; 
+    //height: 10px; 
+    border-top: 5px solid transparent; 
+    border-bottom: 5px solid transparent; 
+    border-right: 5px solid #FF0000;
+    //position:absolute;
+    //right:-20px;
+  }*/
+
+.PlotView__toolBar_buttons {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+.PlotView__toolBar_SearchRadius_Menu {
+  width: 12em !important;
+  position: absolute !important;
+  left: 7em !important;
+}
+
+.PlotView__toolBar_labels {
+  color: #ffffff !important;
+}
+
+.PlotView__toolBar_icons {
+  fill: #ffffff !important;
+}
+
+.PlotView_plot_button_toolbar {
+  background-color: #dddbda; //$color-light-gray;
+  overflow-x: scroll !important;
+  padding: 2px 4px;
+  white-space: nowrap !important;
+  overflow: auto !important;
+  width: "fit-content";
+  height: 3.125rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.PlotView__buttons {
+  align-items: center;
+  background-color: $color-light-gray;
+  display: flex;
+  justify-content: center;
+  //margin: 5px;
+  padding: 2px 4px;
+}
+
+.PlotView__dataGrid {
+  height: 10px;
+  overflow-y: hidden;
+  white-space: nowrap;
+  overflow-x: hidden !important;
+  .rt-table {
+    overflow-x: hidden !important;
+  }
+}
+
+.DataGrid.DataGrid--fixed-header .rt-tbody {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.DataGrid.DataGrid--fixed-header .rt-thead {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.PlotView__radiusComponent {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  margin: 5px;
+  .Picklist__container {
+    max-width: 4rem;
+    margin-right: 20px;
+  }
+  .Picklist {
+    max-width: 70px;
+    width: 70px;
+    min-width: max-content;
+  }
+  .Picklist .Menu {
+    width: 10px !important ;
+    //min-width: 60px!important ;
+  }
+  .slds-input {
+    max-width: 80px;
+  }
+  .slds-dropdown__item {
+    //padding: 0.5rem 2.2rem;
+  }
+}
+
+.PlotView__radiusPickList {
+  width: 60px;
+}
+
+.PlotView__radiusStepper {
+  max-width: 80px;
+}
+
+.PlotView__spinner {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+body.slds-scope .DatePicker {
+  left: 35%;
+  margin: 0;
+}
+
+.tab div {
+  background-image: none;
+  padding: 0;
+}
+
+.PlotView_dateInputModified {
+  .Datepicker {
+    z-index: 70000;
+    left: 0;
+    top: 32px;
+    position: fixed;
+    /* top: 30px; */
+    /* left: 50px; */
+    margin: 0px;
+    /* padding-left: 100px; */
+    margin-left: calc(100% - 355px);
+  }
+}
