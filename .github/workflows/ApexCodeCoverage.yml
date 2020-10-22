@@ -19,6 +19,7 @@ jobs:
         id: testrun
         run: |
            mkdir report
+           set +e
            ./sfdx.sh
            ls
       - id: set_var
