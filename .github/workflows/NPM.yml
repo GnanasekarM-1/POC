@@ -14,14 +14,13 @@ jobs:
         npm install
         npm run sf-build
         npm test
-
-    steps:
+ 
     - name: clone
-       run: |
-        cd POC/DCX
-        npm install
-        npm run sf-build
-        npm test
+      run: |
+         cd POC/dc
+         npm install
+         npm run sf-build
+         npm test
 
 
 
