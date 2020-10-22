@@ -1,229 +1,243 @@
-#!groovy
+	#!groovy
 
-import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+	import groovy.json.JsonSlurperClassic
+	import groovy.json.JsonSlurper
 
 
-node ('DCx-Windows') 
-{
+	node ('DCx-Windows') 
+	{
 
-    def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
-    def SF_USERNAME=env.SF_USERNAME
-    def SERVER_KEY_CREDENTALS_ID=env.SERVER_KEY_CREDENTALS_ID
-    def PROJECT_SCRATCH_PATH = env.PROJECT_SCRATCH_PATH
-    def All_Component_DX = env.All_Component_DX
-    def Static_Resource_1_DX = env.Static_Resource_1_DX
-    def Static_Resource_2_DX = env.Static_Resource_2_DX
-     def SCRATCH_ORG_NAMES= env.SCRATCH_ORG_NAMES
-    def SCRATCH_ORG_NAME = "${SCRATCH_ORG_NAMES}".split(',')
-     def HUB_ORG="HubOrg"
-    def Scratch_Org_Definition = env.Scratch_Org_Definition
-    def toolbelt = tool 'sfdx'
+	def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
+	def SF_USERNAME=env.SF_USERNAME
+	def SERVER_KEY_CREDENTALS_ID=env.SERVER_KEY_CREDENTALS_ID
+	def PROJECT_SCRATCH_PATH = env.PROJECT_SCRATCH_PATH
+	def All_Component_DX = env.All_Component_DX
+	def Static_Resource_1_DX = env.Static_Resource_1_DX
+	def Static_Resource_2_DX = env.Static_Resource_2_DX
+	def SCRATCH_ORG_NAMES= env.SCRATCH_ORG_NAMES
+	def SCRATCH_ORG_NAME = "${SCRATCH_ORG_NAMES}".split(',')
+	def HUB_ORG="HubOrg"
+	def Scratch_Org_Definition = env.Scratch_Org_Definition
+	def toolbelt = tool 'sfdx'
 	def curl = tool 'curl'
+
+
+	/*def TEST_LEVEL='RunLocalTests'
+	def PACKAGE_NAME='0Ho800000004CCAE'
+	def PACKAGE_VERSION */
+
+	// -------------------------------------------------------------------------
+	// Check out code from source control.
+	// -------------------------------------------------------------------------
+	step([$class: 'WsCleanup'])
+
+	println "**${SCRATCH_ORG_NAME}**"
+
+	stage('Checkout_Source') 
 	
+	{
+	  checkout scm
+	} 
 
-    /*def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='0Ho800000004CCAE'
-    def PACKAGE_VERSION */
- 
-    // -------------------------------------------------------------------------
-    // Check out code from source control.
-    // -------------------------------------------------------------------------
-    step([$class: 'WsCleanup'])
-	 
-    println "**${SCRATCH_ORG_NAME}**"
-    stage('Checkout_Source') 
-    {
-        checkout scm
-    } 
+	// -------------------------------------------------------------------------
+	// Run all the enclosed stages with access to the Salesforce
+	// JWT key credentials.
+	// -------------------------------------------------------------------------
 
-    // -------------------------------------------------------------------------
-    // Run all the enclosed stages with access to the Salesforce
-    // JWT key credentials.
-    // -------------------------------------------------------------------------
+	withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) 
+	{
 
-    withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) 
-    {
+	// -------------------------------------------------------------------------
+	// Authorize the Dev Hub org with JWT key and give it an alias.
+	// -------------------------------------------------------------------------
 
-        // -------------------------------------------------------------------------
-        // Authorize the Dev Hub org with JWT key and give it an alias.
-        // -------------------------------------------------------------------------
+	stage('Authorize_Dev_Hub')
+	
+	{
+    DX = command "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
 
-        stage('Authorize_Dev_Hub')
-	    {
- 
-  
-                 DX = command "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
- 
-            if (DX != 0)
-          {
-                error 'Salesforce dev hub org authorization failed.'
-            }
-        }
-      
-      stage ('Creating_Scratch_Org')
-        {
-		for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	     println "${SCRATCH_ORG_NAME[i]}"
- 		   DX= command "${toolbelt}/sfdx force:org:create -s -f ${WORKSPACE}/SVMXC_Scratch_Org_Definition/config/project-scratch-def.json -v ${SF_USERNAME} -a ${SCRATCH_ORG_NAME[i]} -d 30"
-    if (DX != 0) 
-    {
-                error 'Salesforce dev hub org Creation failed'
-            }
-        } 
+	if (DX != 0)
+	{
+	  error 'Salesforce dev hub org authorization failed.'
 	}
-   	stage('Users_Password_Gen') 
-	
-	
-    {
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	 println "${SCRATCH_ORG_NAME[i]}" 
-	 DX = command "${toolbelt}/sfdx force:user:password:generate -u ${SCRATCH_ORG_NAME[i]} -v HubOrg"
-	   if (DX != 0) 
-		 {
-                error 'Users_Password_Generation failed.'
-	     }  
-	 }
-    } 
-	
- 
-    stage ('Push_Static_Resource_1_DX')
-	    {
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	 println "${SCRATCH_ORG_NAME[i]}"
-		   
-		   DX= command "cd ${WORKSPACE}/Static_Resource_1_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
-		 
+	}
 
-    if (DX != 0) {
-                error 'Pushing Static_Resource_1_DX failed.'
-	     }
-	 }
-	    }	    
-     stage ('Push_Static_Resource_2_DX')
-	    {
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	  println "${SCRATCH_ORG_NAME[i]}"
-		    
-     DX= command "cd ${WORKSPACE}/Static_Resource_2_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
- 
-    if (DX != 0) {
-                error 'Pushing Static_Resource_3_DX failed.'
-     
-	      }
-	 }
-	    }  
-	    stage ('Push_Static_Resource_3_DX')
-	    {
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	  println "${SCRATCH_ORG_NAME[i]}"
-		    
-  		   DX= command "cd ${WORKSPACE}/Static_Resource_3_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
+	stage ('Creating_Scratch_Org')
 
-    if (DX != 0) {
-                error 'Pushing Static_Resource_3_DX failed.'
-     
-	      }
-	 }
-	    }
-	     stage ('Static_Resource_SFMD')
-	    {
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	  println "${SCRATCH_ORG_NAME[i]}"
-		    
-  		   DX= command "cd ${WORKSPACE}/Static_Resource_SFMD && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
-                     
-    if (DX != 0) {
-                error 'Pushing Static_Resource_3_DX failed.'
-     
-	      }
-	 }
-	    }
-	    stage ('Push_All_Component_DX')
-	    		    timeout(100)
+	{
+	  for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+	DX= command "${toolbelt}/sfdx force:org:create -s -f ${WORKSPACE}/SVMXC_Scratch_Org_Definition/config/project-scratch-def.json -v ${SF_USERNAME} -a ${SCRATCH_ORG_NAME[i]} -d 30"
+	if (DX != 0) 
+	{
+	  error 'Salesforce dev hub org Creation failed'
+	}
+	} 
+	}
+	stage('Users_Password_Gen') 
 
-	    {
-        command "cd ${WORKSPACE} && mkdir Metadata"
-	 for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	 {
-	 println "${SCRATCH_ORG_NAME[i]}"
- 
-      
-		DX = command "cd ${WORKSPACE}/All_Component_DX && ${toolbelt}/sfdx force:source:convert -r  ${WORKSPACE}/All_Component_DX/force-app/main/default/ -d ${workspace}/Metadata -n Servicemax && ${toolbelt}/sfdx force:mdapi:deploy -d ${workspace}/Metadata -u ${SCRATCH_ORG_NAME[i]} -w 3"
-                     command  "${toolbelt}/sfdx force:mdapi:deploy:report -w 1"
-     
-		 if (DX != 0) 
-		 {
-                error 'Push_All_Component_DX failed'
-     
-	      }
-		   }
-		   } 
-	      
-	   
-	        stage('Populate_SVMX_seed & Email Trigger') 
-	        
-	        {
-		command  "${toolbelt}/sfdx force:mdapi:deploy:report -w 1"
-		sleep(2400) 	
-		println "**WAKE**"	    
 
-	        for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
-	        {
-	        println "${SCRATCH_ORG_NAME[i]}"
-		 
-	        command "${toolbelt}/sfdx force:org:display -u ${SCRATCH_ORG_NAME[i]} --json >> output.json"
-		 
-	        def sfdc = readJSON file: "${WORKSPACE}/output.json"
-		subject ="Scratch_Org_DX"
- 		body = """<p>Hi
-                       <p>Please find below credentials for New Scratch Org
-                       <p>"Alias:${sfdc.result.alias}"<br/>   
-		       "Username:  ${sfdc.result.username} "  <br/>
-		       "Password:${sfdc.result.password} "    <br/>
-		       "OrgId:${sfdc.result.id}"
-                       <div>Regards<br/>Gnanasekar</div>"""
-			/*"Alias:${sfdc.result.alias}'\n'"  +
-		       "Username:  ${sfdc.result.username}'\n'"  +
-		       "Password:${sfdc.result.password}'\n'"    +
-		       "OrgId:${sfdc.result.id}"*/
-	      
-	       println sfdc.result.accessToken
-	       println sfdc.result.instanceUrl
-	      	
-	           DX=command "${curl} ${sfdc.result.instanceUrl}/services/apexrest/SVMXC/Seed/ -H \"Authorization: Bearer ${sfdc.result.accessToken}\""
-               emailext body: "${body}", recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: "${subject}", to: 'gnanasekar.manoharan@servicemax.com'
-                 println "${body}"
-		 command "del output.json"
-             if (DX != 0) 
-		 {
-                error 'Populate_SVMX_seed failed.'
-            }
-	  
-         
-       }
-	    }
-	   
-	 
+	{
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}" 
+	DX = command "${toolbelt}/sfdx force:user:password:generate -u ${SCRATCH_ORG_NAME[i]} -v HubOrg"
+	if (DX != 0) 
+	{
+	  error 'Users_Password_Generation failed.'
+	}  
+	}
+	} 
 
-    }
 
-    
-    }
+	stage ('Push_Static_Resource_1_DX')
+	{
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
 
-def command(script) {
-    if (isUnix()) {
-        return sh(returnStatus: true, script: script);
-    }else {
-		return bat(returnStatus: true, script: script);
-    }
-}
+	DX= command "cd ${WORKSPACE}/Static_Resource_1_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
+
+
+	if (DX != 0) 
+	{
+	  error 'Pushing Static_Resource_1_DX failed.'
+	}
+	}
+	}
+
+	stage ('Push_Static_Resource_2_DX')
+
+	{
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+
+	DX= command "cd ${WORKSPACE}/Static_Resource_2_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
+
+	if (DX != 0) 
+	{
+	  error 'Pushing Static_Resource_3_DX failed.'
+
+	}
+	}
+	}  
+
+	stage ('Push_Static_Resource_3_DX')
+
+	{
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+
+	DX= command "cd ${WORKSPACE}/Static_Resource_3_DX && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
+
+	if (DX != 0) 
+	{
+	  error 'Pushing Static_Resource_3_DX failed.'
+
+	}
+	}
+	}
+
+	stage ('Static_Resource_SFMD')
+
+	{
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+
+	DX= command "cd ${WORKSPACE}/Static_Resource_SFMD && ${toolbelt}/sfdx force:source:push -u ${SCRATCH_ORG_NAME[i]} -f"
+
+	if (DX != 0)
+	{
+	  error 'Pushing Static_Resource_3_DX failed.'
+
+	}
+	}
+	}
+
+	stage ('Push_All_Component_DX')
+	timeout(100)
+
+	{
+	command "cd ${WORKSPACE} && mkdir Metadata"
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+
+
+	DX = command "cd ${WORKSPACE}/All_Component_DX && ${toolbelt}/sfdx force:source:convert -r  ${WORKSPACE}/All_Component_DX/force-app/main/default/ -d ${workspace}/Metadata -n Servicemax && ${toolbelt}/sfdx force:mdapi:deploy -d ${workspace}/Metadata -u ${SCRATCH_ORG_NAME[i]} -w 3"
+	command  "${toolbelt}/sfdx force:mdapi:deploy:report -w 1"
+
+	if (DX != 0) 
+	{
+	  error 'Push_All_Component_DX failed'
+
+	}
+	}
+	} 
+
+
+	stage('Populate_SVMX_seed & Email Trigger') 
+
+	{
+	command  "${toolbelt}/sfdx force:mdapi:deploy:report -w 1"
+	sleep(2400) 	
+	println "**WAKE**"	    
+
+	for (i = 0; i < SCRATCH_ORG_NAME.size(); i++)
+	{
+	println "${SCRATCH_ORG_NAME[i]}"
+
+	command "${toolbelt}/sfdx force:org:display -u ${SCRATCH_ORG_NAME[i]} --json >> output.json"
+
+	def sfdc = readJSON file: "${WORKSPACE}/output.json"
+	subject ="Scratch_Org_DX"
+	body = """<p>Hi
+	<p>Please find below credentials for New Scratch Org
+	<p>"Alias:${sfdc.result.alias}"<br/>   
+	"Username:  ${sfdc.result.username} "  <br/>
+	"Password:${sfdc.result.password} "    <br/>
+	"OrgId:${sfdc.result.id}"
+	<div>Regards<br/>Gnanasekar</div>"""
+	/*"Alias:${sfdc.result.alias}'\n'"  +
+	"Username:  ${sfdc.result.username}'\n'"  +
+	"Password:${sfdc.result.password}'\n'"    +
+	"OrgId:${sfdc.result.id}"*/
+
+	println sfdc.result.accessToken
+	println sfdc.result.instanceUrl
+
+	DX=command "${curl} ${sfdc.result.instanceUrl}/services/apexrest/SVMXC/Seed/ -H \"Authorization: Bearer ${sfdc.result.accessToken}\""
+	emailext body: "${body}", recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: "${subject}", to: 'gnanasekar.manoharan@servicemax.com'
+	println "${body}"
+	command "del output.json"
+
+	if (DX != 0) 
+	{
+	  error 'Populate_SVMX_seed failed.'
+	}
+
+
+	}
+	}
+
+
+
+	}
+
+
+	}
+
+	def command(script) {
+	if (isUnix()) {
+	return sh(returnStatus: true, script: script);
+	}else {
+	return bat(returnStatus: true, script: script);
+	}
+	}
 
 
 
