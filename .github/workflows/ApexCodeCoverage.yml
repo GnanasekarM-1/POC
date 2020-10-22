@@ -17,7 +17,7 @@ jobs:
       - name: TestRun      
         id: testrun
         run: |
-           sfdx force:apex:test:run -l RunLocalTests -d ./ -c  -w 10 -u DH3 -r json >> result.json
+           sfdx force:apex:test:run -l RunAllTestsInOrg -d ./ -c  -w 10 -u DH3 -r json >> result.json
           
       # Use the output from the `hello` step
        
