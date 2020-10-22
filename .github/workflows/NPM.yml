@@ -6,14 +6,23 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps:
-    - name: npm install, build and test
+    - name: clone
       run: |
         git clone https://github.com/Gnanasekar-m/POC.git 
+        cd POC
         ls
-        cd DCX
         npm install
         npm run sf-build
         npm test
+
+    steps:
+    - name: clone
+       run: |
+        cd POC/DCX
+        npm install
+        npm run sf-build
+        npm test
+
 
 
 
