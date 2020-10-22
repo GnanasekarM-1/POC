@@ -18,10 +18,8 @@ jobs:
       - name: TestRun      
         id: testrun
         run: |
-           mkdir report
-           set +e
-           ./sfdx.sh
-           ls
+          sfdx force:apex:test:run -l RunAllTestsInOrg -d ./report/ -c  -w 10 -u DH3 -r json >> result.json
+ 
       - id: set_var
         run: |
           content=`cat ./result.json`
