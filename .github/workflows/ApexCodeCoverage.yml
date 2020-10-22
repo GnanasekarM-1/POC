@@ -13,12 +13,14 @@ jobs:
         run: |
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
+              
       
       - name: TestRun      
         id: testrun
         run: |
            mkdir report
            sfdx force:apex:test:run -l RunAllTestsInOrg -d ./report/ -c  -w 10 -u DH3 -r json >> result.json
+           exit 0
           
       # Use the output from the `hello` step
        
