@@ -2,7 +2,7 @@
 name: IC
 
 on:
-  workflow_dispatch:
+  push
 
 jobs:
  CodeCoverage:
