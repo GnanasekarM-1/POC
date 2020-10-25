@@ -15,7 +15,10 @@ jobs:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: Delta
         run: |
-              wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.28.0/pmd-bin-6.28.0.zip
+              wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+              mkdir sfdx
+              tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
+              ./sfdx/install
               npm install sfdx-git-delta@latest -g
               echo ${{ github.event.pull_request.head.sha }}
               git checkout ${{ github.event.pull_request.head.sha }}
