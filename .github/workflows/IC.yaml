@@ -15,6 +15,7 @@ jobs:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: Delta
         run: |
+              wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.28.0/pmd-bin-6.28.0.zip
               npm install sfdx-git-delta@latest -g
               echo ${{ github.event.pull_request.head.sha }}
               git checkout ${{ github.event.pull_request.head.sha }}
