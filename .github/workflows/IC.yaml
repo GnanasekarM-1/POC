@@ -17,4 +17,5 @@ jobs:
         run: |
               ls -la
               sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
+              echo ${{ github.event.pull_request.head.sha }}
               git checkout ${{ github.event.pull_request.head.sha }}
