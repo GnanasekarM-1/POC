@@ -15,6 +15,5 @@ jobs:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: Delta
         run: |
-              sfdx update
               echo ${{ github.event.pull_request.head.sha }}
               git checkout ${{ github.event.pull_request.head.sha }}
