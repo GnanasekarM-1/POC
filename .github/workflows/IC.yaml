@@ -1,0 +1,20 @@
+
+name: IC
+
+on:
+  workflow_dispatch:
+
+jobs:
+ CodeCoverage:
+    runs-on: ubuntu-latest  
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
+      - name: 'AUTH_SECRET'
+        run: |
+              ls -la
+              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
+              git checkout ${{ github.event.pull_request.head.sha }}
