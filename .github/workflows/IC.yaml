@@ -13,9 +13,8 @@ jobs:
       - uses: sfdx-actions/setup-sfdx@v1
         with:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
-      - name: 'AUTH_SECRET'
+      - name: Delta
         run: |
-              ls -la
-              sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
+              sfdx update
               echo ${{ github.event.pull_request.head.sha }}
               git checkout ${{ github.event.pull_request.head.sha }}
