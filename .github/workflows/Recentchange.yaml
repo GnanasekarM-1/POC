@@ -18,7 +18,7 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-            
+             sed 's/[:blank:]+/,/g' POC/text.txt
          
              
       - uses: pCYSl5EDgo/cat@master
@@ -26,14 +26,13 @@ jobs:
         with:
          path: POC/text.txt
 
-      - run: echo $TEXT
+      - run: |
+             sed 's/[:blank:]+/,/g' POC/text.txt
+             echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
        
-      - uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "' '"
-          replace: ","
+      
         
       - run: echo $TEXT
         env:
