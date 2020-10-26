@@ -12,7 +12,7 @@ trigger User_Trigger1 on User (after insert, after update) {
         //Defect fixed 043247
         if(Test.isRunningTest())
         {
-            svmxSettingList.put('SET001', 'true');
+             .put('SET001', 'true');
             svmxSettingList.put('SET002', 'true');
             svmxSettingList.put('SET003', 'true');
             svmxSettingList.put('SET004', 'true');

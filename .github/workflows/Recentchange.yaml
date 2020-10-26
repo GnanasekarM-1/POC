@@ -34,12 +34,12 @@ jobs:
       - uses: pCYSl5EDgo/cat@master  
         id: poc
         with:
-           path: text.txt
+           path: log.txt
       
         
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.poc.outputs.text }}
+         TEXT: ${{ steps.poc.outputs.log }}
           
        
              
