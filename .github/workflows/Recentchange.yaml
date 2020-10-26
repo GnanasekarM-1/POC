@@ -27,19 +27,19 @@ jobs:
          path: POC/text.txt
 
       - run: |
-             sed 's/ /,/g' POC/text.txt > log.txt
+             sed 's/ /,/g' POC/text.txt  
              echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
       - uses: pCYSl5EDgo/cat@master  
         id: poc
         with:
-           path: log.txt
+           path: POC/text.txt
       
         
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.poc.outputs.log }}
+         TEXT: ${{ steps.poc.outputs.text }}
           
        
              
