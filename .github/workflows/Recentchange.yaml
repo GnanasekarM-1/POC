@@ -23,20 +23,20 @@ jobs:
             
              
       - uses: pCYSl5EDgo/cat@master
-        id: log
+        id: GITHUBLOG
         with:
-           path: POC/Githublog.txt
-             
-      - run: echo $GITHUBLOG
+         path: text.txt
+
+      - run: echo $TEXT
         env:
-         TEXT: ${{ steps.log.outputs.Githublog }}
+         TEXT: ${{ steps.GITHUBLOG.outputs.Githublog }}
          
       - name: Parse
         run: sed -e 's/\s\+/,/g' POC/Githublog.txt  
         
-      - run: echo $GITHUBLOG
+      - run: echo $TEXT
         env:
-         TEXT: ${{ steps.log.outputs.Githublog }}
+         TEXT: ${{ steps.GITHUBLOG.outputs.Githublog }}
           
        
              
