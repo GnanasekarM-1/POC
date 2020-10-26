@@ -25,14 +25,16 @@ jobs:
         id: hello
         with:
          path: POC/text.txt
+
       - run: |
             echo $TEXT
+        env:
+         TEXT: ${{ steps.hello.outputs.text }}
             
       - name: rename
         run: sed 's/ /,/g' POC/text.txt  
-           
-        env:
-         TEXT: ${{ steps.hello.outputs.text }}
+
+       
       - uses: pCYSl5EDgo/cat@master  
         id: poc
         with:
