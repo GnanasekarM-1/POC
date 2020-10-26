@@ -25,7 +25,7 @@ jobs:
       - uses: pCYSl5EDgo/cat@master
         id: GITHUBLOG
         with:
-         path: POC/text.txt
+         path: /POC/Githublog.txt
 
       - run: echo $TEXT
         env:
