@@ -8,7 +8,7 @@ trigger APL_UpdateIBForCoveredProduct on SVMXC__Service_Contract_Products__c (af
     //Added by Naveen V on 10-April-2012 For Performance
     //m perfUtil = new COMM_PerformanceUtils();
     //perfUtil. ();
-    //COMM_PerformanceUtils.start('001: Getting the Setting Value');
+    // .start('001: Getting the Setting Value');
     
     boolean runTrigger = false;
     public Map<String, String> svmxSettingList = new Map<String,String>();
