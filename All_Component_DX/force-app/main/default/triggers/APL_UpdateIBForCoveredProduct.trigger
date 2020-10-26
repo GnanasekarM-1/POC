@@ -1,6 +1,6 @@
 trigger APL_UpdateIBForCoveredProduct on SVMXC__Service_Contract_Products__c (after insert, after update) 
 {
-     //Added by Nidhi as part of BAC-5157, Disabling Trigger based on setting on Trigger Controls page.
+       as part of BAC-5157, Disabling Trigger based on setting on Trigger Controls page.
     if(!CONF_TriggerControl.isTriggerEnabled('SVMXC__Service_Contract_Products__c',userInfo.getUserId(),userInfo.getProfileId())){
         System.debug(Logginglevel.WARN,'APL_UpdateIBForCoveredProduct execution is skipped.');
         return;
