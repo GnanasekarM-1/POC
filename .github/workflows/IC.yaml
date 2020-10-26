@@ -19,6 +19,5 @@ jobs:
               mkdir sfdx
               tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
               ./sfdx/install
-              git checkout ${{ github.event.pull_request.head.sha }}
-              echo ${{ github.event.pull_request.head.sha }}
+              git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
 
