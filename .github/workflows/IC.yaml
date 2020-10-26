@@ -19,7 +19,6 @@ jobs:
               mkdir sfdx
               tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
               ./sfdx/install
-              npm install sfdx-git-delta@latest -g
               git checkout ${{ github.event.pull_request.head.sha }}
               echo ${{ github.event.pull_request.head.sha }}
 
