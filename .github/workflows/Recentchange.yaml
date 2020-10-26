@@ -31,6 +31,7 @@ jobs:
              echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
+      - uses: pCYSl5EDgo/cat@master  
         id: log
         with:
            path: log.txt
