@@ -30,10 +30,10 @@ jobs:
         env:
          TEXT: ${{ steps.hello.outputs.text }}
        
-      - uses: datamonsters/replace-action
+      - uses: jacobtomlinson/gha-find-replace@master
         with:
-         files: 'POC/text.txt'
-         replacements: '"*"=","'
+          find: "*"
+          replace: ","
         
       - run: echo $TEXT
         env:
