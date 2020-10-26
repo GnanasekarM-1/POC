@@ -33,7 +33,7 @@ jobs:
       - uses: datamonsters/replace-action
         with:
          files: 'POC/text.txt'
-         replacements: '*=,'
+         replacements: '"*"=,'
         
       - run: echo $TEXT
         env:
