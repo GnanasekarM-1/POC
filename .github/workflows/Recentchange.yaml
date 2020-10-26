@@ -32,7 +32,7 @@ jobs:
        
       - uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: " "
+          find: "' '"
           replace: ","
         
       - run: echo $TEXT
