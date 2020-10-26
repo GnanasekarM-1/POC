@@ -23,13 +23,13 @@ jobs:
              ls
              
       - uses: pCYSl5EDgo/cat@master
-        id: hello
+        id: text
         with:
            path: POC/text.txt
              
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.hello.outputs.text }}
+         TEXT: ${{ steps.text.outputs.text }}
          
       - name: Parse
         run: sed -e 's/\s\+/,/g' POC/text.txt > POC/result.txt
@@ -41,7 +41,7 @@ jobs:
      
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.hello.outputs.result }}
+         TEXT: ${{ steps.hello.result.result }}
           
        
              
