@@ -17,8 +17,8 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} 
-             git config --global trace2.normalTarget ~/log.normal
-             cat ~/log.normal
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output=log.txt
+             cat log.txt
+
               
 
