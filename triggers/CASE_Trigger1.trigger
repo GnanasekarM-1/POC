@@ -8,7 +8,7 @@ trigger CASE_Trigger1 on Case (after insert, after update, before insert, before
         System.debug(Logginglevel.WARN,'Case_Trigger1 execution is skipped.');
         return;
     }*/
-    //Added by Nidhi as part of BAC-5157
+    //Added by Nidhi   part of BAC-5157
     if(!CONF_TriggerControl.isTriggerEnabled('Case',userInfo.getUserId(),userInfo.getProfileId())){
         System.debug(Logginglevel.WARN,'Case_Trigger1 execution is skipped.');
         return;
