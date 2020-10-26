@@ -15,6 +15,6 @@ jobs:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
       - name: Delta
         run: |
-               git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
-               echo ${{ github.sha }}
+               git show ${{ github.sha }}
+              
 
