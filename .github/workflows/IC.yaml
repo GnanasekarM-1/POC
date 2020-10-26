@@ -18,7 +18,8 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output=log.txt
-             cat log.txt
+             type log.txt
+             
 
               
 
