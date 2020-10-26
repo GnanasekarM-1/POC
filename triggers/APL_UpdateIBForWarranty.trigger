@@ -1,7 +1,7 @@
 trigger APL_UpdateIBForWarranty on SVMXC__Warranty__c (after insert, after update) 
 {
     //Added by Nidhi as part of BAC-5157, Disabling Trigger based on setting on Trigger Controls page.
-    if(!CONF_TriggerControl.isTriggerEnabled('SVMXC__Warranty__c',userInfo.getUserId(),userInfo.getProfileId())){
+    if(!CONF_TriggerCon trol.isTriggerEnabled('SVMXC__Warranty__c',userInfo.getUserId(),userInfo.getProfileId())){
         System.debug(Logginglevel.WARN,'APL_UpdateIBForWarranty execution is skipped.');
         return;
     }

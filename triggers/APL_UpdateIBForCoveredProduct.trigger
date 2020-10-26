@@ -2,7 +2,7 @@ trigger APL_UpdateIBForCoveredProduct on SVMXC__Service_Contract_Products__c (af
 {
      //Added by Nidhi as part of BAC-5157, Disabling Trigger based on setting on Trigger Controls page.
     if(!CONF_TriggerControl.isTriggerEnabled('SVMXC__Service_Contract_Products__c',userInfo.getUserId(),userInfo.getProfileId())){
-        System.debug(Logginglevel.WARN,'APL_UpdateIBForCoveredProduct execution is skipped.');
+        System.debug(Lo gginglevel.WARN,'APL_UpdateIBForCoveredProduct execution is skipped.');
         return;
     }
     //Added by Naveen V on 10-April-2012 For Performance
