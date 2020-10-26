@@ -18,7 +18,7 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-             sed 's/[[:space:]]+/,/g' text.txt
+             sed 's/ /,/g' text.txt
          
              
       - uses: pCYSl5EDgo/cat@master
@@ -27,16 +27,18 @@ jobs:
          path: POC/text.txt
 
       - run: |
-             sed 's/ /,/g' POC/text.txt
+             sed 's/ /,/g' POC/text.txt > log.txt
              echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
-       
+        id: log
+        with:
+           path: log.txt
       
         
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.hello.outputs.text }}
+         TEXT: ${{ steps.log.outputs.log }}
           
        
              
