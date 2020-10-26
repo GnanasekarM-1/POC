@@ -19,7 +19,7 @@ jobs:
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
             
-            
+         
              
       - uses: pCYSl5EDgo/cat@master
         id: hello
@@ -29,13 +29,11 @@ jobs:
       - run: echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
-         
-      - uses: actions/checkout@v2
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@master
+       
+      - uses: datamonsters/replace-action
         with:
-          find: " "
-          replace: ","
+         files: 'POC/text.txt'
+         replacements: '*=,'
         
       - run: echo $TEXT
         env:
