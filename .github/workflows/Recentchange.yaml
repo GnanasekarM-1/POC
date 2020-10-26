@@ -17,13 +17,14 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} >> text.txt
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+             cat ./text.txt
              ls
              
       - uses: pCYSl5EDgo/cat@master
         id: hello
         with:
-           path: POC/POC/text.txt
+           path: text.txt
              
              
       - run: echo $TEXT
