@@ -3,7 +3,7 @@ trigger Event_Trigger1 on Event (before insert, after insert, before update, aft
     //Added fix for defect 045475 : When user doesn't have serviceMax package licence, manage trigger should not execute
     if(!Test.isRunningTest() && (!USER_LicenseAssignment.isServiceMaxPackageAccesible()))
     {
-        System.debug('Event_Trigger1  trigger disabled');
+        System. ('Event_Trigger1  trigger disabled');
         return;
     }
     
