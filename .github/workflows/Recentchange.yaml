@@ -5,7 +5,7 @@ on:
   push
 
 jobs:
- CodeCoverage:
+ IncrementChange:
     runs-on: ubuntu-latest  
     
     steps:
@@ -25,7 +25,7 @@ jobs:
       - uses: pCYSl5EDgo/cat@master
         id: GITHUBLOG
         with:
-         path: /POC/Githublog.txt
+         path: POC/Githublog.txt
 
       - run: echo $TEXT
         env:
