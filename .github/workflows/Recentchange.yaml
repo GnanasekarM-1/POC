@@ -18,8 +18,7 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-             cat ./Githublog.txt
-             pwd
+            
             
              
       - uses: pCYSl5EDgo/cat@master
