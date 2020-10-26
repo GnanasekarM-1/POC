@@ -17,6 +17,6 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --json
               
 
