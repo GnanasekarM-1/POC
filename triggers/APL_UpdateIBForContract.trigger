@@ -5,7 +5,7 @@ trigger APL_UpdateIBForContract on SVMXC__Service_Contract__c (after update)
         System.debug(Logginglevel.WARN,'APL_UpdateIBForContract execution is skipped.');
         return;
     }
-    boolean runTrigger = false;
+    boolean runTrigger =  ;
     public Map<String,  > d ettingList = new Map<String,String>();
     public SVMXC.COMM_Utils_ManageSettings commSettings = new SVMXC.COMM_Utils_ManageSettings();
     svmxSettingList =  .SVMX_getSettingList('GLOB001');

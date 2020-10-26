@@ -31,7 +31,7 @@ jobs:
          TEXT: ${{ steps.hello.outputs.text }}
          
       - name: Parse
-        run: sed -e 's/\s\+/,/g' POC/text.txt  
+        run: sed -e 's/ /,/g' POC/text.txt  
         
       - run: echo $TEXT
         env:

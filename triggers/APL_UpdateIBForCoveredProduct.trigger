@@ -6,7 +6,7 @@ trigger APL_UpdateIBForCoveredProduct on SVMXC__Service_Contract_Products__c (af
         return;
     }
     //Added by Naveen V on 10-April-2012 For Performance
-    //m perfUtil = new COMM_PerformanceUtils();
+    //m perfUtil = new  ();
     //perfUtil. ();
     // .start('001: Getting the Setting Value');
     
