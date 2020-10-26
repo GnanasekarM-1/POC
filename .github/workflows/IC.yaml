@@ -17,8 +17,18 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output=log.txt
-             ls -la
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output=text.txt
+             
+      - uses: pCYSl5EDgo/cat@master
+        id: hello
+        with:
+           path: text.txt
+             
+             
+      - run: echo $TEXT
+        env:
+         TEXT: ${{ steps.hello.outputs.text }}
+       
              
 
               
