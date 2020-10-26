@@ -27,7 +27,7 @@ jobs:
          path: POC/text.txt
 
       - run: |
-             sed 's/[[:space:]]+/,/g' POC/text.txt
+             sed 's/ /,/g' POC/text.txt
              echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
