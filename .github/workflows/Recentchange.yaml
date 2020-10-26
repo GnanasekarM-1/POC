@@ -19,6 +19,7 @@ jobs:
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
              cat ./text.txt
+             pwd
              ls
              
       - uses: pCYSl5EDgo/cat@master
