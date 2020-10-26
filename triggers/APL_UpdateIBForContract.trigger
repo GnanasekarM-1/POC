@@ -6,7 +6,7 @@ trigger APL_UpdateIBForContract on SVMXC__Service_Contract__c (after update)
         return;
     }
     boolean runTrigger =  ;
-    public Map< ,  > d   = new Map<String,String>();
+    public Map< ,  > d   =   Map<String,String>();
     public SVMXC.    = new SVMXC.COMM_Utils_ManageSettings();
     svmxSettingList =  .SVMX_getSettingList('GLOB001');
     if(boolean.valueOf(svmxSettingList.containsKey('GBL014')))
