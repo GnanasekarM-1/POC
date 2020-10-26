@@ -30,8 +30,12 @@ jobs:
         env:
          TEXT: ${{ steps.hello.outputs.text }}
          
-      - name: Parse
-        run: sed -e 's/ /,/g' POC/text.txt  
+      - uses: actions/checkout@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: " "
+          replace: ","
         
       - run: echo $TEXT
         env:
