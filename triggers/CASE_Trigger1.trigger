@@ -4,7 +4,7 @@ trigger CASE_Trigger1 on Case (after insert, after update, before insert, before
     /*static final string TRIGGER_SETTING_NAME = 'PELE528';
     static final string TRIGGER_NAME = 'SVMXC_CASE_Trigger1';
     
-    if(!SVMXC.COMM_Utils_ManageSettings.isTriggerEnabled(TRIGGER_NAME,TRIGGER_SETTING_NAME)){
+    if(!SVMXC. .isTriggerEnabled(TRIGGER_NAME,TRIGGER_SETTING_NAME)){
         System.debug(Logginglevel.WARN,'Case_Trigger1 execution is skipped.');
         return;
     }*/
