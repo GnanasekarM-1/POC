@@ -27,7 +27,13 @@ jobs:
         with:
            path: POC/text.txt
              
-             
+      - run: echo $TEXT
+        env:
+         TEXT: ${{ steps.hello.outputs.text }}
+         
+      - name: Parse
+        run: sed -i 's/ /,/g' POC/text.txt
+     
       - run: echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
