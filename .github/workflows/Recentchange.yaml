@@ -17,31 +17,26 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > Githublog.txt
              cat ./text.txt
              pwd
              ls
              
       - uses: pCYSl5EDgo/cat@master
-        id: text
+        id: Githublog
         with:
-           path: POC/text.txt
+           path: POC/Githublog.txt
              
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.text.outputs.text }}
+         TEXT: ${{ steps.Githublog.outputs.Githublog }}
          
       - name: Parse
-        run: sed -e 's/\s\+/,/g' POC/text.txt > POC/result.txt
+        run: sed -e 's/\s\+/,/g' POC/Githublog.txt  
         
-      - uses: pCYSl5EDgo/cat@master
-        id: result
-        with:
-           path: POC/result.txt
-     
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.hello.result.result }}
+         TEXT: ${{ steps.Githublog.outputs.Githublog }}
           
        
              
