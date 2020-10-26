@@ -32,14 +32,14 @@ jobs:
         env:
          TEXT: ${{ steps.hello.outputs.text }}
       - uses: pCYSl5EDgo/cat@master  
-        id: hello
+        id: poc
         with:
            path: text.txt
       
         
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.log.outputs.log }}
+         TEXT: ${{ steps.poc.outputs.text }}
           
        
              
