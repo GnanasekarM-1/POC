@@ -32,11 +32,17 @@ jobs:
          TEXT: ${{ steps.hello.outputs.text }}
          
       - name: Parse
-        run: sed -i 's/*/,/g' POC/text.txt
+        run: sed -e 's/\s\+/,/g' POC/text.txt > POC/result.txt
+        
+      - uses: pCYSl5EDgo/cat@master
+        id: result
+        with:
+           path: POC/result.txt
      
       - run: echo $TEXT
         env:
-         TEXT: ${{ steps.hello.outputs.text }}
+         TEXT: ${{ steps.hello.outputs.result }}
+          
        
              
 
