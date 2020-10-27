@@ -21,7 +21,8 @@ jobs:
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > log.txt
              grep -v "yml" log.txt > yml.txt
-             sed 's/trigger-meta.xml*/trigger/g' yml.txt > trigger.txt 
+             sed 's/All_Component_DX/*//g' yml.txt > cmp.txt
+             sed 's/trigger-meta.xml*/trigger/g' cmp.txt > trigger.txt 
              sed 's/cls-meta.xml*/cls/g' trigger.txt  > cls.txt
           
       - uses: pCYSl5EDgo/cat@master
