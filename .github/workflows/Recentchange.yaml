@@ -18,6 +18,8 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+             sed s/ */ /g text.txt
+             sed s/ /,/g text.txt
              
       - uses: pCYSl5EDgo/cat@master
         id: hello
@@ -28,10 +30,7 @@ jobs:
             echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
-            
-      - name: rename
-        run: sed 's/ /,/g' POC/text.txt  
-
+      
       - name: Find and Replace
         uses: shitiomatic/str-replace@master
         with:
