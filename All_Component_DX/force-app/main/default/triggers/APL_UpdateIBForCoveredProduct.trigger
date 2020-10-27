@@ -11,7 +11,7 @@ trigger APL_UpdateIBForCoveredProduct on SVMXC__Service_Contract_Products__c (af
     //COMM_PerformanceUtils.start('001: Getting the Setting Value');
     
     boolean runTrigger = false;
-    public Map<String, String> svmxSettingList = new Map<String,String>();
+    public Map<String, String>   = new Map<String,String>();
     public SVMXC.COMM_Utils_ManageSettings commSettings = new SVMXC.COMM_Utils_ManageSettings();
     svmxSettingList = commSettings.SVMX_getSettingList('GLOB001');
     if(boolean.valueOf(svmxSettingList.containsKey('GBL014')))

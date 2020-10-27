@@ -1,7 +1,7 @@
 @isTest
 public class CreateAccountTest {
 static testMethod void testInsertAccount() {
-CreatingAsccount ca = new  ();
+CreatingAsc count ca = new  ();
 ca. (' ');
 }
 }

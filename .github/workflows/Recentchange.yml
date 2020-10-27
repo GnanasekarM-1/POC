@@ -13,51 +13,63 @@ jobs:
       - uses: sfdx-actions/setup-sfdx@v1
         with:
           sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
-      - name: Delta
+      - name: Checkout
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
+      - name: diff-tree
+        run: |       
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > log.txt
              grep -v "yml" log.txt > text.txt
-             sed 's/*trigger-meta.xml*/trigger/g' text.txt
-             sed 's/*cls-meta.xml*/cls/g' text.txt
-             
-
+             sed 's/trigger-meta.xml*/trigger/g' text.txt
+             sed 's/cls-meta.xml*/cls/g' text.txt
+          
       - uses: pCYSl5EDgo/cat@master
-        id: hello
+        id: gitlog
         with:
          path: POC/text.txt
 
       - run: |
             echo Before replace
+            cat "POC/text.txt"
             echo $TEXT
         env:
-         TEXT: ${{ steps.hello.outputs.text }}
+         TEXT: ${{ steps.gitlog.outputs.text }}
       
-      - name: Find and Replace
+      - name: Find and Replace-comma and double quote
         uses: shitiomatic/str-replace@master
         with:
           find: '\s'
           replace: ","
           include: POC/text.txt
         
+      - run: |
+            sed '$ s/,$/"/' POC/text.txt > 
+            echo $TEXT
+
       - uses: pCYSl5EDgo/cat@master  
-        id: poc
+        id: Log
         with:
            path: POC/text.txt
-      
-        
-      - run: echo $TEXT
-        env:
-         TEXT: ${{ steps.poc.outputs.text }}
+      - run: |
+             echo Replaced with comma and double quote
+             echo $TEXT 
 
-      - name: cls-meta
-        if: contains(steps.poc.outputs.text , 'cls-meta.xml') || contains(steps.poc.outputs.text , 'trigger-meta.xml')
+        env:
+         TEXT: ${{ steps.Log.outputs.text }}
+
+      - name: cls-meta or trigger
+        if: contains(steps.poc.outputs.text , 'cls') || contains(steps.poc.outputs.text , 'trigger')
         run: |
-           
+             ${{ steps.poc.outputs.text }}
 
-        env:
-         TEXT: ${{ steps.poc.outputs.text }}
+      
+      - name : deploy to org
+        run: |
+            sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
+            sfdx force:source:deploy -p "${{ steps.poc.outputs.text }} -u DH3
+              
+           
   
 
 
