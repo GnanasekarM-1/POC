@@ -18,6 +18,8 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+             grep -v "cls-meta.xml" POC/text.txt
+             grep -v "trigger-meta.xml" POC/text.txt
       - uses: pCYSl5EDgo/cat@master
         id: hello
         with:
@@ -49,10 +51,9 @@ jobs:
       - name: cls-meta
         if: contains(steps.poc.outputs.text , 'cls-meta.xml') || contains(steps.poc.outputs.text , 'trigger-meta.xml')
         run: |
-           sed -i 's/.cls-meta././g' POC/text.txt
-           sed -i 's/.trigger-meta././g' POC/text.txt
-           echo $TEXT
-           exit 0
+          grep -v "cls-meta.xml" text.txt
+          grep -v "trigger-meta.xml" text.txt
+
         env:
          TEXT: ${{ steps.poc.outputs.text }}
   
