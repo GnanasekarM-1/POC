@@ -17,7 +17,8 @@ jobs:
         run: |
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
-             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > log.txt
+             grep -v "yml" log.txt > text.txt
              sed 's/.cls-meta././g' text.txt
              sed 's/.trigger-meta././g' text.txt
              
