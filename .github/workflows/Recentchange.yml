@@ -18,9 +18,10 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-             sudo apt-get install -y sed
-             grep -v 'cls-meta.xml' POC/text.txt
-             grep -v 'trigger-meta.xml' POC/text.txt
+             grep -v "cls-meta.xml" POC/text.txt
+             grep -v "trigger-meta.xml" POC/text.txt
+             sed -i 'cls-meta.xml' POC/text.txt
+             sed -i 'trigger-meta.xml' POC/text.txt
       - uses: pCYSl5EDgo/cat@master
         id: hello
         with:
@@ -38,7 +39,7 @@ jobs:
           find: '\s'
           replace: ","
           include: POC/text.txt
-       
+        
       - uses: pCYSl5EDgo/cat@master  
         id: poc
         with:
