@@ -47,21 +47,15 @@ jobs:
          TEXT: ${{ steps.poc.outputs.text }}
 
       - name: cls-meta
-        if: contains(steps.poc.outputs.text , 'cls-meta.xml')
+        if: contains(steps.poc.outputs.text , 'cls-meta.xml') || contains(steps.poc.outputs.text , 'trigger-meta.xml')
         run: |
            sed -i 's/.cls-meta././g' POC/text.txt
-           echo $TEXT
-        env:
-         TEXT: ${{ steps.poc.outputs.text }}
-
-
-      - name: trigger-meta
-        if: contains(steps.poc.outputs.text , 'trigger-meta.xml')
-        run: |
            sed -i 's/.trigger-meta././g' POC/text.txt
            echo $TEXT
+           exit 0
         env:
          TEXT: ${{ steps.poc.outputs.text }}
+  
 
 
             
