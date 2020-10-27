@@ -45,6 +45,32 @@ jobs:
       - run: echo $TEXT
         env:
          TEXT: ${{ steps.poc.outputs.text }}
+
+      - name: cls-meta
+        if: contains(steps.poc.outputs.text , 'cls-meta.xml')
+        uses: shitiomatic/str-replace@master
+        with:
+          find: '.cls-meta.'
+          replace: "."
+          include: POC/text.txt
+        run: |
+           echo $TEXT
+        env:
+         TEXT: ${{ steps.poc.outputs.text }}
+      - name: trigger-meta
+        if: contains(steps.poc.outputs.text , 'trigger-meta.xml')
+        uses: shitiomatic/str-replace@master
+        with:
+          find: '.trigger-meta.'
+          replace: "."
+          include: POC/text.txt
+        run: |
+           echo $TEXT
+        env:
+         TEXT: ${{ steps.poc.outputs.text }}
+
+
+            
           
        
              
