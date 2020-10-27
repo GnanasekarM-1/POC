@@ -24,6 +24,7 @@ jobs:
              sed 's/All_Component_DX*//g' yml.txt > cmp.txt
              sed 's/trigger-meta.xml*/trigger/g' cmp.txt > trigger.txt 
              sed 's/cls-meta.xml*/cls/g' trigger.txt  > cls.txt
+             exit 0
           
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
@@ -64,7 +65,7 @@ jobs:
       - name: cls-meta or trigger
         if: contains(steps.Log.outputs.text , 'cls') || contains(steps.Log.outputs.text , 'trigger')
         run: |
-             echo components path to be deployed are "${{ steps.Log.outputs.text }}
+             echo components path to be deployed are ${{ steps.Log.outputs.text }}
 
       
       - name : deploy to org
