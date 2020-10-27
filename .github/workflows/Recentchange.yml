@@ -1,0 +1,53 @@
+
+name: IncrementChange
+
+on:
+  push
+
+jobs:
+ IncrementChange:
+    runs-on: ubuntu-latest  
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.AUTH_SECRET }}
+      - name: Delta
+        run: |
+             git clone https://github.com/Gnanasekar-m/POC.git
+             cd POC
+             git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
+      - uses: pCYSl5EDgo/cat@master
+        id: hello
+        with:
+         path: POC/text.txt
+
+      - run: |
+            echo Before replace
+            echo $TEXT
+        env:
+         TEXT: ${{ steps.hello.outputs.text }}
+      
+      - name: Find and Replace
+        uses: shitiomatic/str-replace@master
+        with:
+          find: '\s'
+          replace: ","
+          include: POC/text.txt
+       
+      - uses: pCYSl5EDgo/cat@master  
+        id: poc
+        with:
+           path: POC/text.txt
+      
+        
+      - run: echo $TEXT
+        env:
+         TEXT: ${{ steps.poc.outputs.text }}
+          
+       
+             
+
+              
+
