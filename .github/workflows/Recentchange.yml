@@ -47,7 +47,7 @@ jobs:
 
       - name : Find and Replace- double quote
         run : |
-             sed '$ s/,$/"/' POC/cls.txt > POC/text.txt  
+             sed '$ s/,$//' POC/cls.txt > POC/text.txt  
 
       - uses: pCYSl5EDgo/cat@master  
         id: Log
@@ -70,8 +70,8 @@ jobs:
         run: |
             sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
             ls
-            cd All_Component_DX
-            sfdx force:source:deploy -p "${{ steps.Log.outputs.text }} -u DH3
+            cd POC/All_Component_DX
+            sfdx force:source:deploy -p "${{ steps.Log.outputs.text }}"   -u DH3
               
            
   
