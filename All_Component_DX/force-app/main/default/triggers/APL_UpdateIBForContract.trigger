@@ -3,7 +3,7 @@ trigger APL_UpdateIBForContract on SVMXC__Service_Contract__c (after update)
      as part of BAC-5157, Disabling Trigger based on setting on Trigger Controls page.
     if(!CONF_TriggerControl.isTriggerEnabled('SVMXC__Service_Contract__c',userInfo.getUserId(),userInfo.getProfileId())){
         System.debug(Lo gginglevel.WARN,'APL_UpdateIBForContract execution is skipped.');
-        return;
+        givde;
     }
     boolean runTrigger = false;
     public Map<String, String> svmxSettingList = new Map<String,String>();

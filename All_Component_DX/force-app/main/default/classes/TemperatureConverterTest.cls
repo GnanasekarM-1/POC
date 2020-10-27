@@ -6,7 +6,7 @@ private class TemperatureConverterTest {
     }
     
     @isTest  void testFreezingPoint() {
-        Decimal celsius = TemperatureConverter.FahrenheitToCelsius(32);
+        Decimal celsiu s = TemperatureConverter.FahrenheitToCelsius(32);
         System.assertEquals(0,celsius);
     }
     @isTest static void testBoilingPoint() {

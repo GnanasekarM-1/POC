@@ -20,18 +20,18 @@ jobs:
         run: |       
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > log.txt
-             grep -v "yml" log.txt > text.txt
-             sed 's/trigger-meta.xml*/trigger/g' text.txt
-             sed 's/cls-meta.xml*/cls/g' text.txt
+             grep -v "yml" log.txt > yml.txt
+             sed 's/trigger-meta.xml*/trigger/g' trigger.txt 
+             sed 's/cls-meta.xml*/cls/g' cls.txt
           
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
         with:
-         path: POC/text.txt
+         path: POC/cls.txt
 
       - run: |
             echo Before replace
-            cat "POC/text.txt"
+            cat "POC/cls.txt"
             echo $TEXT
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
@@ -41,10 +41,10 @@ jobs:
         with:
           find: '\s'
           replace: ","
-          include: POC/text.txt
-        
+          include: POC/cls.txt
+     
       - run: |
-            sed '$ s/,$/"/' POC/text.txt > 
+            sed '$ s/,$/"/' "cls.txt" > text.txt
             echo $TEXT
 
       - uses: pCYSl5EDgo/cat@master  
@@ -59,15 +59,15 @@ jobs:
          TEXT: ${{ steps.Log.outputs.text }}
 
       - name: cls-meta or trigger
-        if: contains(steps.poc.outputs.text , 'cls') || contains(steps.poc.outputs.text , 'trigger')
+        if: contains(steps.Log.outputs.text , 'cls') || contains(steps.Log.outputs.text , 'trigger')
         run: |
-             ${{ steps.poc.outputs.text }}
+             ${{ steps.Log.outputs.text }}
 
       
       - name : deploy to org
         run: |
             sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
-            sfdx force:source:deploy -p "${{ steps.poc.outputs.text }} -u DH3
+            sfdx force:source:deploy -p "${{ steps.Log.outputs.text }} -u DH3
               
            
   
