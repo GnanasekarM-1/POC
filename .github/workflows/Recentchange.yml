@@ -30,8 +30,7 @@ jobs:
          path: POC/cls.txt
 
       - run: |
-            echo Before replace
-            echo $TEXT
+            echo  Before replace $TEXT
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
 
@@ -44,7 +43,7 @@ jobs:
           include: POC/cls.txt
      
       - run: |
-            echo $TEXT
+            echo Find and Replace-comma($TEXT)
 
       - name : Find and Replace- double quote
         run : |
@@ -64,7 +63,7 @@ jobs:
       - name: cls-meta or trigger
         if: contains(steps.Log.outputs.text , 'cls') || contains(steps.Log.outputs.text , 'trigger')
         run: |
-             ${{ steps.Log.outputs.text }}
+             echo components path to be deployed are ${{ steps.Log.outputs.text }}" 
 
       
       - name : deploy to org
