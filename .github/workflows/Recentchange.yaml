@@ -18,8 +18,9 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-             sed s/ */ /g text.txt
-             sed s/ /,/g text.txt
+             sed s/ */ /g POC/text.txt
+             sed s/ $// POC/text.txt
+             sed s/ /,/g POC/text.txt
              
       - uses: pCYSl5EDgo/cat@master
         id: hello
