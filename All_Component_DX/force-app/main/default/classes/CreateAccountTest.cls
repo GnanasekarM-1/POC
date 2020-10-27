@@ -2,6 +2,6 @@
 public class CreateAccountTest {
 static testMethod void testInsertAccount() {
 CreatingAccount ca = new  ();
-ca.createAccount('ta');
+ca. ('ta');
 }
 }
