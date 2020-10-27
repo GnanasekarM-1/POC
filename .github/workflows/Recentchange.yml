@@ -70,7 +70,7 @@ jobs:
         run: |
             sfdx force:auth:sfdxurl:store -f ./authurl -s -a DH3
             ls
-            cd POC/All_Component_DX
+            cd All_Component_DX
             sfdx force:source:deploy -p "${{ steps.Log.outputs.text }} -u DH3
               
            
