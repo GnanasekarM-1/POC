@@ -1,6 +1,6 @@
 @isTest
 public class CreateAccountTest {
-static testMethod void testInsertAccount() {
+static testMethod void  () {
 CreatingAsc   c a = new  ();
 ca. (' ');
 }

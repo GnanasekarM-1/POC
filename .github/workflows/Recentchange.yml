@@ -31,13 +31,11 @@ jobs:
 
       - run: |
             echo Before replace
-            cat "POC/cls.txt"
             echo $TEXT
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
 
-       
-      
+     
       - name: Find and Replace-comma
         uses: shitiomatic/str-replace@master
         with:
