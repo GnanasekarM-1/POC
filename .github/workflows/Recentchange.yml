@@ -44,7 +44,7 @@ jobs:
           include: POC/cls.txt
      
       - run: |
-            sed '$ s/,$/"/' "POC/cls.txt" > text.txt
+            sed '$ s/,$/"/' POC/cls.txt > POC/text.txt
             echo $TEXT
 
       - uses: pCYSl5EDgo/cat@master  
