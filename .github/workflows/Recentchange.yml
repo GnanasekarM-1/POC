@@ -18,8 +18,8 @@ jobs:
              git clone https://github.com/Gnanasekar-m/POC.git
              cd POC
              git diff-tree --no-commit-id --name-only -r ${{ github.sha }} > text.txt
-             grep -v "cls-meta.xml" POC/text.txt
-             grep -v "trigger-meta.xml" POC/text.txt
+             grep -v 'cls-meta.xml' POC/text.txt
+             grep -v 'trigger-meta.xml' POC/text.txt
       - uses: pCYSl5EDgo/cat@master
         id: hello
         with:
