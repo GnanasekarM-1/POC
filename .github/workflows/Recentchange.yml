@@ -35,8 +35,10 @@ jobs:
             echo $TEXT
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
+
+       
       
-      - name: Find and Replace-comma and double quote
+      - name: Find and Replace-comma
         uses: shitiomatic/str-replace@master
         with:
           find: '\s'
@@ -44,8 +46,11 @@ jobs:
           include: POC/cls.txt
      
       - run: |
-            sed '$ s/,$/"/' POC/cls.txt > POC/text.txt
             echo $TEXT
+
+      - name : Find and Replace- double quote
+        run : |
+             sed '$ s/,$/"/' POC/cls.txt > POC/text.txt  
 
       - uses: pCYSl5EDgo/cat@master  
         id: Log
