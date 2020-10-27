@@ -19,7 +19,7 @@ yarn-error.log*
 node_modules/
 svmx-sfdc/All_Component_DX/force-app/main/default/objectTranslations/
 svmx-sfdc/All_Component_DXforce-app/main/default/translations/
-.github/workflows
+.github/workflows/*
 
 
 # Eslint cache

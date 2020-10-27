@@ -24,6 +24,7 @@ jobs:
          path: POC/text.txt
 
       - run: |
+            echo Before replace
             echo $TEXT
         env:
          TEXT: ${{ steps.hello.outputs.text }}
