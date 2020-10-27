@@ -34,6 +34,12 @@ jobs:
       - name: rename
         run: sed 's/ /,/g' POC/text.txt  
 
+      - name: Find and Replace
+        uses: shitiomatic/str-replace@master
+        with:
+          find: " "
+          replace: "world"
+          include: POC/text.txt
        
       - uses: pCYSl5EDgo/cat@master  
         id: poc
