@@ -34,7 +34,8 @@ jobs:
              git config --global user.name "gnanasekarhero"
              git fetch
              git config pull.rebase false
-             git checkout HOTFIX
+             git checkout HOTFIX 
+             git checkout ${{ github.sha }}
              git checkout main
              git pull
              git merge HOTFIX main
