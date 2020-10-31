@@ -24,7 +24,12 @@ jobs:
              mkdir AM
              cd AM
              git init
-             git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git
+             git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.gitsteps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.12.0"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+           
       - name: Merge
         run: |    
              cd AM/POC
