@@ -27,7 +27,7 @@ jobs:
              git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git
       - name: Checkout
         run: |    
-             cd POC
+             cd AM/POC
              git config pull.rebase false
              git checkout DEV
              git pull
