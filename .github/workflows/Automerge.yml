@@ -38,6 +38,5 @@ jobs:
              git checkout DEV
              git checkout HOTFIX
              git pull
-             git merge origin/DEV
-             git merge origin/HOTFIX
+             git merge DEV HOTFIX
              echo merged
