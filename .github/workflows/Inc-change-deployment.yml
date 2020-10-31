@@ -2,7 +2,7 @@
 name: IncrementChange
 
 on:
-  push
+  workflow_dispatch:
 
 jobs:
  IncrementChange:
