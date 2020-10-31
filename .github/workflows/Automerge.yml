@@ -37,4 +37,5 @@ jobs:
              git checkout HOTFIX 
              git cherry-pick ${{ github.sha }}
              git merge DEV 
+             git cherry-pick --continue
              echo merged
