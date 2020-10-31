@@ -30,7 +30,7 @@ jobs:
       - name: Merge
         run: |    
              cd AM/POC
-             git config --global user.email "saykarclick@gmail.com
+             git config --global user.email "saykarclick@gmail.com"
              git config --global user.name "gnanasekarhero"
              git fetch
              git config pull.rebase false
