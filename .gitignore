@@ -4,7 +4,7 @@
 
 *.code-workspace
 ../.DS_Store
-c
+hotfix
 
 # Salesforce cache
 .sfdx/
