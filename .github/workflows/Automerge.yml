@@ -24,14 +24,15 @@ jobs:
              mkdir AM
              cd AM
              git init
-             git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git 
+             git clone https://github.com/Gnanasekar-m/POC.git 
+             
       - name: Merge
         run: |    
              cd AM/POC
              git fetch
              git config pull.rebase false
-             git checkout DEV
              git checkout HOTFIX
+             git checkout main
              git pull
-             git merge DEV HOTFIX
+             git merge HOTFIX main
              echo merged
