@@ -6,9 +6,11 @@ name: AutoMerge
 # events but only for the main branch
 on:
   push:
-    branches: [ HOTFIX ]
+    branches:  
+      - HOTFIX
   pull_request:
-    branches: [ HOTFIX ]
+    branches: 
+      - HOTFIX 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
