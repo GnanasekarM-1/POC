@@ -35,8 +35,6 @@ jobs:
              git fetch
              git config pull.rebase false
              git checkout HOTFIX 
-             git checkout ${{ github.sha }}
-             git checkout main
-             git pull
-             git merge HOTFIX main
+             git cherry-pick ${{ github.sha }}
+             git merge DEV 
              echo merged
