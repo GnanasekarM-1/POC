@@ -28,8 +28,11 @@ jobs:
       - name: Merge
         run: |    
              cd AM/POC
+             git fetch
              git config pull.rebase false
              git checkout DEV
              git checkout HOTFIX
              git pull
-             git merge DEV
+             git merge origin/DEV
+             git merge origin/HOTFIX
+             echo merged
