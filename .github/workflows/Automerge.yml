@@ -24,8 +24,8 @@ jobs:
              mkdir AM
              cd AM
              git init
-             git clone https://github.com/Gnanasekar-m/POC.git 
-             echo ${{ secrets.TOKEN }}
+             git clone https://${{ secrets.TOKEN }}github.com/Gnanasekar-m/POC.git 
+             
              
       - name: Merge
         run: |    
