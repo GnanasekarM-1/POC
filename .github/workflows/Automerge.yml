@@ -25,6 +25,7 @@ jobs:
              cd AM
              git init
              git clone https://github.com/Gnanasekar-m/POC.git 
+             echo ${{ secrets.TOKEN }}
              
       - name: Merge
         run: |    
