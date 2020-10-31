@@ -24,7 +24,7 @@ jobs:
              mkdir AM
              cd AM
              git init
-             git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.gitsteps:
+             git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git 
       - name: Merge
         run: |    
              cd AM/POC
