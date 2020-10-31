@@ -25,12 +25,13 @@ jobs:
              cd AM
              git init
              git clone https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
-             git config --global user.email "saykarclick@gmail.com
-             git config --global user.name "gnanasekarhero"
+            
              
       - name: Merge
         run: |    
              cd AM/POC
+             git config --global user.email "saykarclick@gmail.com
+             git config --global user.name "gnanasekarhero"
              git fetch
              git config pull.rebase false
              git checkout HOTFIX
