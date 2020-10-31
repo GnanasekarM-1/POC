@@ -21,5 +21,8 @@ jobs:
     steps:
       - name: merge
         run: |
+             mkdir AM
+             cd AM
+             git init
              git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git
              git merge DEV
