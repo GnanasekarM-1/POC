@@ -26,5 +26,7 @@ jobs:
              git init
              git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git
              git checkout DEV
+             git pull
              git checkout HOTFIX
+             git pull
              git merge DEV
