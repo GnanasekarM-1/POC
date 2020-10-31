@@ -25,12 +25,9 @@ jobs:
              cd AM
              git init
              git clone -b HOTFIX https://github.com/Gnanasekar-m/POC.git
-      - name: Checkout
+      - name: Merge
         run: |    
              cd AM/POC
              git config pull.rebase false
-             git checkout DEV
-             git pull
-             git checkout HOTFIX
              git pull
              git merge DEV
