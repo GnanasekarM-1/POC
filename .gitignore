@@ -4,7 +4,11 @@
 
 *.code-workspace
 ../.DS_Store
+<<<<<<< HEAD
 hotfix
+=======
+*.yml
+>>>>>>> 00140b2a51b9fd32eb872da6231f717840049435
 
 # Salesforce cache
 .sfdx/

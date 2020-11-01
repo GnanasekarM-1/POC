@@ -28,8 +28,8 @@ jobs:
              cd AM
              git init
              git clone https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
-            
-             
+ 
+              
       - name: COMMIT-ID
         run: |    
              cd AM/POC
@@ -41,8 +41,8 @@ jobs:
              git checkout DEV
              git checkout HOTFIX  
              echo ${{ github.sha }} > ../../ID.txt
-            
-             
+ 
+              
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
         with:
@@ -61,3 +61,8 @@ jobs:
             git cherry-pick ${{ steps.gitlog.outputs.text }}
             git checkout STAGING 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            git checkout UAT 
+            git cherry-pick ${{ steps.gitlog.outputs.text }}
+            git checkout main 
+            git cherry-pick ${{ steps.gitlog.outputs.text }}
+ 
