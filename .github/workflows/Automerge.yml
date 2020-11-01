@@ -40,7 +40,7 @@ jobs:
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
         with:
-         path: POC/ID.txt
+         path: AM/POC/ID.txt
 
       - run: |
             echo  $TEXT
