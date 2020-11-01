@@ -4,6 +4,7 @@
 
 *.code-workspace
 ../.DS_Store
+*.yml
 
 # Salesforce cache
 .sfdx/
