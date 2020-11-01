@@ -60,7 +60,7 @@ jobs:
             git add .
             git status
             git commit -m "HOTFIX"
-            git push -u origin HEAD:DEV
+            git push
 
       
              
