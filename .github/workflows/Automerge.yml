@@ -52,12 +52,7 @@ jobs:
             cd AM/POC
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}  
-            git commit -m "HOTFIX"
             git add .
-            git push -f
-            git checkout STAGING 
-            git cherry-pick ${{ steps.gitlog.outputs.text }} 
-            git add . 
             git commit -m "HOTFIX"
             git push -f
             echo MERGED-HOTFIX-DEV&STAGING
