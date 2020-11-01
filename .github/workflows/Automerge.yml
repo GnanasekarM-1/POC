@@ -38,14 +38,15 @@ jobs:
              git remote set-url origin https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
              git remote -v
              git fetch
-             git checkout HOTFIX 
-             echo ${{ github.sha }} > ID.txt
+             git checkout DEV
+             git checkout HOTFIX  
+             echo ${{ github.sha }} > ../../ID.txt
             
              
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
         with:
-         path: AM/POC/ID.txt
+         path: ID.txt
 
       - run: |
             echo  $TEXT
@@ -61,7 +62,7 @@ jobs:
             git add .
             git status
             git commit -m "HOTFIX"
-            git push -u origin/DEV
+            git push -u ${{ github.ref }}
             
 
       
