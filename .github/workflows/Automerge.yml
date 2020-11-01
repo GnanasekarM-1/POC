@@ -35,7 +35,7 @@ jobs:
              git fetch
              git config pull.rebase false
              git checkout HOTFIX 
-             echo ${{ github.sha }} > ID.txt
+             echo ${{ github.sha }} > ../../ID.txt
              
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
