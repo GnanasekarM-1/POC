@@ -58,10 +58,4 @@ jobs:
             cd AM/POC
             echo ${{ github.ref }}
             git checkout DEV 
-            git cherry-pick ${{ steps.gitlog.outputs.text }}    
-
-       
-            
-
-      
-             
+            git cherry-pick ${{ steps.gitlog.outputs.text }}
