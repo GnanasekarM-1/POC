@@ -53,8 +53,9 @@ jobs:
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}  
             git add .
+            git status
             git commit -m "HOTFIX"
-            git push origin DEV
+            echo git push -u origin DEV
 
       
              
