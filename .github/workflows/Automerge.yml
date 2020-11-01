@@ -19,7 +19,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: CHECKOUT-SVN
         run: |
              mkdir AM
              cd AM
@@ -27,7 +27,7 @@ jobs:
              git clone https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
             
              
-      - name: Merge
+      - name: COMMIT-ID
         run: |    
              cd AM/POC
              git config --global user.email "saykarclick@gmail.com"
@@ -35,7 +35,27 @@ jobs:
              git fetch
              git config pull.rebase false
              git checkout HOTFIX 
-             git cherry-pick ${{ github.sha }}
-             git merge DEV 
-             git cherry-pick --continue
-             echo merged
+             echo ${{ github.sha }} > ID.txt
+             
+      - uses: pCYSl5EDgo/cat@master
+        id: gitlog
+        with:
+         path: POC/ID.txt
+
+      - run: |
+            echo  $TEXT
+        env:
+         TEXT: ${{ steps.gitlog.outputs.text }}
+      
+      - name: MERGE-HOTFIX
+        run: |
+            cd AM/POC
+            git checkout DEV 
+            git cherry-pick ${{ steps.gitlog.outputs.text }} -n
+            git commit -m "HOTFIX"
+            git push
+            git checkout STAGING 
+            git cherry-pick ${{ steps.gitlog.outputs.text }} -n
+            git commit -m "HOTFIX"
+            git push
+            echo MERGED-HOTFIX-DEV&STAGING
