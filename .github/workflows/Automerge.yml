@@ -31,12 +31,6 @@ jobs:
       - name: COMMIT-ID
         run: |    
              cd AM/POC
-             git config --global user.email "saykarclick@gmail.com"
-             git config --global user.name "gnanasekarhero"
-             git remote set-url origin https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
-             git remote -v
-             git fetch
-             git config pull.rebase false
              git checkout HOTFIX 
              echo ${{ github.sha }} > ../../ID.txt
              
@@ -52,7 +46,7 @@ jobs:
       
     
       
-      - name: Git stuff
+      - name: Git 
         run: |
             cd AM/POC
             git checkout DEV 
