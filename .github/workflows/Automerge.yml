@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: CHECKOUT-SVN
         run: |
              mkdir AM
@@ -38,6 +39,10 @@ jobs:
              git fetch
              git checkout HOTFIX 
              echo ${{ github.sha }} > ID.txt
+             git add .
+             git status
+             git commit -m "HOTFIX"
+             git push
              
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
@@ -48,9 +53,6 @@ jobs:
             echo  $TEXT
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
-      
-    
-      
       - name: Git stuff
         if: 1 == 1
         run: |
