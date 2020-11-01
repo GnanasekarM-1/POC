@@ -54,10 +54,7 @@ jobs:
             git cherry-pick ${{ steps.gitlog.outputs.text }}  
             git add .
             git commit -m "HOTFIX"
+            git push origin DEV
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-         github_token: ${{ secrets.TOKEN }}
-         branch: DEV
+      
              

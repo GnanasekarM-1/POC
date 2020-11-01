@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps:
+    #checking out POC
     - name: checkout
       run: |
         git clone https://github.com/Gnanasekar-m/POC.git 
