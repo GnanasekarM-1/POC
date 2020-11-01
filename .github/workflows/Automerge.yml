@@ -59,10 +59,14 @@ jobs:
             echo ${{ github.ref }}
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            echo successfully committed to Dev 
             git checkout STAGING 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            echo successfully committed to Staging
             git checkout UAT 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            echo successfully committed to UAT
             git checkout main 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            echo successfully committed to main
  
