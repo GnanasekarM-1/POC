@@ -36,7 +36,6 @@ jobs:
              git remote set-url origin https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
              git remote -v
              git fetch
-             git config pull.rebase false
              git checkout HOTFIX 
              echo ${{ github.sha }} > ../../ID.txt
              
@@ -56,13 +55,14 @@ jobs:
         if: 1 == 1
         run: |
             cd AM/POC
+            echo ${{ github.ref }}
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}  
             git add .
             git status
             git commit -m "HOTFIX"
             git push -u origin/DEV
-            echo ${{ github.ref }}
+            
 
       
              
