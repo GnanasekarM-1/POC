@@ -62,7 +62,7 @@ jobs:
             git add .
             git status
             git commit -m "HOTFIX"
-            git push -u ${{ github.ref }} -f
+            git push
             
 
       
