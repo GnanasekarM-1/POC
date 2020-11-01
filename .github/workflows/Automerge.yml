@@ -32,6 +32,8 @@ jobs:
              cd AM/POC
              git config --global user.email "saykarclick@gmail.com"
              git config --global user.name "gnanasekarhero"
+             git remote set-url origin https://${{ secrets.TOKEN }}@github.com/Gnanasekar-m/POC.git 
+             git remote -v
              git fetch
              git config pull.rebase false
              git checkout HOTFIX 
@@ -55,7 +57,7 @@ jobs:
             git add .
             git status
             git commit -m "HOTFIX"
-            echo git push -u origin DEV
+            git push -u origin/DEV
 
       
              
