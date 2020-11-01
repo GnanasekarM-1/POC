@@ -59,16 +59,9 @@ jobs:
             echo ${{ github.ref }}
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }} 
-            git add .
-            git status
-            git commit -m "HOTFIX"
-            exit 0
+             
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+       
             
 
       
