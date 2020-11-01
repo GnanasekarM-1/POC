@@ -59,3 +59,5 @@ jobs:
             echo ${{ github.ref }}
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}
+            git checkout STAGING 
+            git cherry-pick ${{ steps.gitlog.outputs.text }}
