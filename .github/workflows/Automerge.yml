@@ -62,6 +62,10 @@ jobs:
             git add .
             git status
             git commit -m "HOTFIX"
+
+      - name: COMMIT-ID
+        run: |
+            cd AM/POC
             git push
             
 
