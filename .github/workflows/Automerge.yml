@@ -47,12 +47,17 @@ jobs:
         env:
          TEXT: ${{ steps.gitlog.outputs.text }}
       
-      - name: MERGE-HOTFIX
+      - name: MERGE-DEV
         run: |
             cd AM/POC
             git checkout DEV 
             git cherry-pick ${{ steps.gitlog.outputs.text }}  
             git add .
             git commit -m "HOTFIX"
-            git push -f
-            echo MERGED-HOTFIX-DEV&STAGING
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         branch: DEV
+             
