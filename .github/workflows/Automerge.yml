@@ -58,11 +58,11 @@ jobs:
             cd AM/POC
             echo ${{ github.ref }}
             git checkout DEV 
-            git cherry-pick ${{ steps.gitlog.outputs.text }}  
+            git cherry-pick ${{ steps.gitlog.outputs.text }}  -f
             git add .
             git status
             git commit -m "HOTFIX"
-            git push -u ${{ github.ref }}
+            git push -u ${{ github.ref }} -f
             
 
       
