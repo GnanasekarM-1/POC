@@ -37,7 +37,7 @@ jobs:
              git remote -v
              git fetch
              git checkout HOTFIX 
-             echo ${{ github.sha }} > AM/POC/ID.txt
+             echo ${{ github.sha }} > ID.txt
              
       - uses: pCYSl5EDgo/cat@master
         id: gitlog
