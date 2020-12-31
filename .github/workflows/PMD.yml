@@ -19,7 +19,5 @@ jobs:
           git clone https://github.com/Gnanasekar-m/POC.git 
           pmd -d POC/All_Component_DX/force-app/main/default/classes -R category/apex/design.xml -f textcolor -cache ./Cache.txt 
         
- 
-      - name: Check APEX
-        uses: legetz/setup-pmd@v6.30
-      - run: pmd -language apex -d POC/All_Component_DX/force-app/main/default/classes -rulesets ./pmd-rules.xml -f text
+          pmd -d POC/All_Component_DX/force-app/main/default/classes -R./pmd-rules.xml -f textcolor
+       
