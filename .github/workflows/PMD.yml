@@ -19,5 +19,5 @@ jobs:
           git clone https://github.com/Gnanasekar-m/POC.git 
           pmd -d POC/All_Component_DX/force-app/main/default/classes -R category/apex/design.xml -f textcolor -cache ./Cache.txt 
         
-          pmd -d POC/All_Component_DX/force-app/main/default/classes -R./pmd-rules.xml -f textcolor
+          pmd -d POC/All_Component_DX/force-app/main/default/classes -R ./pmd-rules.xml -f textcolor
        
