@@ -1,6 +1,16 @@
-- name: Send mail
-  uses: dawidd6/action-send-mail@v2
-  with:
+on:
+  pull_request:
+    branches:
+    - main
+    
+jobs:
+  job_id:
+  - name: send the mail
+    runs-on: ubuntu-18.04
+    
+  - name: Send mail
+    uses: dawidd6/action-send-mail@v2
+    with:
     server_address: smtp.gmail.com
     server_port: 465
     username: saykarclick@gmail.com
@@ -9,7 +19,6 @@
     # Literal body:
     body: Build job of ${{github.repository}} completed successfully!
     # Read file contents as body:
-    body: file://README.md
     to: saykarclick@gmail.com
     from:  saykarclick@gmail.com
     # Optional carbon copy recipients
