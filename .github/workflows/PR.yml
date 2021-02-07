@@ -1,0 +1,19 @@
+- name: Send mail
+  uses: dawidd6/action-send-mail@v2
+  with:
+    server_address: smtp.gmail.com
+    server_port: 465
+    username: saykarclick@gmail.com
+    password: Lockdownpwd1!
+    subject: Github Actions job result
+    # Literal body:
+    body: Build job of ${{github.repository}} completed successfully!
+    # Read file contents as body:
+    body: file://README.md
+    to: saykarclick@gmail.com
+    from:  saykarclick@gmail.com
+    # Optional carbon copy recipients
+    content_type: text/html
+    # Optional converting Markdown to HTML (set content_type to text/html too):
+    convert_markdown: true
+     
