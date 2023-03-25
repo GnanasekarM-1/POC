@@ -1,0 +1,7 @@
+On:
+ push:
+
+Steps:
+   New:
+   - name: Script new
+     run: ls
